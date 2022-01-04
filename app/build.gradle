@@ -41,6 +41,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.9'
 
+    //COIL
+    implementation("io.coil-kt:coil:1.4.0")
+
+    //TedImagePicker
+    implementation 'io.github.ParkSangGwon:tedimagepicker:x.y.z'
+    //implementation 'io.github.ParkSangGwon:tedimagepicker:1.1.10'
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
