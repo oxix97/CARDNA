@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_main_explore"
+        android:icon="@drawable/ic_bottom_maincard"
+        android:title="MainCard" />
+    <item
+        android:id="@+id/menu_main_following"
+        android:icon="@drawable/ic_bottom_cardpack"
+        android:title="CardPack" />
+    <item
+        android:id="@+id/menu_main_home"
+        android:icon="@drawable/ic_bottom_insight"
+        android:title="Insight" />
+    <item
+        android:id="@+id/menu_main_mypage"
+        android:icon="@drawable/ic_bottom_mypage"
+        android:title="MyPage" />
+</menu>
