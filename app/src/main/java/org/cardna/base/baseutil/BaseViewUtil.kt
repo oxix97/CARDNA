@@ -13,14 +13,13 @@ import androidx.fragment.app.Fragment
 sealed class BaseViewUtil {
     abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layout: Int) : Fragment() {
         private var _binding: T? = null
-        val binding get() = _binding ?: error("View를 참조하기 위해 binding이 초기화되지 않았습니다.")
+        protected val binding get() = _binding ?: error("View를 참조하기 위해 binding이 초기화되지 않았습니다.")
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
             _binding = DataBindingUtil.inflate(inflater, layout, container, false)
-            binding.lifecycleOwner = viewLifecycleOwner  //라이프사이클 안줘도 실행 잘되는데 왜 꼭 줘야할까?
             return binding.root
         }
 
