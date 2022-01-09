@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fcv_main"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -26,16 +27,13 @@
             android:id="@+id/bnv_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_fill_btn_grey_20"
-            android:paddingBottom="8dp"
-            app:elevation="0dp"
-            app:itemIconTint="@color/selector_btn_icon"
+            android:background="@color/main_bottom_background"
+            android:paddingTop="8dp"
+            android:paddingBottom="32dp"
+            app:itemBackground="@color/main_bottom_background"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/menu_main">
-
-        </com.google.android.material.bottomnavigation.BottomNavigationView>
-
+            app:menu="@menu/menu_main" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
