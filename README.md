@@ -6,19 +6,48 @@
 
 ---
 
-### ✅ 사용한 기술 스텍
+### ✅ 사용한 기술 스택
 
 - 아키텍처 : MVC , 비동기처리, 코루틴
 
 ---
 
-### 카드나 서비스 소개 
+### ✅ 폴더링 구조
+
+```
+🃏org.cardna
+ ┣ 📂data
+ ┃ ┣ 📂remote
+ ┃ ┃ ┣ 📂api
+ ┃ ┃ ┣ 📂model
+ ┃ ┃ ┃ ┣ 📂uiview1
+ ┃ ┃ ┃ ┃ ┣ 🎈request
+ ┃ ┃ ┃ ┃ ┣ 🎈response
+ ┃ ┃ ┃ ┣ 📂uiview2
+ ┃ ┃ ┃ ┃ ┣ 🎈request
+ ┃ ┃ ┃ ┃ ┣ 🎈response
+ ┣ 📂base
+ ┃ ┣ 📂baseutil
+ ┣ 📂ui 
+ ┃ ┣ 📂uiview1
+ ┃ ┃ ┣ 🎈uiview1activity
+ ┃ ┃ ┣ 🎈fragment
+ ┃ ┃ ┣ 🎈adapter
+ ┃ ┣ 📂uiview2
+ ┃ ┃ ┣ 🎈uiview2activity
+ ┃ ┃ ┣ 🎈fragment
+ ┃ ┃ ┣ 🎈adapter
+ ┗📂utils
+ ```
+
+---
+### ✅ 카드나 서비스 소개 
 
 > 내가 소개하는 나와 남이 소개하는 나를 통해 다양한 나를 소개하는 서비스 입니다.
 
 ---
 
-### 각자 맡은 역할
+### ✅ 각자 맡은 역할
 
 - 다빈 : 마이페이지, 인사이트 페이지 구현 
 - 종찬 : 로그인, 메인 화면 
