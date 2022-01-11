@@ -67,7 +67,7 @@ https://github.com/TeamCARDNA/CardnaAndroid/projects/1
 
 ---
 
-### 2-2 CodeingConvention
+### 2-2 Coding Convention
 
 https://github.com/TeamCARDNA/CardnaAndroid/wiki/Android-Coding-Convention
 
