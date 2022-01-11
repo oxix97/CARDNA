@@ -10,4 +10,6 @@
     <color name="representative_green">#5ECC9C</color>
     <color name="representative_purple">#AA87D4</color>
     <color name="main_bottom_background">#121212</color>
+    <color name="text_hint">#6C6C6C</color>
+    <color name="edit_text_bottom">#A0A0A0</color>
 </resources>
