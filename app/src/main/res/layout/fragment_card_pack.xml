@@ -54,7 +54,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- constraintlayout Again ? -->
+        <!-- constraintLayout Again ? -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_card_pack"
             android:layout_width="wrap_content"
