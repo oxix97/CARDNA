@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
@@ -46,6 +47,12 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         binding.tlCardPack.getTabAt(0)?.customView = createTabLayout("카드나")
         binding.tlCardPack.getTabAt(1)?.customView = createTabLayout("카드너")
         // binding.tlCardPack.getTabAt(1)?.setCustomView(createTabLayout("카드너"))
+
+        for (position: Int in 0..binding.tlCardPack.tabCount) {
+            if(binding.tlCardPack.getTabAt(position) != null){
+                binding.tlCardPack.setPaddingRelative(0, 0, 0, 0)
+            }
+        }
     }
 
     private fun createTabLayout(tabName: String): View {

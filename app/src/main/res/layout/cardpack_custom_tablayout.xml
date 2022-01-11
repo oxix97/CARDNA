@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/black">
 
     <ImageView
         android:id="@+id/iv_cardpack_tab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,19 +20,22 @@
         android:id="@+id/tv_cardpack_tab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="16dp"
-        tools:text="카드나"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_cardpack_tab"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_cardpack_tab" />
+        app:layout_constraintStart_toEndOf="@+id/iv_cardpack_tab"
+        app:layout_constraintTop_toTopOf="@+id/iv_cardpack_tab"
+        tools:text="카드나" />
 
     <View
         android:id="@+id/view_cardpack_line"
-        android:layout_width="100dp"
-        android:layout_height="6dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:background="@color/representative_purple" />
+        tools:background="@color/main_purple" />
 </androidx.constraintlayout.widget.ConstraintLayout>
