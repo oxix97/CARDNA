@@ -12,10 +12,9 @@ class MainCardAdapter : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>
     inner class MainCardViewHolder(private val binding: ItemMainCardViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: MainCardListData) {
-            binding.ivMainCard.setImageResource(data.image)
-            binding.ivCardMeIcon.setImageResource(data.icon)
-            binding.tvUserTag.text = data.tag
-            binding.llUserTagContainer.resources.getColor(data.color)
+            binding.ivMainCardImage.setImageResource(data.image)
+            binding.tvMainCardTitle.text = data.tag
+            binding.clMaincardContainer.resources.getColor(data.color)
         }
     }
 
