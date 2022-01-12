@@ -13,6 +13,7 @@
         android:background="@color/real_black"
         android:layout_height="match_parent">
 
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +100,6 @@
             android:text="1 / 7"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

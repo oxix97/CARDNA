@@ -10,11 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CardNa">
         <activity
-            android:name=".data.remote.api.RepresentCardEditActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.maincard.DetailCardActivity"
-            android:exported="true" />
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
