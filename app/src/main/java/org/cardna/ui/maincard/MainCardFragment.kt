@@ -6,6 +6,7 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
+import org.cardna.ui.maincard.adapter.MainCardAdapter
 
 class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
@@ -18,37 +19,34 @@ class MainCardFragment :
     private fun initAdapter() {
         val fragmentList = listOf(
             MainCardListData(
-                R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.drawable.dummy_img_test,
+                R.color.main_green,
                 "책 좋아!!"
             ),
             MainCardListData(
                 R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.color.main_green,
                 "책 좋아22!!"
             ),
             MainCardListData(
                 R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.color.main_green,
                 "책 좋아333!!"
             ),
             MainCardListData(
                 R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.color.main_green,
                 "책 좋아4444!!"
             ),
         )
         mainCardAdapter = MainCardAdapter()
         mainCardAdapter.cardList.addAll(fragmentList)
+        //해당 부분 모름 0 / 4
+        binding.tvMaincardPageCount.text =
+            "${mainCardAdapter.cardList.size} / ${mainCardAdapter.itemCount}"
         binding.vpMaincardList.adapter = mainCardAdapter
-
     }
 
     override fun initView() {
-
     }
 }
