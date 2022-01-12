@@ -12,4 +12,8 @@ class CardCreateActivity :
         super.onCreate(savedInstanceState)
 
     }
+
+    override fun initView() {
+
+    }
 }
