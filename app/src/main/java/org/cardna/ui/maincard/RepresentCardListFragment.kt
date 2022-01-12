@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.api.RepresentCardData
 import org.cardna.databinding.FragmentRepresentCardListBinding
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
 
