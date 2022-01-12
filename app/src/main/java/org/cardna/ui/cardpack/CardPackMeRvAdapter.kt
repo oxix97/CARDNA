@@ -7,7 +7,7 @@ import org.cardna.R
 import org.cardna.data.remote.model.cardpack.ResponseCardpackCardmeData
 import org.cardna.databinding.ItemCardpackCardmeBinding
 
-class CardPackRvAdapter : RecyclerView.Adapter<CardPackRvAdapter.CardPackViewHolder>() {
+class CardPackMeRvAdapter : RecyclerView.Adapter<CardPackMeRvAdapter.CardPackMeViewHolder>() {
 
     // 서버에서 받아올
     val cardList = mutableListOf<ResponseCardpackCardmeData>()
@@ -16,22 +16,22 @@ class CardPackRvAdapter : RecyclerView.Adapter<CardPackRvAdapter.CardPackViewHol
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CardPackViewHolder {
+    ): CardPackMeViewHolder {
         val binding = ItemCardpackCardmeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent, false
         )
 
-        return CardPackViewHolder(binding)
+        return CardPackMeViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CardPackViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CardPackMeViewHolder, position: Int) {
         holder.onBind(cardList[position])
     }
 
     override fun getItemCount(): Int = cardList.size
 
-    class CardPackViewHolder(private val binding: ItemCardpackCardmeBinding) :
+    class CardPackMeViewHolder(private val binding: ItemCardpackCardmeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseCardpackCardmeData ) {
             // binding.ivCardpackRv.setImageResource(data.cardImg)

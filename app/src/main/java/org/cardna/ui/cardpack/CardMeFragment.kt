@@ -5,14 +5,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.cardpack.ResponseCardpackCardmeData
 import org.cardna.databinding.FragmentCardMeBinding
-import org.cardna.ui.cardpack.CardPackRvAdapter
+import org.cardna.ui.cardpack.CardPackMeRvAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 class CardMeFragment :
     BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
 
-    private lateinit var cardPackRvAdapter: CardPackRvAdapter
+    private lateinit var cardPackRvMeAdapter: CardPackMeRvAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,9 +25,9 @@ class CardMeFragment :
     }
 
     private fun initCardmeRvAdapter() {
-        cardPackRvAdapter = CardPackRvAdapter()
+        cardPackRvMeAdapter = CardPackMeRvAdapter()
 
-        binding.rvCardme.adapter = cardPackRvAdapter
+        binding.rvCardme.adapter = cardPackRvMeAdapter
 
         // make GridLayout
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
@@ -37,7 +37,7 @@ class CardMeFragment :
 
         binding.rvCardme.addItemDecoration(SpacesItemDecoration(12))
 
-        cardPackRvAdapter.cardList.addAll(
+        cardPackRvMeAdapter.cardList.addAll(
             listOf(
                 ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아"),
                 ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아"),
@@ -48,7 +48,7 @@ class CardMeFragment :
             )
         )
 
-        cardPackRvAdapter.notifyDataSetChanged()
+        cardPackRvMeAdapter.notifyDataSetChanged()
     }
 
     class SpacesItemDecoration(private val space: Int) : ItemDecoration() {
