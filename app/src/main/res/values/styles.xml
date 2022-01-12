@@ -13,5 +13,26 @@
         <item name="fontFamily">@font/pretendard_semibold</item>
         <item name="android:includeFontPadding">false</item>
     </style>
-</resources>
 
+    <style name="detail_card_text_hint">
+        <item name="android:textColor">@color/white_3</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="cardpack_bottomsheet_title">
+        <item name="android:textColor">@color/white_1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/pretendard_semibold</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="cardpack_bottomsheet_detail">
+        <item name="android:textColor">@color/white_2</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+</resources>

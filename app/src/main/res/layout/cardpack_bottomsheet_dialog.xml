@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_bs_border">
+
+
+    <ImageView
+        android:id="@+id/iv_cardpack_bottom_cardme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/ic_bottomsheet_cardme" />
+
+
+    <TextView
+        android:id="@+id/tv_bottomsheet_cardme_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:text="카드나 작성"
+        android:textAppearance="@style/cardpack_bottomsheet_title"
+        app:layout_constraintStart_toEndOf="@+id/iv_cardpack_bottom_cardme"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_bottonsheet_cardme_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="나에 대한 새로운 카드를 새로 작성해보세요"
+        android:textAppearance="@style/cardpack_bottomsheet_detail"
+        app:layout_constraintStart_toStartOf="@+id/tv_bottomsheet_cardme_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottomsheet_cardme_title" />
+
+    <ImageView
+        android:id="@+id/iv_cardpack_bottom_cardyou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="@+id/iv_cardpack_bottom_cardme"
+        app:layout_constraintTop_toBottomOf="@+id/iv_cardpack_bottom_cardme"
+        app:srcCompat="@drawable/ic_bottomsheet_cardyou" />
+
+    <TextView
+        android:id="@+id/tv_bottomsheet_cardyou_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="카드너 추가"
+        android:textAppearance="@style/cardpack_bottomsheet_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_bottonsheet_cardme_detail"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottonsheet_cardme_detail" />
+
+    <TextView
+        android:id="@+id/tv_bottonsheet_cardyou_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="48dp"
+        android:text="타인이 말하는 나를 카드로 만들어보세요"
+        android:textAppearance="@style/cardpack_bottomsheet_detail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_bottomsheet_cardyou_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_bottomsheet_cardyou_title" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
