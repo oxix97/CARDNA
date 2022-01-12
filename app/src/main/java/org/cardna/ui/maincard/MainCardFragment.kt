@@ -12,9 +12,10 @@ class MainCardFragment :
     private lateinit var mainCardAdapter: MainCardAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdapter()
+        // initAdapter()
     }
 
+    /*
     private fun initAdapter() {
         val fragmentList = listOf(
             MainCardListData(
@@ -47,7 +48,7 @@ class MainCardFragment :
         binding.vp2MainCardList.adapter = mainCardAdapter
 
     }
-
+    */
     override fun initView() {
 
     }

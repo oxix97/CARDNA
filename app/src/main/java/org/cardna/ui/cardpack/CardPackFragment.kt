@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.tabs.TabLayoutMediator
+import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.FragmentCardPackBinding
@@ -20,6 +21,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+        setMakeCardIvListener()
     }
 
     override fun initView(){
@@ -73,5 +75,12 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             }
         }
         return tabView
+    }
+
+    private fun setMakeCardIvListener(){
+        binding.ivMakeCard.setOnClickListener{
+            // 메인 액티비티의 함수를 실행만 해주면 됨
+            (activity as MainActivity).showBottomDialogCardFragment()
+        }
     }
 }
