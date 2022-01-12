@@ -6,16 +6,14 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.model.cardpack.ResponseCardpackCardmeData
-import org.cardna.data.remote.model.cardpack.ResponseCardpackCardyouData
-import org.cardna.databinding.FragmentCardMeBinding
+import org.cardna.data.remote.model.cardpack.ResponseCardPackYouData
 import org.cardna.databinding.FragmentCardYouBinding
+import org.cardna.ui.cardpack.adapter.CardPackYouRecyclerViewAdapter
 
 
-class CardYouFragment :
-    BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.cardna.R.layout.fragment_card_you) {
+class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.cardna.R.layout.fragment_card_you) {
 
-    private lateinit var cardPackRvYouAdapter: CardPackYouRvAdapter
+    private lateinit var cardYouAdapter: CardPackYouRecyclerViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,34 +22,31 @@ class CardYouFragment :
     }
 
     override fun initView() {
-        initCardyouRvAdapter()
+        initCardYouRvAdapter()
     }
 
-    private fun initCardyouRvAdapter() {
-        cardPackRvYouAdapter = CardPackYouRvAdapter()
+    private fun initCardYouRvAdapter() {
+        cardYouAdapter = CardPackYouRecyclerViewAdapter()
 
-        binding.rvCardyou.adapter = cardPackRvYouAdapter
+        binding.rvCardyou.adapter = cardYouAdapter
 
-        // make GridLayout
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvCardyou.layoutManager = gridLayoutManager
 
-        // Gridlayout 간격
-
         binding.rvCardyou.addItemDecoration(SpacesItemDecoration(12))
 
-        cardPackRvYouAdapter.cardList.addAll(
+        cardYouAdapter.cardList.addAll(
             listOf(
-                ResponseCardpackCardyouData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardyouData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardyouData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardyouData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardyouData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardyouData("img url", 1, "댕댕이 짱 좋아")
+                ResponseCardPackYouData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackYouData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackYouData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackYouData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackYouData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackYouData("img url", 1, "댕댕이 짱 좋아")
             )
         )
 
-        cardPackRvYouAdapter.notifyDataSetChanged()
+        cardYouAdapter.notifyDataSetChanged()
     }
 
     class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {

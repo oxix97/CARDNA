@@ -14,15 +14,13 @@
         android:background="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_card_pack_top"
+            android:id="@+id/cl_cardpack_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_card_pack"
+                android:id="@+id/tv_cardpack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -36,14 +34,14 @@
 
 
             <TextView
-                android:id="@+id/tv_num_of_card_pack"
+                android:id="@+id/tv_num_of_cardpack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="23"
                 android:textColor="@color/white_3"
-                app:layout_constraintBaseline_toBaselineOf="@id/tv_card_pack"
-                app:layout_constraintStart_toEndOf="@+id/tv_card_pack"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_cardpack"
+                app:layout_constraintStart_toEndOf="@+id/tv_cardpack"
                 tools:text="23" />
 
             <ImageView
@@ -52,23 +50,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/ic_cardpack_add_card"
-                android:text="+"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_card_pack"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_cardpack"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_card_pack" />
+                app:layout_constraintTop_toTopOf="@+id/tv_cardpack" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- constraintLayout Again ? -->
-
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_card_pack"
+            android:id="@+id/tl_cardpack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cl_card_pack_top"
+            app:layout_constraintTop_toBottomOf="@+id/cl_cardpack_top"
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
             android:clipToPadding="true"
@@ -77,16 +72,13 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_card_pack"
+            android:id="@+id/vp_cardpack"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tl_card_pack" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tl_cardpack" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

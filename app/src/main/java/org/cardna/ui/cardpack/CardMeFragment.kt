@@ -3,16 +3,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.model.cardpack.ResponseCardpackCardmeData
+import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
 import org.cardna.databinding.FragmentCardMeBinding
-import org.cardna.ui.cardpack.CardPackMeRvAdapter
+import org.cardna.ui.cardpack.adapter.CardPackMeRecyclerViewAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
-class CardMeFragment :
-    BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
+class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
 
-    private lateinit var cardPackRvMeAdapter: CardPackMeRvAdapter
+    private lateinit var cardMeAdapter: CardPackMeRecyclerViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,34 +20,31 @@ class CardMeFragment :
     }
 
     override fun initView() {
-        initCardmeRvAdapter()
+        initCardMeRvAdapter()
     }
 
-    private fun initCardmeRvAdapter() {
-        cardPackRvMeAdapter = CardPackMeRvAdapter()
+    private fun initCardMeRvAdapter() {
+        cardMeAdapter = CardPackMeRecyclerViewAdapter()
 
-        binding.rvCardme.adapter = cardPackRvMeAdapter
+        binding.rvCardme.adapter = cardMeAdapter
 
-        // make GridLayout
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvCardme.layoutManager = gridLayoutManager
 
-        // Gridlayout 간격
-
         binding.rvCardme.addItemDecoration(SpacesItemDecoration(12))
 
-        cardPackRvMeAdapter.cardList.addAll(
+        cardMeAdapter.cardList.addAll(
             listOf(
-                ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아"),
-                ResponseCardpackCardmeData("img url", 1, "댕댕이 짱 좋아")
+                ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아"),
+                ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아")
             )
         )
 
-        cardPackRvMeAdapter.notifyDataSetChanged()
+        cardMeAdapter.notifyDataSetChanged()
     }
 
     class SpacesItemDecoration(private val space: Int) : ItemDecoration() {
@@ -60,7 +56,6 @@ class CardMeFragment :
         ) {
             outRect.right = space
             outRect.bottom = space
-
         }
     }
 }
