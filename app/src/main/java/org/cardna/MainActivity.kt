@@ -15,7 +15,7 @@ class MainActivity : BaseViewUtil.BaseAppCompatActivity<ActivityMainBinding>(R.l
         initView()
     }
 
-    private fun initView() {
+    override fun initView() {
         setBottomNavigation()
         setBottomNavigationSelectListener()
 

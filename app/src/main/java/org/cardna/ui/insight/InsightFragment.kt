@@ -11,4 +11,8 @@ class InsightFragment : BaseViewUtil.BaseFragment<FragmentInsightBinding>(R.layo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
+    override fun initView() {
+
+    }
 }

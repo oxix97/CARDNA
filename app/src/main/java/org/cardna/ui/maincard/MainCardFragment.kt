@@ -47,4 +47,8 @@ class MainCardFragment :
         binding.vp2MainCardList.adapter = mainCardAdapter
 
     }
+
+    override fun initView() {
+
+    }
 }

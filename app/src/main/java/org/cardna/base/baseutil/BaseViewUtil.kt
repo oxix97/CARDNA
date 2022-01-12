@@ -38,6 +38,8 @@ sealed class BaseViewUtil {
             super.onCreate(savedInstanceState)
             binding = DataBindingUtil.setContentView(this, layoutRes)
         }
+
+        abstract fun initView()
     }
 
     abstract fun initView()
