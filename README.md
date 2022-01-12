@@ -8,7 +8,7 @@
 
 ### ✅ 사용한 기술 스택
 
-- 아키텍처 : MVC , 비동기처리, 코루틴
+- 아키텍처 : MVC , 비동기처리: 코루틴
 
 ---
 
@@ -67,7 +67,7 @@ https://github.com/TeamCARDNA/CardnaAndroid/projects/1
 
 ---
 
-### 2-2 CodeingConvention
+### 2-2 Coding Convention
 
 https://github.com/TeamCARDNA/CardnaAndroid/wiki/Android-Coding-Convention
 
