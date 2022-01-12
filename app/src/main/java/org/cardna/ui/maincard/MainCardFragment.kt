@@ -44,7 +44,11 @@ class MainCardFragment :
         )
         mainCardAdapter = MainCardAdapter()
         mainCardAdapter.cardList.addAll(fragmentList)
-        binding.vp2MainCardList.adapter = mainCardAdapter
+        binding.vpMaincardList.adapter = mainCardAdapter
+
+    }
+
+    override fun initView() {
 
     }
 }

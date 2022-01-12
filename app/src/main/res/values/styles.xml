@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="fragment_title_text">
         <item name="android:textColor">@color/white_1</item>
         <item name="android:textSize">28sp</item>
@@ -22,17 +21,18 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="represent_card_edit_white_tv">
+    <style name="cardpack_bottomsheet_title">
         <item name="android:textColor">@color/white_1</item>
         <item name="android:textSize">18sp</item>
         <item name="fontFamily">@font/pretendard_semibold</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="represent_card_edit_title_tv">
-        <item name="android:textColor">@color/white_1</item>
-        <item name="android:textSize">22sp</item>
-        <item name="fontFamily">@font/pretendard_semibold</item>
+    <style name="cardpack_bottomsheet_detail">
+        <item name="android:textColor">@color/white_2</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+
 </resources>
