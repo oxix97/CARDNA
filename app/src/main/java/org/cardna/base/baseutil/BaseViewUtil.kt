@@ -41,4 +41,6 @@ sealed class BaseViewUtil {
 
         abstract fun initView()
     }
+
+    abstract fun initView()
 }

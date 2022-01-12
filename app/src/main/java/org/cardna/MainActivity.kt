@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivityMainBinding
+import org.cardna.ui.maincard.MainCardFragment
 
 class MainActivity : BaseViewUtil.BaseAppCompatActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +18,7 @@ class MainActivity : BaseViewUtil.BaseAppCompatActivity<ActivityMainBinding>(R.l
     override fun initView() {
         setBottomNavigation()
         setBottomNavigationSelectListener()
+
     }
 
     private fun setBottomNavigation() {
