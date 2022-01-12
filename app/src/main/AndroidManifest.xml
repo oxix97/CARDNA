@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CardNa">
-        <activity
-            android:name=".ui.cardpack.CardCreateActivity"
-            android:exported="true" />
+       <activity
+            android:name=".ui.maincard.DetailCardActivity"
+            android:exported="false" />
+      
         <activity
             android:name=".MainActivity"
             android:exported="true">
