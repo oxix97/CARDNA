@@ -27,6 +27,8 @@ sealed class BaseViewUtil {
             super.onDestroyView()
             _binding = null
         }
+
+        abstract fun initView()
     }
 
     abstract class BaseAppCompatActivity<T : ViewDataBinding>(@LayoutRes val layoutRes: Int) :
@@ -37,4 +39,6 @@ sealed class BaseViewUtil {
             binding = DataBindingUtil.setContentView(this, layoutRes)
         }
     }
+
+    abstract fun initView()
 }
