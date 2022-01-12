@@ -9,10 +9,11 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@id/iv_cardpack_rv"
+        android:id="@+id/cl_rv_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/background_rv_border"
+        android:backgroundTint="@color/main_green"
         tools:backgroundTint="@color/main_green">
 
         <ImageView

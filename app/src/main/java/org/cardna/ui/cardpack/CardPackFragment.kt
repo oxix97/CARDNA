@@ -18,16 +18,19 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
+    }
+
+
+    override fun initView(){
         // ViewPager2와 Adapter 연동
         initCardPackAdapter()
         initCardPackTabLayout()
     }
 
-
-
     // TabLayout 설정
     private fun initCardPackAdapter() {
-        val fragmentList = listOf(CardYouFragment(), CardMeFragment())
+        val fragmentList = listOf(CardMeFragment(), CardYouFragment())
 
         // ViewPager2와 Adapter 연동
         cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)

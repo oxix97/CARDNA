@@ -16,7 +16,7 @@ class CardYouFragment :
         initView()
     }
 
-    private fun initView(){
+    override fun initView(){
         makeRvGridLayout()
     }
 
