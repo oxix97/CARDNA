@@ -13,15 +13,14 @@
         android:layout_height="match_parent"
         tools:context=".ui.cardpack.CardYouFragment">
 
-
-        <Button
-            android:id="@+id/btn_card_you"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카드너"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cardyou"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_cardpack_cardme"
+            tools:itemCount="6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

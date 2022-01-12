@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.ViewCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
@@ -14,26 +13,26 @@ import org.cardna.databinding.FragmentCardPackBinding
 
 class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.layout.fragment_card_pack) {
 
-    private lateinit var cardPackAdapter: CardPackAdapter
-
+    private lateinit var cardPackTabLayoutAdapter: CardPackTabLayoutAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // ViewPager2와 Adapter 연동
         initCardPackAdapter()
-
         initCardPackTabLayout()
-
     }
 
+
+
+    // TabLayout 설정
     private fun initCardPackAdapter() {
         val fragmentList = listOf(CardYouFragment(), CardMeFragment())
 
         // ViewPager2와 Adapter 연동
-        cardPackAdapter = CardPackAdapter(this)
-        cardPackAdapter.fragments.addAll(fragmentList)
-        binding.vpCardPack.adapter = cardPackAdapter
+        cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
+        cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
+        binding.vpCardPack.adapter = cardPackTabLayoutAdapter
     }
 
     private fun initCardPackTabLayout() {

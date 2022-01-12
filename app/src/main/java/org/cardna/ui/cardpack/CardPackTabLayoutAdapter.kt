@@ -3,7 +3,7 @@ package org.cardna.ui.cardpack
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class CardPackAdapter(fragment: Fragment) :
+class CardPackTabLayoutAdapter(fragment: Fragment) :
     FragmentStateAdapter(fragment) {
     val fragments = mutableListOf<Fragment>()
 
@@ -11,4 +11,3 @@ class CardPackAdapter(fragment: Fragment) :
 
     override fun createFragment(position: Int): Fragment = fragments[position]
 }
-
