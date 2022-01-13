@@ -1,7 +1,9 @@
 package org.cardna.ui.maincard
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
@@ -78,13 +80,14 @@ class RepresentCardEditActivity :
     }
 
     private fun onClick() {
-
         binding.fabRepresentcardedit.setOnClickListener {
             val bottomSheetView =
                 layoutInflater.inflate(R.layout.fragment_represent_card_edit_bottom_dialog, null)
             val bottomSheetDialog = BottomSheetDialog(this)
+            bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
 
             bottomSheetDialog.setContentView(bottomSheetView)
+            bottomSheetDialog.show()
         }
     }
 }
