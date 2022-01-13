@@ -1,6 +1,6 @@
 package org.cardna.ui.cardpack
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
@@ -11,9 +11,20 @@ class CardCreateActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initView()
+        setListener()
     }
 
     override fun initView() {
 
     }
+
+    private fun setListener() {
+        binding.btnCreateCard.setOnClickListener{
+            val intent = Intent(this, CardCreateCompleteActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+
 }
