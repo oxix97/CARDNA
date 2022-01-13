@@ -15,25 +15,26 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_black_radius_2"
+            android:background="@drawable/rectangle_null_2"
             android:id="@+id/iv_main_card_image"
             android:layout_marginHorizontal="12dp"
-            android:layout_marginTop="12dp"
-            android:scaleType="fitXY"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/book" />
+            android:src="@drawable/dummy_img_test" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_main_card_title"
             app:layout_constraintTop_toBottomOf="@id/iv_main_card_image"
-            app:layout_constraintStart_toStartOf="@id/iv_main_card_image"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="힘이 들 땐 하늘을 봐..."
             android:textSize="16sp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
             android:textColor="@color/real_black"
             android:fontFamily="@font/pretendard_bold" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

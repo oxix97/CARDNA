@@ -6,6 +6,7 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
+import org.cardna.ui.maincard.adapter.MainCardAdapter
 
 class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {

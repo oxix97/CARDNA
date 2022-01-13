@@ -15,11 +15,8 @@
     <color name="dark_gray">#323232</color>
 
     <color name="main_purple_60">#99AA87D4</color>
-    <color name="white_1">#e0e0e0</color>intermed
-    <color name="white_1_5">#c6c6c6</color>e color/text_hint (aka org.cardna:color/text_hint) not found.
-    C:\Users\TFX5470H\AndroidStudioProjects\CardNa\app\build\iates\incremental\mergeDebugResources\stripped.dir\layout\activity_card_create.xml:92: error: resource color/text_hint (aka org.cardna:color/text_hint) not found.
-    C:\Users\TFX5470H\AndroidStudioProjects\CardNa\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_card_create.xml:92: error: resource color/edit_text_bottom (aka org.cardna:color/edit_text_bottom) not found.
-    C:\Users\TFX5470H\AndroidStudioProjects\CardNa\app\build\intermediates\incremental\mergeDebugResources\stripped.dir\layout\activity_card_create.xml:101: error: resource colo
+    <color name="white_1">#e0e0e0</color>
+    <color name="white_1_5">#c6c6c6</color>
     <color name="white_2">#a0a0a0</color>
     <color name="white_3">#6c6c6c</color>
     <color name="white_4">#474747</color>
