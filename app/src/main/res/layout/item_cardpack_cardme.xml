@@ -17,7 +17,7 @@
         tools:backgroundTint="@color/main_green">
 
         <ImageView
-            android:id="@+id/iv_friend_background"
+            android:id="@+id/iv_carpack_recyclerview"
             android:layout_width="150dp"
             android:layout_height="215dp"
             android:layout_marginHorizontal="8dp"
