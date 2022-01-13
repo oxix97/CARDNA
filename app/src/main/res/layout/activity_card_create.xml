@@ -57,7 +57,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/iv_icon_group"
                 app:layout_constraintTop_toBottomOf="@id/iv_icon_group"
                 android:text="카드에 들어갈\n이미지를 넣어 보세요!"
-                android:textColor="@color/text_hint" />
+                android:textColor="@color/white_3" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -86,17 +86,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:hint="키워드 중심으로 포현해보세요"
-            android:backgroundTint="@color/edit_text_bottom"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             android:textColor="@color/white"
-            android:textColorHint="@color/text_hint" />
+            android:textColorHint="@color/white_3" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_edit_text_count"
             tools:text="3/14"
-            android:textColor="@color/text_hint"
+            android:textColor="@color/white_3"
             app:layout_constraintEnd_toEndOf="@id/et_keyword"
             app:layout_constraintTop_toBottomOf="@id/et_keyword" />
 
@@ -104,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/et_detail"
-            android:textColorHint="@color/text_hint"
+            android:textColorHint="@color/white_3"
             android:minLines="7"
             android:ems="200"
             android:gravity="top"
@@ -117,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_edit_detail_count"
-            android:textColor="@color/text_hint"
+            android:textColor="@color/white_3"
             tools:text="3/200"
             android:layout_marginBottom="5dp"
             app:layout_constraintEnd_toEndOf="@id/et_detail"

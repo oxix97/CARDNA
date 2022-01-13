@@ -11,4 +11,8 @@ class DetailCardActivity :
         super.onCreate(savedInstanceState)
 
     }
+
+    override fun initView() {
+        TODO("Not yet implemented")
+    }
 }

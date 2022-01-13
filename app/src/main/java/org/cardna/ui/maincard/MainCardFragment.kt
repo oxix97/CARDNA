@@ -19,36 +19,33 @@ class MainCardFragment :
         val fragmentList = listOf(
             MainCardListData(
                 R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.color.main_green,
                 "책 좋아!!"
             ),
             MainCardListData(
                 R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.color.main_green,
                 "책 좋아22!!"
             ),
             MainCardListData(
                 R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.color.main_green,
                 "책 좋아333!!"
             ),
             MainCardListData(
                 R.drawable.book,
-                R.color.representative_green,
-                R.drawable.ic_main_mypage_checked,
+                R.color.main_green,
                 "책 좋아4444!!"
             ),
         )
         mainCardAdapter = MainCardAdapter()
         mainCardAdapter.cardList.addAll(fragmentList)
+        //해당 부분 모름 0 / 4
+        binding.tvMaincardPageCount.text =
+            "${mainCardAdapter.cardList.size} / ${mainCardAdapter.itemCount}"
         binding.vpMaincardList.adapter = mainCardAdapter
-
     }
 
     override fun initView() {
-
     }
 }
