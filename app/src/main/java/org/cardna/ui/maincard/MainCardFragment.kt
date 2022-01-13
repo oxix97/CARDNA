@@ -19,7 +19,7 @@ class MainCardFragment :
     private fun initAdapter() {
         val fragmentList = listOf(
             MainCardListData(
-                R.drawable.dummy_img_test,
+                R.drawable.book,
                 R.color.main_green,
                 "책 좋아!!"
             ),
