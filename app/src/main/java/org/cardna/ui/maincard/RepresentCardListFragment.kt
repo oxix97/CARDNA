@@ -12,6 +12,7 @@ class RepresentCardListFragment :
     private lateinit var representCardAdapter: RepresentCardListAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun initView() {

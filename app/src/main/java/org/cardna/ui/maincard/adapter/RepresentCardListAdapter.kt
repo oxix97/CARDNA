@@ -20,7 +20,7 @@ class RepresentCardListAdapter :
             binding.clRvItem.setBackgroundColor(data.backgroundColor)
             binding.ivRepresentcardeditlistRemove.setOnClickListener {
                 notifyItemRemoved(adapterPosition)
-                cardList.removeAt(adapterPosition+1)
+                cardList.removeAt(adapterPosition + 1)
             }
         }
     }

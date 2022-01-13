@@ -8,14 +8,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:behavior_hideable="true"
+        android:background="@color/dark_gray"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <com.google.android.material.tabs.TabLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tl_test"
+            android:layout_marginTop="32dp"
+            android:id="@+id/tl_representcardedit"
+            app:tabBackground="@drawable/bg_tablayout"
+            app:tabIndicatorColor="@color/white_2"
+            app:tabTextColor="@color/white_2"
+            android:background="@color/dark_gray"
             app:tabSelectedTextColor="@color/white_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +39,54 @@
                 android:id="@+id/tli_cardyou"
                 android:text="카드너" />
         </com.google.android.material.tabs.TabLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_representcardedit_finish"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tl_representcardedit"
+            android:text="완료"
+            app:layout_constraintBottom_toBottomOf="@id/tl_representcardedit"
+            android:fontFamily="@font/pretendard_bold"
+            style="@style/cardpack_bottomsheet_title"
+            android:layout_marginEnd="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_representcardedit_card_list_count"
+            app:layout_constraintStart_toStartOf="@id/tl_representcardedit"
+            app:layout_constraintEnd_toEndOf="@id/tl_representcardedit"
+            app:layout_constraintTop_toBottomOf="@id/tl_representcardedit"
+            android:text="2/7"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/white_3"
+            android:textSize="12sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/main_green"
+            android:id="@+id/rv_representcardedit_cardme"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="4dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_card_list_count"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/rv_representcardedit_cardyou"
+            android:background="@color/main_purple"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_card_list_count"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
+            android:layout_marginTop="8dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
