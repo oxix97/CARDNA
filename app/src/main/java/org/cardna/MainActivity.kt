@@ -7,7 +7,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.base.baseutil.constant
 import org.cardna.databinding.ActivityMainBinding
 import org.cardna.ui.cardpack.BottomDialogCardFragment
 import org.cardna.ui.cardpack.CardCreateActivity
@@ -46,16 +45,21 @@ class MainActivity :
         // 바텀싯 다이얼로그가 뜬 후, 카드나 or 카드너를 선택했을 때, 그거에 따라 어떤 액티비티를 띄워줘야 하는지를 명세한 Fragment정의하고
         val bottomDialogCardFragment: BottomDialogCardFragment = BottomDialogCardFragment {
             when (it) {
-                constant.CARD_ME -> {
+                CARD_ME -> {
                     Toast.makeText(this, "카드나 작성", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, CardCreateActivity::class.java)
                     startActivity(intent)
                 }
                 //
-                constant.CARD_YOU -> Toast.makeText(this, "카드너 추가", Toast.LENGTH_SHORT).show()
+                CARD_YOU -> Toast.makeText(this, "카드너 추가", Toast.LENGTH_SHORT).show()
             }
         }
         bottomDialogCardFragment.show(supportFragmentManager, bottomDialogCardFragment.tag)
+    }
+
+    companion object{
+        const val CARD_ME = 0
+        const val CARD_YOU = 1
     }
 
 }
