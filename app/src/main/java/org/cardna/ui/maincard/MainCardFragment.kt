@@ -69,6 +69,7 @@ class MainCardFragment :
             clipChildren = false
             offscreenPageLimit = 1
             setPageTransformer(compositePageTransformer)
+
             setPadding(56, 0, 56, 0)
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
