@@ -49,7 +49,7 @@ class MainCardFragment :
             ),
         )
 
-        val dpValue = 48;
+        val dpValue = 48
         val d = resources.displayMetrics.density
         val margin = (dpValue * d).toInt()
         binding.vpMaincardList.clipToPadding = false
