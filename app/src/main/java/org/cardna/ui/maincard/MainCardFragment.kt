@@ -23,7 +23,6 @@ class MainCardFragment :
     }
 
     override fun initView() {
-        // initAdapter()
         moveDetailActivity()
         friendMainView()
 
@@ -70,7 +69,7 @@ class MainCardFragment :
             clipChildren = false
             offscreenPageLimit = 1
             setPageTransformer(compositePageTransformer)
-            setPadding(56, 30, 56, 30)
+            setPadding(56, 0, 56, 0)
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
     }
@@ -83,7 +82,6 @@ class MainCardFragment :
         compositePageTransformer.addTransformer { page, position ->
             val scaleRatio = 1 - abs(position)
             page.scaleY = 0.95f + scaleRatio * 0.05f
-            // page.scaleY = 0.95f + scaleRatio * 0.05f
         }
         return compositePageTransformer
     }

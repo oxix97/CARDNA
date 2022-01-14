@@ -11,9 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rectangle_right_null_black_radius_2">
-        <!--       android:layout_marginHorizontal="56dp"
-               android:layout_marginTop="116dp"-->
-
 
         <ImageView
             android:id="@+id/iv_main_card_image"
