@@ -51,4 +51,9 @@
         android:fontStyle="normal"
         app:font="@font/pretendard_extralight"
         app:fontStyle="normal" />
+    <font
+        android:font="@font/montserrat_semibold"
+        android:fontStyle="normal"
+        app:font="@font/montserrat_semibold"
+        app:fontStyle="normal" />
 </font-family>
