@@ -10,4 +10,5 @@
             <solid android:color="@color/main_purple" />
         </shape>
     </item>
+
 </layer-list>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.cardna.data.remote.api.MainCardListData
 import org.cardna.databinding.ItemMainCardViewBinding
-import org.cardna.ui.maincard.DetailCardActivity
+import org.cardna.ui.maincard.DetailCardYouActivity
 
 class MainCardAdapter : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>() {
 
@@ -35,7 +35,7 @@ class MainCardAdapter : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>
     override fun onBindViewHolder(holder: MainCardViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             val context: Context = holder.itemView.context
-            val intent = Intent(context, DetailCardActivity::class.java)
+            val intent = Intent(context, DetailCardYouActivity::class.java)
             context.startActivity(intent)
         }
         holder.onBind(cardList[position])
