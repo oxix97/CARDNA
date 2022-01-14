@@ -10,8 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CardNa">
         <activity
-            android:name=".ui.login.SignActivity"
+            android:name=".ui.login.SignUpActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.login.SignUpNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.SignActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.maincard.DetailCardMeActivity"
             android:exported="false" />
