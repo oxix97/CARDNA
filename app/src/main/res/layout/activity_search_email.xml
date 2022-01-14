@@ -101,7 +101,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tv_searchemail_friend_email"
                 app:layout_constraintStart_toStartOf="@id/tv_searchemail_friend_email"
-                app:layout_constraintTop_toBottomOf="@+id/tv_searchemail_friend_email" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_searchemail_friend_email"
+                app:layout_constraintHorizontal_bias="0.45"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tv_searchemail_add_friend"
@@ -117,6 +119,29 @@
                 app:layout_constraintStart_toStartOf="@id/iv_searchemail_add_friend"
                 app:layout_constraintTop_toTopOf="@id/iv_searchemail_add_friend" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_searchemail_check_image"
+                app:layout_constraintStart_toStartOf="@id/iv_searchemail_add_friend"
+                app:layout_constraintTop_toTopOf="@id/tv_searchemail_add_friend"
+                android:src="@drawable/ic_vector_990__stroke_"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_searchemail_add_friend"
+                android:layout_marginStart="28dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_searchemail_checked_add_friend"
+                app:layout_constraintTop_toTopOf="@id/iv_searchemail_add_friend"
+                app:layout_constraintBottom_toBottomOf="@id/iv_searchemail_add_friend"
+                app:layout_constraintStart_toEndOf="@id/iv_searchemail_check_image"
+                android:textColor="@color/white_3"
+                android:visibility="gone"
+                android:textSize="14sp"
+                android:layout_marginStart="8dp"
+                android:text="친구" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
