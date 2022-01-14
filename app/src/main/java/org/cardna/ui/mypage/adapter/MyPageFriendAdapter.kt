@@ -3,21 +3,22 @@ package org.cardna.ui.mypage.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.R
-import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
 import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
-import org.cardna.databinding.ItemCardpackCardmeBinding
 import org.cardna.databinding.ItemMypageFriendBinding
-import org.cardna.ui.cardpack.adapter.CardPackMeRecyclerViewAdapter
 
-class MyPageFriendAdapter(var friendList: List<ResponseMyPageFriendData>) : RecyclerView.Adapter<MyPageFriendAdapter.MyPageFriendViewHolder>() {
-
+class MyPageFriendAdapter(
+    private val friendList: List<ResponseMyPageFriendData>,
+    private val clickListener: (Int) -> Unit
+) : RecyclerView.Adapter<MyPageFriendAdapter.MyPageFriendViewHolder>() {
 
     inner class MyPageFriendViewHolder(private val binding: ItemMypageFriendBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ResponseMyPageFriendData) {
-            binding.ivFriendImage.setImageResource(R.drawable.img_friend_image)
+        fun onBind(data: ResponseMyPageFriendData, clickListener: (Int) -> Unit, position: Int) {
+            binding.ivFriendImage.setImageResource(data.userImg)
             binding.tvFriendName.text = data.name
             binding.tvFriendSentence.text = data.sentence
+            binding.root.setOnClickListener {
+                clickListener(position)
+            }
         }
     }
 
@@ -27,7 +28,8 @@ class MyPageFriendAdapter(var friendList: List<ResponseMyPageFriendData>) : Recy
     }
 
     override fun onBindViewHolder(holder: MyPageFriendAdapter.MyPageFriendViewHolder, position: Int) {
-        return holder.onBind(friendList[position])
+        return holder.onBind(friendList[position], clickListener, position)
+
     }
 
     override fun getItemCount(): Int = friendList.size
