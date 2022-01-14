@@ -18,6 +18,11 @@
         <activity
             android:name=".ui.mypage.SearchEmailActivity"
             android:exported="false" />
+      
+        <activity
+            android:name=".ui.maincard.RepresentCardEditActivity"
+            android:exported="true" />
+
         <activity
             android:name=".ui.maincard.DetailCardActivity"
             android:exported="false" />

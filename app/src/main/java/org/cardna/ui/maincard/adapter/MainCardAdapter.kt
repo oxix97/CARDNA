@@ -1,4 +1,4 @@
-package org.cardna.ui.maincard
+package org.cardna.ui.maincard.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -21,13 +21,13 @@ class MainCardAdapter : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): MainCardAdapter.MainCardViewHolder {
+    ): MainCardViewHolder {
         val binding =
             ItemMainCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MainCardViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MainCardAdapter.MainCardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MainCardViewHolder, position: Int) {
         holder.onBind(cardList[position])
     }
 
