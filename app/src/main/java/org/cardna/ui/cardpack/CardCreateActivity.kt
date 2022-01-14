@@ -13,21 +13,13 @@ class CardCreateActivity :
         super.onCreate(savedInstanceState)
 
         initView()
-        setListener()
         setChooseCardListener()
+        makeCardListener()
     }
 
     override fun initView() {
 
     }
-
-    private fun setListener() {
-        binding.btnCardcreateComplete.setOnClickListener {
-            val intent = Intent(this, CardCreateCompleteActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
 
     private fun setChooseCardListener() {
         binding.clCardcreateImg.setOnClickListener {
@@ -58,6 +50,19 @@ class CardCreateActivity :
         }
     }
 
+    private fun makeCardListener(){
+        binding.btnCardcreateComplete.setOnClickListener{
+            // 카드나 만들기 버튼을 눌렀을 때, dialog를 띄워준다.
+            val meOrYou = CARD_ME
+            val cardImg = R.drawable.ic_symbol_cardme_0 // 나중에 바꿔야 함
+            val cardTitle = binding.etCardcreateKeyword.text.toString()
+
+            val dialog = CardCreateCompleteDialog(this, meOrYou, cardImg, cardTitle)
+            dialog.showDialog()
+        }
+    }
+
+
     companion object {
         const val SYMBOL_0 = 0
         const val SYMBOL_1 = 1
@@ -65,5 +70,8 @@ class CardCreateActivity :
         const val SYMBOL_3 = 3
         const val SYMBOL_4 = 4
         const val GALLERY = 5
+
+        const val CARD_ME = 6
+        const val CARD_YOU = 7
     }
 }
