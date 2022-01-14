@@ -31,8 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:fontFamily="@font/pretendard_extralight"
             android:text="지우님은"
+            android:fontFamily="@font/pretendard_extralight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ibtn_maincard_alarm" />
 
