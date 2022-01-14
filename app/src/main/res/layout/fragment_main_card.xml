@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:fontFamily="@font/pretendard_extralight"
             android:text="지우님은"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ibtn_maincard_alarm" />
@@ -51,10 +52,11 @@
             android:id="@+id/view_maincard_under_line"
             android:layout_width="0dp"
             android:layout_height="4dp"
+            android:layout_marginTop="28dp"
             android:background="@color/main_purple_60"
             app:layout_constraintEnd_toEndOf="@id/tv_maincard_title"
             app:layout_constraintStart_toStartOf="@id/tv_maincard_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_maincard_title" />
+            app:layout_constraintTop_toTopOf="@+id/tv_maincard_title" />
 
         <LinearLayout
             android:id="@+id/ll_maincard_edit_layout"
@@ -81,27 +83,34 @@
                 android:text="Edit" />
         </LinearLayout>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_maincard_list"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/rectangle_maincard_radius_10"
             app:layout_constraintBottom_toTopOf="@id/tv_maincard_page_count"
-            app:layout_constraintTop_toBottomOf="@id/ll_maincard_edit_layout"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_maincard_edit_layout">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_maincard_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_maincard_page_count"
+                app:layout_constraintTop_toBottomOf="@id/ll_maincard_edit_layout" />
+        </androidx.core.widget.NestedScrollView>
 
         <TextView
             android:id="@+id/tv_maincard_page_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginBottom="48dp"
             android:text="1/7"
             android:textColor="@color/main_purple"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/vp_maincard_list"
-            app:layout_constraintStart_toStartOf="@id/vp_maincard_list" />
+            app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"
+            app:layout_constraintStart_toStartOf="@+id/nestedScrollView"
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

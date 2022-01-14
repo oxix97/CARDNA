@@ -46,4 +46,9 @@
         android:fontStyle="normal"
         app:font="@font/pretendard_thin"
         app:fontStyle="normal" />
+    <font
+        android:font="@font/pretendard_extralight"
+        android:fontStyle="normal"
+        app:font="@font/pretendard_extralight"
+        app:fontStyle="normal" />
 </font-family>
