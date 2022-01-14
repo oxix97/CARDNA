@@ -1,4 +1,3 @@
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
@@ -6,8 +5,7 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
 import org.cardna.databinding.FragmentCardMeBinding
 import org.cardna.ui.cardpack.adapter.CardPackMeRecyclerViewAdapter
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration
+import org.cardna.util.SpacesItemDecoration
 
 class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
 
@@ -45,17 +43,5 @@ class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.card
         )
 
         cardMeAdapter.notifyDataSetChanged()
-    }
-
-    class SpacesItemDecoration(private val space: Int) : ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            outRect.right = space
-            outRect.bottom = space
-        }
     }
 }

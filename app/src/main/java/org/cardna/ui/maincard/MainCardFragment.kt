@@ -15,9 +15,14 @@ class MainCardFragment :
     private lateinit var mainCardAdapter: MainCardAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+
+    override fun initView() {
         initAdapter()
         moveRepresentCardEditActivity()
         moveDetailActivity()
+        friendMainView()
     }
 
     private fun initAdapter() {
@@ -67,6 +72,7 @@ class MainCardFragment :
         binding.vpMaincardList.adapter = mainCardAdapter
     }
 
+
     private fun moveRepresentCardEditActivity() {
     }
 
@@ -77,6 +83,16 @@ class MainCardFragment :
         }
     }
 
-    override fun initView() {
+    override fun initView() {}
+
+    private fun friendMainView() {
+        var id: Int
+        var name = ""
+        if (getArguments() != null) {
+            name = getArguments()?.getString("name") ?: ""
+            binding.tvMaincardUserName.setText(name + "님은")
+        }
+        //넘어온 user id에 따른 대표카드 list보여주기
+        //fun requestFriendMainCard
     }
 }

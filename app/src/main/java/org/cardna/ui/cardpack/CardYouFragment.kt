@@ -9,6 +9,7 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.cardpack.ResponseCardPackYouData
 import org.cardna.databinding.FragmentCardYouBinding
 import org.cardna.ui.cardpack.adapter.CardPackYouRecyclerViewAdapter
+import org.cardna.util.SpacesItemDecoration
 
 
 class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.cardna.R.layout.fragment_card_you) {
@@ -47,17 +48,5 @@ class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.ca
         )
 
         cardYouAdapter.notifyDataSetChanged()
-    }
-
-    class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            outRect.right = space
-            outRect.bottom = space
-        }
     }
 }
