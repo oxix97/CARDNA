@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CardNa">
         <activity
-            android:name=".ui.cardpack.CardCreateCompleteActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.maincard.DetailCardActivity"
             android:exported="false" />
         <activity
