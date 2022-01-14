@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CardNa">
         <activity
+            android:name=".ui.login.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.SignUpNameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.SignActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.cardpack.CardCreateActivity"
             android:exported="false" />
         <activity
@@ -17,7 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.mypage.SettingActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.mypage.OtherWriteActivity"
             android:exported="false" />
