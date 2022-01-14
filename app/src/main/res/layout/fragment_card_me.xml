@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.cardpack.CardMeFragment">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cardme"
             android:layout_width="match_parent"

@@ -3,12 +3,16 @@ package org.cardna.ui.maincard
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.maincard.adapter.MainCardAdapter
+import kotlin.math.abs
 
 class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
@@ -19,13 +23,13 @@ class MainCardFragment :
     }
 
     override fun initView() {
-        initAdapter()
-        moveRepresentCardEditActivity()
         moveDetailActivity()
         friendMainView()
-    }
 
-    private fun initAdapter() {
+
+        mainCardAdapter = MainCardAdapter()
+
+
         val fragmentList = listOf(
             MainCardListData(
                 R.drawable.dummy_img_test,
@@ -49,16 +53,41 @@ class MainCardFragment :
             ),
         )
 
-        val dpValue = 48
-        val d = resources.displayMetrics.density
-        val margin = (dpValue * d).toInt()
-        binding.vpMaincardList.clipToPadding = false
-        binding.vpMaincardList.offscreenPageLimit = margin / 2
-        binding.vpMaincardList.setPadding(0, 0, margin, 0)
-
-        mainCardAdapter = MainCardAdapter()
         mainCardAdapter.cardList.addAll(fragmentList)
+        setAnswerPager(mainCardAdapter)
+        count()
+    }
 
+
+    private fun setAnswerPager(pagerAdapter: MainCardAdapter) {
+
+
+        val compositePageTransformer = getPageTransformer()
+        binding.vpMaincardList.apply {
+            adapter = pagerAdapter
+            clipToPadding = false
+            clipChildren = false
+            offscreenPageLimit = 1
+            setPageTransformer(compositePageTransformer)
+            setPadding(56, 30, 56, 30)
+            getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        }
+    }
+
+
+    //페이지 트랜스포머
+    private fun getPageTransformer(): ViewPager2.PageTransformer {
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(20))
+        compositePageTransformer.addTransformer { page, position ->
+            val scaleRatio = 1 - abs(position)
+            page.scaleY = 0.95f + scaleRatio * 0.05f
+            // page.scaleY = 0.95f + scaleRatio * 0.05f
+        }
+        return compositePageTransformer
+    }
+
+    fun count() {
         binding.vpMaincardList.apply {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -73,9 +102,7 @@ class MainCardFragment :
     }
 
 
-    private fun moveRepresentCardEditActivity() {
-    }
-
+    //상세 페이지로 이동
     private fun moveDetailActivity() {
         binding.llMaincardEditLayout.setOnClickListener {
             val intent = Intent(requireActivity(), RepresentCardEditActivity::class.java)
@@ -83,6 +110,7 @@ class MainCardFragment :
         }
     }
 
+    //타인이 접근
     private fun friendMainView() {
         var id: Int
         var name = ""
