@@ -13,13 +13,12 @@
         android:background="@drawable/background_bs_border">
 
         <Button
-            android:id="@+id/btn_cardpack_complete"
+            android:id="@+id/btn_cardcreate_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
-            android:background="dark_gray"
-
+            android:background="@color/transparent"
             android:fontFamily="@font/pretendard_regular"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -27,6 +26,7 @@
             android:minHeight="0dp"
             android:padding="0dp"
             android:text="완료"
+            android:enabled="false"
             android:textColor="@color/white_3"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:background="@drawable/ic_symbol_unselected_0"
+            android:background="@drawable/selector_cardcreate_symbol_0"
             app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_1"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
             android:id="@+id/img_btn_cardpack_symbol_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_symbol_unselected_1"
+            android:background="@drawable/selector_cardcreate_symbol_1"
             app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_0"
@@ -71,7 +71,7 @@
             android:id="@+id/img_btn_cardpack_symbol_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_symbol_unselected_2"
+            android:background="@drawable/selector_cardcreate_symbol_2"
             app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_1"
@@ -81,7 +81,7 @@
             android:id="@+id/img_btn_cardpack_symbol_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_symbol_unselected_3"
+            android:background="@drawable/selector_cardcreate_symbol_3"
             app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_4"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_2"
@@ -91,7 +91,7 @@
             android:id="@+id/img_btn_cardpack_symbol_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_symbol_unselected_4"
+            android:background="@drawable/selector_cardcreate_symbol_4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_3"
@@ -130,11 +130,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:id="@+id/btn_cardcreate_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-
-                android:background="dark_gray"
+                android:background="@color/transparent"
                 android:fontFamily="@font/pretendard_regular"
                 android:includeFontPadding="false"
                 android:insetTop="0dp"

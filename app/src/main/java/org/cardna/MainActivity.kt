@@ -22,7 +22,6 @@ class MainActivity :
     override fun initView() {
         setBottomNavigation()
         setBottomNavigationSelectListener()
-
     }
 
     private fun setBottomNavigation() {
