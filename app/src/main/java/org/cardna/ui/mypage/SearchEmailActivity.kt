@@ -8,6 +8,15 @@ import org.cardna.databinding.ActivitySearchEmailBinding
 
 class SearchEmailActivity : BaseViewUtil.BaseAppCompatActivity<ActivitySearchEmailBinding>(R.layout.activity_search_email) {
     override fun initView() {
-        TODO("Not yet implemented")
+        transactionEvent()
+    }
+
+    private fun transactionEvent() {
+        binding.ivSearchemailAddFriend.setOnClickListener {
+            binding.ivSearchemailAddFriend.isSelected = !binding.ivSearchemailAddFriend.isSelected
+      /*      if (binding.ivSearchemailAddFriend.isSelected) {
+                binding.ivSearchemailAddFriend.setBackgroundResource(R.drawable.rectangle_null_white_1_5_radius_16)
+            }*/
+        }
     }
 }
