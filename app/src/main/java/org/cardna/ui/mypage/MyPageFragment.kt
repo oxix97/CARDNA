@@ -41,9 +41,8 @@ class MyPageFragment : BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.card
             )
         ) { item ->
             val bundle = Bundle()
-            bundle.putInt("userImg", item.userImg)
+            bundle.putInt("id", item.id)
             bundle.putString("name", item.name)
-            bundle.putString("sentence", item.sentence)
 
             val mainCardFragment = MainCardFragment()
             mainCardFragment.setArguments(bundle)
@@ -53,7 +52,7 @@ class MyPageFragment : BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.card
                 .replace(org.cardna.R.id.fcv_main, mainCardFragment)
             transaction.commit()
         }
-        
+
         binding.rvMypage.adapter = myPageFriendAdapter
 
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
