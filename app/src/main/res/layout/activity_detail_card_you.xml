@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.maincard.DetailCardActivity">
+        tools:context=".ui.maincard.DetailCardYouActivity">
 
         <ImageView
             android:layout_width="match_parent"
@@ -21,22 +21,10 @@
             android:id="@+id/iv_detailcard_image"
             android:background="@color/white_1_5" />
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ibtn_detailcard_back"
-            android:background="@drawable/rectangle_black_radius_2"
-            android:src="@drawable/ic_arrow_left"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="16dp"
-            android:padding="12dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_left_right_null_radius_2"
+            android:background="@drawable/rectangle_left_right_main_purple_radius_2"
             android:id="@+id/cl_detailcard_setting_layout"
             app:layout_constraintTop_toBottomOf="@id/iv_detailcard_image">
 
@@ -63,7 +51,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:paddingVertical="18dp"
                 android:paddingHorizontal="24dp"
-                android:background="@drawable/rectangle_left_right_null_radius_2"
+                android:background="@drawable/rectangle_left_right_main_purple_radius_2"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageButton

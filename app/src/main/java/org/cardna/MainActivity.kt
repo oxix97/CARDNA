@@ -60,5 +60,4 @@ class MainActivity :
         const val CARD_ME = 0
         const val CARD_YOU = 1
     }
-
 }

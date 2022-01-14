@@ -10,10 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CardNa">
         <activity
-            android:name=".ui.maincard.DetailCardActivity"
+            android:name=".ui.cardpack.CardCreateActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.cardpack.CardCreateActivity"
+            android:name=".ui.maincard.DetailCardMeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mypage.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mypage.OtherWriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mypage.SearchEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.maincard.RepresentCardEditActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.maincard.DetailCardYouActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
