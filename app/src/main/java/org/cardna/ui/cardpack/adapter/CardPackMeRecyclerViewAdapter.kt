@@ -13,7 +13,7 @@ class CardPackMeRecyclerViewAdapter : RecyclerView.Adapter<CardPackMeRecyclerVie
 
     inner class CardPackMeViewHolder(private val binding: ItemCardpackCardmeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseCardPackMeData) {
-            binding.ivCardpackRecyclerview.setImageResource(R.drawable.dummy_img_cardpack_1)
+            binding.ivCarpackRecyclerview.setImageResource(R.drawable.dummy_img_cardpack_1)
             binding.tvCardpackRecyclerview.text = data.title
         }
     }
