@@ -85,7 +85,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_maincard_radius_10"
-            android:layout_marginHorizontal="56dp"
             android:id="@+id/vp_maincard_list"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"

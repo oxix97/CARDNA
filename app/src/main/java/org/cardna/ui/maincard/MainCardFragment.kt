@@ -43,6 +43,14 @@ class MainCardFragment :
                 "책 좋아4444!!"
             ),
         )
+
+        val dpValue = 48;
+        val d = resources.displayMetrics.density
+        val margin = (dpValue * d).toInt()
+        binding.vpMaincardList.clipToPadding = false
+        binding.vpMaincardList.offscreenPageLimit = margin / 2
+        binding.vpMaincardList.setPadding(0, 0, margin, 0)
+
         mainCardAdapter = MainCardAdapter()
         mainCardAdapter.cardList.addAll(fragmentList)
 
@@ -60,7 +68,6 @@ class MainCardFragment :
     }
 
     private fun moveRepresentCardEditActivity() {
-
     }
 
     private fun moveDetailActivity() {
