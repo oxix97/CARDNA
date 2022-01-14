@@ -13,7 +13,7 @@
         android:background="@color/real_black">
 
         <TextView
-            android:id="@+id/tv_complete_card"
+            android:id="@+id/tv_cardcreate_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
@@ -30,13 +30,15 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="56dp"
             android:layout_marginTop="40dp"
-            android:background="@color/main_green"
+            android:background="@drawable/background_rv_border"
+            android:backgroundTint="@color/main_green"
+            tools:backgroundTint="@color/main_green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_complete_card">
+            app:layout_constraintTop_toBottomOf="@+id/tv_cardcreate_complete">
 
             <ImageView
-                android:id="@+id/iv_card_create_complete"
+                android:id="@+id/iv_cardcreate_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
@@ -47,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tv_card_title"
+                android:id="@+id/tv_cardcreate_complete_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -57,8 +59,8 @@
                 android:text="하나둘셋넷다섯여섯일곱여덟"
                 android:textAppearance="@style/create_card_complete"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/iv_card_create_complete"
-                app:layout_constraintTop_toBottomOf="@id/iv_card_create_complete" />
+                app:layout_constraintStart_toStartOf="@id/iv_cardcreate_complete"
+                app:layout_constraintTop_toBottomOf="@id/iv_cardcreate_complete" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
