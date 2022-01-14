@@ -83,8 +83,6 @@ class MainCardFragment :
         }
     }
 
-    override fun initView() {}
-
     private fun friendMainView() {
         var id: Int
         var name = ""
