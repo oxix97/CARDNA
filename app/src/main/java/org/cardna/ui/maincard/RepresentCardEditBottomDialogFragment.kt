@@ -9,6 +9,7 @@ import org.cardna.databinding.FragmentRepresentCardEditBottomDialogBinding
 import org.cardna.ui.cardpack.CardYouFragment
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardMeAdapter
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardYouAdapter
+import org.cardna.util.SpacesItemDecoration
 
 class RepresentCardEditBottomDialogFragment :
     BaseViewUtil.BaseFragment<FragmentRepresentCardEditBottomDialogBinding>
@@ -72,8 +73,8 @@ class RepresentCardEditBottomDialogFragment :
         binding.rvRepresentcardeditCardme.layoutManager = gridLayoutManager
         binding.rvRepresentcardeditCardyou.layoutManager = gridLayoutManager
 
-        binding.rvRepresentcardeditCardme.addItemDecoration(CardYouFragment.SpacesItemDecoration(12))
-        binding.rvRepresentcardeditCardyou.addItemDecoration(CardYouFragment.SpacesItemDecoration(12))
+        binding.rvRepresentcardeditCardme.addItemDecoration(SpacesItemDecoration(12))
+        binding.rvRepresentcardeditCardyou.addItemDecoration(SpacesItemDecoration(12))
 
         binding.rvRepresentcardeditCardme.adapter = cardMeAdapter
         binding.rvRepresentcardeditCardyou.adapter = cardYouAdapter

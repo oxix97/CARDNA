@@ -10,6 +10,7 @@ import org.cardna.data.remote.api.RepresentCardData
 import org.cardna.databinding.ActivityRepresentCardEditBinding
 import org.cardna.ui.cardpack.CardYouFragment
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
+import org.cardna.util.SpacesItemDecoration
 
 class RepresentCardEditActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityRepresentCardEditBinding>
@@ -71,7 +72,7 @@ class RepresentCardEditActivity :
         val gridLayoutManager = GridLayoutManager(this, 2)
         binding.rvRepresentcardeditContainer.layoutManager = gridLayoutManager
         binding.rvRepresentcardeditContainer.addItemDecoration(
-            CardYouFragment.SpacesItemDecoration(12)
+            SpacesItemDecoration(12)
         )
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
         representCardAdapter.cardList.addAll(dataList)
