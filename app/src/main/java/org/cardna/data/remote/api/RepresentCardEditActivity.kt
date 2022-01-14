@@ -9,8 +9,6 @@ class RepresentCardEditActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityMainBinding>(R.layout.activity_represent_card_edit) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun initView() {
