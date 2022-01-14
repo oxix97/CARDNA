@@ -12,6 +12,7 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.maincard.adapter.MainCardAdapter
+import org.cardna.ui.representcardedit.RepresentCardEditActivity
 import kotlin.math.abs
 
 class MainCardFragment :

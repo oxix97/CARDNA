@@ -50,8 +50,8 @@ class CardCreateActivity :
         }
     }
 
-    private fun makeCardListener(){
-        binding.btnCardcreateComplete.setOnClickListener{
+    private fun makeCardListener() {
+        binding.btnCardcreateComplete.setOnClickListener {
             // 카드나 만들기 버튼을 눌렀을 때, dialog를 띄워준다.
             val meOrYou = CARD_ME
             val cardImg = R.drawable.ic_symbol_cardme_0 // 나중에 바꿔야 함
