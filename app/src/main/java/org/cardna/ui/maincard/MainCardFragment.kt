@@ -1,7 +1,9 @@
 package org.cardna.ui.maincard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.viewpager2.widget.ViewPager2
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.MainCardListData
@@ -14,6 +16,8 @@ class MainCardFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        moveRepresentCardEditActivity()
+        moveDetailActivity()
     }
 
     private fun initAdapter() {
@@ -41,10 +45,29 @@ class MainCardFragment :
         )
         mainCardAdapter = MainCardAdapter()
         mainCardAdapter.cardList.addAll(fragmentList)
-        //해당 부분 모름 0 / 4
-        binding.tvMaincardPageCount.text =
-            "${mainCardAdapter.cardList.size} / ${mainCardAdapter.itemCount}"
+
+        binding.vpMaincardList.apply {
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    binding.tvMaincardPageCount.text =
+                        "${position + 1}/${mainCardAdapter.cardList.size}"
+                }
+            })
+        }
+
         binding.vpMaincardList.adapter = mainCardAdapter
+    }
+
+    private fun moveRepresentCardEditActivity() {
+
+    }
+
+    private fun moveDetailActivity() {
+        binding.llMaincardEditLayout.setOnClickListener {
+            val intent = Intent(requireActivity(), RepresentCardEditActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun initView() {
