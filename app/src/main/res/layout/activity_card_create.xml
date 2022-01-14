@@ -129,6 +129,17 @@
                         app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <TextView
+                    android:id="@+id/tv_bang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginStart="4dp"
+                    android:text="!"
+                    android:textColor="@color/white_1"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@id/cl_edittext"
+                    app:layout_constraintBottom_toBottomOf="@id/cl_edittext" />
 
                 <TextView
                     android:id="@+id/tv_count_of_keyword"
@@ -190,6 +201,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_count_of_detail"
                     tools:text="카드나 만들기" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="317dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
