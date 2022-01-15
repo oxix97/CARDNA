@@ -1,6 +1,5 @@
 package org.cardna.ui.mypage
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,7 +7,7 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.cardpack.ResponseOtherWriterData
 import org.cardna.databinding.ActivityOtherWriteBinding
-import org.cardna.ui.cardpack.adapter.OtherWriteRecyclerViewAdapter
+import org.cardna.ui.mypage.adapter.OtherWriteRecyclerViewAdapter
 import org.cardna.ui.maincard.DetailCardMeActivity
 
 class OtherWriteActivity : BaseViewUtil.BaseAppCompatActivity<ActivityOtherWriteBinding>(R.layout.activity_other_write) {
