@@ -1,41 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/black">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_cardpack_tab"
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="isCardme"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/selector_cardpack_tab_cardme" />
+        android:paddingEnd="20dp"
+        android:background="@color/black">
 
-    <TextView
-        android:id="@+id/tv_cardpack_tab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/pretendard_semibold"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_cardpack_tab"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_cardpack_tab"
-        app:layout_constraintTop_toTopOf="@+id/iv_cardpack_tab"
-        tools:text="카드나" />
+        <ImageView
+            android:id="@+id/iv_cardpack_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/selector_cardpack_tab_cardme" />
 
-    <View
-        android:id="@+id/view_cardpack_line"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:background="@color/main_purple" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_cardme_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/selector_cardpack_tab_cardme_text"
+            android:visibility="@{isCardme? View.VISIBLE : View.GONE}"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cardpack_tab"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_cardpack_tab"
+            app:layout_constraintTop_toTopOf="@+id/iv_cardpack_tab"
+            tools:text="카드나" />
+
+        <TextView
+            android:id="@+id/tv_cardyou_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/selector_cardpack_tab_cardyou_text"
+            android:visibility="@{isCardme? View.GONE : View.VISIBLE}"
+            android:fontFamily="@font/pretendard_semibold"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cardpack_tab"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_cardpack_tab"
+            app:layout_constraintTop_toTopOf="@+id/iv_cardpack_tab"
+            tools:text="카드나" />
+
+        <View
+            android:id="@+id/view_cardpack_line"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:background="@color/main_purple" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

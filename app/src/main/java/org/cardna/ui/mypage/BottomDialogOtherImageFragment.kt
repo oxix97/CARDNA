@@ -10,10 +10,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.databinding.FragmentBottomDialogImageBinding
+import org.cardna.databinding.FragmentBottomDialogOtherImageBinding
 
 
-class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragment() {
-    private var _binding: FragmentBottomDialogImageBinding? = null
+class BottomDialogOtherImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialogFragment() {
+    private var _binding: FragmentBottomDialogOtherImageBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화되지 않았습니다")
 
     var selectedImg = NONE;
@@ -22,7 +23,7 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentBottomDialogImageBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentBottomDialogOtherImageBinding.inflate(layoutInflater, container, false)
 
         return binding.root
     }

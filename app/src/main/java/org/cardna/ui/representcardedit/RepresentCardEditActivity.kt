@@ -1,14 +1,15 @@
 package org.cardna.ui.representcardedit
 
 import android.os.Bundle
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.RepresentCardData
 import org.cardna.databinding.ActivityRepresentCardEditBinding
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
+import org.cardna.util.LinearGradientSpan
 import org.cardna.util.SpacesItemDecoration
 
 class RepresentCardEditActivity :
@@ -23,6 +24,9 @@ class RepresentCardEditActivity :
     override fun initView() {
         initFragment()
         onClick()
+        setTextGradient()
+        onClickResult()
+        representCardCount()
     }
 
     private fun initFragment() {
@@ -81,13 +85,30 @@ class RepresentCardEditActivity :
 
     private fun onClick() {
         binding.fabRepresentcardedit.setOnClickListener {
-            val bottomSheetView =
-                layoutInflater.inflate(R.layout.fragment_represent_card_edit_bottom_dialog, null)
-            val bottomSheetDialog = BottomSheetDialog(this)
-            bottomSheetDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            val bottomSheetDialog = RepresentCardEditBottomDialogFragment()
 
-            bottomSheetDialog.setContentView(bottomSheetView)
-            bottomSheetDialog.show()
+            bottomSheetDialog.show(supportFragmentManager, "sdsfs")
         }
+    }
+
+    private fun setTextGradient() {
+        val text = binding.tvRepresentcardeditColorTitle.text.toString()
+        val green = getColor(R.color.main_green)
+        val purple = getColor(R.color.main_purple)
+        val spannable = text.toSpannable()
+        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
+        binding.tvRepresentcardeditColorTitle.text = spannable
+    }
+
+    private fun onClickResult() {
+        binding.tvTvRepresentcardeditFinish.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun representCardCount() {
+        val countText = "${representCardAdapter.cardList.size}/7"
+        binding.tvRepresentcardeditCardListCount.text = countText
+        representCardAdapter.notifyDataSetChanged()
     }
 }
