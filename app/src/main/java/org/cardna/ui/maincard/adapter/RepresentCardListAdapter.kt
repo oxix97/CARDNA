@@ -12,7 +12,7 @@ class RepresentCardListAdapter :
 
     inner class RepresentCardViewHolder(private val binding: ItemRepresentEditCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RepresentCardData) {
+        fun onBind(data: RepresentCardData, position: Int) {
             binding.ivRepresentcardeditlistImage.setImageResource(data.image)
             binding.tvRepresentcardlistUserTag.text = data.userTag
             binding.clRvItem.setBackgroundColor(data.backgroundColor)
@@ -36,7 +36,7 @@ class RepresentCardListAdapter :
         holder: RepresentCardViewHolder,
         position: Int
     ) {
-        holder.onBind(cardList[position])
+        holder.onBind(cardList[position], position)
     }
 
     override fun getItemCount(): Int = cardList.size

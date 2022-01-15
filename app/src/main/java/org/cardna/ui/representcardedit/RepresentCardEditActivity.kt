@@ -19,12 +19,14 @@ class RepresentCardEditActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        setTextGradient()
     }
 
     override fun initView() {
         initFragment()
         onClick()
+        setTextGradient()
+        onClickResult()
+        representCardCount()
     }
 
     private fun initFragment() {
@@ -96,5 +98,17 @@ class RepresentCardEditActivity :
         val spannable = text.toSpannable()
         spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
         binding.tvRepresentcardeditColorTitle.text = spannable
+    }
+
+    private fun onClickResult() {
+        binding.tvTvRepresentcardeditFinish.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun representCardCount() {
+        val countText = "${representCardAdapter.cardList.size}/7"
+        binding.tvRepresentcardeditCardListCount.text = countText
+        representCardAdapter.notifyDataSetChanged()
     }
 }
