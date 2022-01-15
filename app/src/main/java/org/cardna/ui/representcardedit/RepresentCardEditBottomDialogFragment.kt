@@ -157,12 +157,15 @@ class RepresentCardEditBottomDialogFragment :
                 list.add(RepresentCardData)
                 cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                 cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
                 return@setItemClickListener list.lastIndex
             } else {
                 list.removeAt(position)
                 cardMeAdapter.setLastRemovedIndex(position)
                 cardYouAdapter.setLastRemovedIndex(position)
+                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
                 cardYouAdapter.notifyDataSetChanged()
+
                 return@setItemClickListener -1
             }
         }
@@ -172,12 +175,16 @@ class RepresentCardEditBottomDialogFragment :
                 list.add(RepresentCardData)
                 cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                 cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
+
                 return@setItemClickListener list.lastIndex
             } else {
                 list.removeAt(position)
                 cardMeAdapter.setLastRemovedIndex(position)
                 cardYouAdapter.setLastRemovedIndex(position)
+                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
                 cardMeAdapter.notifyDataSetChanged()
+
                 return@setItemClickListener -1
             }
         }
