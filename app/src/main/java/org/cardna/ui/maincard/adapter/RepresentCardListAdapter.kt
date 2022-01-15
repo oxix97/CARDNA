@@ -18,10 +18,10 @@ class RepresentCardListAdapter :
             binding.ivRepresentcardeditlistImage.setImageResource(data.image)
             binding.tvRepresentcardlistUserTag.text = data.userTag
             binding.clRvItem.setBackgroundColor(data.backgroundColor)
-            binding.ivRepresentcardeditlistRemove.setOnClickListener {
+       /*     binding.ivRepresentcardeditlistRemove.setOnClickListener {
                 notifyItemRemoved(adapterPosition)
                 cardList.removeAt(adapterPosition + 1)
-            }
+            }*/
         }
     }
 

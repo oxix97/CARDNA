@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import org.cardna.R
 import org.cardna.data.remote.api.MainCardListData
 import org.cardna.databinding.ItemMainCardViewBinding
 import org.cardna.ui.maincard.DetailCardYouActivity
@@ -18,7 +19,11 @@ class MainCardAdapter : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>
         fun onBind(data: MainCardListData) {
             binding.ivMainCardImage.setImageResource(data.image)
             binding.tvMainCardTitle.text = data.tag
-            binding.clMaincardContainer.resources.getColor(data.color)
+
+            if(data.isMe)
+                binding.clMaincardContainer.setBackgroundResource(R.drawable.rectangle_green_null_black_radius_2)
+            else
+                binding.clMaincardContainer.setBackgroundResource(R.drawable.rectangle_right_null_black_radius_2)
         }
     }
 
