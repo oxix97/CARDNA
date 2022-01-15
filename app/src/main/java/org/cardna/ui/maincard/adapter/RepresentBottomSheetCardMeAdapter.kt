@@ -45,6 +45,7 @@ class RepresentBottomSheetCardMeAdapter :
         return CardMeViewHolder(binding)
     }
 
+
     override fun onBindViewHolder(
         holder: RepresentBottomSheetCardMeAdapter.CardMeViewHolder,
         position: Int
