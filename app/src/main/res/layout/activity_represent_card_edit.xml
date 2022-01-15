@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:context=".ui.representcardedit.RepresentCardEditActivity">
+
+        <TextView
+            android:id="@+id/tv_representcardedit_title"
+            style="@style/cardpack_bottomsheet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="대표카드 수정"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_tv_representcardedit_finish"
+            style="@style/cardpack_bottomsheet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="완료"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_representcardedit_card_list_count"
+            style="@style/detail_card_text_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="4/7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_title" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="32dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_representcardedit_card_list_count">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_representcardedit_title_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_representcardedit_card_list_count">
+
+                <TextView
+                    android:id="@+id/tv_representcardedit_text"
+                    style="@style/represent_card_edit_title_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="나를 가장 잘 표현하는 카드를"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_representcardedit_color_title"
+                    style="@style/represent_card_edit_title_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_text_gradient"
+                    android:text="대표카드"
+                    app:layout_constraintStart_toStartOf="@id/tv_representcardedit_text"
+                    app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_text" />
+
+                <TextView
+                    android:id="@+id/tv_representcardedit_text_end"
+                    style="@style/represent_card_edit_title_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로 지정해보세요!"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_representcardedit_color_title"
+                    app:layout_constraintStart_toEndOf="@id/tv_representcardedit_color_title"
+                    app:layout_constraintTop_toTopOf="@id/tv_representcardedit_color_title" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_representcardedit_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:nestedScrollingEnabled="true"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_representcardedit_text_end"
+                    tools:itemCount="4"
+                    tools:layout_editor_absoluteX="16dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_representcardedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/white_1"
+            android:padding="20dp"
+            android:src="@drawable/ic_tray_fill"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
