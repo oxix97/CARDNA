@@ -15,6 +15,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_insight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent">
@@ -24,11 +25,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="108dp"
+                android:layout_marginTop="64dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Open Area"
                 android:textColor="@color/black"
-                android:textSize="46sp"
+                android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,28 +37,78 @@
                 android:id="@+id/iv_openarea_allow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginEnd="32dp"
                 android:src="@drawable/ic_insight_allow_open_area"
-                app:layout_constraintBottom_toBottomOf="@id/tv_openarea_title"
-                app:layout_constraintStart_toEndOf="@id/tv_openarea_title"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_openarea_title" />
 
             <TextView
                 android:id="@+id/tv_openarea_sentence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/pretendard_semibold"
                 android:text="내가 쓴 카드 중 가장 많은 공감을 받은 카드"
+                android:textColor="@color/black"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/tv_openarea_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_openarea_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_openarea_title"
+                app:layout_goneMarginTop="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!--    <ImageView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ctl_insight">
+
+
+            <ImageView
+                android:id="@+id/iv_insight_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="56dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="56dp"
+                android:src="@drawable/rectangle_maingreen_stroke_black" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="40dp"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_insight_openarea"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_insight_card"
+                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
+                app:layout_constraintStart_toStartOf="@+id/iv_insight_card"
+                app:layout_constraintTop_toTopOf="@id/iv_insight_card" />
+
+            <TextView
+                android:id="@+id/tv_insight_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/img_insight_openarea"
-                app:layout_constraintTop_toBottomOf="@+id/tv_openarea_sentence" />-->
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="나도 알고, 타인도 아는 나의 모습이에요."
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
+                app:layout_constraintStart_toStartOf="@id/iv_insight_card"
+                app:layout_constraintTop_toBottomOf="@+id/iv_insight_card" />
+
+            <View
+                android:id="@+id/view_insight_line"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/tv_insight_description"
+                app:layout_constraintStart_toStartOf="@id/tv_insight_description"
+                app:layout_constraintTop_toBottomOf="@+id/tv_insight_description" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
