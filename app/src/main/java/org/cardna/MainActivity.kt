@@ -10,6 +10,8 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivityMainBinding
 import org.cardna.ui.cardpack.BottomDialogCardFragment
 import org.cardna.ui.cardpack.CardCreateActivity
+import org.cardna.ui.mypage.OtherWriteActivity
+import java.nio.channels.InterruptedByTimeoutException
 
 class MainActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -50,13 +52,17 @@ class MainActivity :
                     startActivity(intent)
                 }
                 //
-                CARD_YOU -> Toast.makeText(this, "카드너 추가", Toast.LENGTH_SHORT).show()
+                CARD_YOU -> {
+                    Toast.makeText(this, "카드너 추가", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, OtherWriteActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
         bottomDialogCardFragment.show(supportFragmentManager, bottomDialogCardFragment.tag)
     }
 
-    companion object{
+    companion object {
         const val CARD_ME = 0
         const val CARD_YOU = 1
     }
