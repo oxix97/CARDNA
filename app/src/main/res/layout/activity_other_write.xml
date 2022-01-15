@@ -20,22 +20,22 @@
             android:layout_marginTop="16dp"
             android:text="타인이 말하는 나"
             android:textAppearance="@style/cardpack_bottomsheet_title"
-            app:titleCentered="true"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleCentered="true" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_otherwrite_list"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_otherwrite_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteX="1dp" />
+            tools:itemCount="6"
+            tools:listitem="@layout/item_otherwrite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
