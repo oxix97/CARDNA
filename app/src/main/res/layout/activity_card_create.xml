@@ -44,11 +44,9 @@
                     android:id="@+id/cl_cardcreate_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="85dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/rectangle_text_hint_radius_10"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.633"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -79,6 +77,18 @@
                         app:layout_constraintStart_toStartOf="@+id/iv_cardcreate_img"
                         app:layout_constraintTop_toBottomOf="@id/iv_cardcreate_img" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/iv_cardcreate_gallery_img"
+                    android:layout_width="192dp"
+                    android:layout_height="272dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_symbol_cardme_1"
+                    tools:src="@drawable/ic_symbol_cardme_1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
                 <TextView
                     android:id="@+id/tv_cardcreate_title"
@@ -112,11 +122,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:layout_marginEnd="24dp"
-                        android:ems="14"
                         android:fontFamily="@font/pretendard_regular"
                         android:hint="키워드 중심으로 포현해보세요"
                         android:includeFontPadding="false"
                         android:maxLines="1"
+                        android:maxLength="14"
+                        android:ems="1"
+                        android:singleLine="true"
                         android:padding="0dp"
                         android:paddingStart="0dp"
                         android:layout_marginBottom="4dp"
@@ -161,12 +173,12 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="80dp"
                     android:background="@null"
-                    android:ems="200"
                     android:fontFamily="@font/pretendard_regular"
                     android:gravity="top"
                     android:hint="더 자세하게 적어볼까요? \n설명, 자랑, 경험 등 어떤 내용도 좋아요 :)"
                     android:includeFontPadding="false"
-                    android:minLines="7"
+                    android:maxLines="7"
+                    android:maxLength="200"
                     android:padding="0dp"
                     android:textColor="@color/white_1"
                     android:textColorHint="@color/white_3"
@@ -188,7 +200,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/et_cardcreate_detail"
                     tools:text="0/200" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_cardcreate_complete"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -197,6 +209,8 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="80dp"
                     android:text="카드나 만들기"
+                    android:textColor="@color/white_2"
+                    android:background="@drawable/background_btn_card_disabled"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

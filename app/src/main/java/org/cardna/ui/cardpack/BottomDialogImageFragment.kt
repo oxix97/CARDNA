@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.databinding.FragmentBottomDialogImageBinding
 
@@ -34,6 +35,16 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chooseImageListener()
+
+        // for Gallery
+        accessGallery()
+    }
+
+    private fun accessGallery(){
+        binding.btnCardcreateGallery.setOnClickListener{
+            (activity as CardCreateActivity).checkPermission()
+            dialog?.dismiss()
+        }
     }
 
     private fun chooseImageListener(){
@@ -110,10 +121,12 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
 
 
             // 갤러리부분
+            /*
             clCardpackGallery.setOnClickListener {
                 itemClick(GALLERY)
                 dialog?.dismiss()
             }
+            */
         }
     }
 

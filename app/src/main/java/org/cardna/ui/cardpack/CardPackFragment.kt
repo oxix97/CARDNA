@@ -29,7 +29,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         initCardPackTabLayout()
     }
 
-    private fun initCardPackAdapter() {
+    private fun initCardPackAdapter() {d
         val fragmentList = listOf(CardMeFragment(), CardYouFragment())
 
         cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)

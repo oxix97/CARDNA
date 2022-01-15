@@ -19,13 +19,7 @@
         android:theme="@style/Theme.CardNa">
         <activity
             android:name=".GalleryPracticeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".ui.cardpack.CardCreateActivity"
             android:exported="false" />
@@ -43,13 +37,18 @@
             android:exported="false" />
         <activity
             android:name=".ui.maincard.RepresentCardEditActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.maincard.DetailCardYouActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
