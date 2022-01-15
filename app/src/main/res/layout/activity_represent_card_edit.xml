@@ -79,7 +79,6 @@
                     style="@style/represent_card_edit_title_white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_text_gradient"
                     android:text="대표카드"
                     app:layout_constraintStart_toStartOf="@id/tv_representcardedit_text"
                     app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_text" />
