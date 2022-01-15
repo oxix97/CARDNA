@@ -1,4 +1,4 @@
-package org.cardna.ui.maincard
+package org.cardna.ui.representcardedit
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager

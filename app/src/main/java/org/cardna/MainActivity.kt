@@ -3,16 +3,27 @@ package org.cardna
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivityMainBinding
 import org.cardna.ui.cardpack.BottomDialogCardFragment
 import org.cardna.ui.cardpack.CardCreateActivity
+import org.cardna.ui.cardpack.CardPackFragment
+import org.cardna.ui.insight.InsightFragment
+import org.cardna.ui.maincard.MainCardFragment
+import org.cardna.ui.mypage.MyPageFragment
+import org.cardna.util.replace
 
 class MainActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityMainBinding>(R.layout.activity_main) {
+    private val mainCardFragment = MainCardFragment()
+    private val insightFragment = InsightFragment()
+    private val mypageFragment = MyPageFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -20,20 +31,42 @@ class MainActivity :
     }
 
     override fun initView() {
-        setBottomNavigation()
+        replace(R.id.fcv_main, mainCardFragment)
+        initBottomNavigation()
         setBottomNavigationSelectListener()
     }
 
-    private fun setBottomNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fcv_main) as NavHostFragment
-        val navController = navHostFragment.findNavController()
-        binding.bnvMain.setupWithNavController(navController)
-        binding.bnvMain.isItemHorizontalTranslationEnabled = true
+    //bottomnavigation연결
+    private fun initBottomNavigation() {
+
+        binding.bnvMain.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_main_maincard -> {
+                    supportFragmentManager.popBackStack()
+                    replace(R.id.fcv_main, mainCardFragment)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.menu_main_cardpack -> {
+                    supportFragmentManager.popBackStack()
+                    replace(R.id.fcv_main, CardPackFragment())
+                    return@setOnItemSelectedListener true
+                }
+                R.id.menu_main_insight -> {
+                    supportFragmentManager.popBackStack()
+                    replace(R.id.fcv_main, insightFragment)
+                    return@setOnItemSelectedListener true
+                }
+                else -> {
+                    supportFragmentManager.popBackStack()
+                    replace(R.id.fcv_main, mypageFragment)
+                    return@setOnItemSelectedListener true
+                }
+            }
+        }
     }
 
     private fun setBottomNavigationSelectListener() {
-        binding.bnvMain.setItemIconTintList(null)
+        binding.bnvMain.itemIconTintList = null
         binding.bnvMain.selectedItemId = R.id.menu_main_maincard
     }
 
@@ -56,7 +89,7 @@ class MainActivity :
         bottomDialogCardFragment.show(supportFragmentManager, bottomDialogCardFragment.tag)
     }
 
-    companion object{
+    companion object {
         const val CARD_ME = 0
         const val CARD_YOU = 1
     }

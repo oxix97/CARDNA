@@ -1,4 +1,4 @@
-package org.cardna.ui.maincard
+package org.cardna.ui.representcardedit
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -8,7 +8,6 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.RepresentCardData
 import org.cardna.databinding.ActivityRepresentCardEditBinding
-import org.cardna.ui.cardpack.CardYouFragment
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
 import org.cardna.util.SpacesItemDecoration
 
@@ -18,11 +17,12 @@ class RepresentCardEditActivity :
     private lateinit var representCardAdapter: RepresentCardListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initFragment()
-        onClick()
+        initView()
     }
 
     override fun initView() {
+        initFragment()
+        onClick()
     }
 
     private fun initFragment() {
@@ -72,7 +72,7 @@ class RepresentCardEditActivity :
         val gridLayoutManager = GridLayoutManager(this, 2)
         binding.rvRepresentcardeditContainer.layoutManager = gridLayoutManager
         binding.rvRepresentcardeditContainer.addItemDecoration(
-            SpacesItemDecoration(12)
+            SpacesItemDecoration(6)
         )
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
         representCardAdapter.cardList.addAll(dataList)
