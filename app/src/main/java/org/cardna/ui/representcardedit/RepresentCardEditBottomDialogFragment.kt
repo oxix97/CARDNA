@@ -222,7 +222,7 @@ class RepresentCardEditBottomDialogFragment :
 
     private fun onResultClick() {
         binding.tvRepresentcardeditFinish.setOnClickListener {
-
+            onDestroyView()
         }
     }
 }
