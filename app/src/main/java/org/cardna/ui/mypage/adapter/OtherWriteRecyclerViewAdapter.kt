@@ -1,4 +1,4 @@
-package org.cardna.ui.cardpack.adapter
+package org.cardna.ui.mypage.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.cardna.data.remote.model.cardpack.ResponseOtherWriterData
-import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
 import org.cardna.databinding.ItemOtherwriteBinding
-import org.cardna.ui.mypage.adapter.MyPageFriendAdapter
 
 class OtherWriteRecyclerViewAdapter(
     private val cardList: List<ResponseOtherWriterData>,
@@ -31,12 +29,12 @@ class OtherWriteRecyclerViewAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): OtherWriteRecyclerViewAdapter.OtherWriterViewHolder {
+    ): OtherWriterViewHolder {
         val binding = ItemOtherwriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return OtherWriterViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: OtherWriteRecyclerViewAdapter.OtherWriterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OtherWriterViewHolder, position: Int) {
         holder.onBind(getItem(position))
     }
 

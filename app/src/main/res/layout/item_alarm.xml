@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp">
+
+        <ImageView
+            android:id="@+id/iv_otherwrite_background"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@drawable/rectangle_dark_grey_radius_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_otherwrite_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="보스베이비가 소개를 적어줬어요"
+            android:textColor="@color/white_1"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/iv_otherwrite_background"
+            app:layout_constraintTop_toTopOf="@+id/iv_otherwrite_background" />
+
+        <LinearLayout
+            android:id="@+id/ll_otherwrite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tv_otherwrite_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_otherwrite_title">
+
+            <TextView
+                android:id="@+id/tv_otherwrite_relation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="카드나의 다빈치"
+                android:textColor="@color/white_2"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_otherwrite_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text=" · "
+                android:textColor="@color/white_2"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_otherwrite_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="문다빈"
+                android:textColor="@color/white_2"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_otherwrite_createdAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="2022/01/16"
+            android:textColor="@color/white_2"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_otherwrite_background"
+            app:layout_constraintTop_toTopOf="@+id/ll_otherwrite" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
