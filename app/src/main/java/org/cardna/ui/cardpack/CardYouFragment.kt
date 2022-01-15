@@ -10,6 +10,7 @@ import org.cardna.data.remote.model.cardpack.ResponseCardPackYouData
 import org.cardna.databinding.FragmentCardYouBinding
 import org.cardna.ui.cardpack.adapter.CardPackYouRecyclerViewAdapter
 import org.cardna.util.SpacesItemDecoration
+import kotlin.math.roundToInt
 
 
 class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.cardna.R.layout.fragment_card_you) {
@@ -34,7 +35,8 @@ class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.ca
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvCardyou.layoutManager = gridLayoutManager
 
-        binding.rvCardyou.addItemDecoration(SpacesItemDecoration(12))
+        binding.rvCardyou.addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
+
 
         cardYouAdapter.cardList.addAll(
             listOf(
