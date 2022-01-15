@@ -16,7 +16,7 @@
             android:id="@+id/vp_insight"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/background_insight_open_area"
+            android:background="#82ACB7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -28,9 +28,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:includeFontPadding="false"
             android:text="인사이트"
             android:textColor="@color/black"
+            android:textSize="28sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vp_insight"
             app:layout_constraintTop_toTopOf="parent" />
