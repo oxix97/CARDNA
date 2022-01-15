@@ -76,8 +76,7 @@ class MainCardFragment :
         }
     }
 
-
-    //페이지 트랜스포머
+    //애니메이션인듯 ?
     private fun getPageTransformer(): ViewPager2.PageTransformer {
         val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer(20))
@@ -88,6 +87,7 @@ class MainCardFragment :
         return compositePageTransformer
     }
 
+    //페이지 트랜스포머
     fun count() {
         binding.vpMaincardList.apply {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
