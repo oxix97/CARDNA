@@ -6,6 +6,7 @@ import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
 import org.cardna.databinding.FragmentCardMeBinding
 import org.cardna.ui.cardpack.adapter.CardPackMeRecyclerViewAdapter
 import org.cardna.util.SpacesItemDecoration
+import kotlin.math.roundToInt
 
 class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
 
@@ -29,7 +30,7 @@ class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.card
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvCardme.layoutManager = gridLayoutManager
 
-        binding.rvCardme.addItemDecoration(SpacesItemDecoration(12))
+        binding.rvCardme.addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
 
         cardMeAdapter.cardList.addAll(
             listOf(

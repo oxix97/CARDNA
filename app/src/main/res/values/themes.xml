@@ -19,6 +19,18 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <style name="tablayout_style">
+        <item name="tabSelectedTextColor">@color/main_green</item>
+        선택됐을때 글씨 색
+        <item name="tabTextColor">@color/black</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+    </style>
+
+
+
+
     <style name="Theme.CardNa.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CardNa.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
