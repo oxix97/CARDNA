@@ -1,36 +1,43 @@
 package org.cardna.ui.maincard.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.api.RepresentCardYouData
+import org.cardna.data.remote.api.RepresentCardData
 import org.cardna.databinding.ItemRepresentCardYouBinding
 
 class RepresentBottomSheetCardYouAdapter :
     RecyclerView.Adapter<RepresentBottomSheetCardYouAdapter.CardYouViewHolder>() {
-    val cardYouList = mutableListOf<RepresentCardYouData>()
-    val storage = mutableListOf<Int>()
-    var count = 0
+    private var lastRemovedIndex : Int = Int.MAX_VALUE
+    private var itemClickListener : ((Int, RepresentCardData, Boolean) -> Int) ?= null
+    val cardYouList = mutableListOf<RepresentCardData>()
+
+    fun setItemClickListener(listener : ((Int, RepresentCardData, Boolean) -> Int)) {
+        itemClickListener = listener
+    }
+
+    fun setLastRemovedIndex(index : Int) {
+        lastRemovedIndex = index
+    }
 
     inner class CardYouViewHolder(private val binding: ItemRepresentCardYouBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RepresentCardYouData) {
+        fun onBind(data: RepresentCardData) {
             binding.clRvItem.setBackgroundColor(data.backgroundColor)
             binding.ivCardpackRecyclerview.setImageResource(data.image)
             binding.tvCardpackRecyclerview.text = data.userTag
+
+            binding.tvRepresentcardCount.isVisible = data.isClicked
+
+            if(lastRemovedIndex < data.index) {
+                data.index = data.index - 1
+            }
+            binding.tvRepresentcardCount.text = (data.index + 1).toString()
             binding.clRvItem.setOnClickListener {
-                if (!data.isClicked) {
-                    data.isClicked = true
-                    storage.add(adapterPosition, data.image)
-                    binding.tvRepresentcardCount.text = count.toString()
-                    binding.tvRepresentcardCount.visibility = View.VISIBLE
-                } else {
-                    data.isClicked = false
-                    storage.remove(adapterPosition)
-                    binding.tvRepresentcardCount.text = count.toString()
-                    binding.tvRepresentcardCount.visibility = View.GONE
-                }
+                data.isClicked = !data.isClicked
+                data.index = requireNotNull(itemClickListener?.invoke(data.index, data, data.isClicked))
+                notifyDataSetChanged()
             }
         }
     }
