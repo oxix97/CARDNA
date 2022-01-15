@@ -2,11 +2,9 @@ package org.cardna.ui.maincard.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.cardna.data.remote.api.RepresentCardData
 import org.cardna.databinding.ItemRepresentEditCardBinding
-import kotlin.coroutines.coroutineContext
 
 class RepresentCardListAdapter :
     RecyclerView.Adapter<RepresentCardListAdapter.RepresentCardViewHolder>() {
@@ -14,14 +12,14 @@ class RepresentCardListAdapter :
 
     inner class RepresentCardViewHolder(private val binding: ItemRepresentEditCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RepresentCardData) {
+        fun onBind(data: RepresentCardData, position: Int) {
             binding.ivRepresentcardeditlistImage.setImageResource(data.image)
             binding.tvRepresentcardlistUserTag.text = data.userTag
             binding.clRvItem.setBackgroundColor(data.backgroundColor)
-       /*     binding.ivRepresentcardeditlistRemove.setOnClickListener {
+            binding.ivRepresentcardeditlistDelete.setOnClickListener {
                 notifyItemRemoved(adapterPosition)
                 cardList.removeAt(adapterPosition + 1)
-            }*/
+            }
         }
     }
 
@@ -38,7 +36,7 @@ class RepresentCardListAdapter :
         holder: RepresentCardViewHolder,
         position: Int
     ) {
-        holder.onBind(cardList[position])
+        holder.onBind(cardList[position], position)
     }
 
     override fun getItemCount(): Int = cardList.size

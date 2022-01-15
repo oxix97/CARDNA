@@ -1,12 +1,15 @@
 package org.cardna.ui.representcardedit
 
 import android.os.Bundle
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import androidx.recyclerview.widget.GridLayoutManager
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.RepresentCardData
 import org.cardna.databinding.ActivityRepresentCardEditBinding
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
+import org.cardna.util.LinearGradientSpan
 import org.cardna.util.SpacesItemDecoration
 
 class RepresentCardEditActivity :
@@ -21,6 +24,9 @@ class RepresentCardEditActivity :
     override fun initView() {
         initFragment()
         onClick()
+        setTextGradient()
+        onClickResult()
+        representCardCount()
     }
 
     private fun initFragment() {
@@ -83,5 +89,26 @@ class RepresentCardEditActivity :
 
             bottomSheetDialog.show(supportFragmentManager, "sdsfs")
         }
+    }
+
+    private fun setTextGradient() {
+        val text = binding.tvRepresentcardeditColorTitle.text.toString()
+        val green = getColor(R.color.main_green)
+        val purple = getColor(R.color.main_purple)
+        val spannable = text.toSpannable()
+        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
+        binding.tvRepresentcardeditColorTitle.text = spannable
+    }
+
+    private fun onClickResult() {
+        binding.tvTvRepresentcardeditFinish.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun representCardCount() {
+        val countText = "${representCardAdapter.cardList.size}/7"
+        binding.tvRepresentcardeditCardListCount.text = countText
+        representCardAdapter.notifyDataSetChanged()
     }
 }
