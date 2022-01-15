@@ -12,7 +12,9 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.maincard.adapter.MainCardAdapter
+import org.cardna.ui.representcardedit.RepresentCardEditActivity
 import kotlin.math.abs
+import kotlin.math.roundToInt
 
 class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
@@ -33,22 +35,22 @@ class MainCardFragment :
         val fragmentList = listOf(
             MainCardListData(
                 R.drawable.dummy_img_test,
-                R.color.main_green,
+                true,
                 "책 좋아!!"
             ),
             MainCardListData(
                 R.drawable.dummy_img_cardpack_1,
-                R.color.main_green,
+                false,
                 "책 좋아22!!"
             ),
             MainCardListData(
                 R.drawable.dummy_img_test,
-                R.color.main_green,
+                true,
                 "책 좋아333!!"
             ),
             MainCardListData(
-                R.drawable.book,
-                R.color.main_green,
+                R.drawable.dummy_img_test,
+                false,
                 "책 좋아4444!!"
             ),
         )
@@ -69,24 +71,21 @@ class MainCardFragment :
             clipChildren = false
             offscreenPageLimit = 1
             setPageTransformer(compositePageTransformer)
-            setPadding(56, 30, 56, 30)
+
+            setPadding(56, 0, 56, 0)
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
     }
 
-
-    //페이지 트랜스포머
+    //애니메이션인듯 ?
     private fun getPageTransformer(): ViewPager2.PageTransformer {
         val compositePageTransformer = CompositePageTransformer()
-        compositePageTransformer.addTransformer(MarginPageTransformer(20))
-        compositePageTransformer.addTransformer { page, position ->
-            val scaleRatio = 1 - abs(position)
-            page.scaleY = 0.95f + scaleRatio * 0.05f
-            // page.scaleY = 0.95f + scaleRatio * 0.05f
-        }
+        compositePageTransformer.addTransformer(MarginPageTransformer((20 * resources.displayMetrics.density).roundToInt()))
+
         return compositePageTransformer
     }
 
+    //페이지 트랜스포머
     fun count() {
         binding.vpMaincardList.apply {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

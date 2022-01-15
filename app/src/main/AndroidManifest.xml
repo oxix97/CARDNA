@@ -37,7 +37,7 @@
             android:name=".ui.mypage.SearchEmailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.maincard.RepresentCardEditActivity"
+            android:name=".ui.representcardedit.RepresentCardEditActivity"
             android:exported="true" />
         <activity
             android:name=".ui.maincard.DetailCardYouActivity"

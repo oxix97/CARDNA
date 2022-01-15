@@ -15,3 +15,16 @@ class SpacesItemDecoration(private val space: Int) : RecyclerView.ItemDecoration
         outRect.bottom = space
     }
 }
+
+class SpacesItemDecoration2(private val spaceright: Int, private val spaceleft: Int, private val bottom: Int) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        outRect.right = spaceright
+        outRect.bottom = bottom
+        outRect.left = spaceleft
+    }
+}
