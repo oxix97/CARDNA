@@ -76,6 +76,8 @@ class CardCreateActivity :
 
             val dialog = CardCreateCompleteDialog(this, meOrYou, cardImg, cardTitle)
             dialog.showDialog()
+
+            // 3초간 띄우고 현재 activity 없애기
         }
     }
 

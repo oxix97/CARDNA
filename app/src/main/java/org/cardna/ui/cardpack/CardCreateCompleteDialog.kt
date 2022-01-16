@@ -6,10 +6,14 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.text.set
+import androidx.core.text.toSpannable
 import org.cardna.R
+import org.cardna.util.LinearGradientSpan
 
 class CardCreateCompleteDialog(
-    context: Context,
+    val context: Context,
     private val meOrYou: Int,
     private val cardImg: Int,
     private val cardTitle: String
@@ -40,14 +44,28 @@ class CardCreateCompleteDialog(
             dialog.findViewById<ConstraintLayout>(R.id.cl_cardcreate_complete).setBackgroundResource(R.drawable.background_cardyou)
         }
 
+
         // cardImg에 해당하는 이미지 바꿔주기
         dialog.findViewById<ImageView>(R.id.iv_cardcreate_complete).setImageResource(cardImg)
 
         // cardTitle에 해당하는 title로 바꿔주기
         dialog.findViewById<TextView>(R.id.tv_cardcreate_complete_title).text = cardTitle
 
+        // textColor 바꾸기
+        setTextGradient()
+
         // 3초간 보여주고 그 다음 액티비티 POP 해야 함
         dialog.show()
+    }
+
+
+    fun setTextGradient() {
+        val text = dialog.findViewById<TextView>(R.id.tv_cardcreate_complete).text.toString()
+        val green = ContextCompat.getColor(context, R.color.main_green)
+        val purple = ContextCompat.getColor(context, R.color.main_purple)
+        val spannable = text.toSpannable()
+        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
+        dialog.findViewById<TextView>(R.id.tv_cardcreate_complete).text = spannable
     }
 
     companion object {
