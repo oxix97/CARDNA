@@ -71,6 +71,7 @@ BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateCompleteBinding>(R.layout.a
         val handler = Handler()
         handler.postDelayed({
             var intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             // MainActivity로 갈 때, CardCreateActivity pop하고 가기
             // 현재 A -> B -> C인데, C -> A로 가도록 intent 써서

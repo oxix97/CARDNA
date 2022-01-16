@@ -10,149 +10,157 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_bs_border">
-
-        <Button
-            android:id="@+id/btn_cardcreate_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
-            android:background="@color/transparent"
-            android:fontFamily="@font/pretendard_regular"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:padding="0dp"
-            android:text="완료"
-            android:enabled="false"
-            android:textColor="@color/white_3"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_cardpack_symbol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="44dp"
-            android:fontFamily="@font/pretendard_semibold"
-            android:includeFontPadding="false"
-            android:text="심볼"
-            android:textColor="@color/white_3"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/img_btn_cardpack_symbol_0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/selector_cardme_symbol_0"
-            app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_1"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_cardpack_symbol" />
-
-        <ImageButton
-            android:id="@+id/img_btn_cardpack_symbol_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_cardme_symbol_1"
-            app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_0"
-            app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_0" />
-
-        <ImageButton
-            android:id="@+id/img_btn_cardpack_symbol_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_cardme_symbol_2"
-            app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_3"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_1"
-            app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_1" />
-
-        <ImageButton
-            android:id="@+id/img_btn_cardpack_symbol_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_cardme_symbol_3"
-            app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_4"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_2"
-            app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_2" />
-
-        <ImageButton
-            android:id="@+id/img_btn_cardpack_symbol_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_cardme_symbol_4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_3"
-            app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_3" />
-
-        <TextView
-            android:id="@+id/tv_cardpack_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="44dp"
-            android:fontFamily="@font/pretendard_semibold"
-            android:includeFontPadding="false"
-            android:text="사진"
-            android:textColor="@color/white_3"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_btn_cardpack_symbol_0"/>
+        android:background="@color/real_black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_cardpack_gallery"
+            android:id="@+id/cl_cardcreate_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_cardpack_image">
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/ic_cardpack_gallery"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/background_bs_border">
 
             <Button
-                android:id="@+id/btn_cardcreate_gallery"
+                android:id="@+id/btn_cardcreate_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
                 android:background="@color/transparent"
+                android:enabled="false"
                 android:fontFamily="@font/pretendard_regular"
-                android:includeFontPadding="false"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:padding="0dp"
-                android:text="갤러리에서 가져오기"
-                android:textColor="@color/white_1"
+                android:text="완료"
+                android:textColor="@color/white_3"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
-                app:layout_constraintTop_toTopOf="@+id/imageButton" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tv_cardpack_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="44dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:includeFontPadding="false"
+                android:text="심볼"
+                android:textColor="@color/white_3"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/img_btn_cardpack_symbol_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/selector_cardme_symbol_0"
+                app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_1"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_cardpack_symbol" />
+
+            <ImageButton
+                android:id="@+id/img_btn_cardpack_symbol_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_cardme_symbol_1"
+                app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_0"
+                app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_0" />
+
+            <ImageButton
+                android:id="@+id/img_btn_cardpack_symbol_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_cardme_symbol_2"
+                app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_1"
+                app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_1" />
+
+            <ImageButton
+                android:id="@+id/img_btn_cardpack_symbol_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_cardme_symbol_3"
+                app:layout_constraintEnd_toStartOf="@+id/img_btn_cardpack_symbol_4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_2"
+                app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_2" />
+
+            <ImageButton
+                android:id="@+id/img_btn_cardpack_symbol_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_cardme_symbol_4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/img_btn_cardpack_symbol_3"
+                app:layout_constraintTop_toTopOf="@+id/img_btn_cardpack_symbol_3" />
+
+            <TextView
+                android:id="@+id/tv_cardpack_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="44dp"
+                android:fontFamily="@font/pretendard_semibold"
+                android:includeFontPadding="false"
+                android:text="사진"
+                android:textColor="@color/white_3"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_btn_cardpack_symbol_0" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_cardpack_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_cardpack_image">
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/ic_cardpack_gallery"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_cardcreate_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:background="@color/transparent"
+                    android:fontFamily="@font/pretendard_regular"
+                    android:includeFontPadding="false"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="갤러리에서 가져오기"
+                    android:textColor="@color/white_1"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+                    app:layout_constraintStart_toEndOf="@+id/imageButton"
+                    app:layout_constraintTop_toTopOf="@+id/imageButton" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

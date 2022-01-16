@@ -41,6 +41,7 @@ class OtherCardCreateCompleteActivity :
         val handler = Handler()
         handler.postDelayed({
             var intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             // 진입점이 두개인데 어차피 둘다 MainActivity이므로
             // MainActivity로 갈 때, CardCreateActivity pop하고 가기
