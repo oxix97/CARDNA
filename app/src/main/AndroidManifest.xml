@@ -18,6 +18,9 @@
         android:theme="@style/Theme.CardNa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.cardpack.CardCreateCompleteActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.maincard.AlarmActivity"
             android:exported="false" />
         <activity
