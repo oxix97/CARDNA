@@ -95,6 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:letterSpacing="-0.01"
                     android:id="@+id/tv_detailcard_about"
                     android:layout_marginHorizontal="16dp"
                     app:layout_constraintStart_toStartOf="parent"
