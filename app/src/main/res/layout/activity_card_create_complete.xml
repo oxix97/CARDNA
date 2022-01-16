@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/real_black">
+        android:background="@color/real_black"
+        tools:context=".ui.cardpack.CardCreateCompleteActivity">
 
         <TextView
             android:id="@+id/tv_cardcreate_complete"
@@ -65,5 +66,16 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_cardcreate_complete"
                 tools:text="하둘셋넷다여일여아열하둘셋넷" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_cardcreate_complete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_cardyou"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

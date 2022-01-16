@@ -69,15 +69,19 @@ class CardCreateActivity :
 
     private fun makeCardListener() {
         binding.btnCardcreateComplete.setOnClickListener {
-            // 카드나 만들기 버튼을 눌렀을 때, dialog를 띄워준다.
-            val meOrYou = CARD_ME
-            val cardImg = R.drawable.ic_symbol_cardme_0 // 나중에 바꿔야 함
-            val cardTitle = binding.etCardcreateKeyword.text.toString()
+            // 카드나 만들기 버튼을 눌렀을 때, cardCreateCompleteActivity로 인텐트로 이동
+            val intent = Intent(this, CardCreateCompleteActivity::class.java)
 
+            intent.putExtra("meOrYou", CARD_ME)
+            intent.putExtra("cardImg", R.drawable.ic_symbol_cardme_0)
+            intent.putExtra("cardTitle", binding.etCardcreateKeyword.text.toString())
+
+            startActivity(intent)
+            /*
             val dialog = CardCreateCompleteDialog(this, meOrYou, cardImg, cardTitle)
             dialog.showDialog()
-
-            // 3초간 띄우고 현재 activity 없애기
+             */
+            // dialog 띄우고 현재 activity pop하고 그 전 activity로
         }
     }
 
