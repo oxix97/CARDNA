@@ -11,6 +11,7 @@ import org.cardna.databinding.ActivityRepresentCardEditBinding
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
 import org.cardna.util.LinearGradientSpan
 import org.cardna.util.SpacesItemDecoration
+import kotlin.math.roundToInt
 
 class RepresentCardEditActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityRepresentCardEditBinding>
@@ -66,9 +67,9 @@ class RepresentCardEditActivity :
         representCardAdapter = RepresentCardListAdapter()
         val gridLayoutManager = GridLayoutManager(this, 2)
         binding.rvRepresentcardeditContainer.layoutManager = gridLayoutManager
-        binding.rvRepresentcardeditContainer.addItemDecoration(
-            SpacesItemDecoration(6)
-        )
+
+        binding.rvRepresentcardeditContainer.addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
+
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
         representCardAdapter.cardList.addAll(dataList)
         representCardAdapter.notifyDataSetChanged()
