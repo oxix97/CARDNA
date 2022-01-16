@@ -52,6 +52,7 @@
             android:id="@+id/btn_sign_in"
             app:layout_constraintStart_toStartOf="parent"
             android:paddingVertical="16dp"
+            android:includeFontPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/rectangle_sign_in_gradient_radius_10"
@@ -75,6 +76,7 @@
             android:layout_marginBottom="24dp"
             android:textColor="@color/white"
             android:text="가입하기"
+            android:includeFontPadding="false"
             android:gravity="center"
             android:paddingVertical="16dp"
             android:fontFamily="@font/pretendard_semibold" />

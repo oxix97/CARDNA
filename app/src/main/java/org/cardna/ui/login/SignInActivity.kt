@@ -17,6 +17,9 @@ class SignInActivity :
         onMainActivity()
     }
 
+    override fun initView() {
+    }
+
     private fun emailTextChanged() {
         binding.etSignInEmail.addTextChangedListener {
             if (binding.etSignInEmail.length() > 0) {
@@ -38,7 +41,6 @@ class SignInActivity :
             setButtonBackground()
         }
     }
-
     private fun setButtonBackground() {
         if (binding.etSignInEmail.length() > 0 && binding.etSignInPassword.length() > 0) {
             binding.btnSignInAccess.setBackgroundResource(R.drawable.rectangle_sign_in_gradient_radius_10)
@@ -48,13 +50,11 @@ class SignInActivity :
             binding.btnSignInAccess.setTextColor(getColor(R.color.white_2))
         }
     }
+
     private fun onMainActivity() {
         binding.btnSignInAccess.setOnClickListener {
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    override fun initView() {
     }
 }
