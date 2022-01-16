@@ -1,4 +1,4 @@
-package org.cardna.data.remote.api
+package org.cardna.data.remote.model.representcardedit
 
 data class RepresentCardData(
     val image: Int,
