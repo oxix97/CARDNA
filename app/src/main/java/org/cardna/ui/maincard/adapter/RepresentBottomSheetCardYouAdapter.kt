@@ -24,7 +24,7 @@ class RepresentBottomSheetCardYouAdapter :
     inner class CardYouViewHolder(private val binding: ItemRepresentCardYouBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RepresentCardData) {
-            binding.clRvItem.setBackgroundColor(data.backgroundColor)
+            binding.clRvItem.setBackgroundResource(data.backgroundColor)
             binding.ivCardpackRecyclerview.setImageResource(data.image)
             binding.tvCardpackRecyclerview.text = data.userTag
 

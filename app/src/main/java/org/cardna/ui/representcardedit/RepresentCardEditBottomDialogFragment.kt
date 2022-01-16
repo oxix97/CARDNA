@@ -54,86 +54,81 @@ class RepresentCardEditBottomDialogFragment :
     private fun initFragment() {
         val dataList1 = listOf(
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
+                R.drawable.background_cardme
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "fsdafs",
-                R.color.main_purple,
+                R.drawable.background_cardme
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
+                R.drawable.background_cardme
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.color.main_purple,
+                R.drawable.background_cardyou
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
+                R.drawable.background_cardyou
+
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "fsdafs",
-                R.color.main_purple,
+                R.drawable.background_cardyou
+
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_test,
-                "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.color.main_purple,
+                R.drawable.background_cardyou
+
             ),
         )
         val dataList2 = listOf(
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
+                R.drawable.background_cardme
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "fsdafs",
-                R.color.main_purple,
+                R.drawable.background_cardme
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
+                R.drawable.background_cardme
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.color.main_purple,
+                R.drawable.background_cardyou
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
+                R.drawable.background_cardyou
+
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "fsdafs",
-                R.color.main_purple,
+                R.drawable.background_cardyou
+
             ),
             RepresentCardData(
-                R.drawable.dummy_img_test,
+                R.drawable.dummy_img_cardpack_1,
                 "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.color.main_green,
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_test,
-                "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.color.main_purple,
+                R.drawable.background_cardyou
             ),
         )
 
