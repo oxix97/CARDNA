@@ -3,7 +3,7 @@ package org.cardna.ui.maincard.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.representedit.RepresentCardData
+import org.cardna.data.remote.model.representcardedit.RepresentCardData
 import org.cardna.databinding.ItemRepresentEditCardBinding
 
 class RepresentCardListAdapter :
@@ -15,7 +15,7 @@ class RepresentCardListAdapter :
         fun onBind(data: RepresentCardData, position: Int) {
             binding.ivRepresentcardeditlistImage.setImageResource(data.image)
             binding.tvRepresentcardlistUserTag.text = data.userTag
-            binding.clRvItem.setBackgroundColor(data.backgroundColor)
+            binding.clRvItem.setBackgroundResource(data.backgroundColor)
             binding.ivRepresentcardeditlistDelete.setOnClickListener {
                 notifyItemRemoved(adapterPosition)
                 cardList.removeAt(adapterPosition + 1)

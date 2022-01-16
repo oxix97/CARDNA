@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.representedit.RepresentCardData
+import org.cardna.data.remote.model.representcardedit.RepresentCardData
 import org.cardna.databinding.ItemRepresentCardMeBinding
 
 class RepresentBottomSheetCardMeAdapter :
@@ -24,7 +24,7 @@ class RepresentBottomSheetCardMeAdapter :
     inner class CardMeViewHolder(private val binding: ItemRepresentCardMeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RepresentCardData, position: Int) {
-            binding.clRvItem.setBackgroundColor(data.backgroundColor)
+            binding.clRvItem.setBackgroundResource(data.backgroundColor)
             binding.ivCardpackRecyclerview.setImageResource(data.image)
             binding.tvCardpackRecyclerview.text = data.userTag
 

@@ -179,6 +179,8 @@
                     android:hint="더 자세하게 적어볼까요? \n설명, 자랑, 경험 등 어떤 내용도 좋아요 :)"
                     android:includeFontPadding="false"
                     android:maxLines="7"
+                    android:minHeight="168dp"
+                    android:maxHeight="168dp"
                     android:maxLength="200"
                     android:textColor="@color/white_1"
                     android:textColorHint="@color/white_3"

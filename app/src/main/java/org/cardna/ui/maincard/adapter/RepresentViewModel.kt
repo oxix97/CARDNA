@@ -2,7 +2,7 @@ package org.cardna.ui.maincard.adapter
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.cardna.data.remote.model.representedit.RepresentCardData
+import org.cardna.data.remote.model.representcardedit.RepresentCardData
 
 class RepresentViewModel : ViewModel() {
     var oldList = MutableLiveData<ArrayList<RepresentCardData>>()
