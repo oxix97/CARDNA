@@ -3,7 +3,7 @@ package org.cardna.ui.maincard.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.api.RepresentCardData
+import org.cardna.data.remote.model.representcardedit.RepresentCardData
 import org.cardna.databinding.ItemRepresentEditCardBinding
 
 class RepresentCardListAdapter :

@@ -12,7 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
 import org.cardna.R
-import org.cardna.data.remote.api.RepresentCardData
+import org.cardna.data.remote.model.representcardedit.RepresentCardData
 import org.cardna.databinding.FragmentRepresentCardEditBottomDialogBinding
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardMeAdapter
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardYouAdapter
