@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.cardna.R
-import org.cardna.data.remote.api.MainCardListData
+import org.cardna.data.remote.model.representedit.MainCardListData
 import org.cardna.databinding.ItemMainCardViewBinding
 import org.cardna.ui.maincard.DetailCardYouActivity
 

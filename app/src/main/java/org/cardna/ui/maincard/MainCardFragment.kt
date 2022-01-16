@@ -9,11 +9,10 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.api.MainCardListData
+import org.cardna.data.remote.model.representedit.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.maincard.adapter.MainCardAdapter
 import org.cardna.ui.representcardedit.RepresentCardEditActivity
-import kotlin.math.abs
 import kotlin.math.roundToInt
 
 class MainCardFragment :

@@ -37,6 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_sign_up_email"
+                android:inputType="textEmailAddress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:hint="이메일"
@@ -45,6 +46,15 @@
                 android:textColor="@color/white_1"
                 android:textColorHint="@color/white_3"
                 android:background="@null" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_signup_email_check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/et_sign_up_email"
+                app:layout_constraintBottom_toBottomOf="@id/et_sign_up_email"
+                android:layout_marginEnd="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -72,6 +82,15 @@
                 android:hint="비밀번호(영문+숫자 최소 8자 이상)"
                 android:textColor="@color/white_1" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_signup_password_check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/et_sign_up_password"
+                app:layout_constraintBottom_toBottomOf="@id/et_sign_up_password"
+                android:layout_marginEnd="16dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -93,7 +112,8 @@
             app:layout_constraintStart_toStartOf="@id/tv_sign_up_about"
             app:layout_constraintTop_toBottomOf="@id/tv_sign_up_about"
             android:text="이용약관"
-            android:textColor="@color/main_green"/>
+            android:textColor="@color/main_green" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +122,7 @@
             app:layout_constraintStart_toEndOf="@id/tv_sign_up_about_terms"
             android:textSize="16sp"
             android:textColor="@color/white_3"
-            app:layout_constraintTop_toTopOf="@id/tv_sign_up_about_terms"/>
+            app:layout_constraintTop_toTopOf="@id/tv_sign_up_about_terms" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -112,8 +132,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_sign_up_about_terms_space"
             android:textSize="16sp"
             android:textColor="@color/main_green"
-            android:text=" 개인정보 정책"
-            />
+            android:text=" 개인정보 정책" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"

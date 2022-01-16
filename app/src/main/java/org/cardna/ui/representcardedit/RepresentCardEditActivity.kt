@@ -6,7 +6,7 @@ import androidx.core.text.toSpannable
 import androidx.recyclerview.widget.GridLayoutManager
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.api.RepresentCardData
+import org.cardna.data.remote.model.representedit.RepresentCardData
 import org.cardna.databinding.ActivityRepresentCardEditBinding
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
 import org.cardna.util.LinearGradientSpan
