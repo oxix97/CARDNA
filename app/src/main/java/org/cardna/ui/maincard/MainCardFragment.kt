@@ -27,6 +27,7 @@ class MainCardFragment :
     override fun initView() {
         moveDetailActivity()
         friendMainView()
+        moveAlarmActivity()
 
 
         mainCardAdapter = MainCardAdapter()
@@ -105,6 +106,14 @@ class MainCardFragment :
     private fun moveDetailActivity() {
         binding.llMaincardEditLayout.setOnClickListener {
             val intent = Intent(requireActivity(), RepresentCardEditActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    //알림 페이지로 이동
+    private fun moveAlarmActivity() {
+        binding.ibtnMaincardAlarm.setOnClickListener {
+            val intent = Intent(requireActivity(), AlarmActivity::class.java)
             startActivity(intent)
         }
     }

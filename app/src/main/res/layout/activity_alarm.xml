@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        tools:context=".ui.cardpack.OtherWriteActivity">
+        tools:context=".ui.maincard.AlarmActivity">
 
         <TextView
             android:id="@+id/tv_otherwrite_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="타인이 말하는 나"
+            android:text="알림"
             android:textAppearance="@style/cardpack_bottomsheet_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_otherwrite_list"
+            android:id="@+id/rv_alarm_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
@@ -35,7 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_otherwrite_title"
             tools:itemCount="6"
-            tools:listitem="@layout/item_otherwrite" />
+            tools:listitem="@layout/item_alarm" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
