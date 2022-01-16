@@ -34,7 +34,7 @@
 
 
             <TextView
-                android:id="@+id/tv_num_of_cardpack"
+                android:id="@+id/tv_cardpack_cnt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -44,15 +44,29 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_cardpack"
                 tools:text="23" />
 
-            <ImageView
-                android:id="@+id/iv_make_card"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_cardcreate_wrap_img"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/ic_cardpack_add_card"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_cardpack"
+                android:layout_height="0dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_cardpack" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_make_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/ic_cardpack_add_card"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,13 +77,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:background="@color/black"
+            android:clipToPadding="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cl_cardpack_top"
+            app:tabIndicatorHeight="0dp"
             app:tabPaddingEnd="0dp"
             app:tabPaddingStart="0dp"
-            android:clipToPadding="true"
-            app:tabIndicatorHeight="0dp"
             app:tabRippleColor="@null">
+
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
