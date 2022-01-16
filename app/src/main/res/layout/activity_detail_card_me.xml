@@ -78,6 +78,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="52dp"
                 android:id="@+id/cl_detailcard_scroll_layout">
 
                 <TextView
@@ -111,6 +112,7 @@
                     android:id="@+id/tv_detailcard_date"
                     style="@style/detail_card_text_hint"
                     android:text="2022/01/12"
+                    android:layout_marginBottom="52dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_detailcard_about" />
 
