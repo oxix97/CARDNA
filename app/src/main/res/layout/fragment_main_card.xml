@@ -24,6 +24,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/ibtn_maincard_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_mypage_friend_unchecked"
+            app:layout_constraintBottom_toBottomOf="@+id/ibtn_maincard_alarm"
+            app:layout_constraintEnd_toStartOf="@+id/ibtn_maincard_alarm"
+            app:layout_constraintTop_toTopOf="@+id/ibtn_maincard_alarm" />
+
         <TextView
             android:id="@+id/tv_maincard_user_name"
             style="@style/fragment_title_text"
@@ -83,8 +93,8 @@
                 android:id="@+id/iv_maincard_edit_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_arrow_left_arrow_right" />
 
             <TextView
@@ -114,6 +124,29 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/vp_maincard_list"
             app:layout_constraintStart_toStartOf="@+id/vp_maincard_list" />
+
+        <ImageView
+            android:id="@+id/iv_maincard_goto_cardpack_background"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="112dp"
+            android:layout_marginVertical="8dp"
+            android:src="@drawable/rectangle_maincard_gradient_radius_45"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_maincard_page_count" />
+
+        <TextView
+            android:id="@+id/tv_maincard_goto_cardpack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="카드팩 보기 ->"
+            android:textColor="@color/main_purple"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_maincard_goto_cardpack_background"
+            app:layout_constraintEnd_toEndOf="@id/iv_maincard_goto_cardpack_background"
+            app:layout_constraintStart_toStartOf="@id/iv_maincard_goto_cardpack_background"
+            app:layout_constraintTop_toTopOf="@id/iv_maincard_goto_cardpack_background" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
