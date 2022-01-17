@@ -42,7 +42,7 @@ class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.card
                 ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아")
             )
         ) {
-            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+            val intent = Intent(requireContext(), DetailCardMeActivity::class.java).apply {
                 putExtra("cardImg", R.drawable.background_cardyou)
                 putExtra("id", 1)
                 putExtra("title", "테스트~~")

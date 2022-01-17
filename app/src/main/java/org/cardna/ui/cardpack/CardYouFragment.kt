@@ -14,6 +14,7 @@ import org.cardna.databinding.FragmentCardYouBinding
 import org.cardna.ui.cardpack.adapter.CardPackMeRecyclerViewAdapter
 import org.cardna.ui.cardpack.adapter.CardPackYouRecyclerViewAdapter
 import org.cardna.ui.maincard.DetailActivity
+import org.cardna.ui.maincard.DetailCardMeActivity
 import org.cardna.util.SpacesItemDecoration
 import kotlin.math.roundToInt
 
@@ -43,7 +44,7 @@ class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.ca
                 ResponseCardPackYouData("img url", 1, "댕댕이 짱 좋아")
             )
         ) {
-            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+            val intent = Intent(requireContext(), DetailCardMeActivity::class.java).apply {
                 putExtra("cardImg", R.drawable.background_cardyou)
                 putExtra("id", 1)
                 putExtra("title", "테스트~~")
