@@ -56,8 +56,8 @@ class SignUpActivity :
                 binding.llSignupPasswordLayout.setBackgroundResource(R.drawable.bottom_edit_line_red)
                 binding.llSignupPasswordLayout.isVisible = true
             }
+            onClickAccess()
         }
-        onClickAccess()
     }
 
     private fun checkEmail(): Boolean {
