@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.databinding.ActivityDetailCardBinding
+import org.cardna.databinding.ActivityDetailCardMeBinding
 
 class DetailCardMeActivity :
-    BaseViewUtil.BaseAppCompatActivity<ActivityDetailCardBinding>(R.layout.activity_detail_card) {
+    BaseViewUtil.BaseAppCompatActivity<ActivityDetailCardMeBinding>(R.layout.activity_detail_card_me) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -15,6 +15,7 @@ class DetailCardMeActivity :
 
     override fun initView() {
         getMainCardId()
+        enableCheckLike()
     }
 
     private fun getMainCardId() {
@@ -48,6 +49,13 @@ class DetailCardMeActivity :
                 ibtnDetailcardDelete.setImageResource(R.drawable.ic_detail_3dot)
                 ibtnDetailcardDelete.setBackgroundResource(R.drawable.rectangle_main_purple)
             }
+        }
+    }
+
+    // 공감버튼 체크 되도록
+    private fun enableCheckLike(){
+        binding.ctvLikeIcon.setOnClickListener{
+            binding.ctvLikeIcon.toggle()
         }
     }
 }

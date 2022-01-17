@@ -5,14 +5,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.text.set
 import androidx.core.text.toSpannable
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.maincard.MainCardListData
+import org.cardna.data.remote.model.maincard.ResponseMainCardData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
@@ -22,6 +26,7 @@ import kotlin.math.roundToInt
 
 class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
+    private lateinit var fragmentList: List<MainCardListData>
     private lateinit var mainCardAdapter: MainCardAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,32 +41,34 @@ class MainCardFragment :
     }
 
     private fun initAdapter() {
-        val fragmentList = listOf(
-            MainCardListData(
-                1,
-                R.drawable.dummy_img_test,
-                true,
-                "책 좋아!!"
-            ),
-            MainCardListData(
-                2,
-                R.drawable.dummy_img_test,
-                false,
-                "책 좋아!!"
-            ),
-            MainCardListData(
-                3,
-                R.drawable.dummy_img_test,
-                true,
-                "책 좋아!!"
-            ),
-            MainCardListData(
-                4,
-                R.drawable.dummy_img_test,
-                false,
-                "책 좋아!!"
-            ),
-        )
+           fragmentList = listOf(
+                MainCardListData(
+                    1,
+                    R.drawable.dummy_img_test,
+                    true,
+                    "책 좋아!!"
+                ),
+                MainCardListData(
+                    2,
+                    R.drawable.dummy_img_test,
+                    false,
+                    "책 좋아!!"
+                ),
+                MainCardListData(
+                    3,
+                    R.drawable.dummy_img_test,
+                    true,
+                    "책 좋아!!"
+                ),
+                MainCardListData(
+                    4,
+                    R.drawable.dummy_img_test,
+                    false,
+                    "책 좋아!!"
+                ),
+            )
+
+        //fragmentList=데이터 리스트 넣기
 
         //RecyclerView 연결
         mainCardAdapter = MainCardAdapter(fragmentList) {
@@ -72,13 +79,13 @@ class MainCardFragment :
         }
 
         binding.apply {
-            setAnswerPager(mainCardAdapter)
-            count()
+            setMainCard(mainCardAdapter)
+            pageSelect()
         }
     }
 
-
-    private fun setAnswerPager(pagerAdapter: MainCardAdapter) {
+    //메인카드 레이아웃 마진
+    private fun setMainCard(pagerAdapter: MainCardAdapter) {
         val compositePageTransformer = getPageTransformer()
         binding.vpMaincardList.apply {
             adapter = pagerAdapter
@@ -101,7 +108,7 @@ class MainCardFragment :
     }
 
     //페이지 트랜스포머
-    fun count() {
+    private fun pageSelect() {
         binding.vpMaincardList.apply {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -115,6 +122,19 @@ class MainCardFragment :
         binding.vpMaincardList.adapter = mainCardAdapter
     }
 
+
+    //텍스트 그라디언트
+    private fun setTextGradient() {
+        val text = binding.tvMaincardGotoCardpack.text.toString()
+        val green = requireActivity().getColor(R.color.main_green)
+        val purple = requireActivity().getColor(R.color.main_purple)
+        val spannable = text.toSpannable()
+        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
+        binding.tvMaincardGotoCardpack.text = spannable
+    }
+
+
+    //결과값 리스트를 통해 레이아웃 그리기
 
     //내가 내 메인카드 볼떄 화면
     private fun initClickEventCardMe() {
@@ -168,14 +188,5 @@ class MainCardFragment :
                 .replace(org.cardna.R.id.fcv_main, CardPackFragment())
             transaction.commit()
         }
-    }
-
-    private fun setTextGradient() {
-        val text = binding.tvMaincardGotoCardpack.text.toString()
-        val green = requireActivity().getColor(R.color.main_green)
-        val purple = requireActivity().getColor(R.color.main_purple)
-        val spannable = text.toSpannable()
-        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
-        binding.tvMaincardGotoCardpack.text = spannable
     }
 }

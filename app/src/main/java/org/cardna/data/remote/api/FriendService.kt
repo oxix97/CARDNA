@@ -13,16 +13,16 @@ import retrofit2.http.POST
 
 interface FriendService {
     @Headers("Content-Type:application/json")
-    @GET("/friend")
+    @GET("friend")
     fun getFriend(): Call<ResponseFriendData>
 
-    @GET("/friend/list?name={name}")
+    @GET("friend/list?name={name}")
     fun getFriendName(): Call<ResponseFriendListSearchNameData>
 
-    @GET("/friend/search?.email={email}")
+    @GET("friend/search?.email={email}")
     fun getFriendSearchEmail(): Call<ResponseFriendSearchEmailData>
 
-    @POST("/friend")
+    @POST("friend")
     fun postFriend(
         @Body body: RequestFriendUpdateData
     ): Call<ResponseFriendUpdateData>

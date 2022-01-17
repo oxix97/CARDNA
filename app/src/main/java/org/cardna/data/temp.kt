@@ -1,4 +1,4 @@
 package org.cardna.data
 
-class Temp {
+class temp {
 }

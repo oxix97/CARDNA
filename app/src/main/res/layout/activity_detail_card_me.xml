@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.maincard.DetailCardYouActivity">
+        tools:context=".ui.maincard.DetailCardMeActivity">
 
         <ImageView
             android:id="@+id/iv_detailcard_image"

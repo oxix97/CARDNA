@@ -14,7 +14,7 @@ import retrofit2.http.*
 interface CardService {
     // 대표 카드 조회
     @Headers("Content-Type:application/json")
-    @GET("/card/main/:userId")
+    @GET("/card/main/{userId}")
     suspend fun getMainCard() : ResponseMainCardData
 
     // 대표 카드 수정
@@ -24,19 +24,19 @@ interface CardService {
     ) : ResponseMainCardEditData
 
     // 카드 전체 조회
-    @GET("/card/:userId")
+    @GET("/card/{userId}")
     suspend fun getCardAll() : ResponseCardAllData
 
     // 카드나 전체 조회
-    @GET("/card/me/:userId")
+    @GET("/card/me/{userId}")
     suspend fun getCardMe() : ResponseCardMeData
 
     // 카드너 전체 조회
-    @GET("/card/you/:userId")
+    @GET("/card/you/{userId}")
     suspend fun getCardYou() : ResponseCardYouData
 
     // 카드 상세 조회
-    @GET("/card/info/:cardId")
+    @GET("/card/info/{cardId}")
     suspend fun getCardDetail() : ResponseCardDetailData
 
     // 카드나 작성
@@ -46,13 +46,13 @@ interface CardService {
     ) : ResponseCreateCardMeData
 
     // 카드너 작성
-    @POST("/card/:friendId")
+    @POST("/card/{friendId}")
     suspend fun postCreateCardYou(
         @Body body : RequestCreateCardYouData
     ) : ResponseCreateCardYouData
 
     // 카드 삭제
-    @DELETE("/card/:cardId")
+    @DELETE("/card/{cardId}")
     suspend fun deleteCard() : ResponseDeleteCardData
 
     // 카드너 보관함 조회
@@ -60,6 +60,6 @@ interface CardService {
     suspend fun getCardBox() : ResponseCardYouBoxData
 
     // 카드너 추가, 보관
-    @PUT("/card/box/:cardId")
+    @PUT("/card/box/{cardId}")
     suspend fun putCardBoxCardId() : ResponseAddOrRemoveCardYouData
 }
