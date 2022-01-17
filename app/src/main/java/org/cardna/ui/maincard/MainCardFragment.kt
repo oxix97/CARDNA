@@ -2,7 +2,6 @@ package org.cardna.ui.maincard
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.text.set
 import androidx.core.text.toSpannable
@@ -11,11 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.maincard.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.cardpack.CardPackFragment
@@ -77,7 +73,7 @@ class MainCardFragment :
 
         binding.apply {
             setAnswerPager(mainCardAdapter)
-            pageCount()
+            count()
         }
     }
 
@@ -104,8 +100,8 @@ class MainCardFragment :
         return compositePageTransformer
     }
 
-    //페이지 카운트
-    fun pageCount() {
+    //페이지 트랜스포머
+    fun count() {
         binding.vpMaincardList.apply {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -119,28 +115,6 @@ class MainCardFragment :
         binding.vpMaincardList.adapter = mainCardAdapter
     }
 
-/*    private fun initNetwork() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = ApiService.cardService("dabinKim-0318")
-                initRepositoryAdapter(response)
-
-            } catch (e: Exception) {
-                Log.d("successfully connect with Server", e.toString())
-            }
-        }
-    }*/
-
-
-    //텍스트 그라디언트
-    private fun setTextGradient() {
-        val text = binding.tvMaincardGotoCardpack.text.toString()
-        val green = requireActivity().getColor(R.color.main_green)
-        val purple = requireActivity().getColor(R.color.main_purple)
-        val spannable = text.toSpannable()
-        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
-        binding.tvMaincardGotoCardpack.text = spannable
-    }
 
     //내가 내 메인카드 볼떄 화면
     private fun initClickEventCardMe() {
@@ -163,7 +137,6 @@ class MainCardFragment :
             }
         }
     }
-
 
     //타인이 내 메인카드 볼때 화면
     private fun initClickEventCardYou() {
@@ -197,5 +170,12 @@ class MainCardFragment :
         }
     }
 
-
+    private fun setTextGradient() {
+        val text = binding.tvMaincardGotoCardpack.text.toString()
+        val green = requireActivity().getColor(R.color.main_green)
+        val purple = requireActivity().getColor(R.color.main_purple)
+        val spannable = text.toSpannable()
+        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
+        binding.tvMaincardGotoCardpack.text = spannable
+    }
 }
