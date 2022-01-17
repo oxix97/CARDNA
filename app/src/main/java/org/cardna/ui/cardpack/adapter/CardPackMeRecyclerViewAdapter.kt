@@ -6,20 +6,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.cardna.R
 import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
+import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
 import org.cardna.databinding.ItemCardpackCardmeBinding
 import org.cardna.ui.maincard.DetailActivity
 
-class CardPackMeRecyclerViewAdapter() :
+class CardPackMeRecyclerViewAdapter(
+    private val cardList: List<ResponseCardPackMeData>,
+    private val clickListener: (ResponseCardPackMeData) -> Unit
+) :
     RecyclerView.Adapter<CardPackMeRecyclerViewAdapter.CardPackMeViewHolder>() {
-    val cardList = mutableListOf<ResponseCardPackMeData>()
 
     inner class CardPackMeViewHolder(private val binding: ItemCardpackCardmeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseCardPackMeData) {
-            binding.ivCarpackRecyclerview.setImageResource(R.drawable.dummy_img_cardpack_1)
-            binding.tvCardpackRecyclerview.text = data.title
-            binding.clRvItem.setOnClickListener {
-                println(data.title)
+            with(binding) {
+                ivCarpackRecyclerview.setImageResource(R.drawable.dummy_img_cardpack_1)
+                tvCardpackRecyclerview.text = data.title
+                root.setOnClickListener {
+                    clickListener(data)
+                }
             }
         }
     }
@@ -34,16 +39,7 @@ class CardPackMeRecyclerViewAdapter() :
     }
 
     override fun onBindViewHolder(holder: CardPackMeViewHolder, position: Int) {
-        val intent = Intent(holder.itemView.context, DetailActivity::class.java)
         holder.onBind(cardList[position])
-        intent.putExtra("id", cardList[position].id)
-        intent.putExtra("tag", cardList[position].title)
-        intent.putExtra("img", cardList[position].cardImg)
-        holder.itemView.setOnClickListener {
-            holder.itemView.context.startActivity(
-                intent
-            )
-        }
     }
 
     override fun getItemCount(): Int = cardList.size
