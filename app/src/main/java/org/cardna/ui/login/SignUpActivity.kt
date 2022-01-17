@@ -73,12 +73,9 @@ class SignUpActivity :
         return p
     }
 
-    //여기서 true, true
     private fun onClickSignUpNameActivity() {
         binding.btnSignUpAccess.setOnClickListener {
             val intent = Intent(this, SignUpNameActivity::class.java)
-            intent.putExtra("email",binding.etSignUpEmail.text.toString())
-            intent.putExtra("password",binding.etSignUpPassword.text.toString())
             startActivity(intent)
         }
     }
