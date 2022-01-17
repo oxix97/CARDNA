@@ -11,11 +11,12 @@ class SignUpNameActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivitySignUpNameBinding>(R.layout.activity_sign_up_name) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nameTextChanged()
-        onClickSignInActivity()
+        initView()
     }
 
     override fun initView() {
+        nameTextChanged()
+        onClickSignInActivity()
     }
 
     private fun nameTextChanged() {

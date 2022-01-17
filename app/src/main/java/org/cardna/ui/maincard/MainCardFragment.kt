@@ -3,6 +3,9 @@ package org.cardna.ui.maincard
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.text.set
+import androidx.core.text.toSpannable
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -11,9 +14,10 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.maincard.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
+import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
 import org.cardna.ui.representcardedit.RepresentCardEditActivity
-import kotlin.math.abs
+import org.cardna.util.LinearGradientSpan
 import kotlin.math.roundToInt
 
 class MainCardFragment :
@@ -25,46 +29,56 @@ class MainCardFragment :
     }
 
     override fun initView() {
-        moveDetailActivity()
-        friendMainView()
-        moveAlarmActivity()
+        initAdapter()
+        initClickEventCardYou()
+        setTextGradient()
+        initClickEventCardMe()
+    }
 
-
-        mainCardAdapter = MainCardAdapter()
-
-
+    private fun initAdapter() {
         val fragmentList = listOf(
             MainCardListData(
+                1,
                 R.drawable.dummy_img_test,
                 true,
                 "책 좋아!!"
             ),
             MainCardListData(
-                R.drawable.dummy_img_cardpack_1,
+                2,
+                R.drawable.dummy_img_test,
                 false,
-                "책 좋아22!!"
+                "책 좋아!!"
             ),
             MainCardListData(
+                3,
                 R.drawable.dummy_img_test,
                 true,
-                "책 좋아333!!"
+                "책 좋아!!"
             ),
             MainCardListData(
+                4,
                 R.drawable.dummy_img_test,
                 false,
-                "책 좋아4444!!"
+                "책 좋아!!"
             ),
         )
 
-        mainCardAdapter.cardList.addAll(fragmentList)
-        setAnswerPager(mainCardAdapter)
-        count()
+        //RecyclerView 연결
+        mainCardAdapter = MainCardAdapter(fragmentList) {
+            val intent = Intent(requireContext(), DetailCardMeActivity::class.java).apply {
+                putExtra("id", it.id)
+                startActivity(this)
+            }
+        }
+
+        binding.apply {
+            setAnswerPager(mainCardAdapter)
+            count()
+        }
     }
 
 
     private fun setAnswerPager(pagerAdapter: MainCardAdapter) {
-
-
         val compositePageTransformer = getPageTransformer()
         binding.vpMaincardList.apply {
             adapter = pagerAdapter
@@ -78,7 +92,7 @@ class MainCardFragment :
         }
     }
 
-    //애니메이션인듯 ?
+    //애니메이션
     private fun getPageTransformer(): ViewPager2.PageTransformer {
         val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer((20 * resources.displayMetrics.density).roundToInt()))
@@ -102,24 +116,30 @@ class MainCardFragment :
     }
 
 
-    //상세 페이지로 이동
-    private fun moveDetailActivity() {
-        binding.llMaincardEditLayout.setOnClickListener {
-            val intent = Intent(requireActivity(), RepresentCardEditActivity::class.java)
-            startActivity(intent)
+    //내가 내 메인카드 볼떄 화면
+    private fun initClickEventCardMe() {
+        with(binding) {
+            //카드팩 보러가기 버튼 없애기
+            tvMaincardGotoCardpack.visibility = View.GONE
+            ivMaincardGotoCardpackBackground.visibility = View.GONE
+
+            //친구추가 버튼 없애기
+            ibtnMaincardFriend.visibility = View.GONE
+
+            //클릭 이벤트 달기
+            llMaincardEditLayout.setOnClickListener {
+                val intent = Intent(requireActivity(), RepresentCardEditActivity::class.java)
+                startActivity(intent)
+            }
+            ibtnMaincardAlarm.setOnClickListener {
+                val intent = Intent(requireActivity(), AlarmActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
-    //알림 페이지로 이동
-    private fun moveAlarmActivity() {
-        binding.ibtnMaincardAlarm.setOnClickListener {
-            val intent = Intent(requireActivity(), AlarmActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    //타인이 접근
-    private fun friendMainView() {
+    //타인이 내 메인카드 볼때 화면
+    private fun initClickEventCardYou() {
         var id: Int
         var name = ""
         if (getArguments() != null) {
@@ -128,5 +148,34 @@ class MainCardFragment :
         }
         //넘어온 user id에 따른 대표카드 list보여주기
         //fun requestFriendMainCard
+
+        with(binding) {
+            //카드팩 보러가기 버튼 보이기
+            tvMaincardGotoCardpack.visibility = View.VISIBLE
+            ivMaincardGotoCardpackBackground.visibility = View.VISIBLE
+
+
+            //친구추가 아이콘 보이기
+            ibtnMaincardFriend.visibility = View.VISIBLE
+
+            //카드 작성하기 아이콘 보이기
+            ibtnMaincardAlarm.setImageResource(R.drawable.ic_mypage_write)
+        }
+        //클릭 이벤트 달기
+        binding.tvMaincardGotoCardpack.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(org.cardna.R.id.fcv_main, CardPackFragment())
+            transaction.commit()
+        }
+    }
+
+    private fun setTextGradient() {
+        val text = binding.tvMaincardGotoCardpack.text.toString()
+        val green = requireActivity().getColor(R.color.main_green)
+        val purple = requireActivity().getColor(R.color.main_purple)
+        val spannable = text.toSpannable()
+        spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
+        binding.tvMaincardGotoCardpack.text = spannable
     }
 }

@@ -14,19 +14,18 @@ class SignUpActivity :
     private val emailValidation =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private val passwordValidation =
-        "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)$"
+        "^(?=.*[a-zA-z])(?=.*[0-9]).{8,99}"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        emailTextChanged()
-        passwordTextChange()
-        onClickSignUpNameActivity()
+        initView()
     }
 
     private fun onClickAccess() {
         if (checkEmail() && passwordCheck()) {
             binding.btnSignUpAccess.isEnabled = true
-            binding.btnSignUpAccess.setBackgroundResource(R.drawable.rectangle_sign_up_gradient_radius_10)
+            binding.btnSignUpAccess.setBackgroundResource(R.drawable.rectangle_sign_in_gradient_radius_10)
+            binding.btnSignUpAccess.setTextColor(getColor(R.color.white_1))
         } else {
             binding.btnSignUpAccess.isEnabled = false
             binding.btnSignUpAccess.setBackgroundResource(R.drawable.rectangle_sign_up_gray_radius_10)
@@ -43,6 +42,7 @@ class SignUpActivity :
                 binding.clEditEmail.setBackgroundResource(R.drawable.bottom_edit_line_red)
                 binding.llSignupEmailLayout.isVisible = true
             }
+            onClickAccess()
         }
     }
 
@@ -57,8 +57,8 @@ class SignUpActivity :
                 binding.llSignupPasswordLayout.setBackgroundResource(R.drawable.bottom_edit_line_red)
                 binding.llSignupPasswordLayout.isVisible = true
             }
+            onClickAccess()
         }
-        onClickAccess()
     }
 
     private fun checkEmail(): Boolean {
@@ -70,11 +70,7 @@ class SignUpActivity :
     private fun passwordCheck(): Boolean {
         val password = binding.etSignUpPassword.text.toString().trim() //공백제거
         val p = Pattern.matches(passwordValidation, password) // 패턴 확인
-        return if (p && password.length >= 8) {
-            true
-        } else {
-            false
-        }
+        return p
     }
 
     private fun onClickSignUpNameActivity() {
@@ -85,5 +81,8 @@ class SignUpActivity :
     }
 
     override fun initView() {
+        emailTextChanged()
+        passwordTextChange()
+        onClickSignUpNameActivity()
     }
 }
