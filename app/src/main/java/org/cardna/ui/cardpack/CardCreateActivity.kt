@@ -19,14 +19,12 @@ class CardCreateActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateBinding>(R.layout.activity_card_create) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initView()
-        setChooseCardListener()
-        makeCardListener()
     }
 
     override fun initView() {
-
+        setChooseCardListener()
+        makeCardListener()
     }
 
 
@@ -46,15 +44,16 @@ class CardCreateActivity :
                     }
                     SYMBOL_2 -> {
                         Toast.makeText(this, "SYMBOL_2", Toast.LENGTH_SHORT).show()
-                        img_index= R.drawable.ic_symbol_cardme_2
+                        img_index= R.drawable.ic_symbol_cardme_3
                     }
                     SYMBOL_3 -> {
                         Toast.makeText(this, "SYMBOL_3", Toast.LENGTH_SHORT).show()
-                        img_index= R.drawable.ic_symbol_cardme_3
+                        img_index= R.drawable.ic_symbol_cardme_4
                     }
                     SYMBOL_4 -> {
                         Toast.makeText(this, "SYMBOL_4", Toast.LENGTH_SHORT).show()
                         img_index= R.drawable.ic_symbol_cardme_4                  }
+
 
                 }
                 with(binding){

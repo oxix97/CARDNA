@@ -59,7 +59,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/ctl_insight_bottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,7 +67,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_insight_card"
+                android:id="@+id/ctl_insight_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="56dp"
@@ -83,10 +83,10 @@
                 android:padding="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/img_insight_openarea"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_insight_card"
-                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
-                app:layout_constraintStart_toStartOf="@+id/iv_insight_card"
-                app:layout_constraintTop_toTopOf="@id/iv_insight_card" />
+                app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
+                app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
+                app:layout_constraintStart_toStartOf="@+id/ctl_insight_card"
+                app:layout_constraintTop_toTopOf="@id/ctl_insight_card" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                 android:text="배신을 잘해"
                 android:textColor="@color/real_black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_insight_card"
+                app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
                 app:layout_constraintStart_toStartOf="@+id/iv_openarea_image"
                 app:layout_constraintTop_toBottomOf="@+id/iv_openarea_image" />
 
@@ -111,9 +111,9 @@
                 android:text="@string/insight_open_area"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
-                app:layout_constraintStart_toStartOf="@id/iv_insight_card"
-                app:layout_constraintTop_toBottomOf="@+id/iv_insight_card" />
+                app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
+                app:layout_constraintStart_toStartOf="@id/ctl_insight_card"
+                app:layout_constraintTop_toBottomOf="@+id/ctl_insight_card" />
 
             <View
                 android:id="@+id/view_insight_line"

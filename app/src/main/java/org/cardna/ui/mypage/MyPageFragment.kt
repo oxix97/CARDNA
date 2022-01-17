@@ -12,6 +12,7 @@ import org.cardna.ui.maincard.MainCardFragment
 import org.cardna.ui.mypage.adapter.MyPageFriendAdapter
 import org.cardna.util.SpacesItemDecoration
 import org.cardna.util.shortToast
+import kotlin.math.roundToInt
 
 
 class MyPageFragment : BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.cardna.R.layout.fragment_my_page) {
@@ -62,7 +63,7 @@ class MyPageFragment : BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.card
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvMypage.layoutManager = gridLayoutManager
 
-        binding.rvMypage.addItemDecoration(SpacesItemDecoration(12))
+        binding.rvMypage.addItemDecoration(SpacesItemDecoration((16 * resources.displayMetrics.density).roundToInt()))
         myPageFriendAdapter.notifyDataSetChanged()
     }
 

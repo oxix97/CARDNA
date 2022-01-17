@@ -18,6 +18,9 @@
         android:theme="@style/Theme.CardNa"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.maincard.DetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.mypage.OtherCardCreateCompleteActivity"
             android:exported="false" />
         <activity

@@ -18,7 +18,6 @@ class CardCreateCompleteActivity :
 BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateCompleteBinding>(R.layout.activity_card_create_complete) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initView()
     }
 
@@ -33,7 +32,7 @@ BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateCompleteBinding>(R.layout.a
         val cardImg = intent.getIntExtra("cardImg", 0)
         val cardTitle = intent.getStringExtra("cardTitle")
 
-        // 카드나인지, 카드너인지에 따라
+        // 카드나인지, 카드너인지에 따라 뷰 띄워주기
         // textView 바꿔주기
         if(meOrYou == CARD_ME){
             binding.tvCardcreateComplete.text = "카드나를 만들었어요!"
@@ -48,12 +47,8 @@ BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateCompleteBinding>(R.layout.a
         }
 
         binding.ivCardcreateComplete.setImageResource(cardImg)
-
         binding.tvCardcreateCompleteTitle.text = cardTitle
-
         setTextGradient()
-
-
     }
 
     fun setTextGradient() {

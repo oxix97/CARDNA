@@ -7,11 +7,9 @@
     </item>
     <item
         android:top="2dp"
-        android:bottom="2dp"
-        android:left="2dp"
-        android:right="2dp">
+        android:bottom="2dp">
         <shape>
-            <solid android:color="@color/main_purple" />
+            <solid android:color="@color/white_1_5" />
         </shape>
     </item>
 </layer-list>
