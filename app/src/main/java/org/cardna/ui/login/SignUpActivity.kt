@@ -24,7 +24,8 @@ class SignUpActivity :
     private fun onClickAccess() {
         if (checkEmail() && passwordCheck()) {
             binding.btnSignUpAccess.isEnabled = true
-            binding.btnSignUpAccess.setBackgroundResource(R.drawable.rectangle_sign_up_gradient_radius_10)
+            binding.btnSignUpAccess.setBackgroundResource(R.drawable.rectangle_sign_in_gradient_radius_10)
+            binding.btnSignUpAccess.setTextColor(getColor(R.color.white_1))
         } else {
             binding.btnSignUpAccess.isEnabled = false
             binding.btnSignUpAccess.setBackgroundResource(R.drawable.rectangle_sign_up_gray_radius_10)
