@@ -24,7 +24,7 @@ class SignUpNameActivity :
 
     override fun initView() {
         nameTextChanged()
-        initNetwork()
+        onClickSignInActivity()
     }
 
     private fun nameTextChanged() {
@@ -50,8 +50,7 @@ class SignUpNameActivity :
 
     private fun onClickSignInActivity() {
         binding.btnSignUpNameAccess.setOnClickListener {
-            val intent = Intent(this, SignInActivity::class.java)
-            startActivity(intent)
+            initNetwork()
         }
     }
 
@@ -59,6 +58,9 @@ class SignUpNameActivity :
         val getEmail = intent.getStringExtra("email").toString()
         val getPassword = intent.getStringExtra("password").toString()
         val getName = binding.etSignUpName.text.toString()
+        println(getEmail)
+        println(getPassword)
+        println(getName)
         val requestLoginData = RequestSignUpEmailData(
             email = getEmail,
             password = getPassword,
@@ -78,7 +80,8 @@ class SignUpNameActivity :
                         "${data?.name}님 반갑습니다!!",
                         Toast.LENGTH_SHORT
                     ).show()
-                    onClickSignInActivity()
+                    val intent = Intent(this@SignUpNameActivity, SignInActivity::class.java)
+                    startActivity(intent)
                 } else {
                     Toast.makeText(this@SignUpNameActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                 }

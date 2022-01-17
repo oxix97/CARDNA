@@ -13,16 +13,16 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface AuthService {
-    @POST("/auth/signup/email")
+    @POST("auth/signup/email")
     fun postSignUp(
         @Body body: RequestSignUpEmailData
     ): Call<ResponseSignUpEmailData>
 
-    @POST("/auth/login/email")
+    @POST("auth/login/email")
     fun postSignIn(
         @Body body: RequestSignInEmailData
     ): Call<ResponseSignInEmailData>
 
-    @GET("/auth/refreshtoken")
+    @GET("auth/refreshtoken")
     fun getRefreshToken(): Call<ResponseRefreshTokenData>
 }
