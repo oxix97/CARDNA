@@ -2,11 +2,19 @@ package org.cardna.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.login.RequestSignUpEmailData
+import org.cardna.data.remote.model.login.ResponseSignUpEmailData
 import org.cardna.databinding.ActivitySignUpBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
 
 class SignUpActivity :
@@ -73,9 +81,12 @@ class SignUpActivity :
         return p
     }
 
+    //여기서 true, true
     private fun onClickSignUpNameActivity() {
         binding.btnSignUpAccess.setOnClickListener {
             val intent = Intent(this, SignUpNameActivity::class.java)
+            intent.putExtra("email",binding.etSignUpEmail.text.toString())
+            intent.putExtra("password",binding.etSignUpPassword.text.toString())
             startActivity(intent)
         }
     }
