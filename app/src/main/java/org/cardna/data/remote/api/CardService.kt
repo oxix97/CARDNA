@@ -1,5 +1,6 @@
 package org.cardna.data.remote.api
 
+import org.cardna.data.remote.model.maincard.ResponseMainCardData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -11,8 +12,8 @@ import retrofit2.http.PUT
 interface CardService {
     @Headers("Content-Type:application/json")
     @GET("/card/main")
-    fun getCardMain() : Call<>
-
+    suspend fun getCardMain(): ResponseMainCardData
+/*
     @PUT("/card/main")
     fun putCardMain(
         @Body body :
@@ -47,5 +48,5 @@ interface CardService {
     fun getCardBox() : Call<>
 
     @PUT("/card/box/:cardId")
-    fun putCardBoxCardId() : Call<>
+    fun putCardBoxCardId() : Call<>*/
 }
