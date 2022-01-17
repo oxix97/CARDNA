@@ -125,7 +125,7 @@
                 android:id="@+id/iv_searchemail_check_image"
                 app:layout_constraintStart_toStartOf="@id/iv_searchemail_add_friend"
                 app:layout_constraintTop_toTopOf="@id/tv_searchemail_add_friend"
-                android:src="@drawable/ic_vector_990__stroke_"
+                android:src="@drawable/ic_success"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tv_searchemail_add_friend"
                 android:layout_marginStart="28dp" />

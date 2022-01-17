@@ -79,6 +79,9 @@
                 android:id="@+id/cl_detailcard_scroll_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="52dp"
+                android:id="@+id/cl_detailcard_scroll_layout">
 
                 <TextView
                     android:id="@+id/tv_detailcard_user_name"

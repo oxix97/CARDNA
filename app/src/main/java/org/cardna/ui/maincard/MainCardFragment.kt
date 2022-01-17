@@ -14,6 +14,7 @@ import org.cardna.data.remote.model.maincard.MainCardListData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.maincard.adapter.MainCardAdapter
 import org.cardna.ui.representcardedit.RepresentCardEditActivity
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 class MainCardFragment :

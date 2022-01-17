@@ -58,15 +58,15 @@
             app:layout_constraintStart_toStartOf="@id/tv_maincard_title"
             app:layout_constraintTop_toTopOf="@+id/tv_maincard_title" />
 
-        <!--        <androidx.core.widget.NestedScrollView
-                    android:id="@+id/nestedScrollView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toTopOf="@id/tv_maincard_page_count"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_maincard_edit_layout">-->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_maincard_page_count"
+            app:layout_constraintTop_toBottomOf="@+id/ll_maincard_edit_layout">
 
-        <!--        </androidx.core.widget.NestedScrollView>-->
+        </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
             android:id="@+id/ll_maincard_edit_layout"
