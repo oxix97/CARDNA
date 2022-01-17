@@ -18,9 +18,7 @@ class SignUpActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        emailTextChanged()
-        passwordTextChange()
-        onClickSignUpNameActivity()
+        initView()
     }
 
     private fun onClickAccess() {
@@ -85,5 +83,8 @@ class SignUpActivity :
     }
 
     override fun initView() {
+        emailTextChanged()
+        passwordTextChange()
+        onClickSignUpNameActivity()
     }
 }

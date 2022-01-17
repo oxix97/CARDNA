@@ -1,8 +1,6 @@
 package org.cardna.ui.login
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.LinearGradient
 import android.os.Bundle
 import androidx.core.text.set
 import androidx.core.text.toSpannable
@@ -15,12 +13,13 @@ class SignActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivitySignBinding>(R.layout.activity_sign) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        signUpClick()
-        signInClick()
-        setTextGradient()
+        initView()
     }
 
     override fun initView() {
+        signUpClick()
+        signInClick()
+        setTextGradient()
     }
 
     private fun setTextGradient() {
