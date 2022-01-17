@@ -11,5 +11,5 @@ object CardNaAuthCreator {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val cardNaAuthService: CardNaAuthService = retrofit.create(CardNaAuthService::class.java)
+    val cardNaAuthService: AuthService = retrofit.create(AuthService::class.java)
 }
