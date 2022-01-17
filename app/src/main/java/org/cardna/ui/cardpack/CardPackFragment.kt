@@ -24,12 +24,12 @@ class CardPackFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        setMakeCardIvListener()
     }
 
     override fun initView() {
         initCardPackAdapter()
         initCardPackTabLayout()
+        setMakeCardIvListener()
     }
 
     private fun initCardPackAdapter() {

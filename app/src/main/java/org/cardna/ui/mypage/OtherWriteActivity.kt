@@ -7,10 +7,11 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.cardpack.ResponseOtherWriterData
 import org.cardna.databinding.ActivityOtherWriteBinding
-import org.cardna.ui.mypage.adapter.OtherWriteRecyclerViewAdapter
 import org.cardna.ui.maincard.DetailCardMeActivity
+import org.cardna.ui.mypage.adapter.OtherWriteRecyclerViewAdapter
 
-class OtherWriteActivity : BaseViewUtil.BaseAppCompatActivity<ActivityOtherWriteBinding>(R.layout.activity_other_write) {
+class OtherWriteActivity :
+    BaseViewUtil.BaseAppCompatActivity<ActivityOtherWriteBinding>(R.layout.activity_other_write) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

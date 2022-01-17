@@ -10,7 +10,7 @@ class OtherCardWriteActivity
     : BaseViewUtil.BaseAppCompatActivity<ActivityOtherCardWriteBinding>(R.layout.activity_other_card_write) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_other_card_write)
+        initView()
     }
 
     override fun initView() {
