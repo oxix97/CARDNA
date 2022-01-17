@@ -1,51 +1,51 @@
 package org.cardna.data.remote.api
 
+import org.cardna.data.remote.model.maincard.ResponseMainCardData
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface CardService {
-    @Headers("Content-Type:application/json")
-    @GET("/card/main")
-    fun getCardMain() : Call<>
 
+    //mainCard 조회
+    @Headers("Content-Type:application/json")
+    @GET("/card/main/{id}")
+    suspend fun getCardMain(
+        @Path("id") id: String
+    ): ResponseMainCardData
+/*
     @PUT("/card/main")
     fun putCardMain(
-        @Body body :
-    ) : Call<>
+        @Body body:
+    ): Call<>
 
     @GET("/card/:userId")
-    fun getCardUserId() : Call<>
+    fun getCardUserId(): Call<>
 
     @GET("/card/me/:userId")
-    fun getCardMeUserId() : Call<>
+    fun getCardMeUserId(): Call<>
 
     @GET("/card/you/:userId")
-    fun getCardYouUserId() : Call<>
+    fun getCardYouUserId(): Call<>
 
     @GET("/card/info/:cardId")
-    fun getCardInfoCardId() : Call<>
+    fun getCardInfoCardId(): Call<>
 
     @POST("/card")
     fun postCard(
-        @Body body :
-    ) : Call<>
+        @Body body:
+    ): Call<>
 
     @POST("/card/:friednId")
     fun postCardFriendId(
-        @Body body :
-    ) : Call<>
+        @Body body:
+    ): Call<>
 
     @DELETE("/card/:cardId")
-    fun deleteCardCardId() : Call<>
+    fun deleteCardCardId(): Call<>
 
     @GET("/card/box")
-    fun getCardBox() : Call<>
+    fun getCardBox(): Call<>
 
     @PUT("/card/box/:cardId")
-    fun putCardBoxCardId() : Call<>
+    fun putCardBoxCardId(): Call<>*/
 }
