@@ -6,7 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-
 object ApiService {
     private val BASE_URL = "https://asia-northeast3-wesopt29-328c5.cloudfunctions.net/api"
 
@@ -21,7 +20,7 @@ object ApiService {
     val friendService: FriendService = Retrofit.create(FriendService::class.java)
     val insightService: InsightService = Retrofit.create(InsightService::class.java)
     val likeService: LikeService = Retrofit.create(LikeService::class.java)
-    val mypageService: MypageService = Retrofit.create(MypageService::class.java)
+    val myPageService: MyPageService = Retrofit.create(MyPageService::class.java)
 }
 
 private fun provideOkHttpClient(
@@ -35,7 +34,7 @@ private fun provideOkHttpClient(
 class AppInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain)
-            : okhttp3.Response = with(chain) {
+        : okhttp3.Response = with(chain) {
         val newRequest = request().newBuilder()
             .addHeader("Content-Type", "application/json")
             .build()
