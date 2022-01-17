@@ -7,6 +7,6 @@ import retrofit2.http.Headers
 
 interface InsightService {
     @Headers("Content-Type:application/json")
-    @GET("insight")
+    @GET("/insight")
     fun getInsight(): Call<ResponseInsightData>
 }

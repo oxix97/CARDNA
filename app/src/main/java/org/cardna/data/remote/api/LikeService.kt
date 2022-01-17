@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface LikeService {
     @Headers("Content-Type:application/json")
-    @POST("like")
+    @POST("/like")
     fun postLike(
         @Body body: RequestLikeData
     ): Call<ResponseLikeData>
