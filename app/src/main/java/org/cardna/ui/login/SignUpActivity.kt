@@ -14,7 +14,7 @@ class SignUpActivity :
     private val emailValidation =
         "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
     private val passwordValidation =
-        "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)$"
+        "^(?=.*[a-zA-z])(?=.*[0-9]).{8,99}"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,7 @@ class SignUpActivity :
                 binding.clEditEmail.setBackgroundResource(R.drawable.bottom_edit_line_red)
                 binding.llSignupEmailLayout.isVisible = true
             }
+            onClickAccess()
         }
     }
 
@@ -68,11 +69,7 @@ class SignUpActivity :
     private fun passwordCheck(): Boolean {
         val password = binding.etSignUpPassword.text.toString().trim() //공백제거
         val p = Pattern.matches(passwordValidation, password) // 패턴 확인
-        return if (p && password.length >= 8) {
-            true
-        } else {
-            false
-        }
+        return p
     }
 
     private fun onClickSignUpNameActivity() {
