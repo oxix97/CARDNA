@@ -54,12 +54,12 @@ class CardCreateActivity :
                     }
                     SYMBOL_4 -> {
                         Toast.makeText(this, "SYMBOL_4", Toast.LENGTH_SHORT).show()
-                        img_index= R.drawable.ic_symbol_cardme_2                    }
+                        img_index= R.drawable.ic_symbol_cardme_4                  }
 
                 }
                 with(binding){
-                    ivCardcreateImg.visibility = View.VISIBLE
-                    ivCardcreateImg.setImageResource(img_index)
+                    ivCardcreateGalleryImg.visibility = View.VISIBLE
+                    ivCardcreateGalleryImg.setImageResource(img_index)
                     clCardcreateImg.visibility = View.INVISIBLE
                 }
             }
@@ -112,9 +112,9 @@ class CardCreateActivity :
             val uri = result.data?.data  //Intent를 반환->Intent에서 Uri로 get하기
 
             // imageView는 보이도록
-            binding.ivCardcreateImg.visibility = View.VISIBLE
+            binding.ivCardcreateGalleryImg.visibility = View.VISIBLE
             binding.clCardcreateImg.visibility = View.INVISIBLE // 이제 INVISIBLE이니까 한번 이미지 선택하면 다시 선택불가
-            Glide.with(this).load(uri).into(binding.ivCardcreateImg)
+            Glide.with(this).load(uri).into(binding.ivCardcreateGalleryImg)
         }
         //else if (result.resultCode == Activity.RESULT_CANCELED) {} =>Activity.RESULT_CANCELED일때 처리코드가 필요하다면
     }

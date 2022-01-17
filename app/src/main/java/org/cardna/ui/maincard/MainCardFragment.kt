@@ -3,6 +3,7 @@ package org.cardna.ui.maincard
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -24,46 +25,56 @@ class MainCardFragment :
     }
 
     override fun initView() {
+        initAdapter()
         moveDetailActivity()
         friendMainView()
         moveAlarmActivity()
+    }
 
-
-        mainCardAdapter = MainCardAdapter()
-
-
+    private fun initAdapter() {
         val fragmentList = listOf(
             MainCardListData(
+                1,
                 R.drawable.dummy_img_test,
                 true,
                 "책 좋아!!"
             ),
             MainCardListData(
-                R.drawable.dummy_img_cardpack_1,
+                2,
+                R.drawable.dummy_img_test,
                 false,
-                "책 좋아22!!"
+                "책 좋아!!"
             ),
             MainCardListData(
+                3,
                 R.drawable.dummy_img_test,
                 true,
-                "책 좋아333!!"
+                "책 좋아!!"
             ),
             MainCardListData(
+                4,
                 R.drawable.dummy_img_test,
                 false,
-                "책 좋아4444!!"
+                "책 좋아!!"
             ),
         )
 
-        mainCardAdapter.cardList.addAll(fragmentList)
-        setAnswerPager(mainCardAdapter)
-        count()
+        //RecyclerView 연결
+        mainCardAdapter = MainCardAdapter(fragmentList) {
+            val intent = Intent(requireContext(), DetailCardMeActivity::class.java).apply {
+                putExtra("id", it.id)
+                startActivity(this)
+            }
+        }
+
+        binding.apply {
+            setAnswerPager(mainCardAdapter)
+            count()
+        }
     }
 
 
     private fun setAnswerPager(pagerAdapter: MainCardAdapter) {
-
-
         val compositePageTransformer = getPageTransformer()
         binding.vpMaincardList.apply {
             adapter = pagerAdapter
@@ -77,7 +88,7 @@ class MainCardFragment :
         }
     }
 
-    //애니메이션인듯 ?
+    //애니메이션
     private fun getPageTransformer(): ViewPager2.PageTransformer {
         val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer((20 * resources.displayMetrics.density).roundToInt()))
