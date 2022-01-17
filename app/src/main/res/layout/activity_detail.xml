@@ -19,20 +19,8 @@
             android:layout_marginBottom="220dp"
             app:layout_constraintBottom_toTopOf="@id/cl_detailcard_setting_layout"
             android:id="@+id/iv_detailcard_image"
-            android:background="@color/white_1_5" />
+            android:background="@drawable/rectangle_sign_up_gradient_radius_10" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/iv_detail_back"
-            android:src="@drawable/ic_arrow_left"
-            android:padding="12dp"
-            android:includeFontPadding="false"
-            android:background="@drawable/rectangle_detail_white1_5_radius_null_2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
