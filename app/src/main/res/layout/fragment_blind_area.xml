@@ -24,7 +24,7 @@
                 android:id="@+id/tv_openarea_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="58dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:includeFontPadding="false"
@@ -59,48 +59,52 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/ctl_insight_bottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ctl_insight">
 
-
-            <ImageView
-                android:id="@+id/iv_insight_card"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ctl_insight_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="56dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginBottom="56dp"
-                android:src="@drawable/rectangle_left_right_main_purple_radius_2" />
+                android:background="@drawable/rectangle_left_right_main_purple_radius_2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/iv_openarea_image"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="30dp"
-                android:padding="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_insight_openarea"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_insight_card"
-                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
-                app:layout_constraintStart_toStartOf="@+id/iv_insight_card"
-                app:layout_constraintTop_toTopOf="@id/iv_insight_card" />
+                <ImageView
+                    android:id="@+id/iv_openarea_image"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintDimensionRatio="227:323"
+                    android:src="@drawable/img_insight_openarea"
+                    app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
+                    app:layout_constraintStart_toStartOf="@+id/ctl_insight_card"
+                    app:layout_constraintTop_toTopOf="@id/ctl_insight_card" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/pretendard_semibold"
-                android:includeFontPadding="false"
-                android:text="배신을 잘해"
-                android:textColor="@color/real_black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_insight_card"
-                app:layout_constraintStart_toStartOf="@+id/iv_openarea_image"
-                app:layout_constraintTop_toBottomOf="@+id/iv_openarea_image" />
+                <TextView
+                    android:id="@+id/tv_insight_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:includeFontPadding="false"
+                    android:text="배신을 잘해"
+                    android:textColor="@color/real_black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
+                    app:layout_constraintStart_toStartOf="@+id/iv_openarea_image"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_openarea_image" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_insight_description"
@@ -111,22 +115,21 @@
                 android:text="@string/insight_blind_area"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
-                app:layout_constraintStart_toStartOf="@id/iv_insight_card"
-                app:layout_constraintTop_toBottomOf="@+id/iv_insight_card" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
+                app:layout_constraintStart_toStartOf="@id/ctl_insight_card"
+                app:layout_constraintTop_toBottomOf="@+id/ctl_insight_card" />
 
-            <View
-                android:id="@+id/view_insight_line"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="@id/tv_insight_description"
-                app:layout_constraintStart_toStartOf="@id/tv_insight_description"
-                app:layout_constraintTop_toBottomOf="@+id/tv_insight_description" />
+                <View
+                    android:id="@+id/view_insight_line"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/tv_insight_description"
+                    app:layout_constraintStart_toStartOf="@id/tv_insight_description"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_insight_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
