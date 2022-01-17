@@ -34,6 +34,17 @@
             app:layout_constraintStart_toStartOf="@+id/iv_otherwrite_background"
             app:layout_constraintTop_toTopOf="@+id/iv_otherwrite_background" />
 
+        <ImageView
+            android:id="@+id/iv_otherwrite_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_gallery"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
         <LinearLayout
             android:id="@+id/ll_otherwrite"
             android:layout_width="wrap_content"

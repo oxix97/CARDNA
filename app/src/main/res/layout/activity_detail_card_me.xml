@@ -13,13 +13,23 @@
         tools:context=".ui.maincard.DetailCardYouActivity">
 
         <ImageView
+            android:id="@+id/iv_detailcard_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="220dp"
             app:layout_constraintBottom_toTopOf="@id/cl_detailcard_setting_layout"
-            android:id="@+id/iv_detailcard_image"
             android:background="@color/white_1_5" />
+
+        <CheckedTextView
+            android:id="@+id/ctv_like_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_detailcard_image"
+            app:layout_constraintEnd_toEndOf="@id/iv_detailcard_image"
+            android:background="@drawable/selector_detailcard_like"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
