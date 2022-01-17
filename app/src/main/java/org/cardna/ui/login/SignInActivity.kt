@@ -12,12 +12,13 @@ class SignInActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        emailTextChanged()
-        passwordTextChanged()
-        onMainActivity()
+        initView()
     }
 
     override fun initView() {
+        emailTextChanged()
+        passwordTextChanged()
+        onMainActivity()
     }
 
     private fun emailTextChanged() {
