@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 object ApiService {
-    private val BASE_URL = "https://asia-northeast3-wesopt29-328c5.cloudfunctions.net/api"
+    private val BASE_URL = "https://asia-northeast3-cardna-29f5b.cloudfunctions.net/api/"
 
     private val Retrofit: Retrofit = retrofit2.Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -16,7 +16,8 @@ object ApiService {
         .build()
 
     val authService: AuthService = Retrofit.create(AuthService::class.java)
-    val cardService: CardService = Retrofit.create(CardService::class.java)
+
+    // val cardService: CardService = Retrofit.create(CardService::class.java)
     val friendService: FriendService = Retrofit.create(FriendService::class.java)
     val insightService: InsightService = Retrofit.create(InsightService::class.java)
     val likeService: LikeService = Retrofit.create(LikeService::class.java)

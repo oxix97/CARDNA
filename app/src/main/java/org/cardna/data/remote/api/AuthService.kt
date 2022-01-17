@@ -4,6 +4,7 @@ import org.cardna.data.remote.model.detail.ResponseRefreshTokenData
 import org.cardna.data.remote.model.login.RequestSignInEmailData
 import org.cardna.data.remote.model.login.RequestSignUpEmailData
 import org.cardna.data.remote.model.login.ResponseSignInEmailData
+import org.cardna.data.remote.model.login.ResponseSignUpEmailData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -12,18 +13,16 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface AuthService {
-    @Headers("Content-Type:application/json")
-    @POST("/auth/signup/email")
+    @POST("auth/signup/email")
     fun postSignUp(
         @Body body: RequestSignUpEmailData
-    ): Call<RequestSignUpEmailData>
+    ): Call<ResponseSignUpEmailData>
 
-    @Headers("Content-Type:application/json")
-    @POST("/auth/login/email")
+    @POST("auth/login/email")
     fun postSignIn(
         @Body body: RequestSignInEmailData
     ): Call<ResponseSignInEmailData>
 
-    @GET("/auth/refreshtoken")
+    @GET("auth/refreshtoken")
     fun getRefreshToken(): Call<ResponseRefreshTokenData>
 }
