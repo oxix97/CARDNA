@@ -1,7 +1,7 @@
 package org.cardna.data.remote.model.mypage
 
 
-data class ResponseCheckCardYouStorageData(
+data class ResponseCardYouBoxData(
     val status: Int,
     val success: Boolean,
     val message: String,
