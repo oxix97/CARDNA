@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.lifecycle.lifecycleScope
@@ -24,7 +23,6 @@ import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
 import org.cardna.ui.mypage.OtherCardCreateActivity
-import org.cardna.ui.mypage.OtherWriteActivity
 import org.cardna.ui.representcardedit.RepresentCardEditActivity
 import org.cardna.util.LinearGradientSpan
 import kotlin.math.roundToInt
@@ -33,6 +31,7 @@ class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
     private lateinit var mainCardAdapter: MainCardAdapter
     private lateinit var list: MutableList<MainCardList>
+    private var isMyCard = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,6 +59,7 @@ class MainCardFragment :
         lifecycleScope.launch {
             try {
                 list = ApiService.cardService.getMainCard(id).data.mainCardList
+                isMyCard = ApiService.cardService.getMainCard(id).data.isMyCard
                 initAdapter(list)
                 initClickEventCardYou(id)
             } catch (e: Exception) {
@@ -69,7 +69,6 @@ class MainCardFragment :
     }
 
     private fun SeeMeNetwork() {
-
         lifecycleScope.launch {
             try {
                 val dataContainer = ApiService.myPageService.getMyPage().data
@@ -80,21 +79,10 @@ class MainCardFragment :
                 Log.d("실패", e.message.toString())
             }
         }
-
-
         lifecycleScope.launch {
             try {
                 list = ApiService.cardService.getUserMainCard().data.mainCardList
-                initAdapter(list)
-                initClickEventCardMe()
-            } catch (e: Exception) {
-                Log.d("실패", e.message.toString())
-            }
-        }
-
-        lifecycleScope.launch {
-            try {
-                list = ApiService.cardService.getUserMainCard().data.mainCardList
+                isMyCard = ApiService.cardService.getUserMainCard().data.isMyCard
                 initAdapter(list)
                 initClickEventCardMe()
             } catch (e: Exception) {
@@ -107,6 +95,7 @@ class MainCardFragment :
         mainCardAdapter = MainCardAdapter(list) {
             val intent = Intent(requireContext(), DetailCardMeActivity::class.java).apply {
                 putExtra("id", it.id)
+                putExtra("isMyCard", isMyCard)
                 startActivity(this)
             }
         }
@@ -219,7 +208,7 @@ class MainCardFragment :
                 lifecycleScope.launch {
                     try {
                         val responseData = ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
-                  //    Log.d("친구추가", ApiService.friendService.postFriend(RequestFriendUpdateData(id)).message)
+                        //    Log.d("친구추가", ApiService.friendService.postFriend(RequestFriendUpdateData(id)).message)
                     } catch (e: Exception) {
                         Log.d("실패", e.message.toString())
                     }
