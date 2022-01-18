@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
@@ -53,17 +55,6 @@ class MainCardFragment :
     }
 
     private fun SeeOtherNetwork(id: Int) {
-        //초기유저 상단 데이터 뿌리는 통신
-        lifecycleScope.launch {
-            try {
-                list = ApiService.cardService.getMainCard(id).data.mainCardList
-                initAdapter(list)
-                initClickEventCardYou(id)
-            } catch (e: Exception) {
-                Log.d("실패", e.message.toString())
-            }
-        }
-
         //메인카드 리스트 뿌리는 통신
         lifecycleScope.launch {
             try {
@@ -77,6 +68,20 @@ class MainCardFragment :
     }
 
     private fun SeeMeNetwork() {
+
+        lifecycleScope.launch {
+            try {
+                val dataContainer = ApiService.myPageService.getMyPage().data
+                withContext(Dispatchers.Main) {
+                    binding.tvMaincardUserName.text = dataContainer.name + "님은"
+
+                }
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+
+
         lifecycleScope.launch {
             try {
                 list = ApiService.cardService.getUserMainCard().data.mainCardList
@@ -141,7 +146,9 @@ class MainCardFragment :
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     binding.tvMaincardPageCount.text =
-                        "${position + 1}/${mainCardAdapter.cardList.size}"
+                        "${position + 1} "
+                    binding.tvMaincardAll.text =
+                        "/ ${mainCardAdapter.cardList.size}"
                 }
             })
         }
