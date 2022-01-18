@@ -2,6 +2,7 @@ package org.cardna.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.lifecycleScope
@@ -29,7 +30,7 @@ class MyPageFragment :
     override fun initView() {
         initScrollView()
         initClickEvent()
-        initCoroutine()
+        initNetwork()
     }
 
     private fun initScrollView() {
@@ -40,27 +41,25 @@ class MyPageFragment :
 
     private fun myPageRecyclerViewAdapter(dataList: List<ResponseMyPageFriendData>) {
         list = dataList
-        val myPageFriendAdapter = MyPageFriendAdapter(list) { item ->
+        val myPageFriendAdapter = MyPageFriendAdapter(dataList) { item ->
             val bundle = Bundle()
             bundle.putInt("id", item.id)
             bundle.putString("name", item.name)
-            // bundle.putStringArrayList("friendList", friendList)
+            bundle.putString("sentence", item.sentence)
 
             val mainCardFragment = MainCardFragment()
             mainCardFragment.setArguments(bundle)
 
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
-                .replace(org.cardna.R.id.fcv_main, mainCardFragment)
+                .add(org.cardna.R.id.fcv_main, mainCardFragment)
             transaction.commit()
         }
-
-        binding.rvMypage.adapter = myPageFriendAdapter
-
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvMypage.layoutManager = gridLayoutManager
 
         binding.rvMypage.addItemDecoration(SpacesItemDecoration((16 * resources.displayMetrics.density).roundToInt()))
+        binding.rvMypage.adapter = myPageFriendAdapter
         myPageFriendAdapter.notifyDataSetChanged()
     }
 
@@ -88,7 +87,7 @@ class MyPageFragment :
         }
     }
 
-    private fun initCoroutine() {
+    private fun initNetwork() {
         lifecycleScope.launch {
             try {
                 val dataContainer = ApiService.myPageService.getMyPage().data
@@ -102,7 +101,7 @@ class MyPageFragment :
                 setMyPage(myData)
                 myPageRecyclerViewAdapter(list)
             } catch (e: Exception) {
-                requireContext().shortToast("error")
+                Log.d("실패", e.message.toString())
             }
         }
     }
@@ -117,34 +116,4 @@ class MyPageFragment :
             .circleCrop()
             .into(binding.ivMypageProfile)
     }
-
-    // private fun initNetwork() {
-    //     val call: Call<ResponseMyPageData> = ApiService.myPageService.getMyPage()
-    //     call.enqueue(object : Callback<ResponseMyPageData> {
-    //         override fun onResponse(
-    //             call: Call<ResponseMyPageData>,
-    //             response: Response<ResponseMyPageData>
-    //         ) {
-    //             val data = response.body()?.data
-    //             if (data != null) {
-    //                 myPageRecyclerViewAdapter(data.friendList)
-    //             }
-    //             binding.tvMypageName.text = data?.name.toString()
-    //             println(data?.name)
-    //             println(data?.email.toString())
-    //             Glide
-    //                 .with(this@MyPageFragment)
-    //                 .load(data?.userImg)
-    //                 .circleCrop()
-    //                 .into(binding.ivMypageProfile)
-    //
-    //             binding.tvMypageEmail.text = data?.email.toString()
-    //             binding.tvMypageFriendCount.text = data?.friendList?.size.toString()
-    //         }
-    //
-    //         override fun onFailure(call: Call<ResponseMyPageData>, t: Throwable) {
-    //             requireContext().shortToast("error")
-    //         }
-    //     })
-    // }
 }

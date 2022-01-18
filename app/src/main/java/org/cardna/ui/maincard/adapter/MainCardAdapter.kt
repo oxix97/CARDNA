@@ -5,11 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.cardna.R
-import org.cardna.data.remote.model.detail.ResponseDetailData
-import org.cardna.data.remote.model.maincard.MainCard
 import org.cardna.data.remote.model.maincard.MainCardList
-import org.cardna.data.remote.model.maincard.MainCardListData
-import org.cardna.data.remote.model.maincard.ResponseMainCardData
 import org.cardna.databinding.ItemMainCardViewBinding
 
 class MainCardAdapter(
