@@ -9,17 +9,17 @@ data class ResponseMyPageData(
     val data: Data,
 ) {
     data class Data(
-        val email: String,
-        val friendList: List<Friend>,
         val id: Int,
         val name: String,
-        val userImg: String
+        val userImg: String,
+        val email: String,
+        val friendList: List<ResponseMyPageFriendData>,
     )
 }
 
-data class Friend(
+data class ResponseMyPageFriendData(
     val id: Int,
     val name: String,
+    val userImg: String,
     val sentence: String,
-    val userImg: String
 )

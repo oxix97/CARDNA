@@ -19,6 +19,11 @@ class OtherCardCreateActivity :
     }
 
     private fun setListener() {
+
+        val name = intent.getStringExtra("name")
+        val id = intent.getIntExtra("id", 0)
+        binding.tvOthercardcreateRelation.text = "당신은 ${name}님에게 어떤 사람인가요 ?"
+
         binding.btnOthercardcreateNext.setOnClickListener {
             // editText 값이 들어가있으면 버튼 클릭할 수 있도록
 

@@ -14,14 +14,14 @@ import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
 import retrofit2.http.*
 
 interface CardService {
-    // 대표 카드 조회
-    @GET("card/main/{userId}")
+    //타인의 대표카드 조회
+     @GET("card/main/{userId}")
     suspend fun getMainCard(
         @Path("userId")
         userId: Int?
     ): ResponseMainCardData
 
-    // 대표 카드 조회 - userId 없이
+    // 자신의 대표 카드 조회 - userId 없이
     @GET("card/main")
     suspend fun getUserMainCard(): ResponseMainCardData
 

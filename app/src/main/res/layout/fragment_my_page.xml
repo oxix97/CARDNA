@@ -81,6 +81,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tv_mypage_email"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="alalekqls2@gmail.com"
                     android:textColor="@color/white_3"
