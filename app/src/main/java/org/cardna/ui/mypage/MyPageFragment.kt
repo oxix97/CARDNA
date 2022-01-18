@@ -40,12 +40,12 @@ class MyPageFragment :
         }
     }
 
-    private fun myPageRecyclerViewAdapter(dataList : List<ResponseMyPageFriendData>) {
-        friendList = dataList
-        val myPageFriendAdapter = MyPageFriendAdapter(friendList) { item ->
+    private fun myPageRecyclerViewAdapter(dataList: List<ResponseMyPageFriendData>) {
+        val myPageFriendAdapter = MyPageFriendAdapter(dataList) { item ->
             val bundle = Bundle()
             bundle.putInt("id", item.id)
             bundle.putString("name", item.name)
+            bundle.putString("sentence", item.sentence)
             // bundle.putStringArrayList("friendList", friendList)
 
             val mainCardFragment = MainCardFragment()
@@ -56,13 +56,11 @@ class MyPageFragment :
                 .replace(org.cardna.R.id.fcv_main, mainCardFragment)
             transaction.commit()
         }
-
-        binding.rvMypage.adapter = myPageFriendAdapter
-
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvMypage.layoutManager = gridLayoutManager
 
         binding.rvMypage.addItemDecoration(SpacesItemDecoration((16 * resources.displayMetrics.density).roundToInt()))
+        binding.rvMypage.adapter = myPageFriendAdapter
         myPageFriendAdapter.notifyDataSetChanged()
     }
 
@@ -102,8 +100,7 @@ class MyPageFragment :
                     myPageRecyclerViewAdapter(data.friendList)
                 }
                 binding.tvMypageName.text = data?.name.toString()
-                println(data?.name)
-                println(data?.email.toString())
+
                 Glide
                     .with(this@MyPageFragment)
                     .load(data?.userImg)

@@ -86,6 +86,16 @@ class MainCardFragment :
                 Log.d("실패", e.message.toString())
             }
         }
+
+        lifecycleScope.launch {
+            try {
+                list = ApiService.cardService.getUserMainCard().data.mainCardList
+                initAdapter(list)
+                initClickEventCardMe()
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
     }
 
     private fun initAdapter(list: MutableList<MainCardList>) {
