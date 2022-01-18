@@ -67,6 +67,8 @@ class DetailCardMeActivity :
     //내가 카드너 상세
     private fun setUserCardYou() {
         with(binding) {
+            //공감 아이콘 없애기
+            ctvLikeIcon.visibility = View.INVISIBLE
 
             //공감 아이콘 없애기
             ctvLikeIcon.visibility = View.INVISIBLE
