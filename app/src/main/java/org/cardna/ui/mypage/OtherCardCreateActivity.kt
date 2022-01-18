@@ -27,6 +27,7 @@ class OtherCardCreateActivity :
             startActivity(intent)
         }
     }
+
     // editText 내용 있을 때, 다음 버튼 누를 수 있도록 버튼 enable
     // 누르면 그에 써진 그사람과의 관계 정보를 OtherCardWriteActivity에 전달?
 }

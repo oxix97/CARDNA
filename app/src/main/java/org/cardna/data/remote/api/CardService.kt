@@ -1,7 +1,12 @@
 package org.cardna.data.remote.api
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.cardna.data.remote.model.cardpack.*
-import org.cardna.data.remote.model.maincard.*
+import org.cardna.data.remote.model.maincard.RequestMainCardEditData
+import org.cardna.data.remote.model.maincard.ResponseDeleteCardData
+import org.cardna.data.remote.model.maincard.ResponseMainCardData
+import org.cardna.data.remote.model.maincard.ResponseMainCardEditData
 import org.cardna.data.remote.model.mypage.RequestCreateCardYouData
 import org.cardna.data.remote.model.mypage.ResponseAddOrRemoveCardYouData
 import org.cardna.data.remote.model.mypage.ResponseCardYouBoxData
@@ -10,13 +15,13 @@ import retrofit2.http.*
 
 interface CardService {
     // 대표 카드 조회
-
     @GET("card/main/{userId}")
     suspend fun getMainCard(
         @Path("userId")
         userId: Int?
     ): ResponseMainCardData
 
+    // 대표 카드 조회 - userId 없이
     @GET("card/main")
     suspend fun getUserMainCard(): ResponseMainCardData
 
@@ -43,9 +48,11 @@ interface CardService {
     suspend fun getCardDetail(): ResponseCardDetailData
 
     // 카드나 작성
+    @Multipart
     @POST("card")
     suspend fun postCreateCardMe(
-        @Body body: RequestCreateCardMeData
+        @PartMap body:HashMap<String, RequestBody>,
+        @Part image : MultipartBody.Part
     ): ResponseCreateCardMeData
 
     // 카드너 작성

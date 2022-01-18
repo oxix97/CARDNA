@@ -17,7 +17,7 @@ class BottomDialogOtherImageFragment(val itemClick: (Int) -> Unit) : BottomSheet
     private var _binding: FragmentBottomDialogOtherImageBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화되지 않았습니다")
 
-    var selectedImg = NONE;
+    var selectedImg = GALLERY;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -146,7 +146,6 @@ class BottomDialogOtherImageFragment(val itemClick: (Int) -> Unit) : BottomSheet
     }
 
     companion object {
-        const val NONE = -1
         const val SYMBOL_0 = 0
         const val SYMBOL_1 = 1
         const val SYMBOL_2 = 2
