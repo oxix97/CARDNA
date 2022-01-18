@@ -3,6 +3,7 @@ package org.cardna.ui.mypage.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
 import org.cardna.databinding.ItemMypageFriendBinding
 
@@ -14,7 +15,7 @@ class MyPageFriendAdapter(
     inner class MyPageFriendViewHolder(private val binding: ItemMypageFriendBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseMyPageFriendData) {
             binding.apply {
-                ivFriendImage.setImageResource(data.userImg)
+                // ivFriendImage.setImageResource(data.userImg)
                 tvFriendName.text = data.name
                 tvFriendSentence.text = data.sentence
                 root.setOnClickListener {
