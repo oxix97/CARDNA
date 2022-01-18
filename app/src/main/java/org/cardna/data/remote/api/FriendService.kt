@@ -22,8 +22,9 @@ interface FriendService {
     @GET("friend/search?.email={email}")
     fun getFriendSearchEmail(): Call<ResponseFriendSearchEmailData>
 
+    //친구추가
     @POST("friend")
     fun postFriend(
         @Body body: RequestFriendUpdateData
-    ): Call<ResponseFriendUpdateData>
+    ): ResponseFriendUpdateData
 }
