@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface CardService {
 
     //타인의 대표카드 조회
-     @GET("card/main/{userId}")
+    @GET("card/main/{userId}")
     suspend fun getMainCard(
         @Path("userId")
         userId: Int?
@@ -39,9 +39,16 @@ interface CardService {
     @GET("card/you/{userId}")
     suspend fun getCardYou(): ResponseCardYouData
 
-    // 카드 상세 조회
+    // 타인 카드 상세 조회
     @GET("card/info/{cardId}")
-    suspend fun getCardDetail(): ResponseCardDetailData
+    suspend fun getCardDetail(
+        @Path("cardId")
+        userId: Int?
+    ): ResponseCardDetailData
+
+    // 내 카드 상세 조회
+    @GET("card/info")
+    suspend fun getCardUserDetail(): ResponseCardDetailData
 
     // 카드나 작성
     @POST("card")
