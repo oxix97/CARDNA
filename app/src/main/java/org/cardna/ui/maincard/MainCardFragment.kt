@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +20,6 @@ import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
 import org.cardna.ui.mypage.OtherCardCreateActivity
-import org.cardna.ui.mypage.OtherWriteActivity
 import org.cardna.ui.representcardedit.RepresentCardEditActivity
 import org.cardna.util.LinearGradientSpan
 import kotlin.math.roundToInt
@@ -30,6 +28,11 @@ class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
     private lateinit var mainCardAdapter: MainCardAdapter
     private lateinit var list: MutableList<MainCardList>
+
+    override fun onResume() {
+        super.onResume()
+        initNetwork()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

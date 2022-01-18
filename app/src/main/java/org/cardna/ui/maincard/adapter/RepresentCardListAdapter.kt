@@ -3,22 +3,35 @@ package org.cardna.ui.maincard.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.representcardedit.RepresentCardData
+import com.bumptech.glide.Glide
+import org.cardna.R
+import org.cardna.data.remote.model.maincard.MainCardList
 import org.cardna.databinding.ItemRepresentEditCardBinding
 
-class RepresentCardListAdapter :
+class RepresentCardListAdapter() :
     RecyclerView.Adapter<RepresentCardListAdapter.RepresentCardViewHolder>() {
-    val cardList = mutableListOf<RepresentCardData>()
+    var cardList = mutableListOf<MainCardList>()
 
     inner class RepresentCardViewHolder(private val binding: ItemRepresentEditCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RepresentCardData, position: Int) {
-            binding.ivRepresentcardeditlistImage.setImageResource(data.image)
-            binding.tvRepresentcardlistUserTag.text = data.userTag
-            binding.clRvItem.setBackgroundResource(data.backgroundColor)
-            binding.ivRepresentcardeditlistDelete.setOnClickListener {
-                notifyItemRemoved(adapterPosition)
-                cardList.removeAt(adapterPosition + 1)
+        fun onBind(data: MainCardList, position: Int) {
+            binding.apply {
+                //Glide 사용해서 이미지 사용 circleCrop()
+                Glide
+                    .with(itemView.context)
+                    .load(data.cardImg)
+                    .into(binding.ivRepresentcardeditlistImage)
+
+                tvRepresentcardlistUserTag.text = data.title
+                if (data.isMe) {
+                    clRvItem.setBackgroundResource(R.drawable.rectangle_main_green_radius_10)
+                } else {
+                    clRvItem.setBackgroundResource(R.drawable.rectangle_main_purple_radius_10)
+                }
+                ivRepresentcardeditlistDelete.setOnClickListener {
+                    cardList.removeAt(adapterPosition)
+                    notifyItemRemoved(adapterPosition)
+                }
             }
         }
     }

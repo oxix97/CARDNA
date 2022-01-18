@@ -24,7 +24,7 @@ interface CardService {
     // 대표 카드 수정
     @PUT("card/main")
     suspend fun putMainCardEdit(
-        @Body body: RequestMainCardEditData
+        @Body body:RequestMainCardEditData
     ): ResponseMainCardEditData
 
     // 카드 전체 조회

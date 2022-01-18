@@ -1,12 +1,18 @@
 package org.cardna.ui.representcardedit
 
 import android.os.Bundle
+import android.util.Log
+import android.view.ActionMode
 import androidx.core.text.set
 import androidx.core.text.toSpannable
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.model.representcardedit.RepresentCardData
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.maincard.MainCardList
+import org.cardna.data.remote.model.maincard.RequestMainCardEditData
 import org.cardna.databinding.ActivityRepresentCardEditBinding
 import org.cardna.ui.maincard.adapter.RepresentCardListAdapter
 import org.cardna.util.LinearGradientSpan
@@ -23,55 +29,22 @@ class RepresentCardEditActivity :
     }
 
     override fun initView() {
-        initFragment()
+        initCoroutine()
         onClick()
         setTextGradient()
         onClickResult()
-        representCardCount()
     }
 
-    private fun initFragment() {
-        val dataList = listOf(
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "댕댕 1호",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "댕댕 2호",
-                R.drawable.background_cardyou
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "댕댕 3호",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "댕댕 4호",
-                R.drawable.background_cardyou
-            ),
-
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "댕댕 5호",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "댕댕 6호",
-                R.drawable.background_cardyou
-            ),
-        )
+    private fun initFragment(representList: MutableList<MainCardList>) {
         representCardAdapter = RepresentCardListAdapter()
         val gridLayoutManager = GridLayoutManager(this, 2)
         binding.rvRepresentcardeditContainer.layoutManager = gridLayoutManager
 
-        binding.rvRepresentcardeditContainer.addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
+        binding.rvRepresentcardeditContainer
+            .addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
 
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
-        representCardAdapter.cardList.addAll(dataList)
+        representCardAdapter.cardList = representList
         representCardAdapter.notifyDataSetChanged()
     }
 
@@ -94,13 +67,35 @@ class RepresentCardEditActivity :
 
     private fun onClickResult() {
         binding.tvTvRepresentcardeditFinish.setOnClickListener {
+            val cardList = representCardAdapter.cardList
+            val cardIdList = mutableListOf<Int>()
+
+            for (i in 0 until cardList.size) {
+                cardIdList.add(cardList[i].id)
+            }
+
+            val data = RequestMainCardEditData(cardIdList)
+            lifecycleScope.launch {
+                try {
+                    ApiService.cardService.putMainCardEdit(data)
+                    ApiService.cardService.getUserMainCard()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
             finish()
         }
     }
 
-    private fun representCardCount() {
-        val countText = "${representCardAdapter.cardList.size}/7"
-        binding.tvRepresentcardeditCardListCount.text = countText
-        representCardAdapter.notifyDataSetChanged()
+    private fun initCoroutine() {
+        lifecycleScope.launch {
+            try {
+                val dataContainer = ApiService.cardService.getUserMainCard()
+                val list = dataContainer.data.mainCardList
+                initFragment(list)
+            } catch (e: Exception) {
+                Log.d("error", "error")
+            }
+        }
     }
 }
