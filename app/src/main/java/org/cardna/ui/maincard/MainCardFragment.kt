@@ -2,9 +2,11 @@ package org.cardna.ui.maincard
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.text.set
 import androidx.core.text.toSpannable
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -12,66 +14,45 @@ import androidx.viewpager2.widget.ViewPager2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
-import org.cardna.data.remote.model.maincard.MainCardListData
-import org.cardna.data.remote.model.maincard.ResponseMainCardData
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.maincard.MainCardList
 import org.cardna.databinding.FragmentMainCardBinding
-import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
-import org.cardna.ui.representcardedit.RepresentCardEditActivity
 import org.cardna.util.LinearGradientSpan
 import kotlin.math.roundToInt
 
 class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
-    private lateinit var fragmentList: MainCardListData
     private lateinit var mainCardAdapter: MainCardAdapter
+    private lateinit var list: MutableList<MainCardList>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
 
     override fun initView() {
-        initAdapter()
-        initClickEventCardYou()
+        // initClickEventCardYou()
+        initNetwork()
         setTextGradient()
-        initClickEventCardMe()
+        //initClickEventCardMe()
     }
 
-    private fun initAdapter() {
-        /*    fragmentList = listOf(
-                MainCardListData(
-                    1,
-                    R.drawable.dummy_img_test,
-                    true,
-                    "책 좋아!!"
-                ),
-                MainCardListData(
-                    2,
-                    R.drawable.dummy_img_test,
-                    false,
-                    "책 좋아!!"
-                ),
-                MainCardListData(
-                    3,
-                    R.drawable.dummy_img_test,
-                    true,
-                    "책 좋아!!"
-                ),
-                MainCardListData(
-                    4,
-                    R.drawable.dummy_img_test,
-                    false,
-                    "책 좋아!!"
-                ),
-            )*/
+    private fun initNetwork() {
+        lifecycleScope.launch {
+            try {
+                list = ApiService.cardService.getMainCard(1).data.mainCardList
+                initAdapter(list)
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+    }
 
-        //fragmentList=데이터 리스트 넣기
-
-        //RecyclerView 연결
-        mainCardAdapter = MainCardAdapter(fragmentList) {
+    private fun initAdapter(list: MutableList<MainCardList>) {
+        mainCardAdapter = MainCardAdapter(list) {
             val intent = Intent(requireContext(), DetailCardMeActivity::class.java).apply {
                 putExtra("id", it.id)
                 startActivity(this)
@@ -79,13 +60,13 @@ class MainCardFragment :
         }
 
         binding.apply {
-            setMainCard(mainCardAdapter)
-            pageSelect()
+            setAnswerPager(mainCardAdapter)
+            pageCount()
         }
     }
 
-    //메인카드 레이아웃 마진
-    private fun setMainCard(pagerAdapter: MainCardAdapter) {
+
+    private fun setAnswerPager(pagerAdapter: MainCardAdapter) {
         val compositePageTransformer = getPageTransformer()
         binding.vpMaincardList.apply {
             adapter = pagerAdapter
@@ -108,7 +89,7 @@ class MainCardFragment :
     }
 
     //페이지 트랜스포머
-    private fun pageSelect() {
+    private fun pageCount() {
         binding.vpMaincardList.apply {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -133,10 +114,7 @@ class MainCardFragment :
         binding.tvMaincardGotoCardpack.text = spannable
     }
 
-
-    //결과값 리스트를 통해 레이아웃 그리기
-
-    //내가 내 메인카드 볼떄 화면
+/*    //내가 내 메인카드 볼떄 화면
     private fun initClickEventCardMe() {
         with(binding) {
             //카드팩 보러가기 버튼 없애기
@@ -188,5 +166,5 @@ class MainCardFragment :
                 .replace(org.cardna.R.id.fcv_main, CardPackFragment())
             transaction.commit()
         }
-    }
+    }*/
 }

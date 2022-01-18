@@ -1,51 +1,68 @@
 package org.cardna.data.remote.api
 
-import org.cardna.data.remote.model.maincard.ResponseMainCardData
-import retrofit2.Call
+import org.cardna.data.remote.model.cardpack.*
+import org.cardna.data.remote.model.maincard.*
+import org.cardna.data.remote.model.mypage.RequestCreateCardYouData
+import org.cardna.data.remote.model.mypage.ResponseAddOrRemoveCardYouData
+import org.cardna.data.remote.model.mypage.ResponseCheckCardYouStorageData
+import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
 import retrofit2.http.*
 
 interface CardService {
+    // 대표 카드 조회
 
-    //mainCard 조회
-    @Headers("Content-Type:application/json")
-    @GET("/card/main/{id}")
-    suspend fun getCardMain(
-        @Path("id") id: String
+    @GET("card/main/{userId}")
+    suspend fun getMainCard(
+        @Path("userId")
+        userId: Int?
     ): ResponseMainCardData
-/*
+
+    @GET("card/main")
+    suspend fun getUserMainCard(): ResponseMainCardData
+
+    // 대표 카드 수정
     @PUT("/card/main")
-    fun putCardMain(
-        @Body body:
-    ): Call<>
+    suspend fun putMainCardEdit(
+        @Body body: RequestMainCardEditData
+    ): ResponseMainCardEditData
 
-    @GET("/card/:userId")
-    fun getCardUserId(): Call<>
+    // 카드 전체 조회
+    @GET("/card/{userId}")
+    suspend fun getCardAll(): ResponseCardAllData
 
-    @GET("/card/me/:userId")
-    fun getCardMeUserId(): Call<>
+    // 카드나 전체 조회
+    @GET("/card/me/{userId}")
+    suspend fun getCardMe(): ResponseCardMeData
 
-    @GET("/card/you/:userId")
-    fun getCardYouUserId(): Call<>
+    // 카드너 전체 조회
+    @GET("/card/you/{userId}")
+    suspend fun getCardYou(): ResponseCardYouData
 
-    @GET("/card/info/:cardId")
-    fun getCardInfoCardId(): Call<>
+    // 카드 상세 조회
+    @GET("/card/info/{cardId}")
+    suspend fun getCardDetail(): ResponseCardDetailData
 
+    // 카드나 작성
     @POST("/card")
-    fun postCard(
-        @Body body:
-    ): Call<>
+    suspend fun postCreateCardMe(
+        @Body body: RequestCreateCardMeData
+    ): ResponseCreateCardMeData
 
-    @POST("/card/:friednId")
-    fun postCardFriendId(
-        @Body body:
-    ): Call<>
+    // 카드너 작성
+    @POST("/card/{friendId}")
+    suspend fun postCreateCardYou(
+        @Body body: RequestCreateCardYouData
+    ): ResponseCreateCardYouData
 
-    @DELETE("/card/:cardId")
-    fun deleteCardCardId(): Call<>
+    // 카드 삭제
+    @DELETE("/card/{cardId}")
+    suspend fun deleteCard(): ResponseDeleteCardData
 
+    // 카드너 보관함 조회
     @GET("/card/box")
-    fun getCardBox(): Call<>
+    suspend fun getCardBox(): ResponseCheckCardYouStorageData
 
-    @PUT("/card/box/:cardId")
-    fun putCardBoxCardId(): Call<>*/
+    // 카드너 추가, 보관
+    @PUT("/card/box/{cardId}")
+    suspend fun putCardBoxCardId(): ResponseAddOrRemoveCardYouData
 }
