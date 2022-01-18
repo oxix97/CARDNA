@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
@@ -104,7 +102,6 @@ class MainCardFragment :
         }
     }
 
-
     private fun setAnswerPager(pagerAdapter: MainCardAdapter) {
         val compositePageTransformer = getPageTransformer()
         binding.vpMaincardList.apply {
@@ -141,7 +138,6 @@ class MainCardFragment :
 
         binding.vpMaincardList.adapter = mainCardAdapter
     }
-
 
     //텍스트 그라디언트
     private fun setTextGradient() {

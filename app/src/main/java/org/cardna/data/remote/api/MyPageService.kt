@@ -8,7 +8,7 @@ import retrofit2.http.Headers
 
 interface MyPageService {
     @Headers("Content-Type:application/json")
-    @GET("mypage")
+    @GET("my-page")
     fun getMyPage(): Call<ResponseMyPageData>
 
     @GET("my-page/user")
