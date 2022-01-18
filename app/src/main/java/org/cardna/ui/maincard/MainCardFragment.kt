@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +18,11 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.maincard.MainCardList
 import org.cardna.databinding.FragmentMainCardBinding
+import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
+import org.cardna.ui.mypage.OtherCardCreateActivity
+import org.cardna.ui.mypage.OtherWriteActivity
+import org.cardna.ui.representcardedit.RepresentCardEditActivity
 import org.cardna.util.LinearGradientSpan
 import kotlin.math.roundToInt
 
@@ -32,17 +37,39 @@ class MainCardFragment :
     }
 
     override fun initView() {
-        // initClickEventCardYou()
         initNetwork()
         setTextGradient()
-        //initClickEventCardMe()
     }
 
+    //네트워크 통신으로 뿌려줄 리스트 초기화
     private fun initNetwork() {
+        var id: Int?
+        if (getArguments() != null) {
+            id = getArguments()?.getInt("id", 0) ?: 0
+            SeeOtherNetwork(id)
+        } else {
+            SeeMeNetwork()
+        }
+    }
+
+    private fun SeeOtherNetwork(id: Int) {
         lifecycleScope.launch {
             try {
-                list = ApiService.cardService.getMainCard(1).data.mainCardList
+                list = ApiService.cardService.getMainCard(id).data.mainCardList
                 initAdapter(list)
+                initClickEventCardYou(id)
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+    }
+
+    private fun SeeMeNetwork() {
+        lifecycleScope.launch {
+            try {
+                list = ApiService.cardService.getUserMainCard().data.mainCardList
+                initAdapter(list)
+                initClickEventCardMe()
             } catch (e: Exception) {
                 Log.d("실패", e.message.toString())
             }
@@ -110,7 +137,7 @@ class MainCardFragment :
         binding.tvMaincardGotoCardpack.text = spannable
     }
 
-/*    //내가 내 메인카드 볼떄 화면
+    //내가 내 메인카드 볼떄 화면
     private fun initClickEventCardMe() {
         with(binding) {
             //카드팩 보러가기 버튼 없애기
@@ -118,49 +145,73 @@ class MainCardFragment :
             ivMaincardGotoCardpackBackground.visibility = View.GONE
 
             //친구추가 버튼 없애기
-            ibtnMaincardFriend.visibility = View.GONE
+            ctvMaincardFriend.visibility = View.GONE
 
-            //클릭 이벤트 달기
+            //연필->알림으로 바꾸기
+            ibtnMaincardAlarm.setBackgroundResource(R.drawable.ic_alarm)
+
+            //대표카드 수정 페이지로 이동
             llMaincardEditLayout.setOnClickListener {
                 val intent = Intent(requireActivity(), RepresentCardEditActivity::class.java)
                 startActivity(intent)
             }
+
+            //알림 페이지로 이동
             ibtnMaincardAlarm.setOnClickListener {
                 val intent = Intent(requireActivity(), AlarmActivity::class.java)
                 startActivity(intent)
             }
+
         }
     }
 
     //타인이 내 메인카드 볼때 화면
-    private fun initClickEventCardYou() {
-        var id: Int
+    private fun initClickEventCardYou(id: Int) {
         var name = ""
+        var sentence = ""
         if (getArguments() != null) {
             name = getArguments()?.getString("name") ?: ""
+            sentence = getArguments()?.getString("sentence") ?: ""
             binding.tvMaincardUserName.setText(name + "님은")
+            binding.tvMaincardTitle.setText(sentence)
         }
-        //넘어온 user id에 따른 대표카드 list보여주기
-        //fun requestFriendMainCard
-
         with(binding) {
             //카드팩 보러가기 버튼 보이기
             tvMaincardGotoCardpack.visibility = View.VISIBLE
             ivMaincardGotoCardpackBackground.visibility = View.VISIBLE
 
+            //edittext 버튼 없애기
+            llMaincardEditLayout.visibility = View.INVISIBLE
 
-            //친구추가 아이콘 보이기
-            ibtnMaincardFriend.visibility = View.VISIBLE
+            //친구추가 클릭
+            ctvMaincardFriend.setOnClickListener {
+                ctvMaincardFriend.toggle()
+                //친구 추가하는 네트워크 통신
+            }
 
-            //카드 작성하기 아이콘 보이기
-            ibtnMaincardAlarm.setImageResource(R.drawable.ic_mypage_write)
+            //카드너 작성하기 페이지로 이동
+            ibtnMaincardAlarm.setOnClickListener {
+                val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
+                    //현재 사용자의 name값을 전달해줘야하나? 토큰으로 못가져오나..
+                    putExtra("name", name)
+                    putExtra("id", id)
+                }
+                startActivity(intent)
+            }
+
+            //카드팩 보러갈떄 유저 id bundle로 넘김
+            tvMaincardGotoCardpack.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putInt("id", id)
+
+                val cardPackFragment = CardPackFragment()
+                cardPackFragment.setArguments(bundle)
+
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fcv_main, cardPackFragment)
+                transaction.commit()
+            }
         }
-        //클릭 이벤트 달기
-        binding.tvMaincardGotoCardpack.setOnClickListener {
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(org.cardna.R.id.fcv_main, CardPackFragment())
-            transaction.commit()
-        }
-    }*/
+    }
 }
