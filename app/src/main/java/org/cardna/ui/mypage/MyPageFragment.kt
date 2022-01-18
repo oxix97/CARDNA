@@ -2,27 +2,26 @@ package org.cardna.ui.mypage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.launch
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
-import org.cardna.data.remote.model.mypage.ResponseMyPageData
 import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
 import org.cardna.databinding.FragmentMyPageBinding
 import org.cardna.ui.maincard.MainCardFragment
 import org.cardna.ui.mypage.adapter.MyPageFriendAdapter
 import org.cardna.util.SpacesItemDecoration
 import org.cardna.util.shortToast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import kotlin.math.roundToInt
 
 class MyPageFragment :
     BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.cardna.R.layout.fragment_my_page) {
-    private lateinit var friendList: List<ResponseMyPageFriendData>
+    private lateinit var list: List<ResponseMyPageFriendData>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -41,12 +40,12 @@ class MyPageFragment :
     }
 
     private fun myPageRecyclerViewAdapter(dataList: List<ResponseMyPageFriendData>) {
+        list = dataList
         val myPageFriendAdapter = MyPageFriendAdapter(dataList) { item ->
             val bundle = Bundle()
             bundle.putInt("id", item.id)
             bundle.putString("name", item.name)
             bundle.putString("sentence", item.sentence)
-            // bundle.putStringArrayList("friendList", friendList)
 
             val mainCardFragment = MainCardFragment()
             mainCardFragment.setArguments(bundle)
@@ -89,31 +88,32 @@ class MyPageFragment :
     }
 
     private fun initNetwork() {
-        val call: Call<ResponseMyPageData> = ApiService.myPageService.getMyPage()
-        call.enqueue(object : Callback<ResponseMyPageData> {
-            override fun onResponse(
-                call: Call<ResponseMyPageData>,
-                response: Response<ResponseMyPageData>
-            ) {
-                val data = response.body()?.data
-                if (data != null) {
-                    myPageRecyclerViewAdapter(data.friendList)
-                }
-                binding.tvMypageName.text = data?.name.toString()
-
-                Glide
-                    .with(this@MyPageFragment)
-                    .load(data?.userImg)
-                    .circleCrop()
-                    .into(binding.ivMypageProfile)
-
-                binding.tvMypageEmail.text = data?.email.toString()
-                binding.tvMypageFriendCount.text = data?.friendList?.size.toString()
+        lifecycleScope.launch {
+            try {
+                val dataContainer = ApiService.myPageService.getMyPage().data
+                val myData = listOf(
+                    dataContainer.name,
+                    dataContainer.email,
+                    dataContainer.userImg,
+                    dataContainer.friendList.size.toString()
+                )
+                list = dataContainer.friendList
+                setMyPage(myData)
+                myPageRecyclerViewAdapter(list)
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
             }
+        }
+    }
 
-            override fun onFailure(call: Call<ResponseMyPageData>, t: Throwable) {
-                requireContext().shortToast("error")
-            }
-        })
+    private fun setMyPage(myData: List<String>) {
+        binding.tvMypageName.text = myData[0]
+        binding.tvMypageEmail.text = myData[1]
+        binding.tvMypageFriendCount.text = myData[3]
+        Glide
+            .with(this@MyPageFragment)
+            .load(myData[2])
+            .circleCrop()
+            .into(binding.ivMypageProfile)
     }
 }
