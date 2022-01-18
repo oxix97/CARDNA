@@ -9,9 +9,11 @@ class DetailCardYouActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityDetailCardYouBinding>(R.layout.activity_detail_card_you) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
     }
 
     override fun initView() {
-        TODO("Not yet implemented")
+
     }
+
 }
