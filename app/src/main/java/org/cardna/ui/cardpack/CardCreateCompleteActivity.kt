@@ -46,6 +46,8 @@ BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateCompleteBinding>(R.layout.a
 
         }
 
+        // URI로 받은 사진 띄우기
+        // symboliD 값 받으면 그거에 따라 local에서 심볼 사진 띄우기
         binding.ivCardcreateComplete.setImageResource(cardImg)
         binding.tvCardcreateCompleteTitle.text = cardTitle
         setTextGradient()

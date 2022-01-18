@@ -59,7 +59,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_0
+                if(imgBtnCardpackSymbol0.isSelected)
+                    selectedImg = SYMBOL_0
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol1.setOnClickListener {
@@ -69,7 +72,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_1
+                if(imgBtnCardpackSymbol1.isSelected)
+                    selectedImg = SYMBOL_1
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol2.setOnClickListener {
@@ -79,7 +85,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_2
+                if(imgBtnCardpackSymbol2.isSelected)
+                    selectedImg = SYMBOL_2
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol3.setOnClickListener {
@@ -89,7 +98,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = !imgBtnCardpackSymbol3.isSelected
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_3
+                if(imgBtnCardpackSymbol3.isSelected)
+                    selectedImg = SYMBOL_3
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol4.setOnClickListener {
@@ -99,7 +111,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = !imgBtnCardpackSymbol4.isSelected
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_4
+                if(imgBtnCardpackSymbol4.isSelected)
+                    selectedImg = SYMBOL_4
+                else
+                    selectedImg = GALLERY
             }
 
 
@@ -152,5 +167,7 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
         const val SYMBOL_4 = 4
         const val GALLERY = 5
     }
+
+
 
 }
