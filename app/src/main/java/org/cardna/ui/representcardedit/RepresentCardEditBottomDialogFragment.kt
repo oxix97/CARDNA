@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.launch
 import org.cardna.R
-import org.cardna.data.remote.model.representcardedit.RepresentCardData
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.cardpack.Card
 import org.cardna.databinding.FragmentRepresentCardEditBottomDialogBinding
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardMeAdapter
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardYouAdapter
@@ -24,7 +27,7 @@ class RepresentCardEditBottomDialogFragment(
     private val cardListSize: Int
 ) :
     BottomSheetDialogFragment() {
-    private val list = mutableListOf<RepresentCardData>()
+    private val list = mutableListOf<Card>()
     private var _binding: FragmentRepresentCardEditBottomDialogBinding? = null
     private val binding get() = _binding ?: error("View를 참조하기 위해 binding이 초기화되지 않았습니다.")
     private lateinit var cardMeAdapter: RepresentBottomSheetCardMeAdapter
@@ -36,7 +39,7 @@ class RepresentCardEditBottomDialogFragment(
 
         binding.clBottomSheet.layoutParams.height =
             (resources.displayMetrics.heightPixels * 0.94).roundToInt()
-        initFragment()
+        initCoroutine()
         initTabLayout()
     }
 
@@ -54,89 +57,21 @@ class RepresentCardEditBottomDialogFragment(
         return binding.root
     }
 
-    private fun initFragment() {
-        val dataList1 = listOf(
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.drawable.background_cardyou
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
+    private fun initCoroutine() {
+        lifecycleScope.launch {
+            try {
+                val cardMeContainer = ApiService.cardService.getCardMe().data.cardMeList
+                val cardYouContainer = ApiService.cardService.getCardYou().data.cardYouList
+                initFragment(cardMeContainer, cardYouContainer)
+            } catch (e: Exception) {
+                requireActivity().shortToast("Coroutine error")
+            }
+        }
+    }
 
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardyou
-
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
-
-            ),
-        )
-        val dataList2 = listOf(
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.drawable.background_cardyou
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
-
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardyou
-
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
-            ),
-        )
-
+    private fun initFragment(cardMeList: List<Card>, cardYouList: List<Card>) {
         cardMeAdapter = RepresentBottomSheetCardMeAdapter(cardListSize)
-        cardYouAdapter = RepresentBottomSheetCardYouAdapter()
+        cardYouAdapter = RepresentBottomSheetCardYouAdapter(cardListSize)
 
         val gridLayoutManager1 = GridLayoutManager(requireContext(), 2)
         val gridLayoutManager2 = GridLayoutManager(requireContext(), 2)
@@ -199,8 +134,8 @@ class RepresentCardEditBottomDialogFragment(
             }
         }
 
-        cardMeAdapter.cardMeList.addAll(dataList1)
-        cardYouAdapter.cardYouList.addAll(dataList2)
+        cardMeAdapter.cardMeList.addAll(cardMeList)
+        cardYouAdapter.cardYouList.addAll(cardYouList)
 
         cardMeAdapter.notifyDataSetChanged()
         cardYouAdapter.notifyDataSetChanged()

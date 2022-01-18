@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.representcardedit.RepresentCardData
+import com.bumptech.glide.Glide
+import org.cardna.R
+import org.cardna.data.remote.model.cardpack.Card
 import org.cardna.databinding.ItemRepresentCardMeBinding
 
 class RepresentBottomSheetCardMeAdapter(
@@ -12,10 +14,10 @@ class RepresentBottomSheetCardMeAdapter(
 ) :
     RecyclerView.Adapter<RepresentBottomSheetCardMeAdapter.CardMeViewHolder>() {
     private var lastRemovedIndex: Int = Int.MAX_VALUE
-    private var itemClickListener: ((Int, RepresentCardData, Boolean) -> Int)? = null
-    val cardMeList = mutableListOf<RepresentCardData>()
+    private var itemClickListener: ((Int, Card, Boolean) -> Int)? = null
+    val cardMeList = mutableListOf<Card>()
 
-    fun setItemClickListener(listener: ((Int, RepresentCardData, Boolean) -> Int)) {
+    fun setItemClickListener(listener: ((Int, Card, Boolean) -> Int)) {
         itemClickListener = listener
     }
 
@@ -25,11 +27,14 @@ class RepresentBottomSheetCardMeAdapter(
 
     inner class CardMeViewHolder(private val binding: ItemRepresentCardMeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RepresentCardData, position: Int) {
-            binding.clRvItem.setBackgroundResource(data.backgroundColor)
-            binding.ivCardpackRecyclerview.setImageResource(data.image)
-            binding.tvCardpackRecyclerview.text = data.userTag
+        fun onBind(data: Card, position: Int) {
+            binding.clRvItem.setBackgroundResource(R.drawable.rectangle_main_green_radius_10)
+            Glide
+                .with(itemView.context)
+                .load(data.cardImg)
+                .into(binding.ivCardpackRecyclerview)
 
+            binding.tvCardpackRecyclerview.text = data.title
             binding.tvRepresentcardCount.isVisible = data.isClicked
             if (lastRemovedIndex < data.index) {
                 data.index = data.index - 1
