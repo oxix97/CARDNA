@@ -56,10 +56,11 @@ class MyPageFragment :
             transaction.commit()
         }
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvMypage.layoutManager = gridLayoutManager
-
-        binding.rvMypage.addItemDecoration(SpacesItemDecoration((16 * resources.displayMetrics.density).roundToInt()))
-        binding.rvMypage.adapter = myPageFriendAdapter
+        with(binding) {
+            rvMypage.layoutManager = gridLayoutManager
+            rvMypage.addItemDecoration(SpacesItemDecoration((16 * resources.displayMetrics.density).roundToInt()))
+            rvMypage.adapter = myPageFriendAdapter
+        }
         myPageFriendAdapter.notifyDataSetChanged()
     }
 
@@ -107,9 +108,11 @@ class MyPageFragment :
     }
 
     private fun setMyPage(myData: List<String>) {
-        binding.tvMypageName.text = myData[0]
-        binding.tvMypageEmail.text = myData[1]
-        binding.tvMypageFriendCount.text = myData[3]
+        with(binding) {
+            tvMypageName.text = myData[0]
+            tvMypageEmail.text = myData[1]
+            tvMypageFriendCount.text = myData[3]
+        }
         Glide
             .with(this@MyPageFragment)
             .load(myData[2])
