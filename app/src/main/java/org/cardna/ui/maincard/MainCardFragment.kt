@@ -55,6 +55,18 @@ class MainCardFragment :
     }
 
     private fun SeeOtherNetwork(id: Int) {
+        //초기유저 상단 데이터 뿌리는 통신
+        lifecycleScope.launch {
+            try {
+                list = ApiService.cardService.getMainCard(id).data.mainCardList
+                initAdapter(list)
+                initClickEventCardYou(id)
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+
+        //메인카드 리스트 뿌리는 통신
         lifecycleScope.launch {
             try {
                 list = ApiService.cardService.getMainCard(id).data.mainCardList
