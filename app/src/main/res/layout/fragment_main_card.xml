@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:checkMark="@drawable/selector_add_friend"
-            android:checked="false"
+            android:checked="true"
             app:layout_constraintBottom_toBottomOf="@+id/ibtn_maincard_alarm"
             app:layout_constraintEnd_toStartOf="@+id/ibtn_maincard_alarm"
             app:layout_constraintTop_toTopOf="@+id/ibtn_maincard_alarm" />
