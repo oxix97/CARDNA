@@ -21,7 +21,7 @@ class InsightFragment : BaseViewUtil.BaseFragment<FragmentInsightBinding>(R.layo
 
     //viewPager연결
     private fun initAdapter() {
-        val fragmentList = listOf(OpenAreaFragment(), BuildAreaFragment())
+        val fragmentList = listOf(OpenAreaFragment(), BlindAreaFragment())
         viewPagerAdater = InsightAdapter(requireActivity())
         viewPagerAdater.fragments.addAll(fragmentList)
         binding.vpInsight.adapter = viewPagerAdater

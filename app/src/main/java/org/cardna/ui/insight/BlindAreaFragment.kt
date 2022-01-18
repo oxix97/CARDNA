@@ -5,7 +5,7 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.FragmentBlindAreaBinding
 import org.cardna.databinding.FragmentOpenAreaBinding
 
-class BuildAreaFragment : BaseViewUtil.BaseFragment<FragmentBlindAreaBinding>(R.layout.fragment_blind_area) {
+class BlindAreaFragment : BaseViewUtil.BaseFragment<FragmentBlindAreaBinding>(R.layout.fragment_blind_area) {
 
     override fun initView() {
 
