@@ -17,9 +17,12 @@ import org.cardna.databinding.FragmentRepresentCardEditBottomDialogBinding
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardMeAdapter
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardYouAdapter
 import org.cardna.util.SpacesItemDecoration
+import org.cardna.util.shortToast
 import kotlin.math.roundToInt
 
-class RepresentCardEditBottomDialogFragment :
+class RepresentCardEditBottomDialogFragment(
+    private val cardListSize: Int
+) :
     BottomSheetDialogFragment() {
     private val list = mutableListOf<RepresentCardData>()
     private var _binding: FragmentRepresentCardEditBottomDialogBinding? = null
@@ -132,7 +135,7 @@ class RepresentCardEditBottomDialogFragment :
             ),
         )
 
-        cardMeAdapter = RepresentBottomSheetCardMeAdapter()
+        cardMeAdapter = RepresentBottomSheetCardMeAdapter(cardListSize)
         cardYouAdapter = RepresentBottomSheetCardYouAdapter()
 
         val gridLayoutManager1 = GridLayoutManager(requireContext(), 2)
@@ -146,41 +149,53 @@ class RepresentCardEditBottomDialogFragment :
 
         binding.rvRepresentcardeditCardme.adapter = cardMeAdapter
         binding.rvRepresentcardeditCardyou.adapter = cardYouAdapter
+        binding.tvRepresentcardeditCardListCount.text = "0/${7 - cardListSize}"
 
-        cardMeAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
-            if (isSelected) {
-                list.add(RepresentCardData)
-                cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
-                return@setItemClickListener list.lastIndex
-            } else {
-                list.removeAt(position)
-                cardMeAdapter.setLastRemovedIndex(position)
-                cardYouAdapter.setLastRemovedIndex(position)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
-                cardYouAdapter.notifyDataSetChanged()
+        if (list.size + cardListSize < 7) {
+            cardMeAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
+                if (isSelected) {
+                    list.add(RepresentCardData)
+                    cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                    cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                    binding.tvRepresentcardeditCardListCount.text =
+                        "${list.size}/${7 - cardListSize}"
+                    return@setItemClickListener list.lastIndex
+                } else {
+                    list.removeAt(position)
+                    cardMeAdapter.setLastRemovedIndex(position)
+                    cardYouAdapter.setLastRemovedIndex(position)
+                    binding.tvRepresentcardeditCardListCount.text =
+                        "${list.size}/${7 - cardListSize}"
+                    cardYouAdapter.notifyDataSetChanged()
 
-                return@setItemClickListener -1
+                    return@setItemClickListener -1
+                }
             }
         }
 
         cardYouAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
-            if (isSelected) {
-                list.add(RepresentCardData)
-                cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
+            if (list.size + cardListSize < 7) {
+                if (isSelected) {
+                    list.add(RepresentCardData)
+                    cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                    cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                    binding.tvRepresentcardeditCardListCount.text =
+                        "${list.size}/${7 - cardListSize}"
 
-                return@setItemClickListener list.lastIndex
+                    return@setItemClickListener list.lastIndex
+                } else {
+                    list.removeAt(position)
+                    cardMeAdapter.setLastRemovedIndex(position)
+                    cardYouAdapter.setLastRemovedIndex(position)
+                    binding.tvRepresentcardeditCardListCount.text =
+                        "${list.size}/${7 - cardListSize}"
+                    cardMeAdapter.notifyDataSetChanged()
+
+                    return@setItemClickListener -1
+                }
             } else {
-                list.removeAt(position)
-                cardMeAdapter.setLastRemovedIndex(position)
-                cardYouAdapter.setLastRemovedIndex(position)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
-                cardMeAdapter.notifyDataSetChanged()
-
-                return@setItemClickListener -1
+                requireActivity().shortToast("대표카드는 7개가 최대입니다.")
+                return@setItemClickListener 112
             }
         }
 

@@ -7,17 +7,19 @@ import androidx.recyclerview.widget.RecyclerView
 import org.cardna.data.remote.model.representcardedit.RepresentCardData
 import org.cardna.databinding.ItemRepresentCardMeBinding
 
-class RepresentBottomSheetCardMeAdapter :
+class RepresentBottomSheetCardMeAdapter(
+    private val isSelectedCount: Int
+) :
     RecyclerView.Adapter<RepresentBottomSheetCardMeAdapter.CardMeViewHolder>() {
-    private var lastRemovedIndex : Int = Int.MAX_VALUE
-    private var itemClickListener : ((Int, RepresentCardData, Boolean) -> Int) ?= null
+    private var lastRemovedIndex: Int = Int.MAX_VALUE
+    private var itemClickListener: ((Int, RepresentCardData, Boolean) -> Int)? = null
     val cardMeList = mutableListOf<RepresentCardData>()
 
-    fun setItemClickListener(listener : ((Int, RepresentCardData, Boolean) -> Int)) {
+    fun setItemClickListener(listener: ((Int, RepresentCardData, Boolean) -> Int)) {
         itemClickListener = listener
     }
 
-    fun setLastRemovedIndex(index : Int) {
+    fun setLastRemovedIndex(index: Int) {
         lastRemovedIndex = index
     }
 
@@ -29,17 +31,18 @@ class RepresentBottomSheetCardMeAdapter :
             binding.tvCardpackRecyclerview.text = data.userTag
 
             binding.tvRepresentcardCount.isVisible = data.isClicked
-            if(lastRemovedIndex < data.index) {
+            if (lastRemovedIndex < data.index) {
                 data.index = data.index - 1
             }
 
             binding.tvRepresentcardCount.text = (data.index + 1).toString()
+
             binding.clRvItem.setOnClickListener {
                 data.isClicked = !data.isClicked
-                data.index = requireNotNull(itemClickListener?.invoke(data.index, data, data.isClicked))
+                data.index =
+                    requireNotNull(itemClickListener?.invoke(data.index, data, data.isClicked))
                 notifyDataSetChanged()
             }
-
         }
     }
 
@@ -51,7 +54,6 @@ class RepresentBottomSheetCardMeAdapter :
             ItemRepresentCardMeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardMeViewHolder(binding)
     }
-
 
     override fun onBindViewHolder(
         holder: RepresentBottomSheetCardMeAdapter.CardMeViewHolder,
