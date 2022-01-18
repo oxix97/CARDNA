@@ -53,7 +53,7 @@ class MyPageFragment :
 
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
-                .replace(org.cardna.R.id.fcv_main, mainCardFragment)
+                .add(org.cardna.R.id.fcv_main, mainCardFragment)
             transaction.commit()
         }
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)

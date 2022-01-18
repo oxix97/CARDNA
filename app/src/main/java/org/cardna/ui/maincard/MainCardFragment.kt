@@ -229,8 +229,8 @@ class MainCardFragment :
                 val cardPackFragment = CardPackFragment()
                 cardPackFragment.setArguments(bundle)
 
+                requireActivity().supportFragmentManager.popBackStack()
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                    .addToBackStack(null)
                     .replace(R.id.fcv_main, cardPackFragment)
                 transaction.commit()
             }
