@@ -68,6 +68,9 @@ class DetailCardMeActivity :
     private fun setUserCardYou() {
         with(binding) {
 
+            //공감 아이콘 없애기
+            ctvLikeIcon.visibility = View.INVISIBLE
+
             //배경색 보라색으로
             clDetailcardSettingLayout.setBackgroundResource(R.drawable.rectangle_left_right_main_purple)
 
