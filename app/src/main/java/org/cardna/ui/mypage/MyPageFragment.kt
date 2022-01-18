@@ -37,17 +37,18 @@ class MyPageFragment : BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.card
     private fun myPageRecyclerViewAdapter() {
         val myPageFriendAdapter = MyPageFriendAdapter(
             listOf(
-                ResponseMyPageFriendData(1, "다빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
-                ResponseMyPageFriendData(1, "라빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
-                ResponseMyPageFriendData(1, "마빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
-                ResponseMyPageFriendData(1, "바빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
-                ResponseMyPageFriendData(1, "사빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
-                ResponseMyPageFriendData(1, "아빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이")
+                ResponseMyPageFriendData(3, "다빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
+                ResponseMyPageFriendData(3, "라빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
+                ResponseMyPageFriendData(3, "마빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
+                ResponseMyPageFriendData(3, "바빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
+                ResponseMyPageFriendData(3, "사빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이"),
+                ResponseMyPageFriendData(3, "아빈", org.cardna.R.drawable.img_searchemail_friend_image, "하이")
             )
         ) { item ->
             val bundle = Bundle()
             bundle.putInt("id", item.id)
             bundle.putString("name", item.name)
+            bundle.putString("sentence", item.sentence)
 
             val mainCardFragment = MainCardFragment()
             mainCardFragment.setArguments(bundle)
