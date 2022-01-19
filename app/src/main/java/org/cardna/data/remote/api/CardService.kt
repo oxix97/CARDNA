@@ -42,8 +42,8 @@ interface CardService {
     suspend fun getCardAll(): ResponseCardAllData
 
 
-
     // 타인의 카드나 조회
+    @Headers("Content-Type:application/json")
     @GET("card/me/{userId}")
     suspend fun getOtherCardMe(
         @Path("userId")
@@ -53,7 +53,6 @@ interface CardService {
     // maincard에서 나의 카드나 조회
     @GET("card/me")
     suspend fun getUserCardMe(): RepresentCardMeData
-
 
 
     // 카드팩에서
@@ -73,12 +72,6 @@ interface CardService {
     suspend fun getUserCardYou(): RepresentCardYouData
 
 
-
-
-
-
-
-
     // 타인 카드 상세 조회
     @GET("card/info/{cardId}")
     suspend fun getCardDetail(
@@ -94,8 +87,8 @@ interface CardService {
     @Multipart
     @POST("card")
     suspend fun postCreateCardMe(
-        @PartMap body:HashMap<String, RequestBody>,
-        @Part image : MultipartBody.Part
+        @PartMap body: HashMap<String, RequestBody>,
+        @Part image: MultipartBody.Part
     ): ResponseCreateCardMeData
 
     // 카드너 작성

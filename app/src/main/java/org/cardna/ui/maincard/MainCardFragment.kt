@@ -227,6 +227,7 @@ class MainCardFragment :
 
             //카드팩 보러갈떄 유저 id bundle로 넘김
             tvMaincardGotoCardpack.setOnClickListener {
+                Log.d("타인이 카드팩 버튼 클릭", "타인이")
                 val bundle = Bundle()
                 bundle.putInt("id", id)
 
