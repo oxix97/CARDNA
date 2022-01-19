@@ -1,5 +1,6 @@
 package org.cardna.ui.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,13 +11,16 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.representcardedit.ResponseCardStorageData
 import org.cardna.databinding.ActivityOtherWriteBinding
+import org.cardna.ui.maincard.DetailActivity
 import org.cardna.ui.mypage.adapter.OtherWriteAdapter
+import org.cardna.ui.mypage.adapter.OtherWriteRecyclerViewAdapter
 import org.cardna.util.SpacesItemDecoration
 import kotlin.math.roundToInt
 
 class OtherWriteActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityOtherWriteBinding>(R.layout.activity_other_write) {
     private lateinit var adapter: OtherWriteAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -50,7 +54,8 @@ class OtherWriteActivity :
         adapter.notifyDataSetChanged()
     }
 
-    //  data: MutableList<ResponseCardYouBoxDataList>
+
+//  data: MutableList<ResponseCardYouBoxDataList>
     // private fun initAdapter(dataList: MutableList<ResponseCardStorageData.Data>) {
     //     adapter = OtherWriteRecyclerViewAdapter(dataList) { position ->
     //         Intent(this, DetailActivity::class.java).apply {
@@ -66,6 +71,5 @@ class OtherWriteActivity :
     //         adapter.notifyDataSetChanged()
     //         //     adapter.submitList(cardList) // 아이템 업데이트
     //     }
-    //
     // }
 }

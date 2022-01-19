@@ -117,5 +117,8 @@ interface CardService {
 
     // 카드너 추가, 보관
     @PUT("card/box/{cardId}")
-    suspend fun putCardBoxCardId(): ResponseAddOrRemoveCardYouData
+    suspend fun putCardBoxCardId(
+        @Path("cardId")
+        cardId : Int?
+    ): ResponseAddOrRemoveCardYouData
 }

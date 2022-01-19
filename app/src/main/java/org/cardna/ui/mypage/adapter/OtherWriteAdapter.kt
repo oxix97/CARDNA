@@ -1,12 +1,13 @@
 package org.cardna.ui.mypage.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.cardna.data.remote.model.representcardedit.ResponseCardStorageData
 import org.cardna.databinding.ItemOtherwriteBinding
+import org.cardna.ui.maincard.DetailActivity
 
 class OtherWriteAdapter() :
     RecyclerView.Adapter<OtherWriteAdapter.OtherWriteViewHolder>() {
@@ -21,8 +22,16 @@ class OtherWriteAdapter() :
                 tvOtherwriteName.text = data.name
                 tvOtherwriteCreatedAt.text = data.createdAt
                 ivOtherwriteGallery.isVisible = data.isImage
-                clOtherwrite.setOnClickListener {
-                    Toast.makeText(itemView.context, "$adapterPosition", Toast.LENGTH_SHORT).show()
+                clOtherwriteItem.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailActivity::class.java).apply {
+                        putExtra("id", data.id)
+                        putExtra("title", data.title)
+                        putExtra("relation", data.relation)
+                        putExtra("name", data.name)
+                        putExtra("createAt", data.createdAt)
+                        putExtra("isImage", data.isImage)
+                    }
+                    itemView.context.startActivity(intent)
                 }
             }
         }
