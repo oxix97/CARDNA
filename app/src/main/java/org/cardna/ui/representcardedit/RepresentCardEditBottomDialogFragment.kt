@@ -38,7 +38,6 @@ class RepresentCardEditBottomDialogFragment :
     private lateinit var cardMeList: MutableList<RepresentCardMeListData>
     private lateinit var cardYouList: MutableList<RepresentCardYouListData>
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (dialog as BottomSheetDialog).behavior.state = BottomSheetBehavior.STATE_EXPANDED

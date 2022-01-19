@@ -19,11 +19,10 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
-
-            android:scaleType="fitXY"
             android:layout_marginBottom="4dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/tv_main_card_title"
             android:src="@drawable/dummy_img_test"
-            app:layout_constraintBottom_toTopOf="@+id/tv_main_card_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +37,8 @@
             android:text="힘이 들 땐 하늘을 봐..."
             android:textColor="@color/real_black"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
