@@ -15,7 +15,6 @@ class OtherWriteRecyclerViewAdapter(
 ) : ListAdapter<ResponseCardYouBoxDataList, OtherWriteRecyclerViewAdapter.OtherWriterViewHolder>(
     diffUtil
 ) {
-
     inner class OtherWriterViewHolder(private val binding: ItemOtherwriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseCardYouBoxDataList) {

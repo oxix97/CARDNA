@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_openarea_title"
+                android:id="@+id/tv_blindarea_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -35,17 +35,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/iv_openarea_allow"
+                android:id="@+id/iv_blindarea_allow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
                 android:src="@drawable/ic_insight_allow_open_area"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_openarea_title" />
+                app:layout_constraintTop_toTopOf="@id/tv_blindarea_title" />
 
             <TextView
-                android:id="@+id/tv_openarea_sentence"
+                android:id="@+id/tv_blindarea_sentence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -53,8 +53,8 @@
                 android:text="내가 쓴 카드 중 가장 많은 공감을 받은 카드"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/tv_openarea_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_openarea_title" />
+                app:layout_constraintStart_toStartOf="@id/tv_blindarea_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_blindarea_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,14 +66,14 @@
             app:layout_constraintTop_toBottomOf="@+id/ctl_insight">
 
 
-            <ImageView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ctl_insight_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="56dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="56dp"
-                android:src="@drawable/rectangle_maingreen_stroke_black" />
+                android:background="@drawable/rectangle_maingreen_stroke_black" />
 
             <ImageView
                 android:id="@+id/iv_openarea_image"
@@ -86,11 +86,14 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
                 app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
                 app:layout_constraintStart_toStartOf="@+id/ctl_insight_card"
-                app:layout_constraintTop_toTopOf="@id/ctl_insight_card" />
+                app:layout_constraintTop_toTopOf="@id/ctl_insight_card"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/tv_openarea_user_title"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/pretendard_semibold"
