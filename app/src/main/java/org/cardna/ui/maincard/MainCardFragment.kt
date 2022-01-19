@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.maincard.MainCardList
+import org.cardna.data.remote.model.mypage.RequestFriendUpdateData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
@@ -28,6 +31,7 @@ class MainCardFragment :
     BaseViewUtil.BaseFragment<FragmentMainCardBinding>(R.layout.fragment_main_card) {
     private lateinit var mainCardAdapter: MainCardAdapter
     private lateinit var list: MutableList<MainCardList>
+    private var isMyCard = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,7 +58,8 @@ class MainCardFragment :
         //메인카드 리스트 뿌리는 통신
         lifecycleScope.launch {
             try {
-                list = ApiService.cardService.getOtherMainCard(id).data.mainCardList
+                list = ApiService.cardService.getMainCard(id).data.mainCardList
+                isMyCard = ApiService.cardService.getMainCard(id).data.isMyCard
                 initAdapter(list)
                 initClickEventCardYou(id)
             } catch (e: Exception) {
@@ -66,7 +71,18 @@ class MainCardFragment :
     private fun SeeMeNetwork() {
         lifecycleScope.launch {
             try {
-                list = ApiService.cardService.getMainCard().data.mainCardList
+                val dataContainer = ApiService.myPageService.getMyPage().data
+                withContext(Dispatchers.Main) {
+                    binding.tvMaincardUserName.text = dataContainer.name + "님은"
+                }
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+        lifecycleScope.launch {
+            try {
+                list = ApiService.cardService.getUserMainCard().data.mainCardList
+                isMyCard = ApiService.cardService.getUserMainCard().data.isMyCard
                 initAdapter(list)
                 initClickEventCardMe()
             } catch (e: Exception) {
@@ -79,6 +95,7 @@ class MainCardFragment :
         mainCardAdapter = MainCardAdapter(list) {
             val intent = Intent(requireContext(), DetailCardMeActivity::class.java).apply {
                 putExtra("id", it.id)
+                putExtra("isMyCard", isMyCard)
                 startActivity(this)
             }
         }
@@ -98,12 +115,7 @@ class MainCardFragment :
             offscreenPageLimit = 1
             setPageTransformer(compositePageTransformer)
 
-            setPadding(
-                (56 * resources.displayMetrics.density).roundToInt(),
-                0,
-                (56 * resources.displayMetrics.density).roundToInt(),
-                0
-            )
+            setPadding(56, 0, 56, 0)
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
     }
@@ -123,7 +135,9 @@ class MainCardFragment :
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     binding.tvMaincardPageCount.text =
-                        "${position + 1}/${mainCardAdapter.cardList.size}"
+                        "${position + 1} "
+                    binding.tvMaincardAll.text =
+                        "/ ${mainCardAdapter.cardList.size}"
                 }
             })
         }
@@ -191,6 +205,14 @@ class MainCardFragment :
             ctvMaincardFriend.setOnClickListener {
                 ctvMaincardFriend.toggle()
                 //친구 추가하는 네트워크 통신
+                lifecycleScope.launch {
+                    try {
+                        val responseData = ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
+                        //    Log.d("친구추가", ApiService.friendService.postFriend(RequestFriendUpdateData(id)).message)
+                    } catch (e: Exception) {
+                        Log.d("실패", e.message.toString())
+                    }
+                }
             }
 
             //카드너 작성하기 페이지로 이동

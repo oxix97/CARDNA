@@ -44,6 +44,7 @@ class CardPackFragment :
 
                 val cardMeFragment = CardMeFragment()
                 val cardYouFragment = CardYouFragment()
+
                 cardMeFragment.arguments = bundle
                 cardYouFragment.arguments = bundle
 

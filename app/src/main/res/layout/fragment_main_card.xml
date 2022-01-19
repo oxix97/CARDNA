@@ -29,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:checked="false"
             android:checkMark="@drawable/selector_add_friend"
+            android:checked="true"
             app:layout_constraintBottom_toBottomOf="@+id/ibtn_maincard_alarm"
             app:layout_constraintEnd_toStartOf="@+id/ibtn_maincard_alarm"
             app:layout_constraintTop_toTopOf="@+id/ibtn_maincard_alarm" />
@@ -69,6 +69,16 @@
             app:layout_constraintStart_toStartOf="@id/tv_maincard_title"
             app:layout_constraintTop_toTopOf="@+id/tv_maincard_title" />
 
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_maincard_page_count"
+            app:layout_constraintTop_toBottomOf="@+id/ll_maincard_edit_layout">
+
+        </androidx.core.widget.NestedScrollView>
+
         <LinearLayout
             android:id="@+id/ll_maincard_edit_layout"
             android:layout_width="wrap_content"
@@ -100,22 +110,35 @@
             android:id="@+id/vp_maincard_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toTopOf="@id/tv_maincard_page_count"
-            app:layout_constraintTop_toBottomOf="@id/ll_maincard_edit_layout" />
+            app:layout_constraintTop_toBottomOf="@id/ll_maincard_edit_layout"
+            tools:layout_editor_absoluteX="0dp" />
 
         <TextView
             android:id="@+id/tv_maincard_page_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="24dp"
-            android:text="1/7"
+            android:layout_marginBottom="46dp"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="1 "
             android:textColor="@color/main_purple"
-            app:layout_constraintTop_toBottomOf="@id/vp_maincard_list"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/vp_maincard_list"
             app:layout_constraintStart_toStartOf="@+id/vp_maincard_list" />
+
+        <TextView
+            android:id="@+id/tv_maincard_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="/ 7"
+            android:textColor="@color/white_3"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_maincard_page_count"
+            app:layout_constraintStart_toEndOf="@+id/tv_maincard_page_count"
+            app:layout_constraintTop_toTopOf="@+id/tv_maincard_page_count" />
 
         <ImageView
             android:id="@+id/iv_maincard_goto_cardpack_background"
