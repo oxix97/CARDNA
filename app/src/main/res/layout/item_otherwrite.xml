@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/cl_otherwrite_item"
         android:background="@drawable/rectangle_dark_grey_radius_10">
 
         <TextView

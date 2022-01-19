@@ -2,14 +2,15 @@ package org.cardna.ui.maincard
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.cardpack.ResponseCardDetailData
 import org.cardna.databinding.ActivityDetailBinding
-import org.cardna.ui.cardpack.CardCreateActivity
-import org.cardna.ui.cardpack.CardCreateCompleteActivity
+import org.cardna.util.shortToast
 
 class DetailActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityDetailBinding>(R.layout.activity_detail) {
@@ -20,14 +21,15 @@ class DetailActivity :
     }
 
     override fun initView() {
+        initNetwork()
         getCardPackData()
-        setListener()
     }
 
     private fun getCardPackData() {
         val cardImg = intent.getIntExtra("cardImg", 0)
         val id = intent.getIntExtra("id", 0)
         val title = intent.getStringExtra("title")
+        val isImage = intent.getStringExtra("isImage")
 
         with(binding) {
             ivDetailcardImage.setBackgroundResource(R.drawable.rectangle_left_right_main_purple)
@@ -36,35 +38,40 @@ class DetailActivity :
         }
     }
 
+    private fun initNetwork() {
+        lifecycleScope.launch {
+            val id = intent.getIntExtra("id", 0)
+            val dataContainer =
+                ApiService.cardService.getCardDetail(id)
 
-    // 카드너 만들기 버튼 누르면,
-    private fun setListener(){
-        binding.btnDetailCardCreate.setOnClickListener{
-
-            // 서버로 카드너 만들기 호출
-
-
-
-            // 인텐트로 CardCreateCompleteActivity로 이동
-            val intent = Intent(this@DetailActivity, CardCreateCompleteActivity::class.java)
-            intent.putExtra("meOrYou", CARD_YOU) // 카드나 추가이므로 CARD_YOU를 보내줌 // 심볼 - 2, 갤러리 - null
-            intent.putExtra("symbolId", -1) // CompleteActivity에서 -1을 받아서, 심볼이 아닌 이미지를 띄워줘야 하므로
-            // 카드의 이미지 intent.putExtra("cardImg", uri.toString()) // 심볼 - null, 갤러리 - adflkadlfaf
-            // 카드의 title 넣어주기 intent.putExtra("cardTitle", binding.etCardcreateKeyword.text.toString())
-            startActivity(intent)
+            setCardDetail(dataContainer.data, dataContainer.message)
         }
     }
 
+    //카드너 만들기 put
+    private fun createCardYou(id: Int, message: String) {
+        lifecycleScope.launch {
+            ApiService.cardService.putCardBoxCardId(id)
+        }
+        shortToast(message)
+        finish()
+    }
 
-    companion object {
-        const val SYMBOL_0 = 0
-        const val SYMBOL_1 = 1
-        const val SYMBOL_2 = 2
-        const val SYMBOL_3 = 3
-        const val SYMBOL_4 = 4
-
-        const val CARD_ME = 6
-        const val CARD_YOU = 7
-
+    private fun setCardDetail(cardInfo: ResponseCardDetailData.Data, message: String) {
+        binding.apply {
+            tvDetailcardTitle.text = cardInfo.title
+            tvDetailcardAbout.text = cardInfo.content
+            tvDetailcardUserName.text = cardInfo.relation
+            tvDetailcardDate.text = cardInfo.createdAt
+            tvDetailcardUserName.text = cardInfo.name
+            Glide
+                .with(this@DetailActivity)
+                .load(cardInfo.cardImg)
+                .fitCenter()
+                .into(ivDetailcardImage)
+            btnDetailCardCreate.setOnClickListener {
+                createCardYou(cardInfo.id.toInt(), message)
+            }
+        }
     }
 }
