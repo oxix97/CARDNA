@@ -9,6 +9,7 @@ import org.cardna.R
 import org.cardna.data.remote.model.cardpack.CardMe
 import org.cardna.databinding.ItemRepresentCardMeBinding
 
+
 class RepresentBottomSheetCardMeAdapter(
     private val isSelectedCount: Int
 ) :
