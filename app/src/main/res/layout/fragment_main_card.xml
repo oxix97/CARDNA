@@ -121,8 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="46dp"
             android:fontFamily="@font/pretendard_regular"
-            android:text="1 "
-            android:textColor="@color/main_purple"
+
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/vp_maincard_list"
@@ -133,7 +132,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
-            android:text="/ 7"
             android:textColor="@color/white_3"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_maincard_page_count"
