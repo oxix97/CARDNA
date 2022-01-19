@@ -3,7 +3,10 @@ package org.cardna.ui.cardpack.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.cardna.R
+import org.cardna.data.remote.model.cardpack.CardMeList
+import org.cardna.data.remote.model.cardpack.CardYouList
 import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
 import org.cardna.data.remote.model.cardpack.ResponseCardPackYouData
 import org.cardna.databinding.ItemCardpackCardmeBinding
@@ -11,16 +14,16 @@ import org.cardna.databinding.ItemCardpackCardyouBinding
 
 
 class CardPackYouRecyclerViewAdapter(
-    private val cardList: List<ResponseCardPackYouData>,
-    private val clickListener: (ResponseCardPackYouData) -> Unit
+    private val cardList: MutableList<CardYouList>,
+    private val clickListener: (CardYouList) -> Unit
 ) :
     RecyclerView.Adapter<CardPackYouRecyclerViewAdapter.CardPackYouViewHolder>() {
 
     inner class CardPackYouViewHolder(private val binding: ItemCardpackCardyouBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ResponseCardPackYouData) {
+        fun onBind(data: CardYouList) {
             with(binding) {
-                ivCardpackRecyclerview.setImageResource(R.drawable.dummy_img_cardpack_1)
+                Glide.with(itemView.context).load(data.cardImg).into(binding.ivCardpackRecyclerview)
                 tvCardpackRecyclerview.text = data.title
                 root.setOnClickListener {
                     clickListener(data)
@@ -32,7 +35,7 @@ class CardPackYouRecyclerViewAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CardPackYouRecyclerViewAdapter.CardPackYouViewHolder {
+    ): CardPackYouViewHolder {
         val binding =
             ItemCardpackCardyouBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardPackYouViewHolder(binding)

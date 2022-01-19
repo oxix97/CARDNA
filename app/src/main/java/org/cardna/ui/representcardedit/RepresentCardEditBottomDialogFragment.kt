@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.data.remote.api.ApiService
-import org.cardna.data.remote.model.cardpack.CardMe
+import org.cardna.data.remote.model.representcardedit.UpdateData
 import org.cardna.databinding.FragmentRepresentCardEditBottomDialogBinding
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardMeAdapter
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardYouAdapter
@@ -24,10 +24,12 @@ import org.cardna.util.SpacesItemDecoration
 import org.cardna.util.shortToast
 import kotlin.math.roundToInt
 
-class RepresentCardEditBottomDialogFragment(private val cardListSize: Int) : BottomSheetDialogFragment() {
-    private val list = mutableListOf<CardMe>()
+class RepresentCardEditBottomDialogFragment(private val cardListSize: Int) :
+    BottomSheetDialogFragment() {
+    private val list = mutableListOf<UpdateData>()
     private var _binding: FragmentRepresentCardEditBottomDialogBinding? = null
     private val binding get() = _binding ?: error("View를 참조하기 위해 binding이 초기화되지 않았습니다.")
+
     private lateinit var cardMeAdapter: RepresentBottomSheetCardMeAdapter
     private lateinit var cardYouAdapter: RepresentBottomSheetCardYouAdapter
 
@@ -59,10 +61,12 @@ class RepresentCardEditBottomDialogFragment(private val cardListSize: Int) : Bot
         lifecycleScope.launch {
             try {
                 //코루틴 에러가 나는데 ??
-                val cardMeContainer = ApiService.cardService.getCardMe()
-                val cardYouContainer = ApiService.cardService.getCardYou()
+                val cardMeContainer = ApiService.cardService.getBottomSheetCardMe()
+                val cardYouContainer = ApiService.cardService.getBottomSheetCardYou()
                 Log.d("ff", "ff")
-                initFragment(cardMeContainer.data.cardMeList, cardYouContainer.data.cardYouList)
+                val cardMeList = cardMeContainer.data.cardMeList
+                val cardYouList = cardYouContainer.data.cardYouList
+                initFragment(cardMeList, cardYouList)
             } catch (e: Exception) {
                 e.printStackTrace()
                 requireActivity().shortToast("Coroutine error")
@@ -70,7 +74,10 @@ class RepresentCardEditBottomDialogFragment(private val cardListSize: Int) : Bot
         }
     }
 
-    private fun initFragment(cardMeList: List<CardMe>, cardYouList: List<CardMe>) {
+    private fun initFragment(
+        cardMeList: MutableList<UpdateData>,
+        cardYouList: MutableList<UpdateData>
+    ) {
         cardMeAdapter = RepresentBottomSheetCardMeAdapter(cardListSize)
         cardYouAdapter = RepresentBottomSheetCardYouAdapter(cardListSize)
 

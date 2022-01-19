@@ -4,20 +4,22 @@ data class ResponseCardYouData(
     val status: Int,
     val success: Boolean,
     val message: String,
-    val data: Data
-){
-    data class Data(
+    val data: CardList
+) {
+
+    data class CardList(
         val totalCardCnt: Int,
         val isMyCard: Boolean,
-        val cardYouList: List<CardMe>
+        val cardYouList: MutableList<CardYouList>
     )
 }
-//data class CardMe(
-//    val id: Int,
-//    val cardImg: String,
-//    val title: String,
-//    val mainOrder: Int,
-//    val isLiked: Boolean,
-//    var isClicked: Boolean = false,
-//    var index: Int = -1,
-//)
+
+data class CardYouList(
+    val id: Int,
+    val cardImg: String,
+    val title: String,
+    val mainOrder: Int,
+    val isLiked: Boolean
+)
+
+

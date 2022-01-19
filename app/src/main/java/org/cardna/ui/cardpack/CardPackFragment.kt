@@ -1,21 +1,30 @@
 package org.cardna.ui.cardpack
 
 import CardMeFragment
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
+import org.cardna.data.remote.api.ApiService
 import org.cardna.databinding.CardpackCustomTablayoutBinding
 import org.cardna.databinding.FragmentCardPackBinding
 import org.cardna.ui.cardpack.adapter.CardPackTabLayoutAdapter
+import org.cardna.ui.maincard.DetailCardMeActivity
+import org.cardna.ui.mypage.OtherCardCreateActivity
+import org.cardna.ui.mypage.OtherCardWriteActivity
 
-class CardPackFragment :
-    BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.layout.fragment_card_pack) {
+class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.layout.fragment_card_pack) {
 
     private lateinit var cardPackTabLayoutAdapter: CardPackTabLayoutAdapter
 
@@ -27,34 +36,36 @@ class CardPackFragment :
     override fun initView() {
         initCardPackAdapter()
         initCardPackTabLayout()
-        setMakeCardIvListener()
+
     }
 
     private fun initCardPackAdapter() {
         val fragmentList: List<Fragment>
 
+        //타인이 접근
         var id: Int?
-        if (getArguments() != null) { // userId가 있을 때, 마이페이지에서 친구 타고 친구의 카드팩으로 접근할 때
-                id = getArguments()?.getInt("id", 0) ?: 0
+        if (getArguments() != null) {
+            id = getArguments()?.getInt("id", 4) ?: 0
+            Log.d("idid", id.toString())
 
-                // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
-                val bundle = Bundle()
-                bundle.putInt("id", id)
+            // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
+            val bundle = Bundle()
+            bundle.putInt("id", id)
 
-                val cardMeFragment = CardMeFragment()
-                val cardYouFragment = CardYouFragment()
+            val cardMeFragment = CardMeFragment()
+            val cardYouFragment = CardYouFragment()
 
-                cardMeFragment.arguments = bundle
-                cardYouFragment.arguments = bundle
+            cardMeFragment.setArguments(bundle)
+            cardYouFragment.setArguments(bundle)
 
-                fragmentList = listOf(cardMeFragment, cardYouFragment)
+            fragmentList = listOf(cardMeFragment, cardYouFragment)
+            initCardYouLayout(id)
+            //내가 접근->걍 통신하면됨
+        } else {
+            fragmentList = listOf(CardMeFragment(), CardYouFragment())
+            initCardMeLayout()
+        }
 
-            } else { // userId가 없을 때, 현재 유저에 대한 카드팩으로 조회
-                fragmentList = listOf(CardMeFragment(), CardYouFragment())
-            }
-
-        // 여기서 fragment 생성할 때, 현재 프래그먼트로 bundle로 받은 userId값을
-        // init으로 거기서 네트워크 생성
         cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
         cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
         binding.vpCardpack.adapter = cardPackTabLayoutAdapter
@@ -107,8 +118,38 @@ class CardPackFragment :
 
     private fun setMakeCardIvListener() {
         binding.ivMakeCard.setOnClickListener {
-            // 메인 액티비티의 함수를 실행만 해주면 됨
             (activity as MainActivity).showBottomDialogCardFragment()
         }
+    }
+
+    //카드 총 개수 세팅
+    private fun initCardMeLayout() {
+        lifecycleScope.launch {
+            val totalCardCnt = ApiService.cardService.getCardMe().data.totalCardCnt
+            withContext(Dispatchers.Main) {
+                binding.tvCardpackCnt.text = totalCardCnt.toString()
+            }
+        }
+        setMakeCardIvListener()
+    }
+
+    private fun initCardYouLayout(id: Int) {
+        lifecycleScope.launch {
+            val totalCardCnt = ApiService.cardService.getOtherCardMe(id).data.totalCardCnt
+            withContext(Dispatchers.Main) {
+                binding.tvCardpackCnt.text = totalCardCnt.toString()
+            }
+        }
+        with(binding) {
+            ivMakeCard.setBackgroundResource(R.drawable.ic_mypage_write)
+            ivMakeCard.setOnClickListener {
+                val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
+                    //현재 사용자의 name값을 전달해줘야하나? 토큰으로 못가져오나..
+                    putExtra("id", id)
+                }
+                startActivity(intent)
+            }
+        }
+
     }
 }

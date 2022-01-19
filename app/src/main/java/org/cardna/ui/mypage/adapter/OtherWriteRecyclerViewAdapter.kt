@@ -6,18 +6,18 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.mypage.ResponseCardYouBoxDataList
+import org.cardna.data.remote.model.mypage.ResponseCardStorageData
 import org.cardna.databinding.ItemOtherwriteBinding
 
 class OtherWriteRecyclerViewAdapter(
-    private val cardList: MutableList<ResponseCardYouBoxDataList>,
-    private val clickListener: (ResponseCardYouBoxDataList) -> Unit
-) : ListAdapter<ResponseCardYouBoxDataList, OtherWriteRecyclerViewAdapter.OtherWriterViewHolder>(
+    private val cardList: MutableList<ResponseCardStorageData.Data>,
+    private val clickListener: (ResponseCardStorageData.Data) -> Unit
+) : ListAdapter<ResponseCardStorageData.Data, OtherWriteRecyclerViewAdapter.OtherWriterViewHolder>(
     diffUtil
 ) {
     inner class OtherWriterViewHolder(private val binding: ItemOtherwriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ResponseCardYouBoxDataList) {
+        fun onBind(data: ResponseCardStorageData.Data) {
             binding.apply {
                 tvOtherwriteTitle.text = data.title
                 tvOtherwriteRelation.text = data.relation
@@ -46,16 +46,16 @@ class OtherWriteRecyclerViewAdapter(
     override fun getItemCount(): Int = cardList.size
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<ResponseCardYouBoxDataList>() {
+        val diffUtil = object : DiffUtil.ItemCallback<ResponseCardStorageData.Data>() {
             override fun areContentsTheSame(
-                oldItem: ResponseCardYouBoxDataList,
-                newItem: ResponseCardYouBoxDataList,
+                oldItem: ResponseCardStorageData.Data,
+                newItem: ResponseCardStorageData.Data,
             ) =
                 oldItem == newItem
 
             override fun areItemsTheSame(
-                oldItem:ResponseCardYouBoxDataList,
-                newItem:ResponseCardYouBoxDataList,
+                oldItem: ResponseCardStorageData.Data,
+                newItem: ResponseCardStorageData.Data,
             ) =
                 oldItem.id == newItem.id
         }

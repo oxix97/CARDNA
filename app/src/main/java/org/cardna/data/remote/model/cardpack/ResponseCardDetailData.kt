@@ -1,12 +1,11 @@
 package org.cardna.data.remote.model.cardpack
 
-
 data class ResponseCardDetailData(
     val status: Int,
     val success: Boolean,
     val message: String,
     val data: Data
-){
+) {
     data class Data(
         val id: String,
         val isMe: Boolean,
@@ -18,5 +17,5 @@ data class ResponseCardDetailData(
         val name: String,
         val createdAt: String,
         val isLiked: Boolean
-        )
+    )
 }
