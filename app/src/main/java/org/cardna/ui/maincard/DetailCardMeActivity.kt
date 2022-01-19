@@ -63,7 +63,7 @@ class DetailCardMeActivity :
                 DetailCardData = ApiService.cardService.getCardDetail(id).data
 
                 if (isMyCard == true && DetailCardData.isMe == true) {  //내가 카드나 상세
-                    setUserCardMe()
+                    setUserCardMe(id)
                 } else if (isMyCard == true && DetailCardData.isMe == false) {    //내가 카드너 상세
                     setUserCardYou(id)
                     //다이어로그
@@ -80,7 +80,7 @@ class DetailCardMeActivity :
     }
 
     //내가 카드나 상세
-    private fun setUserCardMe() {
+    private fun setUserCardMe(id: Int) {
         with(binding) {
             //공감 아이콘 없애기
             ctvLikeIcon.visibility = View.INVISIBLE
@@ -89,7 +89,7 @@ class DetailCardMeActivity :
 
             //삭제버튼 클릭시 네트워크 통신
             ibtnDetailcardDelete.setOnClickListener {
-
+                showUserDialog(id)
             }
         }
     }
@@ -205,16 +205,8 @@ class DetailCardMeActivity :
         deleteBtn.setOnClickListener {
             lifecycleScope.launch {
                 try {
-                    val dataContainer = ApiService.cardService.deleteCard(id).data
-                    val myData = listOf(
-                        dataContainer.name,
-                        dataContainer.email,
-                        dataContainer.userImg,
-                        dataContainer.friendList.size.toString()
-                    )
-                    list = dataContainer.friendList
-                    setMyPage(myData)
-                    myPageRecyclerViewAdapter(list)
+                    val dataContainer = ApiService.cardService.deleteCard(id)
+                    Log.d("성공", dataContainer.success.toString())
                 } catch (e: Exception) {
                     Log.d("실패", e.message.toString())
                 }
