@@ -13,6 +13,16 @@
         android:background="@color/real_black"
         tools:context=".ui.cardpack.OtherCardCreateCompleteActivity">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_othercardcreate_complete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_card_complete"/>
+
+
         <TextView
             android:id="@+id/tv_othercardcreate_complete"
             android:layout_width="wrap_content"
@@ -26,13 +36,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="타인 소개를 작성했어요!" />
 
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lav_othercardcreate_complete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/lottie_card_complete"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

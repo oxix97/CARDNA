@@ -4,9 +4,8 @@ import CardMeFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import org.cardna.MainActivity
 import org.cardna.R
@@ -33,8 +32,33 @@ class CardPackFragment :
     }
 
     private fun initCardPackAdapter() {
-        val fragmentList = listOf(CardMeFragment(), CardYouFragment())
+        val fragmentList: List<Fragment>
 
+        var id: Int?
+        if (getArguments() != null) { // userId가 있을 때, 마이페이지에서 친구 타고 친구의 카드팩으로 접근할 때
+                id = getArguments()?.getInt("id", 0) ?: 0
+
+                // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
+                val bundle = Bundle()
+                bundle.putInt("id", id)
+
+                val cardMeFragment = CardMeFragment()
+                val cardYouFragment = CardYouFragment()
+
+                cardMeFragment.arguments = bundle
+                cardYouFragment.arguments = bundle
+
+                fragmentList = listOf(CardMeFragment(), CardYouFragment())
+
+
+                // SeeOtherNetwork(id)
+            } else { // userId가 없을 때, 현재 유저에 대한 카드팩으로 조회
+                fragmentList = listOf(CardMeFragment(), CardYouFragment())
+                // SeeMeNetwork()
+            }
+
+        // 여기서 fragment 생성할 때, 현재 프래그먼트로 bundle로 받은 userId값을
+        // init으로 거기서 네트워크 생성
         cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
         cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
         binding.vpCardpack.adapter = cardPackTabLayoutAdapter

@@ -13,6 +13,18 @@
         android:background="@color/real_black"
         tools:context=".ui.cardpack.CardCreateCompleteActivity">
 
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lav_cardcreate_complete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/lottie_card_complete"/>
+
+
         <TextView
             android:id="@+id/tv_cardcreate_complete"
             android:layout_width="wrap_content"
@@ -67,12 +79,5 @@
                 tools:text="하둘셋넷다여일여아열하둘셋넷" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lav_cardcreate_complete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/lottie_card_complete"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

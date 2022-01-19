@@ -1,15 +1,21 @@
 package org.cardna.data.remote.api
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.cardna.data.remote.model.cardpack.*
-import org.cardna.data.remote.model.maincard.*
+import org.cardna.data.remote.model.maincard.RequestMainCardEditData
+import org.cardna.data.remote.model.maincard.ResponseDeleteCardData
+import org.cardna.data.remote.model.maincard.ResponseMainCardData
+import org.cardna.data.remote.model.maincard.ResponseMainCardEditData
 import org.cardna.data.remote.model.mypage.RequestCreateCardYouData
 import org.cardna.data.remote.model.mypage.ResponseAddOrRemoveCardYouData
 import org.cardna.data.remote.model.mypage.ResponseCardYouBoxData
 import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
+import org.cardna.data.remote.model.representcardedit.RepresentCardMeData
+import org.cardna.data.remote.model.representcardedit.RepresentCardYouData
 import retrofit2.http.*
 
 interface CardService {
-
     //타인의 대표카드 조회
     @GET("card/main/{userId}")
     suspend fun getMainCard(
@@ -24,20 +30,56 @@ interface CardService {
     // 대표 카드 수정
     @PUT("card/main")
     suspend fun putMainCardEdit(
-        @Body body:RequestMainCardEditData
+        @Body body: RequestMainCardEditData
     ): ResponseMainCardEditData
 
     // 카드 전체 조회
     @GET("card/{userId}")
     suspend fun getCardAll(): ResponseCardAllData
 
-    // 카드나 전체 조회
-    @GET("card/me/{userId}")
+
+
+
+    // 카드팩에서
+    // 나의 카드나 조회
+    @GET("card/me")
     suspend fun getCardMe(): ResponseCardMeData
+
+    // 타인의 카드나 조회
+    @GET("card/me/{userId}")
+    suspend fun getOtherCardMe(
+        @Path("userId")
+        userId: Int?
+    ): ResponseCardMeData
+
+    // maincard에서 나의 카드나 조회
+    @GET("card/me")
+    suspend fun getUserCardMe(): RepresentCardMeData
+
+
+
+    // 카드팩에서
+    // 나의 카드너 전체 조회
+    @GET("card/you")
+    suspend fun getCardYou(): ResponseCardYouData
 
     // 카드너 전체 조회
     @GET("card/you/{userId}")
-    suspend fun getCardYou(): ResponseCardYouData
+    suspend fun getOtherCardYou(
+        @Path("userId")
+        userId: Int?
+    ): ResponseCardYouData
+
+    // maincard에서 나의 카드나 조회
+    @GET("card/you")
+    suspend fun getUserCardYou(): RepresentCardYouData
+
+
+
+
+
+
+
 
     // 타인 카드 상세 조회
     @GET("card/info/{cardId}")
@@ -51,9 +93,11 @@ interface CardService {
     suspend fun getCardUserDetail(): ResponseCardDetailData
 
     // 카드나 작성
+    @Multipart
     @POST("card")
     suspend fun postCreateCardMe(
-        @Body body: RequestCreateCardMeData
+        @PartMap body:HashMap<String, RequestBody>,
+        @Part image : MultipartBody.Part
     ): ResponseCreateCardMeData
 
     // 카드너 작성
