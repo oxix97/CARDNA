@@ -65,7 +65,8 @@ class DetailCardMeActivity :
                 if (isMyCard == true && DetailCardData.isMe == true) {  //내가 카드나 상세
                     setUserCardMe()
                 } else if (isMyCard == true && DetailCardData.isMe == false) {    //내가 카드너 상세
-                    setUserCardYou()
+                    setUserCardYou(id)
+                    //다이어로그
                 } else if (isMyCard == false && DetailCardData.isMe == true) {     //타인이 카드나 상세
                     setOtherCardMe()
                 } else if (isMyCard == false && DetailCardData.isMe == false) {          //타인이 카드너 상세
@@ -94,7 +95,7 @@ class DetailCardMeActivity :
     }
 
     //내가 카드너 상세
-    private fun setUserCardYou() {
+    private fun setUserCardYou(id: Int) {
         with(binding) {
             //공감 아이콘 없애기
             ctvLikeIcon.visibility = View.INVISIBLE
@@ -108,7 +109,7 @@ class DetailCardMeActivity :
             //쓰레기통->3dot 아이콘, 보관, 삭제 다이어로그 띄우기
             ibtnDetailcardDelete.setImageResource(R.drawable.ic_detail_3dot)
             ibtnDetailcardDelete.setOnClickListener {
-                showDialog()
+                showUserDialog(id)
             }
             //배경 보라색으로
             ibtnDetailcardDelete.setBackgroundResource(R.drawable.rectangle_main_purple)
@@ -172,15 +173,23 @@ class DetailCardMeActivity :
         }
     }
 
-    private fun showDialog() {
+    private fun showUserDialog(id: Int) {
         val dialog = Dialog(this)     // Dialog 초기화
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // 타이틀 제거
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.Transparent.toArgb()))  //둥근테두리로 만들려고 background를 투명하게
-        dialog.setContentView(R.layout.dialog_dtail_cardyou)             // xml 레이아웃 파일과 연결(다이어로그 레이아웃)
-        dialog.setCancelable(false)  // 다이얼로그외에 다른 화면을 눌렀을 때 나가는 것 방지
+        dialog.setContentView(R.layout.dialog_detail_cardyou)             // xml 레이아웃 파일과 연결(다이어로그 레이아웃)
+        dialog.setCancelable(true)  // 다이얼로그외에 다른 화면을 눌렀을 때 나가는 것 방지
 
         dialog.getWindow()!!.setGravity(Gravity.BOTTOM)
-        dialog.show(); // 다이얼로그 띄우기
+
+        /*    val params = dialog.window!!.attributes
+            params.x = 3000
+            params.y = 50*/
+        //   params.width = 122
+        //   params.height = 72
+
+        //  dialog.window!!.attributes = params
+        dialog.show()// 다이얼로그 띄우기
 
         // 보관 버튼
         val noBtn = dialog.findViewById<Button>(R.id.tv_dialog_save)
@@ -192,11 +201,25 @@ class DetailCardMeActivity :
 
 
         // 삭제 버튼
-        val yesBtn = dialog.findViewById<Button>(R.id.tv_dialog_delete)
-        yesBtn.setOnClickListener {
-
-            //삭제 서버통신
-            Toast.makeText(this, "아니오", Toast.LENGTH_SHORT).show()
+        val deleteBtn = dialog.findViewById<Button>(R.id.tv_dialog_delete)
+        deleteBtn.setOnClickListener {
+            lifecycleScope.launch {
+                try {
+                    val dataContainer = ApiService.cardService.deleteCard(id).data
+                    val myData = listOf(
+                        dataContainer.name,
+                        dataContainer.email,
+                        dataContainer.userImg,
+                        dataContainer.friendList.size.toString()
+                    )
+                    list = dataContainer.friendList
+                    setMyPage(myData)
+                    myPageRecyclerViewAdapter(list)
+                } catch (e: Exception) {
+                    Log.d("실패", e.message.toString())
+                }
+            }
+            dialog.dismiss() //토스트 띄우고 다이어로그 사라지게
         }
     }
 }
