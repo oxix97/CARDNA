@@ -25,11 +25,29 @@ interface CardService {
     @GET("card/main")
     suspend fun getUserMainCard(): ResponseMainCardData
 
-    // 카드팩에서
     // 나의 카드나 조회
     @Headers("Content-Type:application/json")
     @GET("card/me")
     suspend fun getCardMe(): ResponseCardMeData
+
+    // 타인의 카드나 조회
+    @Headers("Content-Type:application/json")
+    @GET("card/me/{userId}")
+    suspend fun getOtherCardMe(
+        @Path("userId")
+        userId: Int?
+    ): ResponseCardMeData
+
+    // 나의 카드너 전체 조회
+    @GET("card/you")
+    suspend fun getCardYou(): ResponseCardYouData
+
+    // 타인의 카드너 전체 조회
+    @GET("card/you/{userId}")
+    suspend fun getOtherCardYou(
+        @Path("userId")
+        userId: Int?
+    ): ResponseCardYouData
 
     // 대표 카드 수정
     @PUT("card/main")
@@ -42,30 +60,9 @@ interface CardService {
     suspend fun getCardAll(): ResponseCardAllData
 
 
-    // 타인의 카드나 조회
-    @Headers("Content-Type:application/json")
-    @GET("card/me/{userId}")
-    suspend fun getOtherCardMe(
-        @Path("userId")
-        userId: Int?
-    ): ResponseCardMeData
-
     // maincard에서 나의 카드나 조회
     @GET("card/me")
     suspend fun getUserCardMe(): RepresentCardMeData
-
-
-    // 카드팩에서
-    // 나의 카드너 전체 조회
-    @GET("card/you")
-    suspend fun getCardYou(): ResponseCardYouData
-
-    // 카드너 전체 조회
-    @GET("card/you/{userId}")
-    suspend fun getOtherCardYou(
-        @Path("userId")
-        userId: Int?
-    ): ResponseCardYouData
 
     // maincard에서 나의 카드나 조회
     @GET("card/you")

@@ -1,6 +1,7 @@
 package org.cardna.ui.cardpack
 
 import CardMeFragment
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,22 +20,23 @@ import org.cardna.data.remote.api.ApiService
 import org.cardna.databinding.CardpackCustomTablayoutBinding
 import org.cardna.databinding.FragmentCardPackBinding
 import org.cardna.ui.cardpack.adapter.CardPackTabLayoutAdapter
+import org.cardna.ui.maincard.DetailCardMeActivity
+import org.cardna.ui.mypage.OtherCardCreateActivity
+import org.cardna.ui.mypage.OtherCardWriteActivity
 
-class CardPackFragment :
-    BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.layout.fragment_card_pack) {
+class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.layout.fragment_card_pack) {
 
     private lateinit var cardPackTabLayoutAdapter: CardPackTabLayoutAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
     }
 
     override fun initView() {
         initCardPackAdapter()
         initCardPackTabLayout()
-        setMakeCardIvListener()
+
     }
 
     private fun initCardPackAdapter() {
@@ -45,6 +47,7 @@ class CardPackFragment :
         if (getArguments() != null) {
             id = getArguments()?.getInt("id", 4) ?: 0
             Log.d("idid", id.toString())
+
             // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
             val bundle = Bundle()
             bundle.putInt("id", id)
@@ -55,15 +58,13 @@ class CardPackFragment :
             cardMeFragment.setArguments(bundle)
             cardYouFragment.setArguments(bundle)
 
-
             fragmentList = listOf(cardMeFragment, cardYouFragment)
-
+            initCardYouLayout(id)
             //내가 접근->걍 통신하면됨
         } else {
-            Log.d("idid띄면안됨", "타인이 접근하지 않음")
             fragmentList = listOf(CardMeFragment(), CardYouFragment())
+            initCardMeLayout()
         }
-
 
         cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
         cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
@@ -102,7 +103,6 @@ class CardPackFragment :
                     isCardme = true
                     ivCardpackTab.setImageResource(R.drawable.selector_cardpack_tab_cardme)
                     viewCardpackLine.setBackgroundResource(R.drawable.selector_cardpack_tab_cardme_line)
-                    initCardMeLayout()
                 }
 
                 "카드너" -> {
@@ -110,7 +110,6 @@ class CardPackFragment :
                     isCardme = false
                     ivCardpackTab.setImageResource(R.drawable.selector_cardpack_tab_cardyou)
                     viewCardpackLine.setBackgroundResource(R.drawable.selector_cardpack_tab_cardyou_line)
-                    initCardYouLayout()
                 }
             }
         }
@@ -119,7 +118,6 @@ class CardPackFragment :
 
     private fun setMakeCardIvListener() {
         binding.ivMakeCard.setOnClickListener {
-            // 메인 액티비티의 함수를 실행만 해주면 됨
             (activity as MainActivity).showBottomDialogCardFragment()
         }
     }
@@ -132,14 +130,26 @@ class CardPackFragment :
                 binding.tvCardpackCnt.text = totalCardCnt.toString()
             }
         }
+        setMakeCardIvListener()
     }
 
-    private fun initCardYouLayout() {
+    private fun initCardYouLayout(id: Int) {
         lifecycleScope.launch {
-            val totalCardCnt = ApiService.cardService.getCardYou().data.totalCardCnt
+            val totalCardCnt = ApiService.cardService.getOtherCardMe(id).data.totalCardCnt
             withContext(Dispatchers.Main) {
                 binding.tvCardpackCnt.text = totalCardCnt.toString()
             }
         }
+        with(binding) {
+            ivMakeCard.setBackgroundResource(R.drawable.ic_mypage_write)
+            ivMakeCard.setOnClickListener {
+                val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
+                    //현재 사용자의 name값을 전달해줘야하나? 토큰으로 못가져오나..
+                    putExtra("id", id)
+                }
+                startActivity(intent)
+            }
+        }
+
     }
 }

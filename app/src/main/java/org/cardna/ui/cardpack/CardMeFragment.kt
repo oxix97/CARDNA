@@ -27,8 +27,6 @@ class CardMeFragment :
     }
 
     override fun initView() {
-
-
         //타인이 내 카드나 접근하는 경우 유저 id 받아옴
         if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
             Log.d("1. cardmeFragment생성시 받오오는 id:", id.toString())
@@ -56,31 +54,16 @@ class CardMeFragment :
 
     // 다른사람의 id로 카드 팩 볼때
     private fun getCardMeUsingId(id: Int) {
-        Log.d("2. getCardMeUsingId", id.toString())
         lifecycleScope.launch {
             try {
                 val cardMeData = ApiService.cardService.getOtherCardMe(id).data.cardMeList
+                isMyCard = ApiService.cardService.getOtherCardMe(id).data.isMyCard
                 initCardMeRvAdapter(cardMeData)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
-
-/*
-    private fun <T> initCardMeRvAdapter(cardMeData: MutableList<T>) {
-        Log.d("3. initCardMeRvAdapter", cardMeData.size.toString())
-        var cardMeAdapter = CardPackMeRecyclerViewAdapter(cardMeData)
-
-        with(binding) {
-            rvCardme.adapter = cardMeAdapter
-            cardMeAdapter.notifyDataSetChanged()
-            val gridLayoutManager = GridLayoutManager(requireContext(), 2)
-            rvCardme.layoutManager = gridLayoutManager
-            rvCardme.addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
-        }
-    }*/
-
 
     private fun initCardMeRvAdapter(cardMeData: MutableList<CardMeList>) {
         Log.d("3. initCardMeRvAdapter", cardMeData.size.toString())

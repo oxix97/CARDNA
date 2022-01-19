@@ -29,17 +29,6 @@ class CardPackMeRecyclerViewAdapter(
                     clickListener(data)
                 }
             }
-            /*      } else if (data is CardYouList) {
-                      with(binding) {
-                          // uri로 받은 사진 Glide로 띄우기
-                          Glide.with(itemView.context).load(data.cardImg).into(binding.ivCardpackRecyclerview)
-                          tvCardpackRecyclerview.text = data.title + "하이"
-                          *//*    binding.root.setOnClickListener {
-                            clickListener(data)
-                        }*//*
-                }
-            }*/
-
         }
     }
 

@@ -21,3 +21,5 @@ data class CardYouList(
     val mainOrder: Int,
     val isLiked: Boolean
 )
+
+
