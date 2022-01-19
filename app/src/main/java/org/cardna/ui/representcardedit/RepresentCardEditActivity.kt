@@ -2,7 +2,6 @@ package org.cardna.ui.representcardedit
 
 import android.os.Bundle
 import android.util.Log
-import android.view.ActionMode
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.lifecycle.lifecycleScope
@@ -50,7 +49,8 @@ class RepresentCardEditActivity :
 
     private fun onClick() {
         binding.fabRepresentcardedit.setOnClickListener {
-            val bottomSheetDialog = RepresentCardEditBottomDialogFragment()
+            val bottomSheetDialog =
+                RepresentCardEditBottomDialogFragment(representCardAdapter.cardList.size)
 
             bottomSheetDialog.show(supportFragmentManager, "sdsfs")
         }

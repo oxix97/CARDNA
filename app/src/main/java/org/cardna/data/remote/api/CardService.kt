@@ -13,6 +13,7 @@ import org.cardna.data.remote.model.mypage.ResponseCardYouBoxData
 import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
 import org.cardna.data.remote.model.representcardedit.RepresentCardMeData
 import org.cardna.data.remote.model.representcardedit.RepresentCardYouData
+import org.cardna.data.remote.model.representcardedit.ResponseCardStorageData
 import retrofit2.http.*
 
 interface CardService {
@@ -106,7 +107,7 @@ interface CardService {
 
     // 카드너 보관함 조회
     @GET("card/box")
-    suspend fun getCardBox(): ResponseCardYouBoxData
+    suspend fun getCardBox(): ResponseCardStorageData
 
     // 카드너 추가, 보관
     @PUT("card/box/{cardId}")
