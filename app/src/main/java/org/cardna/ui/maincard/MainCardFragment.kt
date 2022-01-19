@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +20,6 @@ import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
 import org.cardna.ui.mypage.OtherCardCreateActivity
-import org.cardna.ui.mypage.OtherWriteActivity
 import org.cardna.ui.representcardedit.RepresentCardEditActivity
 import org.cardna.util.LinearGradientSpan
 import kotlin.math.roundToInt
@@ -53,21 +51,10 @@ class MainCardFragment :
     }
 
     private fun SeeOtherNetwork(id: Int) {
-        //초기유저 상단 데이터 뿌리는 통신
-        lifecycleScope.launch {
-            try {
-                list = ApiService.cardService.getMainCard(id).data.mainCardList
-                initAdapter(list)
-                initClickEventCardYou(id)
-            } catch (e: Exception) {
-                Log.d("실패", e.message.toString())
-            }
-        }
-
         //메인카드 리스트 뿌리는 통신
         lifecycleScope.launch {
             try {
-                list = ApiService.cardService.getMainCard(id).data.mainCardList
+                list = ApiService.cardService.getOtherMainCard(id).data.mainCardList
                 initAdapter(list)
                 initClickEventCardYou(id)
             } catch (e: Exception) {
@@ -79,17 +66,7 @@ class MainCardFragment :
     private fun SeeMeNetwork() {
         lifecycleScope.launch {
             try {
-                list = ApiService.cardService.getUserMainCard().data.mainCardList
-                initAdapter(list)
-                initClickEventCardMe()
-            } catch (e: Exception) {
-                Log.d("실패", e.message.toString())
-            }
-        }
-
-        lifecycleScope.launch {
-            try {
-                list = ApiService.cardService.getUserMainCard().data.mainCardList
+                list = ApiService.cardService.getMainCard().data.mainCardList
                 initAdapter(list)
                 initClickEventCardMe()
             } catch (e: Exception) {
@@ -121,7 +98,12 @@ class MainCardFragment :
             offscreenPageLimit = 1
             setPageTransformer(compositePageTransformer)
 
-            setPadding((56* resources.displayMetrics.density).roundToInt()   , 0, (56* resources.displayMetrics.density).roundToInt(), 0)
+            setPadding(
+                (56 * resources.displayMetrics.density).roundToInt(),
+                0,
+                (56 * resources.displayMetrics.density).roundToInt(),
+                0
+            )
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
     }

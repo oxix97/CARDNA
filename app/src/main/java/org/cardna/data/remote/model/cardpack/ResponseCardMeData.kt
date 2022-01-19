@@ -10,7 +10,7 @@ data class ResponseCardMeData(
     data class Data(
         val totalCardCnt: Int,
         val isMyCard: Boolean,
-        val cardMeList: List<ResponseCardAllData.Data.CardMe>
+        val cardMeList: List<CardMe>
     ){
         data class CardMe(
             val id: Int,

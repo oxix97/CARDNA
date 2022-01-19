@@ -1,11 +1,17 @@
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.cardpack.ResponseCardMeData
 import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
+import org.cardna.data.remote.model.maincard.MainCardList
 import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
 import org.cardna.databinding.FragmentCardMeBinding
 import org.cardna.ui.cardpack.CardPackFragment
@@ -17,9 +23,12 @@ import org.cardna.ui.mypage.adapter.MyPageFriendAdapter
 import org.cardna.util.SpacesItemDecoration
 import kotlin.math.roundToInt
 
-class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
+class CardMeFragment :
+    BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
 
     private lateinit var cardMeAdapter: CardPackMeRecyclerViewAdapter
+    private lateinit var cardMeList: List<ResponseCardMeData.Data.CardMe>
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,7 +40,48 @@ class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.card
         initCardMeRvAdapter()
     }
 
+    init { // CardPackFragment로부터 생성될 건데 거기서 받은 id 값에 따라 뿌려주는 data가 다름.
+        var id: Int?
+        if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
+            id = getArguments()?.getInt("id", 0) ?: 0
+            getCardMeUsingId(id)
+        } else { // id값이 없을 때, id값 이용해서 나의 카드나 띄우기
+            getCardMe()
+        }
+    }
+
+
+    private fun getCardMe() {
+        lifecycleScope.launch {
+            try {
+                cardMeList = ApiService.cardService.getCardMe().data.cardMeList
+                // 가지고 현재 fragment에 띄우기
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+    }
+
+    // 다른 유저의 카드나 띄우기
+    private fun getCardMeUsingId(id: Int) {
+        lifecycleScope.launch {
+            try {
+                cardMeList = ApiService.cardService.getOtherCardMe(id).data.cardMeList
+                // 가지고 현재 fragment에 띄우기
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+    }
+
+
     private fun initCardMeRvAdapter() {
+        // 이를 서버에서 받아온 cardMeList에 대한 data로 뿌려주는데
+        // getCardMe로 받아왔다면 cardMeList의 isMyCard 가 true일 것이고,
+        // getOtherCardMe로 받아옸다면 cardMeList의 isMyCard가 false일 것이다.
+        // 내가 쓰진 않지만, 눌렀을 때 이를 넘겨줘야 함.
+
+
         cardMeAdapter = CardPackMeRecyclerViewAdapter(
             listOf(
                 ResponseCardPackMeData("img url", 1, "댕댕이 짱 좋아"),
@@ -59,4 +109,5 @@ class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.card
             rvCardme.addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
         }
     }
+
 }

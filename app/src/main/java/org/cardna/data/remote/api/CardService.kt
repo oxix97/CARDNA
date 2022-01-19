@@ -14,16 +14,16 @@ import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
 import retrofit2.http.*
 
 interface CardService {
-    //타인의 대표카드 조회
-     @GET("card/main/{userId}")
-    suspend fun getMainCard(
+    // 나의 대표 카드 조회 - userId 없이
+    @GET("card/main")
+    suspend fun getMainCard(): ResponseMainCardData
+
+    // 타인의 대표카드 조회
+    @GET("card/main/{userId}")
+    suspend fun getOtherMainCard(
         @Path("userId")
         userId: Int?
     ): ResponseMainCardData
-
-    // 자신의 대표 카드 조회 - userId 없이
-    @GET("card/main")
-    suspend fun getUserMainCard(): ResponseMainCardData
 
     // 대표 카드 수정
     @PUT("card/main")
@@ -35,13 +35,23 @@ interface CardService {
     @GET("card/{userId}")
     suspend fun getCardAll(): ResponseCardAllData
 
-    // 카드나 전체 조회
-    @GET("card/me/{userId}")
+    // 나의 대표 카드 조회
+    @GET("card/me")
     suspend fun getCardMe(): ResponseCardMeData
+
+    // 타인의 카드나 전체 조회
+    @GET("card/me/{userId}")
+    suspend fun getOtherCardMe(
+        @Path("userId")
+        userId: Int?
+    ): ResponseCardMeData
 
     // 카드너 전체 조회
     @GET("card/you/{userId}")
-    suspend fun getCardYou(): ResponseCardYouData
+    suspend fun getCardYou(
+        @Path("userId")
+        userId: Int?
+    ): ResponseCardYouData
 
     // 카드 상세 조회
     @GET("card/info/{cardId}")
