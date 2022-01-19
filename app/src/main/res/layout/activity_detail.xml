@@ -21,8 +21,6 @@
             android:id="@+id/iv_detailcard_image"
             android:background="@drawable/rectangle_sign_up_gradient_radius_10" />
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

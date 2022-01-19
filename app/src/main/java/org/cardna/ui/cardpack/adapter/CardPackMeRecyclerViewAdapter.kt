@@ -3,6 +3,7 @@ package org.cardna.ui.cardpack.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.cardna.data.remote.model.cardpack.CardMe
 import org.cardna.databinding.ItemCardpackCardmeBinding
 

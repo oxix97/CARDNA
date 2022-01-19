@@ -39,7 +39,9 @@ class CardMeFragment :
         if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
             id = getArguments()?.getInt("id", 0) ?: 0
             getCardMeUsingId(id)
+            Log.d("타인 카드나", "ok")
         } else { // id값이 없을 때, id값 이용해서 나의 카드나 띄우기
+            Log.d("내 카드나", "ok")
             getCardMe()
         }
     }
@@ -50,7 +52,7 @@ class CardMeFragment :
         lifecycleScope.launch {
             try {
                 val cardMeData = ApiService.cardService.getCardMe().data
-                Toast.makeText(requireActivity(), cardMeData.cardMeList.size.toString(), Toast.LENGTH_SHORT).show()
+                // Toast.makeText(requireActivity(), cardMeData.cardMeList.size.toString(), Toast.LENGTH_SHORT).show()
                 cardMeList = cardMeData.cardMeList
                 totalCardCnt = cardMeData.cardMeList.size
                 isMyCard = cardMeData.isMyCard
@@ -77,17 +79,22 @@ class CardMeFragment :
     }
 
 
-
     private fun initCardMeRvAdapter() {
         // 여기서 서버에서 받아온 cardMeList에 대한 data를 뿌려줘야함
         // getCardMe로 받아왔다면 cardMeList의 isMyCard 가 true일 것이고,
         // getOtherCardMe로 받아옸다면 cardMeList의 isMyCard가 false일 것이다.
         // 내가 쓰진 않지만, 눌렀을 때 이를 넘겨줘야 함.
 
-        val cardListForRecyclerView = mutableListOf<CardMe>()
+        val cardListForRecyclerView = listOf(
+            CardMe(1, "1", "1", 1, true),
+            CardMe(2, "1", "1", 1, true),
+            CardMe(3, "1", "1", 1, true),
+            CardMe(4, "1", "1", 1, true)
+            )
 
+        // val cardListForRecyclerView = mutableListOf<CardMe>()
         for (i in 0 until (totalCardCnt)) {
-            cardListForRecyclerView.add(cardMeList[i])
+            // cardListForRecyclerView.add(cardMeList[i])
         }
 
         cardMeAdapter = CardPackMeRecyclerViewAdapter(

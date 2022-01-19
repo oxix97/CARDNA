@@ -75,12 +75,6 @@ interface CardService {
     suspend fun getUserCardYou(): RepresentCardYouData
 
 
-
-
-
-
-
-
     // 타인 카드 상세 조회
     @GET("card/info/{cardId}")
     suspend fun getCardDetail(
