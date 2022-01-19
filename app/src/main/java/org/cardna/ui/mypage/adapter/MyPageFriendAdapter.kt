@@ -1,5 +1,6 @@
 package org.cardna.ui.mypage.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +19,7 @@ class MyPageFriendAdapter(
                 // ivFriendImage.setImageResource(data.userImg)
                 tvFriendName.text = data.name
                 tvFriendSentence.text = data.sentence
+                Glide.with(itemView.context).load(data.userImg).circleCrop().into(binding.ivFriendImage)
                 root.setOnClickListener {
                     clickListener(data)
                 }
