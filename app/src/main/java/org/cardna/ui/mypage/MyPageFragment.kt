@@ -48,7 +48,7 @@ class MyPageFragment :
             bundle.putString("sentence", item.sentence)
 
             val mainCardFragment = MainCardFragment()
-            mainCardFragment.setArguments(bundle)
+            mainCardFragment.arguments = bundle
 
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
