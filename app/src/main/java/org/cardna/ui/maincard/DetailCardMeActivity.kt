@@ -1,8 +1,17 @@
 package org.cardna.ui.maincard
 
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.Toast
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.coroutineScope
@@ -76,6 +85,11 @@ class DetailCardMeActivity :
             ctvLikeIcon.visibility = View.INVISIBLE
             //관계 text없애기
             tvDetailcardUserName.visibility = View.GONE
+
+            //삭제버튼 클릭시 네트워크 통신
+            ibtnDetailcardDelete.setOnClickListener {
+
+            }
         }
     }
 
@@ -85,20 +99,20 @@ class DetailCardMeActivity :
             //공감 아이콘 없애기
             ctvLikeIcon.visibility = View.INVISIBLE
 
-            //공감 아이콘 없애기
-            ctvLikeIcon.visibility = View.INVISIBLE
-
             //배경색 보라색으로
             clDetailcardSettingLayout.setBackgroundResource(R.drawable.rectangle_left_right_main_purple)
 
             //관계 text 보이기
             tvDetailcardUserName.visibility = View.VISIBLE
 
-            //쓰레기통->3dot 아이콘
+            //쓰레기통->3dot 아이콘, 보관, 삭제 다이어로그 띄우기
             ibtnDetailcardDelete.setImageResource(R.drawable.ic_detail_3dot)
-
+            ibtnDetailcardDelete.setOnClickListener {
+                showDialog()
+            }
             //배경 보라색으로
             ibtnDetailcardDelete.setBackgroundResource(R.drawable.rectangle_main_purple)
+
         }
     }
 
@@ -155,6 +169,34 @@ class DetailCardMeActivity :
 
                 Log.d("ischeck", ischeck.toString())
             }
+        }
+    }
+
+    private fun showDialog() {
+        val dialog = Dialog(this)     // Dialog 초기화
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // 타이틀 제거
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.Transparent.toArgb()))  //둥근테두리로 만들려고 background를 투명하게
+        dialog.setContentView(R.layout.dialog_dtail_cardyou)             // xml 레이아웃 파일과 연결(다이어로그 레이아웃)
+        dialog.setCancelable(false)  // 다이얼로그외에 다른 화면을 눌렀을 때 나가는 것 방지
+
+        dialog.getWindow()!!.setGravity(Gravity.BOTTOM)
+        dialog.show(); // 다이얼로그 띄우기
+
+        // 보관 버튼
+        val noBtn = dialog.findViewById<Button>(R.id.tv_dialog_save)
+        noBtn.setOnClickListener {
+            //보관 서버 통신
+            Toast.makeText(this, "네", Toast.LENGTH_SHORT).show()
+            dialog.dismiss() //토스트 띄우고 다이어로그 사라지게
+        }
+
+
+        // 삭제 버튼
+        val yesBtn = dialog.findViewById<Button>(R.id.tv_dialog_delete)
+        yesBtn.setOnClickListener {
+
+            //삭제 서버통신
+            Toast.makeText(this, "아니오", Toast.LENGTH_SHORT).show()
         }
     }
 }
