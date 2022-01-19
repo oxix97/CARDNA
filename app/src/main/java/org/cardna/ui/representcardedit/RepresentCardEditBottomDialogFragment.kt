@@ -1,6 +1,7 @@
 package org.cardna.ui.representcardedit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,10 +24,7 @@ import org.cardna.util.SpacesItemDecoration
 import org.cardna.util.shortToast
 import kotlin.math.roundToInt
 
-class RepresentCardEditBottomDialogFragment(
-    private val cardListSize: Int
-) :
-    BottomSheetDialogFragment() {
+class RepresentCardEditBottomDialogFragment(private val cardListSize: Int) : BottomSheetDialogFragment() {
     private val list = mutableListOf<Card>()
     private var _binding: FragmentRepresentCardEditBottomDialogBinding? = null
     private val binding get() = _binding ?: error("View를 참조하기 위해 binding이 초기화되지 않았습니다.")
@@ -60,10 +58,13 @@ class RepresentCardEditBottomDialogFragment(
     private fun initCoroutine() {
         lifecycleScope.launch {
             try {
-                val cardMeContainer = ApiService.cardService.getCardMe().data.cardMeList
-                val cardYouContainer = ApiService.cardService.getCardYou().data.cardYouList
-                initFragment(cardMeContainer, cardYouContainer)
+                //코루틴 에러가 나는데 ??
+                val cardMeContainer = ApiService.cardService.getCardMe()
+                val cardYouContainer = ApiService.cardService.getCardYou()
+                Log.d("ff", "ff")
+                initFragment(cardMeContainer.data.cardMeList, cardYouContainer.data.cardYouList)
             } catch (e: Exception) {
+                e.printStackTrace()
                 requireActivity().shortToast("Coroutine error")
             }
         }
