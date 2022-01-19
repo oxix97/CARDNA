@@ -1,18 +1,25 @@
 package org.cardna.ui.representcardedit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.launch
 import org.cardna.R
-import org.cardna.data.remote.model.representcardedit.RepresentCardData
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.representcardedit.RepresentCardMeData
+import org.cardna.data.remote.model.representcardedit.RepresentCardMeListData
+import org.cardna.data.remote.model.representcardedit.RepresentCardYouData
+import org.cardna.data.remote.model.representcardedit.RepresentCardYouListData
 import org.cardna.databinding.FragmentRepresentCardEditBottomDialogBinding
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardMeAdapter
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardYouAdapter
@@ -21,11 +28,16 @@ import kotlin.math.roundToInt
 
 class RepresentCardEditBottomDialogFragment :
     BottomSheetDialogFragment() {
-    private val list = mutableListOf<RepresentCardData>()
+    private val list1 = mutableListOf<RepresentCardMeData>()
+    private val list2 = mutableListOf<RepresentCardYouData>()
     private var _binding: FragmentRepresentCardEditBottomDialogBinding? = null
     private val binding get() = _binding ?: error("View를 참조하기 위해 binding이 초기화되지 않았습니다.")
     private lateinit var cardMeAdapter: RepresentBottomSheetCardMeAdapter
     private lateinit var cardYouAdapter: RepresentBottomSheetCardYouAdapter
+
+    private lateinit var cardMeList: MutableList<RepresentCardMeListData>
+    private lateinit var cardYouList: MutableList<RepresentCardYouListData>
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,113 +64,46 @@ class RepresentCardEditBottomDialogFragment :
     }
 
     private fun initFragment() {
-        val dataList1 = listOf(
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.drawable.background_cardyou
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
+        lifecycleScope.launch {
+            try {
+                cardMeList = ApiService.cardService.getUserCardMe().data.cardMeList
+                cardYouList = ApiService.cardService.getUserCardYou().data.cardYouList
+                initAdapter()
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
 
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardyou
-
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
-
-            ),
-        )
-        val dataList2 = listOf(
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardme
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁㄹㄹㄹㄹㄹㄹ",
-                R.drawable.background_cardyou
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
-
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "fsdafs",
-                R.drawable.background_cardyou
-
-            ),
-            RepresentCardData(
-                R.drawable.dummy_img_cardpack_1,
-                "ㅁ너ㅣㅏㄹㅁㄴ",
-                R.drawable.background_cardyou
-            ),
-        )
-
-        cardMeAdapter = RepresentBottomSheetCardMeAdapter()
-        cardYouAdapter = RepresentBottomSheetCardYouAdapter()
+        cardMeAdapter = RepresentBottomSheetCardMeAdapter(requireContext())
+        cardYouAdapter = RepresentBottomSheetCardYouAdapter(requireContext())
 
         val gridLayoutManager1 = GridLayoutManager(requireContext(), 2)
         val gridLayoutManager2 = GridLayoutManager(requireContext(), 2)
 
-        binding.rvRepresentcardeditCardme.layoutManager = gridLayoutManager1
-        binding.rvRepresentcardeditCardyou.layoutManager = gridLayoutManager2
+        with(binding) {
+            rvRepresentcardeditCardme.layoutManager = gridLayoutManager1
+            rvRepresentcardeditCardyou.layoutManager = gridLayoutManager2
 
-        binding.rvRepresentcardeditCardme.addItemDecoration(SpacesItemDecoration(12))
-        binding.rvRepresentcardeditCardyou.addItemDecoration(SpacesItemDecoration(12))
+            rvRepresentcardeditCardme.addItemDecoration(SpacesItemDecoration(12))
+            rvRepresentcardeditCardyou.addItemDecoration(SpacesItemDecoration(12))
 
-        binding.rvRepresentcardeditCardme.adapter = cardMeAdapter
-        binding.rvRepresentcardeditCardyou.adapter = cardYouAdapter
+            rvRepresentcardeditCardme.adapter = cardMeAdapter
+            rvRepresentcardeditCardyou.adapter = cardYouAdapter
+        }
+
 
         cardMeAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
             if (isSelected) {
-                list.add(RepresentCardData)
+                list1.add(RepresentCardData)
                 cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                 cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
-                return@setItemClickListener list.lastIndex
+                binding.tvRepresentcardeditCardListCount.text = "${list1.size}/7"
+                return@setItemClickListener list1.lastIndex
             } else {
-                list.removeAt(position)
+                list1.removeAt(position)
                 cardMeAdapter.setLastRemovedIndex(position)
                 cardYouAdapter.setLastRemovedIndex(position)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
+                binding.tvRepresentcardeditCardListCount.text = "${list1.size}/7"
                 cardYouAdapter.notifyDataSetChanged()
 
                 return@setItemClickListener -1
@@ -167,30 +112,32 @@ class RepresentCardEditBottomDialogFragment :
 
         cardYouAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
             if (isSelected) {
-                list.add(RepresentCardData)
+                list2.add(RepresentCardData)
                 cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                 cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
+                binding.tvRepresentcardeditCardListCount.text = "${list2.size}/7"
 
-                return@setItemClickListener list.lastIndex
+                return@setItemClickListener list2.lastIndex
             } else {
-                list.removeAt(position)
+                list2.removeAt(position)
                 cardMeAdapter.setLastRemovedIndex(position)
                 cardYouAdapter.setLastRemovedIndex(position)
-                binding.tvRepresentcardeditCardListCount.text = "${list.size}/7"
+                binding.tvRepresentcardeditCardListCount.text = "${list2.size}/7"
                 cardMeAdapter.notifyDataSetChanged()
 
                 return@setItemClickListener -1
             }
         }
 
-        cardMeAdapter.cardMeList.addAll(dataList1)
-        cardYouAdapter.cardYouList.addAll(dataList2)
+        onResultClick()
+    }
+
+    private fun initAdapter() {
+        cardMeAdapter.cardMeList.addAll(cardMeList)
+        cardYouAdapter.cardYouList.addAll(cardYouList)
 
         cardMeAdapter.notifyDataSetChanged()
         cardYouAdapter.notifyDataSetChanged()
-
-        onResultClick()
     }
 
     private fun initTabLayout() {

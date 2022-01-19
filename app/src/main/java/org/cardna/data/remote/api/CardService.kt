@@ -6,6 +6,8 @@ import org.cardna.data.remote.model.mypage.RequestCreateCardYouData
 import org.cardna.data.remote.model.mypage.ResponseAddOrRemoveCardYouData
 import org.cardna.data.remote.model.mypage.ResponseCardYouBoxData
 import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
+import org.cardna.data.remote.model.representcardedit.RepresentCardMeData
+import org.cardna.data.remote.model.representcardedit.RepresentCardYouData
 import retrofit2.http.*
 
 interface CardService {
@@ -24,20 +26,20 @@ interface CardService {
     // 대표 카드 수정
     @PUT("card/main")
     suspend fun putMainCardEdit(
-        @Body body:RequestMainCardEditData
+        @Body body: RequestMainCardEditData
     ): ResponseMainCardEditData
 
     // 카드 전체 조회
     @GET("card/{userId}")
     suspend fun getCardAll(): ResponseCardAllData
 
-    // 카드나 전체 조회
-    @GET("card/me/{userId}")
-    suspend fun getCardMe(): ResponseCardMeData
+    // 내가 내 카드나 전체 조회
+    @GET("card/me")
+    suspend fun getUserCardMe(): RepresentCardMeData
 
-    // 카드너 전체 조회
-    @GET("card/you/{userId}")
-    suspend fun getCardYou(): ResponseCardYouData
+    // 내가 내 카드너 전체 조회
+    @GET("card/you")
+    suspend fun getUserCardYou(): RepresentCardYouData
 
     // 타인 카드 상세 조회
     @GET("card/info/{cardId}")
