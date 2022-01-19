@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.representcardedit.ResponseCardStorageData
+import org.cardna.data.remote.model.mypage.ResponseCardStorageData
 import org.cardna.databinding.ItemOtherwriteBinding
 import org.cardna.ui.maincard.DetailActivity
 

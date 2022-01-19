@@ -1,19 +1,14 @@
 package org.cardna.ui.mypage
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
-import org.cardna.data.remote.model.representcardedit.ResponseCardStorageData
+import org.cardna.data.remote.model.mypage.ResponseCardStorageData
 import org.cardna.databinding.ActivityOtherWriteBinding
-import org.cardna.ui.maincard.DetailActivity
 import org.cardna.ui.mypage.adapter.OtherWriteAdapter
-import org.cardna.ui.mypage.adapter.OtherWriteRecyclerViewAdapter
 import org.cardna.util.SpacesItemDecoration
 import kotlin.math.roundToInt
 
@@ -24,6 +19,11 @@ class OtherWriteActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initCoroutine()
     }
 
     override fun initView() {

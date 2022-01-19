@@ -42,6 +42,11 @@ class MainCardFragment :
         setTextGradient()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initNetwork()
+    }
+
     //네트워크 통신으로 뿌려줄 리스트 초기화
     private fun initNetwork() {
         var id: Int?
@@ -205,7 +210,7 @@ class MainCardFragment :
                 lifecycleScope.launch {
                     try {
                         // val responseData =
-                            // ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
+                        // ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
                         //    Log.d("친구추가", ApiService.friendService.postFriend(RequestFriendUpdateData(id)).message)
                     } catch (e: Exception) {
                         Log.d("실패", e.message.toString())

@@ -6,8 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.mypage.ResponseCardYouBoxDataList
-import org.cardna.data.remote.model.representcardedit.ResponseCardStorageData
+import org.cardna.data.remote.model.mypage.ResponseCardStorageData
 import org.cardna.databinding.ItemOtherwriteBinding
 
 class OtherWriteRecyclerViewAdapter(
@@ -55,8 +54,8 @@ class OtherWriteRecyclerViewAdapter(
                 oldItem == newItem
 
             override fun areItemsTheSame(
-                oldItem:ResponseCardStorageData.Data,
-                newItem:ResponseCardStorageData.Data,
+                oldItem: ResponseCardStorageData.Data,
+                newItem: ResponseCardStorageData.Data,
             ) =
                 oldItem.id == newItem.id
         }

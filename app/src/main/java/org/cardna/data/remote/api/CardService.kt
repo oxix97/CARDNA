@@ -2,15 +2,32 @@ package org.cardna.data.remote.api
 
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.cardna.data.remote.model.cardpack.*
+import org.cardna.data.remote.model.cardpack.ResponseCardAllData
+import org.cardna.data.remote.model.cardpack.ResponseCardDetailData
+import org.cardna.data.remote.model.cardpack.ResponseCardMeData
+import org.cardna.data.remote.model.cardpack.ResponseCardYouData
+import org.cardna.data.remote.model.cardpack.ResponseCreateCardMeData
 import org.cardna.data.remote.model.maincard.RequestMainCardEditData
 import org.cardna.data.remote.model.maincard.ResponseDeleteCardData
 import org.cardna.data.remote.model.maincard.ResponseMainCardData
 import org.cardna.data.remote.model.maincard.ResponseMainCardEditData
-import org.cardna.data.remote.model.mypage.*
-import org.cardna.data.remote.model.representcardedit.RepresentCardMeData
+import org.cardna.data.remote.model.mypage.RequestCreateCardYouData
+import org.cardna.data.remote.model.mypage.ResponseAddOrRemoveCardYouData
+import org.cardna.data.remote.model.mypage.ResponseCardStorageData
+import org.cardna.data.remote.model.mypage.ResponseCardYouBoxData
+import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
+import org.cardna.data.remote.model.representcardedit.RepresentCardMeBottomSheetData
+import org.cardna.data.remote.model.representcardedit.RepresentCardYouBottomSheetData
 import org.cardna.data.remote.model.representcardedit.RepresentCardYouData
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.DELETE
+import retrofit2.http.GET
+import retrofit2.http.Multipart
+import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.PartMap
+import retrofit2.http.Path
 
 interface CardService {
     //타인의 대표카드 조회
@@ -34,7 +51,13 @@ interface CardService {
     @GET("card/{userId}")
     suspend fun getCardAll(): ResponseCardAllData
 
+    //바텀싯 카드나 선택시
+    @GET("card/me")
+    suspend fun getBottomSheetCardMe() : RepresentCardMeBottomSheetData
 
+    //바텀싯 카드너 선택시
+    @GET("card/you")
+    suspend fun getBottomSheetCardYou() : RepresentCardYouBottomSheetData
 
 
     // 카드팩에서
@@ -50,8 +73,8 @@ interface CardService {
     ): ResponseCardMeData
 
     // maincard에서 나의 카드나 조회
-    @GET("card/me")
-    suspend fun getUserCardMe(): RepresentCardMeData
+    // @GET("card/me")
+    // suspend fun getUserCardMe(): RepresentCardMeData
 
 
 
@@ -70,12 +93,6 @@ interface CardService {
     // maincard에서 나의 카드나 조회
     @GET("card/you")
     suspend fun getUserCardYou(): RepresentCardYouData
-
-
-
-
-
-
 
 
     // 타인 카드 상세 조회
@@ -109,7 +126,7 @@ interface CardService {
 
     // 카드너 보관함 조회
     @GET("card/box")
-    suspend fun getCardBox(): ResponseCardYouBoxData
+    suspend fun getCardBox(): ResponseCardStorageData
 
     // 카드너 추가, 보관
     @PUT("card/box/{cardId}")

@@ -43,4 +43,3 @@ data class RepresentCardYouListData(
     val isLiked: Boolean,
 )
 
-

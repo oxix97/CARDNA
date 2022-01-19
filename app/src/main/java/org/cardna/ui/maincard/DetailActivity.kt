@@ -17,8 +17,9 @@ class DetailActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-
     }
+
+
 
     override fun initView() {
         initNetwork()

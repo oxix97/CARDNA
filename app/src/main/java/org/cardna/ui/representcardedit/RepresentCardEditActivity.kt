@@ -27,6 +27,11 @@ class RepresentCardEditActivity :
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initCoroutine()
+    }
+
     override fun initView() {
         initCoroutine()
         onClick()

@@ -1,7 +1,4 @@
-package org.cardna.data.remote.model.representcardedit
-
-
-import com.google.gson.annotations.SerializedName
+package org.cardna.data.remote.model.mypage
 
 data class ResponseCardStorageData(
     val message: String,
