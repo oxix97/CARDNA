@@ -8,7 +8,6 @@ import retrofit2.http.Headers
 
 interface MyPageService {
     @Headers("Content-Type:application/json")
-
     @GET("my-page")
     suspend fun getMyPage(): ResponseMyPageData
 

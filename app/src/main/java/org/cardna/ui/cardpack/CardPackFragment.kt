@@ -53,6 +53,8 @@ class CardPackFragment :
 
                 // SeeOtherNetwork(id)
             } else { // userId가 없을 때, 현재 유저에 대한 카드팩으로 조회
+
+                //프래그먼트 2개 생성되는 부분->init 네트워크 통신
                 fragmentList = listOf(CardMeFragment(), CardYouFragment())
                 // SeeMeNetwork()
             }

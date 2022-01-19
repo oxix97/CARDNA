@@ -3,19 +3,20 @@ package org.cardna.ui.cardpack.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.data.remote.model.cardpack.CardMe
+import org.cardna.data.remote.model.cardpack.CardMeList
+import org.cardna.data.remote.model.cardpack.ResponseCardAllData
 import org.cardna.databinding.ItemCardpackCardmeBinding
 
 class CardPackMeRecyclerViewAdapter(
-    private val cardList: List<CardMe>,
-    private val clickListener: (CardMe) -> Unit
+    private val cardList: MutableList<CardMeList>,
+    private val clickListener: (CardMeList) -> Unit
 ) :
     RecyclerView.Adapter<CardPackMeRecyclerViewAdapter.CardPackMeViewHolder>() {
 
     inner class CardPackMeViewHolder(private val binding: ItemCardpackCardmeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(data: CardMe) {
+        fun onBind(data: CardMeList) {
             with(binding) {
                 // uri로 받은 사진 Glide로 띄우기
                 // Glide.with(itemView.context).load(data.cardImg).into(binding.ivCardpackRecyclerview)
