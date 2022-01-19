@@ -21,7 +21,6 @@ class CardPackFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
     }
 
@@ -48,13 +47,10 @@ class CardPackFragment :
                 cardMeFragment.arguments = bundle
                 cardYouFragment.arguments = bundle
 
-                fragmentList = listOf(CardMeFragment(), CardYouFragment())
+                fragmentList = listOf(cardMeFragment, cardYouFragment)
 
-
-                // SeeOtherNetwork(id)
             } else { // userId가 없을 때, 현재 유저에 대한 카드팩으로 조회
                 fragmentList = listOf(CardMeFragment(), CardYouFragment())
-                // SeeMeNetwork()
             }
 
         // 여기서 fragment 생성할 때, 현재 프래그먼트로 bundle로 받은 userId값을

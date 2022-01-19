@@ -41,6 +41,7 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
     }
 
     private fun accessGallery(){
+        // 이미지 선택하는 dialog에서 갤러리 접근 버튼 눌렀을 때, 갤러리에 접근하고 dialog는 사라짐
         binding.btnCardcreateGallery.setOnClickListener{
             (activity as CardCreateActivity).checkPermission()
             dialog?.dismiss()
@@ -117,12 +118,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                     selectedImg = GALLERY
             }
 
-
-
             // 완료 버튼 누르면 dialog 없어지고, 현재 selected되어 있는 버튼에 대한 상수 값을 itemClick으로 넘겨준다.
             // 완료 버튼 안 누르고 갤러리 접근하면 itemClock 호출 안할테니
             btnCardcreateComplete.setOnClickListener{
-                itemClick(selectedImg)
+                itemClick(selectedImg) // 완료 버튼 누르려면 하나라도 선택되어있어야 하므로 selectedimg는 0,1,2,3,4중 하나로 넘어갈 것
                 dialog?.dismiss()
             }
 

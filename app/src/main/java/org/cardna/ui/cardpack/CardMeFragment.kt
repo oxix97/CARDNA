@@ -34,6 +34,33 @@ class CardMeFragment :
 
     // 이 블록의 내용들이 바텀 내비게이션이 탭 될때마다 실행되야하지 않을까
 
+    init { // CardPackFragment로부터 생성될 건데 거기서 받은 id 값에 따라 뿌려주는 data가 다름.
+        var id: Int?
+        if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
+            id = getArguments()?.getInt("id", 0) ?: 0
+            getCardMeUsingId(id)
+        } else { // id값이 없을 때, id값 이용해서 나의 카드나 띄우기
+            getCardMe()
+        }
+    }
+
+
+    // 현재 유저의 카드나 띄우기
+    private fun getCardMe() {
+        lifecycleScope.launch {
+            try {
+                val cardMeData = ApiService.cardService.getCardMe().data
+                // Toast.makeText(requireActivity(), cardMeData.cardMeList.size.toString(), Toast.LENGTH_SHORT).show()
+                cardMeList = cardMeData.cardMeList
+                totalCardCnt = cardMeData.cardMeList.size
+                isMyCard = cardMeData.isMyCard
+                // 가지고 현재 fragment에 띄우기
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
+    }
+
     // init { // CardPackFragment로부터 생성될 건데 거기서 받은 id 값에 따라 뿌려주는 data가 다름.
     //     var id: Int?
     //     if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
@@ -62,20 +89,19 @@ class CardMeFragment :
     // }
 
     // 다른 유저의 카드나 띄우기
-    // private fun getCardMeUsingId(id: Int) {
-    //     lifecycleScope.launch {
-    //         try {
-    //             val cardMeData = ApiService.cardService.getOtherCardMe(id).data
-    //             cardMeList = cardMeData.cardMeList
-    //             totalCardCnt = cardMeData.totalCardCnt
-    //             isMyCard = cardMeData.isMyCard
-    //             // 가지고 현재 fragment에 띄우기
-    //         } catch (e: Exception) {
-    //             Log.d("실패", e.message.toString())
-    //         }
-    //     }
-    // }
-
+    private fun getCardMeUsingId(id: Int) {
+         lifecycleScope.launch {
+             try {
+                 val cardMeData = ApiService.cardService.getOtherCardMe(id).data
+                 cardMeList = cardMeData.cardMeList
+                 totalCardCnt = cardMeData.totalCardCnt
+                 isMyCard = cardMeData.isMyCard
+                 // 가지고 현재 fragment에 띄우기
+             } catch (e: Exception) {
+                 Log.d("실패", e.message.toString())
+             }
+         }
+     }
 
 
     private fun initCardMeRvAdapter() {
@@ -84,10 +110,16 @@ class CardMeFragment :
         // getOtherCardMe로 받아옸다면 cardMeList의 isMyCard가 false일 것이다.
         // 내가 쓰진 않지만, 눌렀을 때 이를 넘겨줘야 함.
 
-        val cardListForRecyclerView = mutableListOf<CardMe>()
+        val cardListForRecyclerView = listOf(
+            CardMe(1, "1", "1", 1, true),
+            CardMe(2, "1", "1", 1, true),
+            CardMe(3, "1", "1", 1, true),
+            CardMe(4, "1", "1", 1, true)
+            )
 
+        // val cardListForRecyclerView = mutableListOf<CardMe>()
         for (i in 0 until (totalCardCnt)) {
-            cardListForRecyclerView.add(cardMeList[i])
+            // cardListForRecyclerView.add(cardMeList[i])
         }
 
         cardMeAdapter = CardPackMeRecyclerViewAdapter(

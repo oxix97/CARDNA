@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.data.remote.api.ApiService
-import org.cardna.data.remote.model.cardpack.Card
+import org.cardna.data.remote.model.cardpack.CardMe
 import org.cardna.databinding.FragmentRepresentCardEditBottomDialogBinding
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardMeAdapter
 import org.cardna.ui.maincard.adapter.RepresentBottomSheetCardYouAdapter
@@ -25,7 +25,7 @@ import org.cardna.util.shortToast
 import kotlin.math.roundToInt
 
 class RepresentCardEditBottomDialogFragment(private val cardListSize: Int) : BottomSheetDialogFragment() {
-    private val list = mutableListOf<Card>()
+    private val list = mutableListOf<CardMe>()
     private var _binding: FragmentRepresentCardEditBottomDialogBinding? = null
     private val binding get() = _binding ?: error("View를 참조하기 위해 binding이 초기화되지 않았습니다.")
     private lateinit var cardMeAdapter: RepresentBottomSheetCardMeAdapter
@@ -70,7 +70,7 @@ class RepresentCardEditBottomDialogFragment(private val cardListSize: Int) : Bot
         }
     }
 
-    private fun initFragment(cardMeList: List<Card>, cardYouList: List<Card>) {
+    private fun initFragment(cardMeList: List<CardMe>, cardYouList: List<CardMe>) {
         cardMeAdapter = RepresentBottomSheetCardMeAdapter(cardListSize)
         cardYouAdapter = RepresentBottomSheetCardYouAdapter(cardListSize)
 
