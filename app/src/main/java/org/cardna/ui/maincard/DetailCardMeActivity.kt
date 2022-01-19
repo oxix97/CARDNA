@@ -5,11 +5,13 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.cardpack.ResponseCardDetailData
+import org.cardna.data.remote.model.detail.RequestLikeData
 import org.cardna.databinding.ActivityDetailCardMeBinding
 
 class DetailCardMeActivity :
@@ -29,11 +31,24 @@ class DetailCardMeActivity :
     private fun getCardData() {
         val id = intent.getIntExtra("id", 0)
         val isMyCard = intent.getBooleanExtra("isMyCard", false)
-        initNetwork(id, isMyCard)
+
+        lifecycleScope.launch {
+            try {
+                val isLike = ApiService.likeService.postLike(RequestLikeData(id)).data.isLiked
+                Log.d("isLiked", isLike.toString())
+                initNetwork(id, isMyCard, isLike)
+
+            } catch (e: Exception) {
+                Log.d("실패", e.message.toString())
+            }
+        }
     }
 
     //상세카드 조회->ResponseDetailData 데이터 값 받아옴
-    private fun initNetwork(id: Int, isMyCard: Boolean) {
+    private fun initNetwork(id: Int, isMyCard: Boolean, isLike: Boolean) {
+        if (isLike) {
+            binding.ctvLikeIcon.isChecked
+        }
         lifecycleScope.launch {
             try {
                 DetailCardData = ApiService.cardService.getCardDetail(id).data
@@ -47,7 +62,7 @@ class DetailCardMeActivity :
                 } else if (isMyCard == false && DetailCardData.isMe == false) {          //타인이 카드너 상세
                     setOtherCardYou()
                 }
-                setData()
+                setData(isLike, id)
             } catch (e: Exception) {
                 Log.d("실패", e.message.toString())
             }
@@ -118,7 +133,7 @@ class DetailCardMeActivity :
         }
     }
 
-    private fun setData() {
+    private fun setData(isLike: Boolean, id: Int) {
         with(binding) {
             Glide.with(this@DetailCardMeActivity).load(DetailCardData.cardImg).into(binding.ivDetailcardImage)
 
@@ -135,7 +150,10 @@ class DetailCardMeActivity :
             tvDetailcardUserName.text = DetailCardData.relation
 
             ctvLikeIcon.setOnClickListener {
+                var ischeck = false
                 ctvLikeIcon.toggle()
+
+                Log.d("ischeck", ischeck.toString())
             }
         }
     }
