@@ -7,6 +7,7 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.model.cardpack.ResponseOtherWriterData
 import org.cardna.databinding.ActivityOtherWriteBinding
+import org.cardna.ui.maincard.DetailActivity
 import org.cardna.ui.maincard.DetailCardMeActivity
 import org.cardna.ui.mypage.adapter.OtherWriteRecyclerViewAdapter
 
@@ -40,7 +41,7 @@ class OtherWriteActivity :
 
 
         val adpater = OtherWriteRecyclerViewAdapter(cardList) { position ->
-            Intent(this, DetailCardMeActivity::class.java).apply {
+            Intent(this, DetailActivity::class.java).apply {
                 putExtra("name", position.name)
                 putExtra("image", position.relation)
                 putExtra("bio", position.createdAt)
