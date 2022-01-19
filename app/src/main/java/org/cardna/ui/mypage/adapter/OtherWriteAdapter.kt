@@ -21,9 +21,9 @@ class OtherWriteAdapter() :
                 tvOtherwriteName.text = data.name
                 tvOtherwriteCreatedAt.text = data.createdAt
                 ivOtherwriteGallery.isVisible = data.isImage
-            /*    clOtherwrite.setOnClickListener {
+                clOtherwrite.setOnClickListener {
                     Toast.makeText(itemView.context, "$adapterPosition", Toast.LENGTH_SHORT).show()
-                }*/
+                }
             }
         }
     }

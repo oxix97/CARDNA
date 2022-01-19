@@ -1,23 +1,23 @@
 package org.cardna.ui.maincard.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.cardna.R
-import org.cardna.data.remote.model.representcardedit.RepresentCardMeData
-import org.cardna.data.remote.model.representcardedit.RepresentCardMeListData
-import org.cardna.data.remote.model.representcardedit.RepresentCardYouListData
+import org.cardna.data.remote.model.cardpack.CardMe
 import org.cardna.databinding.ItemRepresentCardMeBinding
 
-class RepresentBottomSheetCardMeAdapter(private val context: Context) :
+class RepresentBottomSheetCardMeAdapter(
+    private val isSelectedCount: Int
+) :
     RecyclerView.Adapter<RepresentBottomSheetCardMeAdapter.CardMeViewHolder>() {
     private var lastRemovedIndex: Int = Int.MAX_VALUE
-    private var itemClickListener: ((Int, RepresentCardMeData, Boolean) -> Int)? = null
-    val cardMeList = mutableListOf<RepresentCardMeListData>()
+    private var itemClickListener: ((Int, CardMe, Boolean) -> Int)? = null
+    val cardMeList = mutableListOf<CardMe>()
 
-    fun setItemClickListener(listener: ((Int, RepresentCardMeData, Boolean) -> Int)) {
+    fun setItemClickListener(listener: ((Int, CardMe, Boolean) -> Int)) {
         itemClickListener = listener
     }
 
@@ -27,30 +27,26 @@ class RepresentBottomSheetCardMeAdapter(private val context: Context) :
 
     inner class CardMeViewHolder(private val binding: ItemRepresentCardMeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: RepresentCardMeListData, position: Int) {
+        fun onBind(data: CardMe, position: Int) {
+            binding.clRvItem.setBackgroundResource(R.drawable.rectangle_main_green_radius_10)
+            Glide
+                .with(itemView.context)
+                .load(data.cardImg)
+                .into(binding.ivCardpackRecyclerview)
 
-            with(binding) {
-                //보라 초록
-                binding.clRvItem.setBackgroundResource(R.drawable.rectangle_left_right_main_green_radius_2)
+            binding.tvCardpackRecyclerview.text = data.title
+            binding.tvRepresentcardCount.isVisible = data.isClicked
+            if (lastRemovedIndex < data.index) {
+                data.index = data.index - 1
+            }
 
-                //이미지 삽입
-                Glide.with(context).load(data.cardImg).into(ivCardpackRecyclerview)
+            binding.tvRepresentcardCount.text = (data.index + 1).toString()
 
-                //카드 태그
-                binding.tvCardpackRecyclerview.text = data.title
-
-          /*      binding.tvRepresentcardCount.isVisible = data.isClicked
-                if (lastRemovedIndex < data.index) {
-                    data.index = data.index - 1
-                }
-
-                binding.tvRepresentcardCount.text = (data.index + 1).toString()
-                binding.clRvItem.setOnClickListener {
-                    data.isClicked = !data.isClicked
-                    data.index = requireNotNull(itemClickListener?.invoke(data.index, data, data.isClicked))
-                    notifyDataSetChanged()
-                }*/
-
+            binding.clRvItem.setOnClickListener {
+                data.isClicked = !data.isClicked
+                data.index =
+                    requireNotNull(itemClickListener?.invoke(data.index, data, data.isClicked))
+                notifyDataSetChanged()
             }
         }
     }
@@ -63,7 +59,6 @@ class RepresentBottomSheetCardMeAdapter(private val context: Context) :
             ItemRepresentCardMeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardMeViewHolder(binding)
     }
-
 
     override fun onBindViewHolder(
         holder: RepresentBottomSheetCardMeAdapter.CardMeViewHolder,
