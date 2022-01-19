@@ -6,7 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.cardna.R
-import org.cardna.data.remote.model.cardpack.Card
+import org.cardna.data.remote.model.cardpack.CardMe
 import org.cardna.databinding.ItemRepresentCardMeBinding
 
 class RepresentBottomSheetCardMeAdapter(
@@ -14,10 +14,10 @@ class RepresentBottomSheetCardMeAdapter(
 ) :
     RecyclerView.Adapter<RepresentBottomSheetCardMeAdapter.CardMeViewHolder>() {
     private var lastRemovedIndex: Int = Int.MAX_VALUE
-    private var itemClickListener: ((Int, Card, Boolean) -> Int)? = null
-    val cardMeList = mutableListOf<Card>()
+    private var itemClickListener: ((Int, CardMe, Boolean) -> Int)? = null
+    val cardMeList = mutableListOf<CardMe>()
 
-    fun setItemClickListener(listener: ((Int, Card, Boolean) -> Int)) {
+    fun setItemClickListener(listener: ((Int, CardMe, Boolean) -> Int)) {
         itemClickListener = listener
     }
 
@@ -27,7 +27,7 @@ class RepresentBottomSheetCardMeAdapter(
 
     inner class CardMeViewHolder(private val binding: ItemRepresentCardMeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Card, position: Int) {
+        fun onBind(data: CardMe, position: Int) {
             binding.clRvItem.setBackgroundResource(R.drawable.rectangle_main_green_radius_10)
             Glide
                 .with(itemView.context)

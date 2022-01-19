@@ -88,7 +88,7 @@ class CardCreateCompleteActivity :
                 // MainActivity로 갈 때, CardCreateActivity pop하고 가기
                 // 현재 A -> B -> C인데, C -> A로 가도록 intent 써서
             }, LOTTIE_VIEW_TIME) // 이는 CardCreateActivity가 얼마나 띄워주고 다시 main으로 갈 건지에 대한 시간, 로티가 뜨느 시간은 아님
-        } else {
+        } else if(meOrYou == CARD_YOU) {
             handler.postDelayed(
                 {
                     // 카드너 추가에서 왔다면 OtherWriteActivity로 돌아가야 한다. 근데 이때 OtherWriteAcitivty로 전달해줄 정보는 없고

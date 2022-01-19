@@ -48,10 +48,9 @@ class DetailActivity :
             // 인텐트로 CardCreateCompleteActivity로 이동
             val intent = Intent(this@DetailActivity, CardCreateCompleteActivity::class.java)
             intent.putExtra("meOrYou", CARD_YOU) // 카드나 추가이므로 CARD_YOU를 보내줌 // 심볼 - 2, 갤러리 - null
+            intent.putExtra("symbolId", -1) // CompleteActivity에서 -1을 받아서, 심볼이 아닌 이미지를 띄워줘야 하므로
             // 카드의 이미지 intent.putExtra("cardImg", uri.toString()) // 심볼 - null, 갤러리 - adflkadlfaf
             // 카드의 title 넣어주기 intent.putExtra("cardTitle", binding.etCardcreateKeyword.text.toString())
-            // symbolId는 안 넣어줘도 될 듯
-
             startActivity(intent)
         }
     }
