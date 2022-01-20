@@ -19,12 +19,14 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.utils.LottieValueAnimator
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
+import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.cardpack.ResponseCardDetailData
 import org.cardna.data.remote.model.detail.RequestLikeData
 import org.cardna.databinding.ActivityDetailCardMeBinding
+import org.cardna.util.shortToast
 
 class DetailCardMeActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityDetailCardMeBinding>(R.layout.activity_detail_card_me) {
@@ -93,7 +95,7 @@ class DetailCardMeActivity :
 
             //삭제버튼 클릭시 네트워크 통신
             ibtnDetailcardDelete.setOnClickListener {
-                showUserDialog(id)
+                showUserCardMeDialog(id)  //삭제
             }
         }
     }
@@ -113,7 +115,7 @@ class DetailCardMeActivity :
             //쓰레기통->3dot 아이콘, 보관, 삭제 다이어로그 띄우기
             ibtnDetailcardDelete.setImageResource(R.drawable.ic_detail_3dot)
             ibtnDetailcardDelete.setOnClickListener {
-                showUserDialog(id)
+                showUserCardYouDialog(id)  //보관, 삭제
             }
             //배경 보라색으로
             ibtnDetailcardDelete.setBackgroundResource(R.drawable.rectangle_main_purple)
@@ -184,7 +186,42 @@ class DetailCardMeActivity :
         }
     }
 
-    private fun showUserDialog(id: Int) {
+    private fun showUserCardMeDialog(id: Int) {
+        val dialog = Dialog(this)     // Dialog 초기화
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // 타이틀 제거
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.Transparent.toArgb()))  //둥근테두리로 만들려고 background를 투명하게
+        dialog.setContentView(R.layout.dialog_detail_cardme)             // xml 레이아웃 파일과 연결(다이어로그 레이아웃)
+        dialog.setCancelable(true)  // 다이얼로그외에 다른 화면을 눌렀을 때 나가는 것 방지
+
+        dialog.getWindow()!!.setGravity(Gravity.BOTTOM)
+
+
+        dialog.show()// 다이얼로그 띄우기
+
+        // 진짜 삭제
+        val yesBtn = dialog.findViewById<Button>(R.id.tv_dialog_yes)
+        yesBtn.setOnClickListener {
+            //삭제 서버 통신
+            lifecycleScope.launch {
+                try {
+                    val dataContainer = ApiService.cardService.deleteCard(id)
+                } catch (e: Exception) {
+                    Log.d("실패", e.message.toString())
+                }
+            }
+            dialog.dismiss()
+            shortToast("삭제되었습니다.")
+            finish()
+        }
+
+        // 삭제 안함
+        val noBtn = dialog.findViewById<Button>(R.id.tv_dialog_no)
+        noBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
+    private fun showUserCardYouDialog(id: Int) {
         val dialog = Dialog(this)     // Dialog 초기화
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // 타이틀 제거
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.Transparent.toArgb()))  //둥근테두리로 만들려고 background를 투명하게
@@ -193,21 +230,21 @@ class DetailCardMeActivity :
 
         dialog.getWindow()!!.setGravity(Gravity.BOTTOM)
 
-        /*    val params = dialog.window!!.attributes
-            params.x = 3000
-            params.y = 50*/
-        //   params.width = 122
-        //   params.height = 72
-
-        //  dialog.window!!.attributes = params
         dialog.show()// 다이얼로그 띄우기
 
         // 보관 버튼
         val noBtn = dialog.findViewById<Button>(R.id.tv_dialog_save)
         noBtn.setOnClickListener {
-            //보관 서버 통신
-            Toast.makeText(this, "네", Toast.LENGTH_SHORT).show()
+            lifecycleScope.launch {
+                try {
+                    val dataContainer = ApiService.cardService.putCardBoxCardId(id)
+                } catch (e: Exception) {
+                    Log.d("실패", e.message.toString())
+                }
+            }
             dialog.dismiss() //토스트 띄우고 다이어로그 사라지게
+            shortToast("보관되었습니다.")
+            finish()
         }
 
         // 삭제 버튼
@@ -216,12 +253,15 @@ class DetailCardMeActivity :
             lifecycleScope.launch {
                 try {
                     val dataContainer = ApiService.cardService.deleteCard(id)
-                    Log.d("성공", dataContainer.success.toString())
                 } catch (e: Exception) {
                     Log.d("실패", e.message.toString())
                 }
             }
-            dialog.dismiss() //토스트 띄우고 다이어로그 사라지게
+            dialog.dismiss()
+            shortToast("삭제되었습니다.")
+            var intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
         }
     }
 
