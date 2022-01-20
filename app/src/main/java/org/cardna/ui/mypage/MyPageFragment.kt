@@ -1,5 +1,6 @@
 package org.cardna.ui.mypage
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,9 @@ import org.cardna.util.SpacesItemDecoration
 import org.cardna.util.initRootClickEvent
 import org.cardna.util.shortToast
 import kotlin.math.roundToInt
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
+
 
 class MyPageFragment :
     BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.cardna.R.layout.fragment_my_page) {
@@ -49,7 +53,9 @@ class MyPageFragment :
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun myPageRecyclerViewAdapter(dataList: MutableList<ResponseMyPageFriendData>) {
+        binding.ivMypageSetting.setOnTouchListener { _, _ -> true }
         list = dataList
         val myPageFriendAdapter = MyPageFriendAdapter(dataList) { item ->
             val bundle = Bundle()
@@ -65,6 +71,7 @@ class MyPageFragment :
                 .addToBackStack(null)
                 .add(org.cardna.R.id.fcv_main, mainCardFragment)
             transaction.commit()
+
         }
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         with(binding) {

@@ -13,27 +13,47 @@
         android:layout_height="match_parent"
         android:background="@color/real_black">
 
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/ibtn_maincard_alarm"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_maincard_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/ic_mypage_write"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <CheckedTextView
-            android:id="@+id/ctv_maincard_friend"
+            <ImageView
+                android:id="@+id/ibtn_maincard_alarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/ic_mypage_write"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ctl_maincard_friend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:checkMark="@drawable/selector_add_friend"
-            android:checked="true"
-            app:layout_constraintBottom_toBottomOf="@+id/ibtn_maincard_alarm"
-            app:layout_constraintEnd_toStartOf="@+id/ibtn_maincard_alarm"
-            app:layout_constraintTop_toTopOf="@+id/ibtn_maincard_alarm" />
+            app:layout_constraintBottom_toBottomOf="@+id/ctl_maincard_alarm"
+            app:layout_constraintEnd_toStartOf="@+id/ctl_maincard_alarm"
+            app:layout_constraintTop_toTopOf="@+id/ctl_maincard_alarm">
+
+            <CheckedTextView
+                android:id="@+id/ctv_maincard_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:checkMark="@drawable/selector_add_friend"
+                android:checked="true"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="@+id/ctl_maincard_friend"
+                app:layout_constraintBottom_toBottomOf="@+id/ctl_maincard_friend"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_maincard_user_name"
