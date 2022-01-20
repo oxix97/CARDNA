@@ -7,6 +7,7 @@ import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivityOtherCardCreateBinding
+import org.cardna.util.initRootClickEvent
 
 class OtherCardCreateActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityOtherCardCreateBinding>(R.layout.activity_other_card_create) {
@@ -18,7 +19,9 @@ class OtherCardCreateActivity :
     override fun initView() {
         checkIdAndName()
         checkEditTextLength()
+        initRootClickEvent(binding.ctlOthercardcreateTop)
     }
+
 
     private fun checkIdAndName() {
         val name = intent.getStringExtra("name")

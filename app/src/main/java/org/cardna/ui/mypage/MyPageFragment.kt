@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
@@ -16,12 +17,19 @@ import org.cardna.databinding.FragmentMyPageBinding
 import org.cardna.ui.maincard.MainCardFragment
 import org.cardna.ui.mypage.adapter.MyPageFriendAdapter
 import org.cardna.util.SpacesItemDecoration
+import org.cardna.util.initRootClickEvent
 import org.cardna.util.shortToast
 import kotlin.math.roundToInt
 
 class MyPageFragment :
     BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.cardna.R.layout.fragment_my_page) {
-    private lateinit var list: List<ResponseMyPageFriendData>
+    private lateinit var list: MutableList<ResponseMyPageFriendData>
+
+    override fun onResume() {
+        super.onResume()
+        binding.etMypageSearchBackground.setText("")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -31,6 +39,8 @@ class MyPageFragment :
         initScrollView()
         initClickEvent()
         initNetwork()
+        initRootClickEvent(binding.ctlMypageTop)
+        initRootClickEvent(binding.ctlMypageHeader)
     }
 
     private fun initScrollView() {
@@ -39,12 +49,13 @@ class MyPageFragment :
         }
     }
 
-    private fun myPageRecyclerViewAdapter(dataList: List<ResponseMyPageFriendData>) {
+    private fun myPageRecyclerViewAdapter(dataList: MutableList<ResponseMyPageFriendData>) {
         list = dataList
         val myPageFriendAdapter = MyPageFriendAdapter(dataList) { item ->
             val bundle = Bundle()
             bundle.putInt("id", item.id)
             bundle.putString("name", item.name)
+            bundle.putString("userImg", item.userImg)
             bundle.putString("sentence", item.sentence)
 
             val mainCardFragment = MainCardFragment()
@@ -66,11 +77,24 @@ class MyPageFragment :
 
     private fun initClickEvent() {
         with(binding) {
+            var friendName = ""
             etMypageSearchBackground.setOnEditorActionListener { textView, action, event ->
                 var handled = false
                 if (action == EditorInfo.IME_ACTION_DONE) {
                     //검색완료 키보드 이벤트 완료 시 리사이클러뷰 item 새로 띄우기
-                    requireContext().shortToast("test")
+                    friendName = etMypageSearchBackground.text.toString()
+                    lifecycleScope.launch {
+                        try {
+                            val result = ApiService.friendService.getFriendName(friendName)
+                            if (result.success && list.isNotEmpty()) {
+                                list.clear()
+                                list = mutableListOf(ResponseMyPageFriendData(result.data.id, result.data.name, result.data.userImg, result.data.sentence ?: ""))
+                                myPageRecyclerViewAdapter(list)
+                            }
+                        } catch (e: Exception) {
+                            Log.d("실패", e.message.toString())
+                        }
+                    }
                     handled = true
                 }
                 handled
