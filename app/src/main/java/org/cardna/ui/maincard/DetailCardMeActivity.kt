@@ -1,5 +1,6 @@
 package org.cardna.ui.maincard
 
+import android.animation.Animator
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -142,6 +143,7 @@ class DetailCardMeActivity :
             override fun onAnimationCancel(animation: Animator?) {}
             override fun onAnimationRepeat(animation: Animator?) {}
         })
+
         binding.lavDetailcardLikeme.setAnimation(R.raw.lottie_cardme_1) // 카드나에 대한 로티 setting
     }
 
