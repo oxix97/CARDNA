@@ -1,7 +1,6 @@
 package org.cardna.data.remote.api
 
 import com.google.gson.GsonBuilder
-import com.google.gson.internal.GsonBuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,7 +10,7 @@ import java.io.IOException
 object ApiService {
     private val BASE_URL = "https://asia-northeast3-cardna-29f5b.cloudfunctions.net/api/"
 
-    var gson= GsonBuilder().setLenient().create()
+    var gson = GsonBuilder().setLenient().create()
 
     private val Retrofit: Retrofit = retrofit2.Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -39,10 +38,13 @@ private fun provideOkHttpClient(
 class AppInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain)
-            : okhttp3.Response = with(chain) {
+        : okhttp3.Response = with(chain) {
         val newRequest = request().newBuilder()
-            .addHeader("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJqdW5namFlQGdtYWlsLmNvbSIsIm5hbWUiOiLsoJXsnqwiLCJmaXJlYmFzZUlkIjoidnZJMXFERTVsS2F3NTEyYkl5bUNIekN2SEx1MiIsImlhdCI6MTY0MjQ4NDQyNCwiZXhwIjoxNjQ1MDc2NDI0LCJpc3MiOiJjYXJkbmEifQ.yNk3jLxi6t37oq1p8ShwEghCyGzlv9s-lT3Y7VN-SZg")
-           .build()
+            .addHeader(
+                "token",
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJqaXdvb0BnbWFpbC5jb20iLCJuYW1lIjoi7KeA7JqwIiwiZmlyZWJhc2VJZCI6ImVpSk9qSHJMTWtVOEpiRTg4TUQxWGp6UWhYRzIiLCJpYXQiOjE2NDI2NjA2MjAsImV4cCI6MTY0NTI1MjYyMCwiaXNzIjoiY2FyZG5hIn0.ZW9Ot20SauGijUFjKv5BDb8Ix48RFONvk0Jn_Z0MQYg"
+            )
+            .build()
         proceed(newRequest)
     }
 }
