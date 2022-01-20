@@ -1,9 +1,11 @@
 package org.cardna.ui.maincard
 
+import android.animation.Animator
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -13,8 +15,9 @@ import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.lifecycleScope
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.utils.LottieValueAnimator
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.cardna.MainActivity
 import org.cardna.R
@@ -29,7 +32,7 @@ class DetailCardMeActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityDetailCardMeBinding>(R.layout.activity_detail_card_me) {
 
     private lateinit var DetailCardData: ResponseCardDetailData.Data
-
+    private var isChecked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -48,7 +51,6 @@ class DetailCardMeActivity :
                 val isLike = ApiService.likeService.postLike(RequestLikeData(id)).data.isLiked
                 Log.d("isLiked", isLike.toString())
                 initNetwork(id, isMyCard, isLike)
-
             } catch (e: Exception) {
                 Log.d("실패", e.message.toString())
             }
@@ -57,8 +59,10 @@ class DetailCardMeActivity :
 
     //상세카드 조회->ResponseDetailData 데이터 값 받아옴
     private fun initNetwork(id: Int, isMyCard: Boolean, isLike: Boolean) {
+        //isLike -> true 면 이미 눌려 있는거
         if (isLike) {
-            binding.ctvLikeIcon.isChecked
+            binding.ctvLikeIcon.isChecked = true
+            isChecked = isLike
         }
         lifecycleScope.launch {
             try {
@@ -152,7 +156,8 @@ class DetailCardMeActivity :
 
     private fun setData(isLike: Boolean, id: Int) {
         with(binding) {
-            Glide.with(this@DetailCardMeActivity).load(DetailCardData.cardImg).into(binding.ivDetailcardImage)
+            Glide.with(this@DetailCardMeActivity).load(DetailCardData.cardImg)
+                .into(binding.ivDetailcardImage)
 
             //타이틀
             tvDetailcardTitle.text = DetailCardData.title
@@ -167,10 +172,16 @@ class DetailCardMeActivity :
             tvDetailcardUserName.text = DetailCardData.relation
 
             ctvLikeIcon.setOnClickListener {
-                var ischeck = false
+                //여기서 아이디 값 받아서 cardme cardyou 로티 적용하기
+                val isMe = intent.getBooleanExtra("isMe", false)
+                if (isMe) {
+                    binding.lavDetailcardLikeme.visibility = View.VISIBLE
+                } else {
+                    binding.lavDetailcardLikeme.visibility = View.VISIBLE
+                }
                 ctvLikeIcon.toggle()
 
-                Log.d("ischeck", ischeck.toString())
+                Log.d("ischeck", isChecked.toString())
             }
         }
     }
@@ -236,7 +247,6 @@ class DetailCardMeActivity :
             finish()
         }
 
-
         // 삭제 버튼
         val deleteBtn = dialog.findViewById<Button>(R.id.tv_dialog_delete)
         deleteBtn.setOnClickListener {
@@ -253,5 +263,26 @@ class DetailCardMeActivity :
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
         }
+    }
+
+    private fun cardLike() {
+        val id = intent.getIntExtra("id", 0)
+        val data = RequestLikeData(id)
+        lifecycleScope.launch {
+            try {
+                ApiService.likeService.postLike(data)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cardLike()
+    }
+
+    companion object {
+        const val SPLASH_VIEW_TIME = 670L
     }
 }

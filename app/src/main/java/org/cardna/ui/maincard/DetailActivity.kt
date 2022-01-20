@@ -29,7 +29,6 @@ class DetailActivity :
         initView()
     }
 
-
     override fun initView() {
         initNetwork()
         getCardPackData()
