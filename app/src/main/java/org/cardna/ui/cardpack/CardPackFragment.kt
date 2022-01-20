@@ -53,21 +53,18 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
     }
 
     private fun initViewModel() {
-        binding.viewModel = cardPackViewModel   //onCreate가 호출되고 사용되는 지금 이시점!!!! 에서 by lazy로 지연초기화 했던 값이 들어감
+        binding.viewModel = cardPackViewModel
         binding.lifecycleOwner = this@CardPackFragment
-
     }
 
     private fun initCardPackAdapter() {
         val fragmentList: List<Fragment>
 
-        //타인이 접근
         var id: Int?
         if (getArguments() != null) {
             id = getArguments()?.getInt("id", 4) ?: 0
             cardPackViewModel.id = id
 
-            // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
             val bundle = Bundle()
             bundle.putInt("id", id)
 
@@ -88,12 +85,6 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
         cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
         binding.vpCardpack.adapter = cardPackTabLayoutAdapter
-    }
-
-    private fun restartLayout() {
-        if (cardPackViewModel.id != null) {
-            initCardYouLayout(cardPackViewModel.id!!)
-        } else (initCardMeLayout())
     }
 
     private fun initCardPackTabLayout() {
@@ -175,6 +166,5 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
                 startActivity(intent)
             }
         }
-
     }
 }

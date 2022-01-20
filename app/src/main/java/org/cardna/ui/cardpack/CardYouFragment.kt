@@ -29,8 +29,6 @@ class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.ca
     private var isMyCard: Boolean = true
     var id: Int? = 4
 
-    //private lateinit var cardYouAdapter: CardPackYouRecyclerViewAdapter
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()

@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
@@ -248,7 +249,9 @@ class DetailCardMeActivity :
             }
             dialog.dismiss()
             shortToast("삭제되었습니다.")
-            finish()
+            var intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
         }
     }
 }

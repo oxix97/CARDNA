@@ -26,15 +26,13 @@ class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.card
     }
 
     override fun initView() {
-        if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
+        if (getArguments() != null) {
             getCardMeUsingId(getArguments()?.getInt("id", 4) ?: 0)
-            //내가 내 카드나 접근하는 경우
         } else {
             getCardMe()
         }
     }
 
-    //내가 내 카드나 볼때
     private fun getCardMe() {
         lifecycleScope.launch {
             try {
@@ -80,5 +78,4 @@ class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.card
             rvCardme.addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
         }
     }
-
 }
