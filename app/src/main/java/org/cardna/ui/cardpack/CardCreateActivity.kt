@@ -41,6 +41,9 @@ class CardCreateActivity :
     private var uri: Uri? = null // 이를 multipart로 변환해서 서버에 img로 보내줄 것임
     private var ifChooseImg: Boolean = false // 갤러리 이미지를 선택했는지 확인해주는 변수 => 나중에 버튼 enable 할때 사용
 
+    private var status:Int = 0
+    private var success:Boolean ? = null
+    private var message:String ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,7 +178,6 @@ class CardCreateActivity :
                 lifecycleScope.launch(Dispatchers.IO) {
                     runCatching { cardService.postCreateCardMe(body, null) }
                         .onSuccess {
-                            // Log.d("카드나 작성 성공", it.message)
                         }
                         .onFailure {
                             it.printStackTrace()
@@ -186,7 +188,6 @@ class CardCreateActivity :
                 lifecycleScope.launch(Dispatchers.IO) {
                     runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
                         .onSuccess {
-                            Log.d("카드나 작성 성공", it.message)
                         }
                         .onFailure {
                             it.printStackTrace()
@@ -206,14 +207,12 @@ class CardCreateActivity :
 
             // if(파일이 잘 들어갔을 때)
             // 2. cardCreateCompleteActivity로 인텐트로 이동
+
             val intent = Intent(this@CardCreateActivity, CardCreateCompleteActivity::class.java)
             intent.putExtra("meOrYou", CARD_ME) // 현재는 카드나 작성이므로 CARD_ME를 보내줌
             intent.putExtra("symbolId", symbolId) // 심볼 - 2, 갤러리 - null
             intent.putExtra("cardImg", uri.toString()) // 심볼 - null, 갤러리 - adflkadlfaf
             intent.putExtra("cardTitle", binding.etCardcreateKeyword.text.toString())
-
-            Log.d("uri", uri.toString())
-            Log.d("symbolId", symbolId.toString())
 
             startActivity(intent)
         }
