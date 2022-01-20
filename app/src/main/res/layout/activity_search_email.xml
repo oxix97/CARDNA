@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/real_black"
+        android:id="@+id/ctl_searchemail_top"
         tools:context=".ui.mypage.SearchEmailActivity">
 
         <EditText

@@ -14,6 +14,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -27,16 +29,17 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService.cardService
 import org.cardna.data.remote.model.cardpack.RequestCreateCardMeData
 import org.cardna.databinding.ActivityCardCreateBinding
+import org.cardna.util.initRootClickEvent
 import org.cardna.util.shortToast
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.InputStream
-import java.net.URI
 
 class CardCreateActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateBinding>(R.layout.activity_card_create) {
     private var symbolId: Int? = null // 이미지가 있는 경우 null로 보내줘야 함
     private var uri: Uri? = null // 이를 multipart로 변환해서 서버에 img로 보내줄 것임
+
 
     private var ifChooseImg: Boolean = false // 갤러리 이미지를 선택했는지 확인해주는 변수 => 나중에 버튼 enable 할때 사용
 
@@ -50,7 +53,19 @@ class CardCreateActivity :
         checkEditTextLength()
         setChooseCardListener()
         makeCardListener()
+       initRootClickEvent(binding.tvCardcreateTitle)
+       initRootClickEvent(binding.svCardcreateTop)
+         // initRootClickEvent()
     }
+
+
+    //로그인 화면 전체 아무곳이나 눌러도 키보드 내려가도록
+ /*   private fun initRootClickEvent() {
+        binding.tvCardcreateTitle.setOnClickListener {
+            ViewCompat.getWindowInsetsController(it)?.hide(WindowInsetsCompat.Type.ime())
+        }
+    }*/
+
 
     // editText 글자 수에 따라 글자 수 업데이트, 버튼 선택가능하도록
     private fun checkEditTextLength() {
@@ -73,7 +88,7 @@ class CardCreateActivity :
 
     }
 
-    private fun checkCompleteBtnClickable(){
+    private fun checkCompleteBtnClickable() {
         if (binding.etCardcreateKeyword.length() > 0 && binding.etCardcreateDetail.length() > 0 && ifChooseImg) {
             with(binding) {
                 btnCardcreateComplete.isClickable = true
@@ -169,9 +184,11 @@ class CardCreateActivity :
             lifecycleScope.launch(Dispatchers.IO) {
                 runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
                     .onSuccess {
-                        Log.d("카드나 작성 성공", it.message) }
+                        Log.d("카드나 작성 성공", it.message)
+                    }
                     .onFailure {
-                            it.printStackTrace() }
+                        it.printStackTrace()
+                    }
             }
 
             // if(파일이 잘 들어갔을 때)
