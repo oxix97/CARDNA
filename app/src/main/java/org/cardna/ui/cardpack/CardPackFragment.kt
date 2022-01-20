@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.fragment.app.viewModels
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,44 +21,51 @@ import org.cardna.data.remote.api.ApiService
 import org.cardna.databinding.CardpackCustomTablayoutBinding
 import org.cardna.databinding.FragmentCardPackBinding
 import org.cardna.ui.cardpack.adapter.CardPackTabLayoutAdapter
-import org.cardna.ui.maincard.DetailCardMeActivity
 import org.cardna.ui.mypage.OtherCardCreateActivity
-import org.cardna.ui.mypage.OtherCardWriteActivity
 
 class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.layout.fragment_card_pack) {
 
     private lateinit var cardPackTabLayoutAdapter: CardPackTabLayoutAdapter
+    private val cardPackViewModel: CardPackViewModel by viewModels()
 
     override fun onResume() {
         super.onResume()
-        initCardMeLayout()
-      //  initCardYouLayout()
+        if (cardPackViewModel.id == null) {
+            val fragmentList: List<Fragment>
+            fragmentList = listOf(CardMeFragment(), CardYouFragment())
+            initCardMeLayout()
+
+            cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
+            cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
+            binding.vpCardpack.adapter = cardPackTabLayoutAdapter
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initViewModel()
     }
 
     override fun initView() {
         initCardPackAdapter()
         initCardPackTabLayout()
+    }
 
+    private fun initViewModel() {
+        binding.viewModel = cardPackViewModel
+        binding.lifecycleOwner = this@CardPackFragment
     }
 
     private fun initCardPackAdapter() {
         val fragmentList: List<Fragment>
-
-        //타인이 접근
         var id: Int?
-        var name: String?
 
         if (getArguments() != null) {
             id = getArguments()?.getInt("id", 4) ?: 0
-            name = getArguments()?.getString("name")
-            Log.d("idid", id.toString())
 
-            // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
+            cardPackViewModel.id = id
+
             val bundle = Bundle()
             bundle.putInt("id", id)
 
@@ -68,9 +76,9 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             cardYouFragment.setArguments(bundle)
 
             fragmentList = listOf(cardMeFragment, cardYouFragment)
-            initCardYouLayout(id, name)
-            //내가 접근->걍 통신하면됨
+            initCardYouLayout(id)
         } else {
+            Log.d("내가 내메인카드", "내가내메인")
             fragmentList = listOf(CardMeFragment(), CardYouFragment())
             initCardMeLayout()
         }
@@ -142,7 +150,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         setMakeCardIvListener()
     }
 
-    private fun initCardYouLayout(id: Int, name: String?) {
+    private fun initCardYouLayout(id: Int) {
         lifecycleScope.launch {
             val totalCardCnt = ApiService.cardService.getOtherCardMe(id).data.totalCardCnt
             withContext(Dispatchers.Main) {
@@ -153,13 +161,10 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             ivMakeCard.setBackgroundResource(R.drawable.ic_mypage_write)
             ivMakeCard.setOnClickListener {
                 val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
-                    //현재 사용자의 name값을 전달해줘야하나? 토큰으로 못가져오나..
                     putExtra("id", id)
-                    putExtra("name", name)
                 }
                 startActivity(intent)
             }
         }
-
     }
 }
