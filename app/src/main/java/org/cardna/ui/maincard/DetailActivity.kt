@@ -38,8 +38,7 @@ class DetailActivity :
         // OtherWriteActivity에서 넘겨진 userId값에 해당하는 카드 상세 정보를 서버에서 받아와서 뿌려줌
         lifecycleScope.launch {
             val id = intent.getIntExtra("id", 0)
-            val dataContainer =
-                ApiService.cardService.getCardDetail(id) // 카드 상세 조회
+            val dataContainer = ApiService.cardService.getCardDetail(id) // 카드 상세 조회
 
             // 받아온 데이터를 뷰에 뿌려줌
             setCardDetail(dataContainer.data, dataContainer.message)
@@ -52,7 +51,7 @@ class DetailActivity :
         binding.apply {
             tvDetailcardTitle.text = cardInfo.title
             tvDetailcardAbout.text = cardInfo.content
-            tvDetailcardUserName.text = cardInfo.relation
+            tvDetailcardUserName.text = "From. ${cardInfo.relation}"
             tvDetailcardDate.text = cardInfo.createdAt
             tvDetailcardUserName.text = cardInfo.name
             Glide

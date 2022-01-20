@@ -26,6 +26,7 @@ import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.mypage.RequestCreateCardYouData
 import org.cardna.databinding.ActivityOtherCardWriteBinding
 import org.cardna.ui.cardpack.BottomDialogOtherImageFragment
+import org.cardna.util.initRootClickEvent
 import org.cardna.util.shortToast
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -45,25 +46,33 @@ class OtherCardWriteActivity
     }
 
     override fun initView() {
+        setOtherName()
         checkEditTextLength()
         makeCardListener()
         setChooseCardListener()
+        setOtherName()
+        initRootClickEvent(binding.tvOthercardwriteTitle)
+        initRootClickEvent(binding.svOthercardwriteTop)
+    }
+
+    private fun setOtherName(){
+        val name = intent.getStringExtra("name")
+        binding.tvOthercardwriteTitle.text = "${name}는"
     }
 
     // editText 글자 수에 따라 글자 수 업데이트, 버튼 선택가능하도록
     private fun checkEditTextLength() {
+        binding.ivOthercardwriteGalleryImg.clipToOutline = true // imageView 모서리 둥글게
         binding.btnOthercardwriteComplete.isClickable = false;
 
         binding.etOthercardwriteKeyword.addTextChangedListener {
             checkCompleteBtnClickable()
-            binding.tvOthercardwriteCntKeyword.text =
-                "${binding.etOthercardwriteKeyword.length()}/14"
+            binding.tvOthercardwriteCntKeyword.text = "${binding.etOthercardwriteKeyword.length()}/14"
         }
 
         binding.etOthercardwriteDetail.addTextChangedListener {
             checkCompleteBtnClickable()
-            binding.tvOthercardwriteCntDetail.text =
-                "${binding.etOthercardwriteDetail.length()}/200"
+            binding.tvOthercardwriteCntDetail.text = "${binding.etOthercardwriteDetail.length()}/200"
         }
 
     }
@@ -126,16 +135,13 @@ class OtherCardWriteActivity
                         ivOthercardwriteGalleryImg.visibility = View.VISIBLE
                         // 각 심볼 이미지 띄워주기
                         ivOthercardwriteGalleryImg.setImageResource(img_index)
-                        clOthercardwriteImg.visibility = View.INVISIBLE
 
                         ifChooseImg = true
                         checkCompleteBtnClickable()
+                        clOthercardwriteImg.visibility = View.INVISIBLE
                     }
                 }
-            bottomDialogOtherImageFragment.show(
-                supportFragmentManager,
-                bottomDialogOtherImageFragment.tag
-            )
+            bottomDialogOtherImageFragment.show(supportFragmentManager, bottomDialogOtherImageFragment.tag)
         }
     }
 
@@ -146,32 +152,34 @@ class OtherCardWriteActivity
     private fun makeCardListener() {
         binding.btnOthercardwriteComplete.setOnClickListener {
             // 카드나 만들기 버튼을 눌렀을 때,
+            // 1. 서버로 title, content, symbolId, uri 전송
 
-
-            // MainActivity 에서 올 때, id값을 넘겨줬을 거임
+            // MainActivity -> OtherCardCreateActivity -> 지금까지 올 때, id값, relation을 넘겨줬을 거임
             val relation = intent.getStringExtra("relation")
             val userId = intent.getIntExtra("id", 0)
 
-            // 1. 서버로 title, content, symbolId, uri 전송
             // symbolId - 카드 이미지 심볼 id, 이미지가 있는 경우 null을 보내주면 됨
             val body = RequestCreateCardYouData(
-                binding.etOthercardwriteKeyword.text.toString(),
-                binding.etOthercardwriteDetail.text.toString(),
-                relation!!,
+                binding.etOthercardwriteKeyword.text.toString(), // title
+                binding.etOthercardwriteDetail.text.toString(), // content
+                relation!!, // relation
                 symbolId // 갤러리 이미지를 선택했다면 dialog 완료 버튼을 누르지 않았을 테니까 null 값일 것임
             ).toRequestBody()
 
-
-            lifecycleScope.launch(Dispatchers.IO) {
-                runCatching {
-                    ApiService.cardService.postCreateCardYou(
-                        userId,
-                        body,
-                        makeUriToFile()
-                    )
+            if(uri == null){ // 심볼 선택 시
+                lifecycleScope.launch(Dispatchers.IO) {
+                    runCatching { ApiService.cardService.postCreateCardYou(userId, body, null) }
+                        .onSuccess { Log.d("카드나 작성 성공", it.message) }
+                        .onFailure { Log.d("카드나 작성 실패", it.message!!)}
                 }
-                    .onSuccess { Log.d("카드너 작성 성공", it.message) }
-                    .onFailure { it.printStackTrace() }
+            }
+            else{ // 이미지 선택 시
+                lifecycleScope.launch(Dispatchers.IO) {
+                    runCatching { ApiService.cardService.postCreateCardYou(userId, body, makeUriToFile()) }
+                        .onSuccess { Log.d("카드나 작성 성공", it.message) }
+                        .onFailure { Log.d("카드나 작성 실패", it.message!!)
+                            it.printStackTrace() }
+                }
             }
 
             // 2. otherCardCreateCompleteActivity로 인텐트로 이동

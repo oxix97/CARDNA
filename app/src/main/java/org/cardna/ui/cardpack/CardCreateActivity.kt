@@ -14,8 +14,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -39,10 +37,11 @@ class CardCreateActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityCardCreateBinding>(R.layout.activity_card_create) {
     private var symbolId: Int? = null // 이미지가 있는 경우 null로 보내줘야 함
     private var uri: Uri? = null // 이를 multipart로 변환해서 서버에 img로 보내줄 것임
-
-
     private var ifChooseImg: Boolean = false // 갤러리 이미지를 선택했는지 확인해주는 변수 => 나중에 버튼 enable 할때 사용
 
+    private var status:Int = 0
+    private var success:Boolean ? = null
+    private var message:String ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,27 +52,23 @@ class CardCreateActivity :
         checkEditTextLength()
         setChooseCardListener()
         makeCardListener()
-       initRootClickEvent(binding.tvCardcreateTitle)
-       initRootClickEvent(binding.svCardcreateTop)
-         // initRootClickEvent()
+        initRootClickEvent(binding.tvCardcreateTitle)
+        initRootClickEvent(binding.svCardcreateTop)
+        // initRootClickEvent()
     }
 
 
     //로그인 화면 전체 아무곳이나 눌러도 키보드 내려가도록
- /*   private fun initRootClickEvent() {
-        binding.tvCardcreateTitle.setOnClickListener {
-            ViewCompat.getWindowInsetsController(it)?.hide(WindowInsetsCompat.Type.ime())
-        }
-    }*/
+    /*   private fun initRootClickEvent() {
+           binding.tvCardcreateTitle.setOnClickListener {
+               ViewCompat.getWindowInsetsController(it)?.hide(WindowInsetsCompat.Type.ime())
+           }
+       }*/
 
 
     // editText 글자 수에 따라 글자 수 업데이트, 버튼 선택가능하도록
     private fun checkEditTextLength() {
-
-        binding.ivCardcreateGalleryImg.clipToOutline = true
-        // imageView 모서리 둥글게
-
-
+        binding.ivCardcreateGalleryImg.clipToOutline = true // imageView 모서리 둥글게
         binding.btnCardcreateComplete.isClickable = false;
 
         binding.etCardcreateKeyword.addTextChangedListener {
@@ -85,7 +80,6 @@ class CardCreateActivity :
             checkCompleteBtnClickable()
             binding.tvCardcreateCntDetail.text = "${binding.etCardcreateDetail.length()}/200"
         }
-
     }
 
     private fun checkCompleteBtnClickable() {
@@ -114,30 +108,24 @@ class CardCreateActivity :
                 var img_index: Int = GALLERY
                 when (it) {
                     GALLERY -> {  // 일 경우가 없을 듯
-                        Toast.makeText(this, "GALLERY", Toast.LENGTH_SHORT).show()
                     }
                     SYMBOL_0 -> {
-                        Toast.makeText(this, "SYMBOL_0", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_0
                         symbolId = SYMBOL_0
                     }
                     SYMBOL_1 -> {
-                        Toast.makeText(this, "SYMBOL_1", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_1
                         symbolId = SYMBOL_1
                     }
                     SYMBOL_2 -> {
-                        Toast.makeText(this, "SYMBOL_2", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_2
                         symbolId = SYMBOL_2
                     }
                     SYMBOL_3 -> {
-                        Toast.makeText(this, "SYMBOL_3", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_3
                         symbolId = SYMBOL_3
                     }
                     SYMBOL_4 -> {
-                        Toast.makeText(this, "SYMBOL_4", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_4
                         symbolId = SYMBOL_4
                     }
@@ -169,10 +157,7 @@ class CardCreateActivity :
     // 2. cardCreateCompleteActivity로 인텐트로 이동
     private fun makeCardListener() {
         binding.btnCardcreateComplete.setOnClickListener {
-            // 카드나 만들기 버튼을 눌렀을 때,
-
-            Log.d("카드나 작성 실패 ?", "후")
-
+            // 카드나 만들기 버튼을 눌렀을 때
             // 1. 서버로 title, content, symbolId, uri 전송
             // symbolId - 카드 이미지 심볼 id, 이미지가 있는 경우 null을 보내주면 됨
             val body = RequestCreateCardMeData(
@@ -181,26 +166,40 @@ class CardCreateActivity :
                 symbolId // 갤러리 이미지를 선택했다면 dialog 완료 버튼을 누르지 않았을 테니까 null 값일 것임
             ).toRequestBody()
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
-                    .onSuccess {
-                        Log.d("카드나 작성 성공", it.message)
-                    }
-                    .onFailure {
-                        it.printStackTrace()
-                    }
+            if(uri == null){ // 심볼 선택
+                lifecycleScope.launch(Dispatchers.IO) {
+                    runCatching { cardService.postCreateCardMe(body, null) }
+                        .onSuccess { Log.d("카드나 작성 성공", it.message) }
+                        .onFailure { Log.d("카드나 작성 실패", it.message!!)}
+                }
             }
+            else{ // 이미지 선택
+                lifecycleScope.launch(Dispatchers.IO) {
+                    runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
+                        .onSuccess { Log.d("카드나 작성 성공", it.message) }
+                        .onFailure { Log.d("카드나 작성 실패", it.message!!)
+                            it.printStackTrace() }
+                }
+            }
+
+//            lifecycleScope.launch(Dispatchers.IO) {
+//                runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
+//                    .onSuccess {
+//                        // Log.d("카드나 작성 성공", it.message)
+//                    }
+//                    .onFailure {
+//                        it.printStackTrace()
+//                    }
+//            }
 
             // if(파일이 잘 들어갔을 때)
             // 2. cardCreateCompleteActivity로 인텐트로 이동
+
             val intent = Intent(this@CardCreateActivity, CardCreateCompleteActivity::class.java)
             intent.putExtra("meOrYou", CARD_ME) // 현재는 카드나 작성이므로 CARD_ME를 보내줌
             intent.putExtra("symbolId", symbolId) // 심볼 - 2, 갤러리 - null
             intent.putExtra("cardImg", uri.toString()) // 심볼 - null, 갤러리 - adflkadlfaf
             intent.putExtra("cardTitle", binding.etCardcreateKeyword.text.toString())
-
-            Log.d("uri", uri.toString())
-            Log.d("symbolId", symbolId.toString())
 
             startActivity(intent)
         }
@@ -211,7 +210,7 @@ class CardCreateActivity :
     private fun makeUriToFile(): MultipartBody.Part {
         val options = BitmapFactory.Options()
         val inputStream: InputStream =
-            requireNotNull(contentResolver.openInputStream(uri!!))
+            requireNotNull(contentResolver.openInputStream(uri!!)) // 여기서 문제 인가
         val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap!!.compress(Bitmap.CompressFormat.PNG, 20, byteArrayOutputStream)
@@ -258,7 +257,8 @@ class CardCreateActivity :
 
             // imageView는 보이도록
             binding.ivCardcreateGalleryImg.visibility = View.VISIBLE
-            binding.clCardcreateImg.visibility = View.INVISIBLE // 이제 INVISIBLE이니까 한번 이미지 선택하면 다시 선택불가
+            binding.clCardcreateImg.visibility =
+                View.INVISIBLE // 이제 INVISIBLE이니까 한번 이미지 선택하면 다시 선택불가
             Glide.with(this).load(uri).into(binding.ivCardcreateGalleryImg)
             ifChooseImg = true
             checkCompleteBtnClickable()

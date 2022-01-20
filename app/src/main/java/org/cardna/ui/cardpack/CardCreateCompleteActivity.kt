@@ -101,8 +101,6 @@ class CardCreateCompleteActivity :
         binding.tvCardcreateComplete.text = spannable
     }
 
-
-
     companion object {
         const val SYMBOL_0 = 0
         const val SYMBOL_1 = 1

@@ -137,8 +137,7 @@ class DetailCardMeActivity :
             //관계 text없애기
             tvDetailcardUserName.visibility = View.GONE
         }
-
-
+        
     }
 
     //타인이 카드너 상세

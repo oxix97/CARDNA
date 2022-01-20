@@ -22,8 +22,11 @@ class OtherCardCreateActivity :
         initRootClickEvent(binding.ctlOthercardcreateTop)
     }
 
-
     private fun checkIdAndName() {
+        // 1. 친구의 대표카드 창에서 연필모양 선택 - MainActivity의 mainCard Fragment에서 Intent로 액티비티 전환
+        // 2. 친구의 대표카드 창에서 카드팩으로 들어가서 거기서 연필 모양 - MainActivity의 cardpack Fagment에서 Intent로 액티비티 전환
+
+        //
         val name = intent.getStringExtra("name")
         val id = intent.getIntExtra("id", 0)
         binding.tvOthercardcreateRelation.text = "당신은 ${name}님에게 어떤 사람인가요 ?"
@@ -32,6 +35,10 @@ class OtherCardCreateActivity :
             // editText 값이 들어가있으면 버튼 클릭할 수 있도록
 
             var intent = Intent(this, OtherCardWriteActivity::class.java)
+
+            // 이름, id, 관계 3개 OtherCardWriteActivity로 전달
+            intent.putExtra("name",  name)
+            intent.putExtra("id", id)
             intent.putExtra("relation", binding.etOthercardcreateRelation.text.toString())
             startActivity(intent)
         }
