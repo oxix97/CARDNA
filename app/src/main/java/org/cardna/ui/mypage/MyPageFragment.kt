@@ -17,6 +17,7 @@ import org.cardna.databinding.FragmentMyPageBinding
 import org.cardna.ui.maincard.MainCardFragment
 import org.cardna.ui.mypage.adapter.MyPageFriendAdapter
 import org.cardna.util.SpacesItemDecoration
+import org.cardna.util.initRootClickEvent
 import org.cardna.util.shortToast
 import kotlin.math.roundToInt
 
@@ -38,6 +39,8 @@ class MyPageFragment :
         initScrollView()
         initClickEvent()
         initNetwork()
+        initRootClickEvent(binding.ctlMypageTop)
+        initRootClickEvent(binding.ctlMypageHeader)
     }
 
     private fun initScrollView() {
