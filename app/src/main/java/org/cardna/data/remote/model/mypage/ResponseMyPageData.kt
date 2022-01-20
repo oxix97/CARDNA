@@ -13,7 +13,7 @@ data class ResponseMyPageData(
         val name: String,
         val userImg: String,
         val email: String,
-        val friendList: List<ResponseMyPageFriendData>,
+        val friendList: MutableList<ResponseMyPageFriendData>,
     )
 }
 

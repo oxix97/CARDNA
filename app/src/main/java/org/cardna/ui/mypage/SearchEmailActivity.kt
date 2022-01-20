@@ -1,10 +1,19 @@
 package org.cardna.ui.mypage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
+import org.cardna.data.remote.api.ApiService
+import org.cardna.data.remote.model.mypage.ResponseFriendSearchEmailData
+import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
 import org.cardna.databinding.ActivitySearchEmailBinding
 import org.cardna.util.shortToast
 
@@ -12,25 +21,49 @@ class SearchEmailActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivitySearchEmailBinding>(R.layout.activity_search_email) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        transactionEvent()
+        initView()
     }
 
     override fun initView() {
+        transactionEvent()
     }
 
     private fun transactionEvent() {
-        binding.clSearchemail.visibility = View.INVISIBLE
-        binding.etSearchemailBackground.setOnEditorActionListener { textView, action, event ->
-            var handled = false
-            if (action == EditorInfo.IME_ACTION_DONE) {
-                //네트워크 통신 성공하면 text값 가져와서 일치하는 item 프로필, 이름, 이메일 띄우기
+        with(binding) {
+            clSearchemail.visibility = View.INVISIBLE
+            var friendEmail = ""
+            etSearchemailBackground.setOnEditorActionListener { textView, action, event ->
+                var handled = false
+                if (action == EditorInfo.IME_ACTION_DONE) {
+                    //네트워크 통신 성공하면 text값 가져와서 일치하는 item 프로필, 이름, 이메일 띄우기
+                    friendEmail = etSearchemailBackground.text.toString()
+                    var result: ResponseFriendSearchEmailData
+                    lifecycleScope.launch {
+                        try {
+                            result = ApiService.friendService.getFriendSearchEmail(friendEmail)
+                            if (result.success) {
+                                clSearchemail.visibility = View.VISIBLE
+                                binding.clSearchemail.visibility = View.VISIBLE
+                                withContext(Dispatchers.Main) {
+                                    Glide.with(this@SearchEmailActivity).load(result.data.userImg).circleCrop().into(ivSearchemailFriendProfile)
+                                    tvSearchemailFriendName.text = result.data.name
+                                    tvSearchemailFriendEmail.text = result.data.email
+                                    if (result.data.isFriend) {
+                                    }
+                                }
+                            }
+                        } catch (e: Exception) {
+                            shortToast("존재하지 않는 회원입니다.")
+                        }
+                    }
 
-             //   showFriend(cardImg, title, sentence)
-                handled = true
+                    //   showFriend(cardImg, title, sentence)
+                    handled = true
+                }
+                handled
             }
-            handled
-        }
 
+        }
     }
 
     private fun showFriend(cardImg: String, title: String, sentence: String) {
