@@ -10,6 +10,7 @@ import org.cardna.data.remote.model.mypage.ResponseCardStorageData
 import org.cardna.databinding.ActivityOtherWriteBinding
 import org.cardna.ui.mypage.adapter.OtherWriteAdapter
 import org.cardna.util.SpacesItemDecoration
+import org.cardna.util.SpacesItemDecorationOnlybottom
 import kotlin.math.roundToInt
 
 class OtherWriteActivity :
@@ -46,7 +47,7 @@ class OtherWriteActivity :
         adapter = OtherWriteAdapter()
 
         binding.rvOtherwriteList
-            .addItemDecoration(SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt()))
+            .addItemDecoration(SpacesItemDecorationOnlybottom((8 * resources.displayMetrics.density).roundToInt()))
         binding.rvOtherwriteList.adapter = adapter
         adapter.cardList = cardList
         adapter.notifyDataSetChanged()
