@@ -42,7 +42,7 @@ class AppInterceptor : Interceptor {
             : okhttp3.Response = with(chain) {
         val newRequest = request().newBuilder()
             .addHeader("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJqdW5namFlQGdtYWlsLmNvbSIsIm5hbWUiOiLsoJXsnqwiLCJmaXJlYmFzZUlkIjoidnZJMXFERTVsS2F3NTEyYkl5bUNIekN2SEx1MiIsImlhdCI6MTY0MjQ4NDQyNCwiZXhwIjoxNjQ1MDc2NDI0LCJpc3MiOiJjYXJkbmEifQ.yNk3jLxi6t37oq1p8ShwEghCyGzlv9s-lT3Y7VN-SZg")
-            .build()
+           .build()
         proceed(newRequest)
     }
 }
