@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
@@ -46,9 +47,57 @@ class CardCreateActivity :
     }
 
     override fun initView() {
+        checkEditTextLength()
         setChooseCardListener()
         makeCardListener()
     }
+
+    // editText 글자 수에 따라 글자 수 업데이트, 버튼 선택가능하도록
+    private fun checkEditTextLength() {
+        binding.btnCardcreateComplete.isClickable = false;
+
+        binding.etCardcreateKeyword.addTextChangedListener {
+            if (binding.etCardcreateKeyword.length() > 0 && binding.etCardcreateDetail.length() > 0 && ifChooseImg) {
+                with(binding) {
+                    btnCardcreateComplete.isClickable = true
+                    btnCardcreateComplete.isEnabled = true
+                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.black))
+                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_cardme_abled)
+                }
+            } else {
+                with(binding) {
+                    btnCardcreateComplete.isClickable = false;
+                    btnCardcreateComplete.isEnabled = false;
+                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.white_2))
+                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
+                }
+            }
+
+            binding.tvCardcreateCntKeyword.text = "${binding.etCardcreateKeyword.length()}/14"
+        }
+
+        binding.etCardcreateDetail.addTextChangedListener {
+            if (binding.etCardcreateKeyword.length() > 0 && binding.etCardcreateDetail.length() > 0 && ifChooseImg) {
+                with(binding) {
+                    btnCardcreateComplete.isClickable = true
+                    btnCardcreateComplete.isEnabled = true
+                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.black))
+                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_cardme_abled)
+                }
+            } else {
+                with(binding) {
+                    btnCardcreateComplete.isClickable = false;
+                    btnCardcreateComplete.isEnabled = false;
+                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.white_2))
+                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
+                }
+            }
+
+            binding.tvCardcreateCntDetail.text = "${binding.etCardcreateDetail.length()}/200"
+        }
+
+    }
+
 
     private fun setChooseCardListener() {
         binding.clCardcreateImg.setOnClickListener {
@@ -63,26 +112,31 @@ class CardCreateActivity :
                     SYMBOL_0 -> {
                         Toast.makeText(this, "SYMBOL_0", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_0
+                        ifChooseImg = true
                         symbolId = SYMBOL_0
                     }
                     SYMBOL_1 -> {
                         Toast.makeText(this, "SYMBOL_1", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_1
+                        ifChooseImg = true
                         symbolId = SYMBOL_1
                     }
                     SYMBOL_2 -> {
                         Toast.makeText(this, "SYMBOL_2", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_2
+                        ifChooseImg = true
                         symbolId = SYMBOL_2
                     }
                     SYMBOL_3 -> {
                         Toast.makeText(this, "SYMBOL_3", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_3
+                        ifChooseImg = true
                         symbolId = SYMBOL_3
                     }
                     SYMBOL_4 -> {
                         Toast.makeText(this, "SYMBOL_4", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_4
+                        ifChooseImg = true
                         symbolId = SYMBOL_4
                     }
                 }
@@ -113,7 +167,7 @@ class CardCreateActivity :
         binding.btnCardcreateComplete.setOnClickListener {
             // 카드나 만들기 버튼을 눌렀을 때,
 
-
+            Log.d("카드나 작성 실패 ?", "후")
 
             // 1. 서버로 title, content, symbolId, uri 전송
             // symbolId - 카드 이미지 심볼 id, 이미지가 있는 경우 null을 보내주면 됨
@@ -125,8 +179,10 @@ class CardCreateActivity :
 
             lifecycleScope.launch(Dispatchers.IO) {
                 runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
-                    .onSuccess { Log.d("카드나 작성 성공", it.message) }
-                    .onFailure { it.printStackTrace() }
+                    .onSuccess {
+                        Log.d("카드나 작성 성공", it.message) }
+                    .onFailure {
+                            it.printStackTrace() }
             }
 
             // if(파일이 잘 들어갔을 때)
@@ -198,6 +254,7 @@ class CardCreateActivity :
             binding.ivCardcreateGalleryImg.visibility = View.VISIBLE
             binding.clCardcreateImg.visibility = View.INVISIBLE // 이제 INVISIBLE이니까 한번 이미지 선택하면 다시 선택불가
             Glide.with(this).load(uri).into(binding.ivCardcreateGalleryImg)
+            ifChooseImg = true
         }
         //else if (result.resultCode == Activity.RESULT_CANCELED) {} =>Activity.RESULT_CANCELED일때 처리코드가 필요하다면
     }

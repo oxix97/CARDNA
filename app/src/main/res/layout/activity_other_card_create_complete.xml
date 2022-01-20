@@ -17,6 +17,7 @@
             android:id="@+id/lav_othercardcreate_complete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:scaleType="centerCrop"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"

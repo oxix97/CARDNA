@@ -59,10 +59,11 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
 
     private fun initCardPackAdapter() {
         val fragmentList: List<Fragment>
-
         var id: Int?
+
         if (getArguments() != null) {
             id = getArguments()?.getInt("id", 4) ?: 0
+
             cardPackViewModel.id = id
 
             val bundle = Bundle()
@@ -160,7 +161,6 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             ivMakeCard.setBackgroundResource(R.drawable.ic_mypage_write)
             ivMakeCard.setOnClickListener {
                 val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
-                    //현재 사용자의 name값을 전달해줘야하나? 토큰으로 못가져오나..
                     putExtra("id", id)
                 }
                 startActivity(intent)
