@@ -6,21 +6,26 @@ import org.cardna.data.remote.model.mypage.ResponseFriendListSearchNameData
 import org.cardna.data.remote.model.mypage.ResponseFriendSearchEmailData
 import org.cardna.data.remote.model.mypage.ResponseFriendUpdateData
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface FriendService {
     @Headers("Content-Type:application/json")
     @GET("friend")
     fun getFriend(): Call<ResponseFriendData>
 
-    @GET("friend/list?name={name}")
-    fun getFriendName(): Call<ResponseFriendListSearchNameData>
+    //친구 이름으로 검색@Query("company_name")
+    @GET("friend/list?name")
+    suspend fun getFriendName(
+        @Query("name")
+        name: String?
+    ): ResponseFriendListSearchNameData
 
-    @GET("friend/search?.email={email}")
-    fun getFriendSearchEmail(): Call<ResponseFriendSearchEmailData>
+    //친구 이메일로 검색
+    @GET("friend/search?.email")
+    suspend fun getFriendSearchEmail(
+        @Query("email")
+        email: String?
+    ): ResponseFriendSearchEmailData
 
     //친구추가
     @POST("friend")
