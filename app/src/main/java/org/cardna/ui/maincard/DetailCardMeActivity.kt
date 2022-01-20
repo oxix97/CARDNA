@@ -30,11 +30,10 @@ class DetailCardMeActivity :
 
     private lateinit var DetailCardData: ResponseCardDetailData.Data
     private var isChecked = false
-    private var type: String = "setOtherCardMe"
+    private var type: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        showLikeLottie(type)
     }
 
     override fun initView() {
@@ -75,10 +74,10 @@ class DetailCardMeActivity :
                     //다이어로그
                 } else if (isMyCard == false && DetailCardData.isMe == true) {     //타인이 카드나 상세
                     setOtherCardMe()
-                    type = "setOtherCardMe"
+                    showLikeLottie("setOtherCardMe")
                 } else if (isMyCard == false && DetailCardData.isMe == false) {          //타인이 카드너 상세
                     setOtherCardYou()
-                    type = "setOtherCardYou"
+                    showLikeLottie("setOtherCardYou")
                 }
                 setData(isLike, id)
             } catch (e: Exception) {
@@ -137,7 +136,7 @@ class DetailCardMeActivity :
             //관계 text없애기
             tvDetailcardUserName.visibility = View.GONE
         }
-        
+
     }
 
     //타인이 카드너 상세
@@ -183,45 +182,33 @@ class DetailCardMeActivity :
 
             //false->true일때만 로티 띄우기
             binding.ctvLikeIcon.toggle()
-            Log.d("lottie", binding.ctvLikeIcon.isChecked.toString())
             if (binding.ctvLikeIcon.isChecked) {
                 val lottie = findViewById<LottieAnimationView>(R.id.lottie)
 
                 if (type == "setOtherCardMe") {
                     lottie.setAnimation("lottie_cardme.json")
-                    Log.d("type", "setOtherCardMe")
                 } else {
                     lottie.setAnimation("lottie_cardyou.json")
-                    Log.d("type", "lottie_cardyou.json")
                 }
                 binding.lottie.setVisibility(View.VISIBLE)
                 lottie.loop(false)
-                Log.d("loop", "실행")
                 lottie.playAnimation()
-                Log.d("playAnimation", "실행")
                 lottie.setRepeatCount(1);
-                Log.d("setRepeatCount", "실행")
 
                 lottie.addAnimatorListener(object : Animator.AnimatorListener {
                     override fun onAnimationStart(animation: Animator?) {
                         lottie.setVisibility(View.VISIBLE)
-                        Log.d("onAnimationStart", "실행")
                     }
 
                     override fun onAnimationEnd(animation: Animator?) {
                         lottie.setVisibility(View.GONE)
-                        Log.d("setVisibility", "실행")
-
                     }
-
 
                     override fun onAnimationCancel(animation: Animator?) {}
                     override fun onAnimationRepeat(animation: Animator?) {
-                        Log.d("onAnimationRepeat", "실행")
                     }
                 })
                 lottie.setVisibility(View.GONE)
-
             }
         }
     }
