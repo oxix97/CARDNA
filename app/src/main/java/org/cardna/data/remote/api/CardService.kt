@@ -114,10 +114,14 @@ interface CardService {
         @Part image: MultipartBody.Part
     ): ResponseCreateCardMeData
 
+
     // 카드너 작성
+    @Multipart
     @POST("card/{friendId}")
     suspend fun postCreateCardYou(
-        @Body body: RequestCreateCardYouData
+        @Path("friendId") friendId: Int,
+        @PartMap body:HashMap<String, RequestBody>,
+        @Part image : MultipartBody.Part
     ): ResponseCreateCardYouData
 
     // 카드 삭제

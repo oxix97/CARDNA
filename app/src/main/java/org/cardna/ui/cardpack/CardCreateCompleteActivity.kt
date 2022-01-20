@@ -14,6 +14,7 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivityCardCreateCompleteBinding
 import org.cardna.ui.maincard.DetailActivity
+import org.cardna.ui.mypage.OtherWriteActivity
 import org.cardna.util.LinearGradientSpan
 
 class CardCreateCompleteActivity :
@@ -93,7 +94,7 @@ class CardCreateCompleteActivity :
                 {
                     // 카드너 추가에서 왔다면 OtherWriteActivity로 돌아가야 한다. 근데 이때 OtherWriteAcitivty로 전달해줄 정보는 없고
                     // OtherWriteActivity에서 서버 통신 다시 하도록
-                    var intent = Intent(this, DetailActivity::class.java)
+                    var intent = Intent(this, OtherWriteActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(intent)
                     // MainActivity로 갈 때, CardCreateActivity pop하고 가기

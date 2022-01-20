@@ -1,8 +1,5 @@
 package org.cardna.data.remote.model.mypage
 
-
-import com.google.gson.annotations.SerializedName
-
 data class ResponseCreateCardYouData(
     val status: Int,
     val success: Boolean,

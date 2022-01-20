@@ -44,8 +44,11 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
 
         //타인이 접근
         var id: Int?
+        var name: String?
+
         if (getArguments() != null) {
             id = getArguments()?.getInt("id", 4) ?: 0
+            name = getArguments()?.getString("name")
             Log.d("idid", id.toString())
 
             // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
@@ -59,7 +62,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             cardYouFragment.setArguments(bundle)
 
             fragmentList = listOf(cardMeFragment, cardYouFragment)
-            initCardYouLayout(id)
+            initCardYouLayout(id, name)
             //내가 접근->걍 통신하면됨
         } else {
             fragmentList = listOf(CardMeFragment(), CardYouFragment())
@@ -133,7 +136,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         setMakeCardIvListener()
     }
 
-    private fun initCardYouLayout(id: Int) {
+    private fun initCardYouLayout(id: Int, name: String?) {
         lifecycleScope.launch {
             val totalCardCnt = ApiService.cardService.getOtherCardMe(id).data.totalCardCnt
             withContext(Dispatchers.Main) {
@@ -146,6 +149,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
                 val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
                     //현재 사용자의 name값을 전달해줘야하나? 토큰으로 못가져오나..
                     putExtra("id", id)
+                    putExtra("name", name)
                 }
                 startActivity(intent)
             }

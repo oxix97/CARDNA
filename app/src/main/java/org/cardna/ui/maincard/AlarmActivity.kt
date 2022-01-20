@@ -9,7 +9,7 @@ import org.cardna.data.remote.model.cardpack.ResponseOtherWriterData
 import org.cardna.databinding.ActivityAlarmBinding
 import org.cardna.ui.maincard.adapter.AlarmRecyclerViewAdapter
 
-class AlarmActivity : BaseViewUtil.BaseAppCompatActivity<ActivityAlarmBinding>(R.layout.activity_alarm) {
+class   AlarmActivity : BaseViewUtil.BaseAppCompatActivity<ActivityAlarmBinding>(R.layout.activity_alarm) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
