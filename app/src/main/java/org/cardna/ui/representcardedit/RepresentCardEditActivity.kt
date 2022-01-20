@@ -34,7 +34,6 @@ class RepresentCardEditActivity :
 
     override fun initView() {
         initCoroutine()
-        onClick()
         setTextGradient()
         onClickResult()
     }
@@ -43,7 +42,10 @@ class RepresentCardEditActivity :
         representCardAdapter = RepresentCardListAdapter()
         val gridLayoutManager = GridLayoutManager(this, 2)
         binding.rvRepresentcardeditContainer.layoutManager = gridLayoutManager
-
+        val cardList = mutableListOf<Int>()
+        representList.forEach {
+            cardList.add(it.id)
+        }
         binding.rvRepresentcardeditContainer
             .addItemDecoration(
                 SpacesItemDecoration2(
@@ -55,14 +57,18 @@ class RepresentCardEditActivity :
 
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
         representCardAdapter.cardList = representList
+        onClick(cardList)
         representCardAdapter.notifyDataSetChanged()
     }
 
-    private fun onClick() {
+    //바텀싯 호출문 -> cardList 보낸다 -> 대표카드의 아이디만 있는거
+    private fun onClick(cardList: MutableList<Int>) {
         binding.fabRepresentcardedit.setOnClickListener {
             val bottomSheetDialog =
-                RepresentCardEditBottomDialogFragment(representCardAdapter.cardList.size)
-
+                RepresentCardEditBottomDialogFragment(cardList, representCardAdapter.cardList.size)
+            cardList.forEach {
+                println(it)
+            }
             bottomSheetDialog.show(supportFragmentManager, "sdsfs")
         }
     }
