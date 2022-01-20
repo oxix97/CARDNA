@@ -105,7 +105,7 @@ interface CardService {
     @POST("card")
     suspend fun postCreateCardMe(
         @PartMap body: HashMap<String, RequestBody>,
-        @Part image: MultipartBody.Part
+        @Part image: MultipartBody.Part?
     ): ResponseCreateCardMeData
 
     // 카드너 작성
