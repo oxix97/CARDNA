@@ -60,14 +60,17 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
     private fun initCardPackAdapter() {
         val fragmentList: List<Fragment>
         var id: Int?
+        var name: String?
 
         if (getArguments() != null) {
             id = getArguments()?.getInt("id", 4) ?: 0
+            name = getArguments()?.getString("name") ?: ""
 
             cardPackViewModel.id = id
 
             val bundle = Bundle()
             bundle.putInt("id", id)
+            bundle.putString("name", name)
 
             val cardMeFragment = CardMeFragment()
             val cardYouFragment = CardYouFragment()
@@ -76,7 +79,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             cardYouFragment.setArguments(bundle)
 
             fragmentList = listOf(cardMeFragment, cardYouFragment)
-            initCardYouLayout(id)
+            initCardYouLayout(id, name)
         } else {
             Log.d("내가 내메인카드", "내가내메인")
             fragmentList = listOf(CardMeFragment(), CardYouFragment())
@@ -150,7 +153,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         setMakeCardIvListener()
     }
 
-    private fun initCardYouLayout(id: Int) {
+    private fun initCardYouLayout(id: Int, name: String) {
         lifecycleScope.launch {
             val totalCardCnt = ApiService.cardService.getOtherCardMe(id).data.totalCardCnt
             withContext(Dispatchers.Main) {
@@ -162,6 +165,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             ivMakeCard.setOnClickListener {
                 val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
                     putExtra("id", id)
+                    putExtra("name", name)
                 }
                 startActivity(intent)
             }
