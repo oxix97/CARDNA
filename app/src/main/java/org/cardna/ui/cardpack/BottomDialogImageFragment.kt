@@ -124,23 +124,6 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 itemClick(selectedImg) // 완료 버튼 누르려면 하나라도 선택되어있어야 하므로 selectedimg는 0,1,2,3,4중 하나로 넘어갈 것
                 dialog?.dismiss()
             }
-
-
-
-            // val imgBtnlist = listOf<ImageButton>(imgBtnCardpackSymbol0, imgBtnCardpackSymbol1, imgBtnCardpackSymbol2, imgBtnCardpackSymbol3, imgBtnCardpackSymbol4)
-
-            // 5개의 심볼, 이미지 버튼에서 하나를 선택하면 나머지 선택안되도록
-            // 선택된 이미지 버튼은 image selected 버전으로 setImageResource 바꿔주기
-            // 완료버튼 누르면 현재 5개의 버튼 중 셀렉되어있는 버튼을 찾아 그에 맞는 상수를 넘겨준다
-
-
-            // 갤러리부분
-            /*
-            clCardpackGallery.setOnClickListener {
-                itemClick(GALLERY)
-                dialog?.dismiss()
-            }
-            */
         }
     }
 

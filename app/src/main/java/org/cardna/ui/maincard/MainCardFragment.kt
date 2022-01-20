@@ -243,6 +243,7 @@ class MainCardFragment :
                 Log.d("타인이 카드팩 버튼 클릭", "타인이")
                 val bundle = Bundle()
                 bundle.putInt("id", id)
+                bundle.putString("name", name)
 
                 val cardPackFragment = CardPackFragment()
                 cardPackFragment.setArguments(bundle)
