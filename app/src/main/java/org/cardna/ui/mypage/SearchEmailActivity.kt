@@ -15,6 +15,7 @@ import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.mypage.ResponseFriendSearchEmailData
 import org.cardna.data.remote.model.mypage.ResponseMyPageFriendData
 import org.cardna.databinding.ActivitySearchEmailBinding
+import org.cardna.util.initRootClickEvent
 import org.cardna.util.shortToast
 
 class SearchEmailActivity :
@@ -26,6 +27,7 @@ class SearchEmailActivity :
 
     override fun initView() {
         transactionEvent()
+        initRootClickEvent(binding.ctlSearchemailTop)
     }
 
     private fun transactionEvent() {
