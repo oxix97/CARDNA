@@ -22,7 +22,6 @@ class OtherCardCreateActivity :
         initRootClickEvent(binding.ctlOthercardcreateTop)
     }
 
-
     private fun checkIdAndName() {
         val name = intent.getStringExtra("name")
         val id = intent.getIntExtra("id", 0)

@@ -14,8 +14,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -177,21 +175,16 @@ class CardCreateActivity :
             if(uri == null){ // 심볼 선택
                 lifecycleScope.launch(Dispatchers.IO) {
                     runCatching { cardService.postCreateCardMe(body, null) }
-                        .onSuccess {
-                        }
-                        .onFailure {
-                            it.printStackTrace()
-                        }
+                        .onSuccess { Log.d("카드나 작성 성공", it.message) }
+                        .onFailure { Log.d("카드나 작성 실패", it.message!!)}
                 }
             }
             else{ // 이미지 선택
                 lifecycleScope.launch(Dispatchers.IO) {
                     runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
-                        .onSuccess {
-                        }
-                        .onFailure {
-                            it.printStackTrace()
-                        }
+                        .onSuccess { Log.d("카드나 작성 성공", it.message) }
+                        .onFailure { Log.d("카드나 작성 실패", it.message!!)
+                            it.printStackTrace() }
                 }
             }
 
