@@ -11,10 +11,8 @@ import org.cardna.data.remote.model.maincard.RequestMainCardEditData
 import org.cardna.data.remote.model.maincard.ResponseDeleteCardData
 import org.cardna.data.remote.model.maincard.ResponseMainCardData
 import org.cardna.data.remote.model.maincard.ResponseMainCardEditData
-import org.cardna.data.remote.model.mypage.RequestCreateCardYouData
 import org.cardna.data.remote.model.mypage.ResponseAddOrRemoveCardYouData
 import org.cardna.data.remote.model.mypage.ResponseCardStorageData
-import org.cardna.data.remote.model.mypage.ResponseCardYouBoxData
 import org.cardna.data.remote.model.mypage.ResponseCreateCardYouData
 import org.cardna.data.remote.model.representcardedit.RepresentCardMeBottomSheetData
 import org.cardna.data.remote.model.representcardedit.RepresentCardYouBottomSheetData
@@ -59,7 +57,6 @@ interface CardService {
     @GET("card/you")
     suspend fun getBottomSheetCardYou(): RepresentCardYouBottomSheetData
 
-
     // 카드팩에서
     // 나의 카드나 조회
     @GET("card/me")
@@ -76,7 +73,6 @@ interface CardService {
     // @GET("card/me")
     // suspend fun getUserCardMe(): RepresentCardMeData
 
-
     // 카드팩에서
     // 나의 카드너 전체 조회
     @GET("card/you")
@@ -92,7 +88,6 @@ interface CardService {
     // maincard에서 나의 카드나 조회
     @GET("card/you")
     suspend fun getUserCardYou(): RepresentCardYouData
-
 
     // 타인 카드 상세 조회
     @GET("card/info/{cardId}")
@@ -113,14 +108,13 @@ interface CardService {
         @Part image: MultipartBody.Part
     ): ResponseCreateCardMeData
 
-
     // 카드너 작성
     @Multipart
     @POST("card/{friendId}")
     suspend fun postCreateCardYou(
         @Path("friendId") friendId: Int,
-        @PartMap body:HashMap<String, RequestBody>,
-        @Part image : MultipartBody.Part
+        @PartMap body: HashMap<String, RequestBody>,
+        @Part image: MultipartBody.Part
     ): ResponseCreateCardYouData
 
     //  카드 삭제

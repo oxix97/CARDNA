@@ -1,23 +1,17 @@
 package org.cardna.ui.maincard
 
-import android.animation.Animator
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.widget.Button
-import android.widget.Toast
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.lifecycleScope
-import com.airbnb.lottie.LottieAnimationView
-import com.airbnb.lottie.utils.LottieValueAnimator
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 import org.cardna.MainActivity
@@ -136,6 +130,19 @@ class DetailCardMeActivity :
             //관계 text없애기
             tvDetailcardUserName.visibility = View.GONE
         }
+
+        binding.lavDetailcardLikeme.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator?) {
+                binding.lavDetailcardLikeme.visibility = View.VISIBLE
+            }
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.lavDetailcardLikeme.visibility = View.GONE
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {}
+            override fun onAnimationRepeat(animation: Animator?) {}
+        })
+        binding.lavDetailcardLikeme.setAnimation(R.raw.lottie_cardme_1) // 카드나에 대한 로티 setting
     }
 
     //타인이 카드너 상세
@@ -151,8 +158,22 @@ class DetailCardMeActivity :
 
             //쓰레기통 없애기
             ibtnDetailcardDelete.visibility = View.INVISIBLE
-
         }
+
+        binding.lavDetailcardLikeme.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator?) {
+                binding.lavDetailcardLikeme.visibility = View.VISIBLE
+            }
+            override fun onAnimationEnd(animation: Animator?) {
+                binding.lavDetailcardLikeme.visibility = View.GONE
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {}
+            override fun onAnimationRepeat(animation: Animator?) {}
+        })
+
+        binding.lavDetailcardLikeme.setAnimation(R.raw.lottie_cardyou_1) // 카드너에 대한 로티 setting
+
     }
 
     private fun setData(isLike: Boolean, id: Int) {
@@ -173,15 +194,12 @@ class DetailCardMeActivity :
             tvDetailcardUserName.text = DetailCardData.relation
 
             ctvLikeIcon.setOnClickListener {
+                // binding.lavDetailcardLikeme.visibility = View.VISIBLE
                 //여기서 아이디 값 받아서 cardme cardyou 로티 적용하기
-                val isMe = intent.getBooleanExtra("isMe", false)
-                if (isMe) {
-                    binding.lavDetailcardLikeme.visibility = View.VISIBLE
-                } else {
-                    binding.lavDetailcardLikeme.visibility = View.VISIBLE
+                if (!isChecked) { // 체크가
+                    binding.lavDetailcardLikeme.playAnimation()
                 }
                 ctvLikeIcon.toggle()
-
                 Log.d("ischeck", isChecked.toString())
             }
         }

@@ -1,8 +1,7 @@
 package org.cardna.data.remote.model.maincard
 
-
 data class ResponseMainCardData(
-    val data : CardList
+    val data: CardList
 )
 
 data class CardList(
@@ -16,5 +15,7 @@ data class MainCardList(
     val mainOrder: Int,
     val isMe: Boolean,
     val cardImg: String,
-    val title: String
+    val title: String,
+    var isClicked: Boolean = false,
+    var index: Int = -1,
 )
