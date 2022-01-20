@@ -1,5 +1,6 @@
 package org.cardna.ui.maincard
 
+import android.animation.Animator
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -135,6 +136,7 @@ class DetailCardMeActivity :
             override fun onAnimationStart(animation: Animator?) {
                 binding.lavDetailcardLikeme.visibility = View.VISIBLE
             }
+
             override fun onAnimationEnd(animation: Animator?) {
                 binding.lavDetailcardLikeme.visibility = View.GONE
             }
@@ -164,6 +166,7 @@ class DetailCardMeActivity :
             override fun onAnimationStart(animation: Animator?) {
                 binding.lavDetailcardLikeme.visibility = View.VISIBLE
             }
+
             override fun onAnimationEnd(animation: Animator?) {
                 binding.lavDetailcardLikeme.visibility = View.GONE
             }
@@ -173,7 +176,6 @@ class DetailCardMeActivity :
         })
 
         binding.lavDetailcardLikeme.setAnimation(R.raw.lottie_cardyou_1) // 카드너에 대한 로티 setting
-
     }
 
     private fun setData(isLike: Boolean, id: Int) {

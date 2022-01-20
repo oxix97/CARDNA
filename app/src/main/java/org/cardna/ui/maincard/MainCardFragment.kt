@@ -37,10 +37,6 @@ class MainCardFragment :
         initView()
     }
 
-    private fun startViewPager() {
-        binding.tvMaincardPageCount.text = "1/${mainCardAdapter.cardList.size}"
-    }
-
     override fun initView() {
         initNetwork()
         setTextGradient()
