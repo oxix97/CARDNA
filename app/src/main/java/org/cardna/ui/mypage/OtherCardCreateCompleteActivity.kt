@@ -1,5 +1,6 @@
 package org.cardna.ui.mypage
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,7 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivityCardCreateCompleteBinding
 import org.cardna.databinding.ActivityOtherCardCreateCompleteBinding
 import org.cardna.util.LinearGradientSpan
+import org.cardna.util.shortToast
 
 class OtherCardCreateCompleteActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityOtherCardCreateCompleteBinding>(R.layout.activity_other_card_create_complete) {
@@ -26,14 +28,15 @@ class OtherCardCreateCompleteActivity :
         setLottie()
     }
 
-    fun setTextGradient() {
-        val text = binding.tvOthercardcreateComplete.toString()
+    private fun setTextGradient() {
+        val text = binding.tvOthercardcreateComplete.text.toString()
         val green = getColor(R.color.main_green)
         val purple = getColor(R.color.main_purple)
         val spannable = text.toSpannable()
         spannable[0..text.length] = LinearGradientSpan(text, text, green, purple)
         binding.tvOthercardcreateComplete.text = spannable
     }
+
 
 
     // 로티 띄워주기

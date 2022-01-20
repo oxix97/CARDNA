@@ -44,7 +44,7 @@ class OtherCardCreateActivity :
                 with(binding) {
                     btnOthercardcreateNext.isClickable = true
                     btnOthercardcreateNext.isEnabled = true;
-                    btnOthercardcreateNext.setTextColor(resources.getColor(R.color.white_1))
+                    btnOthercardcreateNext.setTextColor(resources.getColor(R.color.black))
                     btnOthercardcreateNext.setBackgroundResource(R.drawable.background_btn_cardyou_abled)
                 }
             } else {

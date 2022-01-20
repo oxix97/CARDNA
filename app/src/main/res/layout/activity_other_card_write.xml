@@ -231,6 +231,7 @@
                     android:paddingVertical="16dp"
                     android:text="작성 완료"
                     android:textColor="@color/white_2"
+                    android:textAppearance="@style/create_card_complete"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

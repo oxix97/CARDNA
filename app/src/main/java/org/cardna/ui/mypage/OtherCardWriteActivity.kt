@@ -37,7 +37,6 @@ class OtherCardWriteActivity
 
     private var symbolId: Int? = null
     private var uri: Uri? = null
-
     private var ifChooseImg: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,49 +55,36 @@ class OtherCardWriteActivity
         binding.btnOthercardwriteComplete.isClickable = false;
 
         binding.etOthercardwriteKeyword.addTextChangedListener {
-            if (binding.etOthercardwriteKeyword.length() > 0 && binding.etOthercardwriteDetail.length() > 0 && ifChooseImg) {
-                with(binding) {
-                    btnOthercardwriteComplete.isClickable = true
-                    btnOthercardwriteComplete.isEnabled = true
-                    btnOthercardwriteComplete.setTextColor(resources.getColor(R.color.black))
-                    btnOthercardwriteComplete.setBackgroundColor(R.drawable.background_btn_cardyou_abled)
-                }
-            } else {
-                with(binding) {
-                    btnOthercardwriteComplete.isClickable = false;
-                    btnOthercardwriteComplete.isEnabled = false;
-                    btnOthercardwriteComplete.setTextColor(resources.getColor(R.color.white_2))
-                    btnOthercardwriteComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
-                }
-            }
-
+            checkCompleteBtnClickable()
             binding.tvOthercardwriteCntKeyword.text =
                 "${binding.etOthercardwriteKeyword.length()}/14"
         }
 
         binding.etOthercardwriteDetail.addTextChangedListener {
-            if (binding.etOthercardwriteKeyword.length() > 0 && binding.etOthercardwriteDetail.length() > 0 && ifChooseImg) {
-                with(binding) {
-                    btnOthercardwriteComplete.isClickable = true
-                    btnOthercardwriteComplete.isEnabled = true
-                    btnOthercardwriteComplete.setTextColor(resources.getColor(R.color.black))
-                    btnOthercardwriteComplete.setBackgroundColor(R.drawable.background_btn_cardyou_abled)
-                }
-            } else {
-                with(binding) {
-                    btnOthercardwriteComplete.isClickable = false;
-                    btnOthercardwriteComplete.isEnabled = false;
-                    btnOthercardwriteComplete.setTextColor(resources.getColor(R.color.white_2))
-                    btnOthercardwriteComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
-                }
-            }
-
+            checkCompleteBtnClickable()
             binding.tvOthercardwriteCntDetail.text =
                 "${binding.etOthercardwriteDetail.length()}/200"
         }
 
     }
 
+    private fun checkCompleteBtnClickable(){
+        if (binding.etOthercardwriteKeyword.length() > 0 && binding.etOthercardwriteDetail.length() > 0 && ifChooseImg) {
+            with(binding) {
+                btnOthercardwriteComplete.isClickable = true
+                btnOthercardwriteComplete.isEnabled = true
+                btnOthercardwriteComplete.setTextColor(resources.getColor(R.color.black))
+                btnOthercardwriteComplete.setBackgroundResource(R.drawable.background_btn_cardyou_abled)
+            }
+        } else {
+            with(binding) {
+                btnOthercardwriteComplete.isClickable = false;
+                btnOthercardwriteComplete.isEnabled = false;
+                btnOthercardwriteComplete.setTextColor(resources.getColor(R.color.white_2))
+                btnOthercardwriteComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
+            }
+        }
+    }
 
     // bottomDialogOtherImageFragment 생성할 때, 콜백 넘겨주기
     // 이미지 버튼 부분에 있는 constraintLayout 누르면 바텀 다이얼로그 뜨도록 리스너 달기
@@ -115,28 +101,23 @@ class OtherCardWriteActivity
                             Toast.makeText(this, "GALLERY", Toast.LENGTH_SHORT).show()
                         }
                         SYMBOL_0 -> {
-                            img_index = R.drawable.ic_symbol_cardme_0
-                            ifChooseImg = true
+                            img_index = R.drawable.ic_symbol_cardyou_0
                             symbolId = SYMBOL_0
                         }
                         SYMBOL_1 -> {
-                            img_index = R.drawable.ic_symbol_cardme_1
-                            ifChooseImg = true
+                            img_index = R.drawable.ic_symbol_cardyou_1
                             symbolId = SYMBOL_1
                         }
                         SYMBOL_2 -> {
-                            img_index = R.drawable.ic_symbol_cardme_2
-                            ifChooseImg = true
+                            img_index = R.drawable.ic_symbol_cardyou_2
                             symbolId = SYMBOL_2
                         }
                         SYMBOL_3 -> {
-                            img_index = R.drawable.ic_symbol_cardme_3
-                            ifChooseImg = true
+                            img_index = R.drawable.ic_symbol_cardyou_3
                             symbolId = SYMBOL_3
                         }
                         SYMBOL_4 -> {
-                            img_index = R.drawable.ic_symbol_cardme_4
-                            ifChooseImg = true
+                            img_index = R.drawable.ic_symbol_cardyou_4
                             symbolId = SYMBOL_4
                         }
                     }
@@ -146,6 +127,9 @@ class OtherCardWriteActivity
                         // 각 심볼 이미지 띄워주기
                         ivOthercardwriteGalleryImg.setImageResource(img_index)
                         clOthercardwriteImg.visibility = View.INVISIBLE
+
+                        ifChooseImg = true
+                        checkCompleteBtnClickable()
                     }
                 }
             bottomDialogOtherImageFragment.show(
@@ -251,6 +235,7 @@ class OtherCardWriteActivity
                 View.INVISIBLE // 이제 INVISIBLE이니까 한번 이미지 선택하면 다시 선택불가
             Glide.with(this).load(uri).into(binding.ivOthercardwriteGalleryImg)
             ifChooseImg = true
+            checkCompleteBtnClickable()
         }
         //else if (result.resultCode == Activity.RESULT_CANCELED) {} =>Activity.RESULT_CANCELED일때 처리코드가 필요하다면
     }
