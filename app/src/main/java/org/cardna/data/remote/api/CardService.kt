@@ -53,11 +53,11 @@ interface CardService {
 
     //바텀싯 카드나 선택시
     @GET("card/me")
-    suspend fun getBottomSheetCardMe() : RepresentCardMeBottomSheetData
+    suspend fun getBottomSheetCardMe(): RepresentCardMeBottomSheetData
 
     //바텀싯 카드너 선택시
     @GET("card/you")
-    suspend fun getBottomSheetCardYou() : RepresentCardYouBottomSheetData
+    suspend fun getBottomSheetCardYou(): RepresentCardYouBottomSheetData
 
 
     // 카드팩에서
@@ -75,7 +75,6 @@ interface CardService {
     // maincard에서 나의 카드나 조회
     // @GET("card/me")
     // suspend fun getUserCardMe(): RepresentCardMeData
-
 
 
     // 카드팩에서
@@ -124,9 +123,12 @@ interface CardService {
         @Part image : MultipartBody.Part
     ): ResponseCreateCardYouData
 
-    // 카드 삭제
+    //  카드 삭제
     @DELETE("card/{cardId}")
-    suspend fun deleteCard(): ResponseDeleteCardData
+    suspend fun deleteCard(
+        @Path("cardId")
+        cardId: Int?
+    ): ResponseDeleteCardData
 
     // 카드너 보관함 조회
     @GET("card/box")
@@ -136,6 +138,6 @@ interface CardService {
     @PUT("card/box/{cardId}")
     suspend fun putCardBoxCardId(
         @Path("cardId")
-        cardId : Int?
+        cardId: Int?
     ): ResponseAddOrRemoveCardYouData
 }

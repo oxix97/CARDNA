@@ -28,6 +28,12 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
 
     private lateinit var cardPackTabLayoutAdapter: CardPackTabLayoutAdapter
 
+    override fun onResume() {
+        super.onResume()
+        initCardMeLayout()
+      //  initCardYouLayout()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
