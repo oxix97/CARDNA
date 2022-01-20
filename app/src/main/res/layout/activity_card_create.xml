@@ -139,9 +139,8 @@
                         android:layout_marginBottom="4dp"
                         android:background="@null"
                         android:fontFamily="@font/pretendard_regular"
-
-
-                        android:hint="키워드 중심으로 포현해보세요"
+                        android:lineSpacingExtra="-0.22sp"
+                        android:hint="키워드 중심으로 표현해보세요"
                         android:includeFontPadding="false"
                         android:maxLength="14"
                         android:maxLines="1"
