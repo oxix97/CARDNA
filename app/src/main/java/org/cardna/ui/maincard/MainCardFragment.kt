@@ -37,6 +37,10 @@ class MainCardFragment :
         initView()
     }
 
+    private fun startViewPager() {
+        binding.tvMaincardPageCount.text = "1/${mainCardAdapter.cardList.size}"
+    }
+
     override fun initView() {
         initNetwork()
         setTextGradient()
@@ -103,7 +107,6 @@ class MainCardFragment :
                 startActivity(this)
             }
         }
-
         binding.apply {
             setAnswerPager(mainCardAdapter)
             pageCount()
@@ -118,7 +121,6 @@ class MainCardFragment :
             clipChildren = false
             offscreenPageLimit = 1
             setPageTransformer(compositePageTransformer)
-
             setPadding(56, 0, 56, 0)
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
@@ -214,7 +216,7 @@ class MainCardFragment :
             llMaincardEditLayout.visibility = View.INVISIBLE
 
             //친구추가 클릭
-            ctvMaincardFriend.setOnClickListener {
+            ctlMaincardFriend.setOnClickListener {
                 ctvMaincardFriend.toggle()
                 //친구 추가하는 네트워크 통신
                 lifecycleScope.launch {
@@ -229,7 +231,7 @@ class MainCardFragment :
             }
 
             //카드너 작성하기 페이지로 이동
-            ibtnMaincardAlarm.setOnClickListener {
+            ctlMaincardAlarm.setOnClickListener {
                 val intent = Intent(requireActivity(), OtherCardCreateActivity::class.java).apply {
                     //현재 사용자의 name값을 전달해줘야하나? 토큰으로 못가져오나..
                     putExtra("name", name)

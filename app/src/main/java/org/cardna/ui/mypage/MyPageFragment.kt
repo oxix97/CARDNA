@@ -21,6 +21,9 @@ import org.cardna.util.SpacesItemDecoration
 import org.cardna.util.initRootClickEvent
 import org.cardna.util.shortToast
 import kotlin.math.roundToInt
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
+
 
 class MyPageFragment :
     BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.cardna.R.layout.fragment_my_page) {
@@ -68,6 +71,7 @@ class MyPageFragment :
                 .addToBackStack(null)
                 .add(org.cardna.R.id.fcv_main, mainCardFragment)
             transaction.commit()
+
         }
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         with(binding) {

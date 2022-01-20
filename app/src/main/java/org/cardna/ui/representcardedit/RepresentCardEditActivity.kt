@@ -6,6 +6,7 @@ import androidx.core.text.set
 import androidx.core.text.toSpannable
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
@@ -57,8 +58,22 @@ class RepresentCardEditActivity :
 
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
         representCardAdapter.cardList = representList
+        binding.tvRepresentcardeditCardListCount.text =
+            "${representCardAdapter.itemCount}/7"
+        activityReload()
         onClick(cardList)
         representCardAdapter.notifyDataSetChanged()
+    }
+
+    private fun activityReload() {
+        representCardAdapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                super.onItemRangeRemoved(positionStart, itemCount)
+                binding.tvRepresentcardeditCardListCount.text =
+                    "${representCardAdapter.itemCount}/7"
+            }
+        })
     }
 
     //바텀싯 호출문 -> cardList 보낸다 -> 대표카드의 아이디만 있는거
