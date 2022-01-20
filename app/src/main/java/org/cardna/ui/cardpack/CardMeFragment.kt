@@ -20,6 +20,11 @@ class CardMeFragment :
     private var isMyCard: Boolean = true
     var id: Int? = 4
 
+    override fun onResume() {
+        super.onResume()
+        getCardMe()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()

@@ -32,6 +32,11 @@ class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.ca
 
     private lateinit var cardYouAdapter: CardPackYouRecyclerViewAdapter
 
+    override fun onResume() {
+        super.onResume()
+        getCardYou()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()

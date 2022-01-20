@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import androidx.fragment.app.viewModels
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -20,28 +21,35 @@ import org.cardna.data.remote.api.ApiService
 import org.cardna.databinding.CardpackCustomTablayoutBinding
 import org.cardna.databinding.FragmentCardPackBinding
 import org.cardna.ui.cardpack.adapter.CardPackTabLayoutAdapter
-import org.cardna.ui.maincard.DetailCardMeActivity
 import org.cardna.ui.mypage.OtherCardCreateActivity
-import org.cardna.ui.mypage.OtherCardWriteActivity
 
 class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.layout.fragment_card_pack) {
 
     private lateinit var cardPackTabLayoutAdapter: CardPackTabLayoutAdapter
+    private val cardPackViewModel: CardPackViewModel by viewModels()
+
 
     override fun onResume() {
         super.onResume()
-        initCardMeLayout()
-      //  initCardYouLayout()
+        // restartLayout()
+        Log.d("onResume---", "실행됨")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        initViewModel()
     }
 
     override fun initView() {
         initCardPackAdapter()
         initCardPackTabLayout()
+    }
+
+    private fun initViewModel() {
+
+        binding.viewModel = cardPackViewModel   //onCreate가 호출되고 사용되는 지금 이시점!!!! 에서 by lazy로 지연초기화 했던 값이 들어감
+        binding.lifecycleOwner = this@CardPackFragment
 
     }
 
@@ -52,7 +60,7 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         var id: Int?
         if (getArguments() != null) {
             id = getArguments()?.getInt("id", 4) ?: 0
-            Log.d("idid", id.toString())
+            cardPackViewModel.id = id
 
             // 각 아이디를 프래그먼트 생성할 때 전달해줘야 함
             val bundle = Bundle()
@@ -67,6 +75,18 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
             fragmentList = listOf(cardMeFragment, cardYouFragment)
             initCardYouLayout(id)
             //내가 접근->걍 통신하면됨
+        } else if (cardPackViewModel.id != null) {
+            val bundle = Bundle()
+            bundle.putInt("id", cardPackViewModel.id ?: 0)
+
+            val cardMeFragment = CardMeFragment()
+            val cardYouFragment = CardYouFragment()
+
+            cardMeFragment.setArguments(bundle)
+            cardYouFragment.setArguments(bundle)
+
+            fragmentList = listOf(cardMeFragment, cardYouFragment)
+            initCardYouLayout(cardPackViewModel?.id ?: 0)
         } else {
             fragmentList = listOf(CardMeFragment(), CardYouFragment())
             initCardMeLayout()
@@ -75,6 +95,12 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
         cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
         cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
         binding.vpCardpack.adapter = cardPackTabLayoutAdapter
+    }
+
+    private fun restartLayout() {
+        if (cardPackViewModel.id != null) {
+            initCardYouLayout(cardPackViewModel.id!!)
+        } else (initCardMeLayout())
     }
 
     private fun initCardPackTabLayout() {

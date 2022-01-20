@@ -34,10 +34,8 @@ class OtherWriteActivity :
         lifecycleScope.launch {
             try {
                 val dataContainer = ApiService.cardService.getCardBox()
-                println("error-------------------1")
                 val cardList = dataContainer.data
                 initFragment(cardList)
-                println("error-------------------2")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
