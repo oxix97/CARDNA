@@ -1,5 +1,6 @@
 package org.cardna.ui.mypage
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -49,7 +50,9 @@ class MyPageFragment :
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun myPageRecyclerViewAdapter(dataList: MutableList<ResponseMyPageFriendData>) {
+        binding.ivMypageSetting.setOnTouchListener { _, _ -> true }
         list = dataList
         val myPageFriendAdapter = MyPageFriendAdapter(dataList) { item ->
             val bundle = Bundle()

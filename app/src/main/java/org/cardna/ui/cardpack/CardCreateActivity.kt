@@ -182,11 +182,11 @@ class CardCreateActivity :
                         }
                 }
             }
-            else{
+            else{ // 이미지 선택
                 lifecycleScope.launch(Dispatchers.IO) {
                     runCatching { cardService.postCreateCardMe(body, makeUriToFile()) }
                         .onSuccess {
-                            // Log.d("카드나 작성 성공", it.message)
+                            Log.d("카드나 작성 성공", it.message)
                         }
                         .onFailure {
                             it.printStackTrace()
