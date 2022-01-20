@@ -10,8 +10,8 @@ data class ResponseFriendSearchEmailData(
     val data: Data,
 ){
     data class Data(
-        val email: String,
         val id: Int,
+        val email: String,
         val isFriend: Boolean,
         val name: String,
         val userImg: String
