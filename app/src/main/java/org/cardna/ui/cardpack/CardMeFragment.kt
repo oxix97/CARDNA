@@ -2,6 +2,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.launch
@@ -9,21 +10,15 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.cardpack.CardMeList
 import org.cardna.databinding.FragmentCardMeBinding
+import org.cardna.ui.cardpack.CardPackViewModel
 import org.cardna.ui.cardpack.adapter.CardPackMeRecyclerViewAdapter
 import org.cardna.ui.maincard.DetailCardMeActivity
 import org.cardna.util.SpacesItemDecoration
 import kotlin.math.roundToInt
 
-class CardMeFragment :
-    BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
-
+class CardMeFragment : BaseViewUtil.BaseFragment<FragmentCardMeBinding>(org.cardna.R.layout.fragment_card_me) {
     private var isMyCard: Boolean = true
     var id: Int? = 4
-
-    override fun onResume() {
-        super.onResume()
-        getCardMe()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,9 +26,7 @@ class CardMeFragment :
     }
 
     override fun initView() {
-        //타인이 내 카드나 접근하는 경우 유저 id 받아옴
         if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
-            Log.d("1. cardmeFragment생성시 받오오는 id:", id.toString())
             getCardMeUsingId(getArguments()?.getInt("id", 4) ?: 0)
             //내가 내 카드나 접근하는 경우
         } else {

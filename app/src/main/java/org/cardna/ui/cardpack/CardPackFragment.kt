@@ -28,11 +28,17 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
     private lateinit var cardPackTabLayoutAdapter: CardPackTabLayoutAdapter
     private val cardPackViewModel: CardPackViewModel by viewModels()
 
-
     override fun onResume() {
         super.onResume()
-        // restartLayout()
-        Log.d("onResume---", "실행됨")
+        if (cardPackViewModel.id == null) {
+            val fragmentList: List<Fragment>
+            fragmentList = listOf(CardMeFragment(), CardYouFragment())
+            initCardMeLayout()
+
+            cardPackTabLayoutAdapter = CardPackTabLayoutAdapter(this)
+            cardPackTabLayoutAdapter.fragments.addAll(fragmentList)
+            binding.vpCardpack.adapter = cardPackTabLayoutAdapter
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +53,6 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
     }
 
     private fun initViewModel() {
-
         binding.viewModel = cardPackViewModel   //onCreate가 호출되고 사용되는 지금 이시점!!!! 에서 by lazy로 지연초기화 했던 값이 들어감
         binding.lifecycleOwner = this@CardPackFragment
 
@@ -74,20 +79,8 @@ class CardPackFragment : BaseViewUtil.BaseFragment<FragmentCardPackBinding>(R.la
 
             fragmentList = listOf(cardMeFragment, cardYouFragment)
             initCardYouLayout(id)
-            //내가 접근->걍 통신하면됨
-        } else if (cardPackViewModel.id != null) {
-            val bundle = Bundle()
-            bundle.putInt("id", cardPackViewModel.id ?: 0)
-
-            val cardMeFragment = CardMeFragment()
-            val cardYouFragment = CardYouFragment()
-
-            cardMeFragment.setArguments(bundle)
-            cardYouFragment.setArguments(bundle)
-
-            fragmentList = listOf(cardMeFragment, cardYouFragment)
-            initCardYouLayout(cardPackViewModel?.id ?: 0)
         } else {
+            Log.d("내가 내메인카드", "내가내메인")
             fragmentList = listOf(CardMeFragment(), CardYouFragment())
             initCardMeLayout()
         }

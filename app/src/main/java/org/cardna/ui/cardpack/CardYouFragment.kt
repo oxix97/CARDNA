@@ -26,16 +26,10 @@ import kotlin.math.roundToInt
 
 
 class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.cardna.R.layout.fragment_card_you) {
-
     private var isMyCard: Boolean = true
     var id: Int? = 4
 
-    private lateinit var cardYouAdapter: CardPackYouRecyclerViewAdapter
-
-    override fun onResume() {
-        super.onResume()
-        getCardYou()
-    }
+    //private lateinit var cardYouAdapter: CardPackYouRecyclerViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +37,6 @@ class CardYouFragment : BaseViewUtil.BaseFragment<FragmentCardYouBinding>(org.ca
     }
 
     override fun initView() {
-        //타인이 내 카드너 접근하는 경우 유저 id 받아옴
         if (getArguments() != null) { // id값이 있을 때, id값 이용해서 다른 유저의 카드나 띄우기
             getCardYouUsingId(getArguments()?.getInt("id", 4) ?: 0)
             //내가 내 카드나 접근하는 경우
