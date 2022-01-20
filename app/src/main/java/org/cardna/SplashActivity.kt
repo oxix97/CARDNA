@@ -20,8 +20,7 @@ class SplashActivity : BaseViewUtil.BaseAppCompatActivity<ActivitySplashBinding>
 
     private fun initSplash() {
         val handler = Handler()
-        handler.postDelayed({
-            var intent = Intent(this, MainActivity::class.java)
+        handler.postDelayed({ var intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }, SPLASH_VIEW_TIME)
     }
