@@ -57,47 +57,34 @@ class CardCreateActivity :
         binding.btnCardcreateComplete.isClickable = false;
 
         binding.etCardcreateKeyword.addTextChangedListener {
-            if (binding.etCardcreateKeyword.length() > 0 && binding.etCardcreateDetail.length() > 0 && ifChooseImg) {
-                with(binding) {
-                    btnCardcreateComplete.isClickable = true
-                    btnCardcreateComplete.isEnabled = true
-                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.black))
-                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_cardme_abled)
-                }
-            } else {
-                with(binding) {
-                    btnCardcreateComplete.isClickable = false;
-                    btnCardcreateComplete.isEnabled = false;
-                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.white_2))
-                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
-                }
-            }
-
+            checkCompleteBtnClickable()
             binding.tvCardcreateCntKeyword.text = "${binding.etCardcreateKeyword.length()}/14"
         }
 
         binding.etCardcreateDetail.addTextChangedListener {
-            if (binding.etCardcreateKeyword.length() > 0 && binding.etCardcreateDetail.length() > 0 && ifChooseImg) {
-                with(binding) {
-                    btnCardcreateComplete.isClickable = true
-                    btnCardcreateComplete.isEnabled = true
-                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.black))
-                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_cardme_abled)
-                }
-            } else {
-                with(binding) {
-                    btnCardcreateComplete.isClickable = false;
-                    btnCardcreateComplete.isEnabled = false;
-                    btnCardcreateComplete.setTextColor(resources.getColor(R.color.white_2))
-                    btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
-                }
-            }
-
+            checkCompleteBtnClickable()
             binding.tvCardcreateCntDetail.text = "${binding.etCardcreateDetail.length()}/200"
         }
 
     }
 
+    private fun checkCompleteBtnClickable(){
+        if (binding.etCardcreateKeyword.length() > 0 && binding.etCardcreateDetail.length() > 0 && ifChooseImg) {
+            with(binding) {
+                btnCardcreateComplete.isClickable = true
+                btnCardcreateComplete.isEnabled = true
+                btnCardcreateComplete.setTextColor(resources.getColor(R.color.black))
+                btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_cardme_abled)
+            }
+        } else {
+            with(binding) {
+                btnCardcreateComplete.isClickable = false;
+                btnCardcreateComplete.isEnabled = false;
+                btnCardcreateComplete.setTextColor(resources.getColor(R.color.white_2))
+                btnCardcreateComplete.setBackgroundResource(R.drawable.background_btn_card_disabled)
+            }
+        }
+    }
 
     private fun setChooseCardListener() {
         binding.clCardcreateImg.setOnClickListener {
@@ -112,38 +99,35 @@ class CardCreateActivity :
                     SYMBOL_0 -> {
                         Toast.makeText(this, "SYMBOL_0", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_0
-                        ifChooseImg = true
                         symbolId = SYMBOL_0
                     }
                     SYMBOL_1 -> {
                         Toast.makeText(this, "SYMBOL_1", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_1
-                        ifChooseImg = true
                         symbolId = SYMBOL_1
                     }
                     SYMBOL_2 -> {
                         Toast.makeText(this, "SYMBOL_2", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_2
-                        ifChooseImg = true
                         symbolId = SYMBOL_2
                     }
                     SYMBOL_3 -> {
                         Toast.makeText(this, "SYMBOL_3", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_3
-                        ifChooseImg = true
                         symbolId = SYMBOL_3
                     }
                     SYMBOL_4 -> {
                         Toast.makeText(this, "SYMBOL_4", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_4
-                        ifChooseImg = true
                         symbolId = SYMBOL_4
                     }
                 }
                 with(binding) {
-                    // 이미지 뷰 보이도록
                     ivCardcreateGalleryImg.visibility = View.VISIBLE
                     ivCardcreateGalleryImg.setImageResource(img_index)
+
+                    ifChooseImg = true
+                    checkCompleteBtnClickable()
                     // 각 심볼 이미지 띄워주기
                     clCardcreateImg.visibility = View.INVISIBLE // visibility말고 background를 검정으로 바꾸면 계속 선택가능하지 않을까
                 }
@@ -255,6 +239,7 @@ class CardCreateActivity :
             binding.clCardcreateImg.visibility = View.INVISIBLE // 이제 INVISIBLE이니까 한번 이미지 선택하면 다시 선택불가
             Glide.with(this).load(uri).into(binding.ivCardcreateGalleryImg)
             ifChooseImg = true
+            checkCompleteBtnClickable()
         }
         //else if (result.resultCode == Activity.RESULT_CANCELED) {} =>Activity.RESULT_CANCELED일때 처리코드가 필요하다면
     }

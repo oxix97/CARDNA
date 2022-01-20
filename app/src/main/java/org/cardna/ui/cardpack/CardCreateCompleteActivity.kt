@@ -26,7 +26,6 @@ class CardCreateCompleteActivity :
 
     override fun initView() {
         setCardMeOrYou()
-        setLottie()
     }
 
 
@@ -58,20 +57,8 @@ class CardCreateCompleteActivity :
             binding.tvCardcreateComplete.text = "카드너를 만들었어요!"
             binding.clCardcreateComplete.setBackgroundResource(R.drawable.background_cardyou)
 
-
             /* 카드너일 경우, symbol로 된 이미지도 uri로 줄것이므로 glide이용해서 uri를 imageView에 띄워주기만 하면 될 듯 */
-
-            if (symbolId == -1) { // 이미지를 띄워주면 됨.
-                Glide.with(this).load(cardImg).into(binding.ivCardcreateComplete)
-            } else { // symbolId가 null이 아니라면 이에 해당하는 각 심볼 이미지 띄워주면 됨 이라면,
-                when (symbolId) {
-                    SYMBOL_0 -> binding.ivCardcreateComplete.setImageResource(R.drawable.ic_symbol_cardyou_0)
-                    SYMBOL_1 -> binding.ivCardcreateComplete.setImageResource(R.drawable.ic_symbol_cardyou_1)
-                    SYMBOL_2 -> binding.ivCardcreateComplete.setImageResource(R.drawable.ic_symbol_cardyou_2)
-                    SYMBOL_3 -> binding.ivCardcreateComplete.setImageResource(R.drawable.ic_symbol_cardyou_3)
-                    SYMBOL_4 -> binding.ivCardcreateComplete.setImageResource(R.drawable.ic_symbol_cardyou_4)
-                }
-            }
+            Glide.with(this).load(cardImg).into(binding.ivCardcreateComplete)
         }
 
         binding.tvCardcreateCompleteTitle.text = cardTitle
@@ -115,9 +102,6 @@ class CardCreateCompleteActivity :
     }
 
 
-    // 로티는 카드나, 카드너인지에 따라 같음
-    private fun setLottie() {
-    }
 
     companion object {
         const val SYMBOL_0 = 0

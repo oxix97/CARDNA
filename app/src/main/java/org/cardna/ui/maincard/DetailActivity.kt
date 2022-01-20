@@ -19,6 +19,7 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.cardpack.ResponseCardDetailData
 import org.cardna.databinding.ActivityDetailBinding
+import org.cardna.ui.cardpack.CardCreateCompleteActivity
 import org.cardna.util.shortToast
 
 class DetailActivity :
@@ -31,40 +32,22 @@ class DetailActivity :
 
     override fun initView() {
         initNetwork()
-        getCardPackData()
-    }
-
-    private fun getCardPackData() {
-        val cardImg = intent.getIntExtra("cardImg", 0)
-        val id = intent.getIntExtra("id", 0)
-        val title = intent.getStringExtra("title")
-        val isImage = intent.getStringExtra("isImage")
-
-        with(binding) {
-            ivDetailcardImage.setBackgroundResource(R.drawable.rectangle_left_right_main_purple)
-            tvDetailcardUserName.text = id.toString()
-            tvDetailcardAbout.text = title
-        }
     }
 
     private fun initNetwork() {
+        // OtherWriteActivity에서 넘겨진 userId값에 해당하는 카드 상세 정보를 서버에서 받아와서 뿌려줌
         lifecycleScope.launch {
             val id = intent.getIntExtra("id", 0)
-            val dataContainer = ApiService.cardService.getCardDetail(id)
+            val dataContainer =
+                ApiService.cardService.getCardDetail(id) // 카드 상세 조회
+
+            // 받아온 데이터를 뷰에 뿌려줌
             setCardDetail(dataContainer.data, dataContainer.message)
             showUserCardDialog(id)
         }
     }
 
-    //카드너 만들기 put
-    private fun createCardYou(id: Int, message: String) {
-        lifecycleScope.launch {
-            ApiService.cardService.putCardBoxCardId(id)
-        }
-        shortToast(message)
-        finish()
-    }
-
+    // 받아온 데이터를 뷰에 뿌려줌
     private fun setCardDetail(cardInfo: ResponseCardDetailData.Data, message: String) {
         binding.apply {
             tvDetailcardTitle.text = cardInfo.title
@@ -77,10 +60,41 @@ class DetailActivity :
                 .load(cardInfo.cardImg)
                 .fitCenter()
                 .into(ivDetailcardImage)
+
             btnDetailCardCreate.setOnClickListener {
-                createCardYou(cardInfo.id.toInt(), message)
+                createCardYou(cardInfo.id.toInt(), cardInfo.isMe, cardInfo.cardImg, cardInfo.title, message)
+                //   createCardYou(cardInfo.id.toInt(), message)
             }
         }
+    }
+
+
+    //카드너 만들기 put
+    private fun createCardYou(id: Int, isMe: Boolean, cardImg: String, title: String,  message: String) {
+        lifecycleScope.launch {
+            ApiService.cardService.putCardBoxCardId(id)
+        }
+
+        // 다음 인텐트로 넘어가서 (정보를 넘겨주면서) CardCreateCompleteActivity 띄워줌.
+        val intent = Intent(this, CardCreateCompleteActivity::class.java)
+        intent.putExtra("meOrYou", CARD_YOU)
+        intent.putExtra("cardTitle", title)
+        intent.putExtra("cardImg", cardImg)
+        startActivity(intent)
+    }
+
+
+    companion object {
+        const val SYMBOL_0 = 0
+        const val SYMBOL_1 = 1
+        const val SYMBOL_2 = 2
+        const val SYMBOL_3 = 3
+        const val SYMBOL_4 = 4
+
+        const val CARD_ME = 6
+        const val CARD_YOU = 7
+
+        const val LOTTIE_VIEW_TIME = 1670L
     }
 
     private fun showUserCardDialog(id: Int) {
