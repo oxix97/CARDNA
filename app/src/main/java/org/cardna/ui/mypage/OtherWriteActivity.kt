@@ -2,6 +2,9 @@ package org.cardna.ui.mypage
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
@@ -17,6 +20,9 @@ class OtherWriteActivity :
     BaseViewUtil.BaseAppCompatActivity<ActivityOtherWriteBinding>(R.layout.activity_other_write) {
     private lateinit var adapter: OtherWriteAdapter
 
+    private var flag = false
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -29,6 +35,8 @@ class OtherWriteActivity :
 
     override fun initView() {
         initCoroutine()
+        binding.rvOtherwriteList
+            .addItemDecoration(SpacesItemDecorationOnlybottom((12 * resources.displayMetrics.density).roundToInt()))
     }
 
     private fun initCoroutine() {
@@ -45,30 +53,9 @@ class OtherWriteActivity :
 
     private fun initFragment(cardList: MutableList<ResponseCardStorageData.Data>) {
         adapter = OtherWriteAdapter()
-
-        binding.rvOtherwriteList
-            .addItemDecoration(SpacesItemDecorationOnlybottom((8 * resources.displayMetrics.density).roundToInt()))
         binding.rvOtherwriteList.adapter = adapter
         adapter.cardList = cardList
         adapter.notifyDataSetChanged()
     }
 
-
-//  data: MutableList<ResponseCardYouBoxDataList>
-    // private fun initAdapter(dataList: MutableList<ResponseCardStorageData.Data>) {
-    //     adapter = OtherWriteRecyclerViewAdapter(dataList) { position ->
-    //         Intent(this, DetailActivity::class.java).apply {
-    //             putExtra("name", position.name)
-    //             putExtra("image", position.relation)
-    //             putExtra("bio", position.createdAt)
-    //             startActivity(this)
-    //         }
-    //     }
-    //     with(binding) {
-    //         rvOtherwriteList.adapter = adapter
-    //         binding.rvOtherwriteList.layoutManager = LinearLayoutManager(this@OtherWriteActivity)
-    //         adapter.notifyDataSetChanged()
-    //         //     adapter.submitList(cardList) // 아이템 업데이트
-    //     }
-    // }
 }

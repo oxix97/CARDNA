@@ -97,6 +97,7 @@
                     android:layout_marginTop="16dp"
                     android:scaleType="fitXY"
                     android:visibility="invisible"
+                    android:background="@drawable/background_round"
                     app:layout_constraintDimensionRatio="190:273"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -54,6 +54,11 @@ class CardCreateActivity :
 
     // editText 글자 수에 따라 글자 수 업데이트, 버튼 선택가능하도록
     private fun checkEditTextLength() {
+
+        binding.ivCardcreateGalleryImg.clipToOutline = true
+        // imageView 모서리 둥글게
+
+
         binding.btnCardcreateComplete.isClickable = false;
 
         binding.etCardcreateKeyword.addTextChangedListener {
