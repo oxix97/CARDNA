@@ -16,11 +16,11 @@
             android:id="@+id/iv_detailcard_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:scaleType="fitXY"
-            app:layout_constraintDimensionRatio="360:378"
             android:background="@color/white_1_5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/cl_detailcard_setting_layout" />
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/cl_detailcard_setting_layout"
+            app:layout_constraintDimensionRatio="360:378"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <CheckedTextView
             android:id="@+id/ctv_like_icon"
@@ -137,17 +137,13 @@
         </ScrollView>
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lav_detailcard_likeme"
+            android:id="@+id/lottie"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:visibility="invisible"
-            app:lottie_autoPlay="false"
-            app:lottie_loop="false"
-            app:lottie_rawRes="@raw/lottie_cardme_1"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
+            android:layout_height="200sp"
+            android:layout_marginTop="50sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
