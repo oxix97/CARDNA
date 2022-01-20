@@ -114,7 +114,7 @@ interface CardService {
     suspend fun postCreateCardYou(
         @Path("friendId") friendId: Int,
         @PartMap body: HashMap<String, RequestBody>,
-        @Part image: MultipartBody.Part
+        @Part image: MultipartBody.Part?
     ): ResponseCreateCardYouData
 
     //  카드 삭제

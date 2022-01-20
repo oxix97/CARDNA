@@ -40,8 +40,8 @@ class AppInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain)
         : okhttp3.Response = with(chain) {
         val newRequest = request().newBuilder()
-            .addHeader("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtaW5qdUBnbWFpbC5jb20iLCJuYW1lIjoi66-87KO8IiwiZmlyZWJhc2VJZCI6Ilo2c1RtdDB3ZGRNN0R0cWpUc01qdTh5RGpncDEiLCJpYXQiOjE2NDI0ODYwMzEsImV4cCI6MTY0NTA3ODAzMSwiaXNzIjoiY2FyZG5hIn0.m6YBfAlYTPJgjnt2vq2-fTI9Xgqw7X9OJBKKwtYmgBE")
-           .build()
+            .addHeader("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtaW5qdUBnbWFpbC5jb20iLCJuYW1lIjoi66-87KO8IiwiZmlyZWJhc2VJZCI6Ilo2c1RtdDB3ZGRNN0R0cWpUc01qdTh5RGpncDEiLCJpYXQiOjE2NDI0OTYzMjEsImV4cCI6MTY0NTA4ODMyMSwiaXNzIjoiY2FyZG5hIn0.NoZ3RzuDeToWRo9p0zvGgODYCz9W6PYmZbVNGpQXBvk")
+            .build()
         proceed(newRequest)
     }
 }

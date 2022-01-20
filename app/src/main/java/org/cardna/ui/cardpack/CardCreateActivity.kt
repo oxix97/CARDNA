@@ -108,30 +108,24 @@ class CardCreateActivity :
                 var img_index: Int = GALLERY
                 when (it) {
                     GALLERY -> {  // 일 경우가 없을 듯
-                        Toast.makeText(this, "GALLERY", Toast.LENGTH_SHORT).show()
                     }
                     SYMBOL_0 -> {
-                        Toast.makeText(this, "SYMBOL_0", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_0
                         symbolId = SYMBOL_0
                     }
                     SYMBOL_1 -> {
-                        Toast.makeText(this, "SYMBOL_1", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_1
                         symbolId = SYMBOL_1
                     }
                     SYMBOL_2 -> {
-                        Toast.makeText(this, "SYMBOL_2", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_2
                         symbolId = SYMBOL_2
                     }
                     SYMBOL_3 -> {
-                        Toast.makeText(this, "SYMBOL_3", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_3
                         symbolId = SYMBOL_3
                     }
                     SYMBOL_4 -> {
-                        Toast.makeText(this, "SYMBOL_4", Toast.LENGTH_SHORT).show()
                         img_index = R.drawable.ic_symbol_cardme_4
                         symbolId = SYMBOL_4
                     }
