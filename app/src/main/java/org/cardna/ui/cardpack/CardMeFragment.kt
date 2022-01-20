@@ -2,7 +2,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.launch
@@ -10,7 +9,6 @@ import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.cardpack.CardMeList
 import org.cardna.databinding.FragmentCardMeBinding
-import org.cardna.ui.cardpack.CardPackViewModel
 import org.cardna.ui.cardpack.adapter.CardPackMeRecyclerViewAdapter
 import org.cardna.ui.maincard.DetailCardMeActivity
 import org.cardna.util.SpacesItemDecoration
