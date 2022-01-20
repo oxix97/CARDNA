@@ -138,8 +138,18 @@ class MainCardFragment :
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
+                    if (list[position].isMe) {
+                        binding.tvMaincardPageCount.setTextColor(requireContext().getColor(R.color.main_green))
+                        binding.viewMaincardUnderLine.setBackgroundColor(requireContext().getColor(R.color.main_green_60))
+                    } else {
+                        binding.tvMaincardPageCount.setTextColor(requireContext().getColor(R.color.main_purple))
+                        binding.viewMaincardUnderLine.setBackgroundColor(requireContext().getColor(R.color.main_purple_60))
+                    }
+
                     binding.tvMaincardPageCount.text =
-                        "${position + 1}/ ${mainCardAdapter.cardList.size}"
+                        "${position + 1} "
+                    binding.tvMaincardAll.text =
+                        "/ ${mainCardAdapter.cardList.size}"
                 }
             })
         }
