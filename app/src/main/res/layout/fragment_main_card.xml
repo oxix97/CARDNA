@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/real_black">
+        android:background="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ctl_maincard_alarm"
@@ -131,6 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:background="@color/black"
             app:layout_constraintBottom_toTopOf="@id/tv_maincard_page_count"
             app:layout_constraintTop_toBottomOf="@id/ll_maincard_edit_layout"
             tools:layout_editor_absoluteX="0dp" />

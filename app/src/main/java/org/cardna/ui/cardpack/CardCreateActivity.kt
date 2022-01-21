@@ -218,6 +218,8 @@ class CardCreateActivity :
         bitmap!!.compress(Bitmap.CompressFormat.PNG, 20, byteArrayOutputStream)
         val fileBody = RequestBody.create(
             MediaType.parse("image/png"),
+
+
             byteArrayOutputStream.toByteArray()
         )
 
