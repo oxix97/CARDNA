@@ -75,7 +75,7 @@ class MyPageFragment :
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         with(binding) {
             rvMypage.layoutManager = gridLayoutManager
-            rvMypage.addItemDecoration(SpacesItemDecoration((16 * resources.displayMetrics.density).roundToInt()))
+            rvMypage.addItemDecoration(SpacesItemDecoration((8 * resources.displayMetrics.density).roundToInt()))
             rvMypage.adapter = myPageFriendAdapter
         }
         myPageFriendAdapter.notifyDataSetChanged()
