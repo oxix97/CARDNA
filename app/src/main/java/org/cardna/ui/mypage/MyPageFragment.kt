@@ -29,8 +29,9 @@ class MyPageFragment :
     BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.cardna.R.layout.fragment_my_page) {
     private lateinit var list: MutableList<ResponseMyPageFriendData>
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+        initNetwork()
         binding.etMypageSearchBackground.setText("")
     }
 
@@ -53,9 +54,7 @@ class MyPageFragment :
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun myPageRecyclerViewAdapter(dataList: MutableList<ResponseMyPageFriendData>) {
-        binding.ivMypageSetting.setOnTouchListener { _, _ -> true }
         list = dataList
         val myPageFriendAdapter = MyPageFriendAdapter(dataList) { item ->
             val bundle = Bundle()
@@ -110,11 +109,12 @@ class MyPageFragment :
             ivMypageGotoEmailsearch.setOnClickListener {
                 startActivity(Intent(requireContext(), SearchEmailActivity::class.java))
             }
-            ivMypageOtherWrote.setOnClickListener {
+            ctlMypage.setOnClickListener {
                 startActivity(Intent(requireContext(), OtherWriteActivity::class.java))
             }
-            ivMypageSetting.setOnClickListener {
+            ctlMypageRight.setOnClickListener {
                 startActivity(Intent(requireContext(), SettingActivity::class.java))
+                binding.ivMypageSetting.setOnTouchListener { _, _ -> true }
             }
         }
     }

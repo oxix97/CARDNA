@@ -36,25 +36,46 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_mypage_other_wrote"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctl_mypage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:src="@drawable/ic_goto_others_wrote"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_mypage_title"
-                    app:layout_constraintEnd_toStartOf="@id/iv_mypage_setting"
-                    app:layout_constraintTop_toTopOf="@id/tv_mypage_title" />
 
-                <ImageView
-                    android:id="@+id/iv_mypage_setting"
+                    android:padding="15dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/ctl_mypage_right"
+                    app:layout_constraintEnd_toStartOf="@id/ctl_mypage_right"
+                    app:layout_constraintTop_toTopOf="@id/ctl_mypage_right">
+
+                    <ImageView
+                        android:id="@+id/iv_mypage_other_wrote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_goto_others_wrote"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctl_mypage_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/ic_setting"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_mypage_other_wrote"
+                    android:layout_marginTop="6dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/iv_mypage_other_wrote" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_mypage_setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_setting"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/iv_mypage_profile"
@@ -79,9 +100,9 @@
                     app:layout_constraintTop_toTopOf="@+id/iv_mypage_profile" />
 
                 <TextView
+                    android:id="@+id/tv_mypage_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_mypage_email"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="alalekqls2@gmail.com"
                     android:textColor="@color/white_3"
@@ -173,8 +194,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
                     android:overScrollMode="never"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:itemCount="6"
                     tools:listitem="@layout/item_mypage_friend">

@@ -1,5 +1,7 @@
 package org.cardna.data.remote.api
 
+import org.cardna.data.remote.model.detail.RequestLikeData
+import org.cardna.data.remote.model.login.ResponseLikeData
 import org.cardna.data.remote.model.mypage.RequestFriendUpdateData
 import org.cardna.data.remote.model.mypage.ResponseFriendData
 import org.cardna.data.remote.model.mypage.ResponseFriendListSearchNameData
@@ -29,7 +31,8 @@ interface FriendService {
 
     //친구추가
     @POST("friend")
-    fun postFriend(
+    suspend fun postFriend(
         @Body body: RequestFriendUpdateData
     ): ResponseFriendUpdateData
 }
+
