@@ -3,8 +3,10 @@ package org.cardna
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivitySplashBinding
+import org.cardna.ui.login.SignActivity
 
 class SplashActivity : BaseViewUtil.BaseAppCompatActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,10 +18,10 @@ class SplashActivity : BaseViewUtil.BaseAppCompatActivity<ActivitySplashBinding>
         initSplash()
     }
 
-    private fun initSplash() {
-        val handler = Handler()
-        handler.postDelayed({ var intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+  private fun initSplash() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this, SignActivity::class.java))
+            finish()
         }, SPLASH_VIEW_TIME)
     }
 
