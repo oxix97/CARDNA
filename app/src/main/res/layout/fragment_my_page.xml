@@ -40,9 +40,7 @@
                     android:id="@+id/ctl_mypage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:padding="15dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/ctl_mypage_right"
+                    android:padding="12dp"
                     app:layout_constraintEnd_toStartOf="@id/ctl_mypage_right"
                     app:layout_constraintTop_toTopOf="@id/ctl_mypage_right">
 
@@ -50,11 +48,9 @@
                         android:id="@+id/iv_mypage_other_wrote"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
                         android:src="@drawable/ic_goto_others_wrote"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="15dp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,10 +63,11 @@
 
                     <ImageView
                         android:id="@+id/iv_mypage_setting"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:padding="10dp"
+                        android:layout_marginBottom="10dp"
                         android:src="@drawable/ic_setting"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
