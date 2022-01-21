@@ -20,7 +20,7 @@ class SplashActivity : BaseViewUtil.BaseAppCompatActivity<ActivitySplashBinding>
 
   private fun initSplash() {
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, SignActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, SPLASH_VIEW_TIME)
     }

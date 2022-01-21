@@ -234,7 +234,7 @@ class DetailCardMeActivity :
                 }
             }
             dialog.dismiss()
-            shortToast("삭제되었습니다.")
+            // shortToast("삭제되었습니다.")
             finish()
         }
 
@@ -267,7 +267,7 @@ class DetailCardMeActivity :
                 }
             }
             dialog.dismiss() //토스트 띄우고 다이어로그 사라지게
-            shortToast("보관되었습니다.")
+            // shortToast("보관되었습니다.")
             finish()
         }
 
