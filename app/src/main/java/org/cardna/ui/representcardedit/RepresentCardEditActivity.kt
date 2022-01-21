@@ -28,11 +28,12 @@ class RepresentCardEditActivity :
         initView()
     }
 
-    //대표카드가 수정된 이후 확인 activity로 돌아왔을 때 리스트 업데이트
     override fun onResume() {
         super.onResume()
         initCoroutine()
     }
+
+
 
     override fun initView() {
         initCoroutine()
@@ -131,7 +132,7 @@ class RepresentCardEditActivity :
         }
     }
 
-    //초기대표카드 아이템들을 가져와서 리사이클러뷰 어댑터에게 넘겨줌
+
     private fun initCoroutine() {
         lifecycleScope.launch {
             try {
