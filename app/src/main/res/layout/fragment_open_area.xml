@@ -8,6 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_grand_parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_insight_open_area"
@@ -58,22 +59,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ctl_insight_bottom"
+            android:id="@+id/ctl_insight_card"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ctl_insight">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ctl_insight_card"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="56dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="56dp"
-                android:background="@drawable/rectangle_maingreen_stroke_black">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="56dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/rectangle_maingreen_stroke_black"
+            app:layout_constraintTop_toBottomOf="@id/ctl_insight">
 
             <ImageView
                 android:id="@+id/iv_openarea_image"
@@ -84,14 +79,15 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/img_insight_openarea"
                 app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
+                app:layout_constraintDimensionRatio="227:343"
                 app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
                 app:layout_constraintStart_toStartOf="@+id/ctl_insight_card"
                 app:layout_constraintTop_toTopOf="@id/ctl_insight_card" />
 
             <TextView
+                android:id="@+id/tv_openarea_user_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_openarea_user_title"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/pretendard_semibold"
@@ -103,34 +99,30 @@
                 app:layout_constraintStart_toStartOf="@+id/iv_openarea_image"
                 app:layout_constraintTop_toBottomOf="@+id/iv_openarea_image" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <TextView
-                android:id="@+id/tv_insight_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="@string/insight_open_area"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
-                app:layout_constraintStart_toStartOf="@id/ctl_insight_card"
-                app:layout_constraintTop_toBottomOf="@+id/ctl_insight_card" />
-
-            <View
-                android:id="@+id/view_insight_line"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="@id/tv_insight_description"
-                app:layout_constraintStart_toStartOf="@id/tv_insight_description"
-                app:layout_constraintTop_toBottomOf="@+id/tv_insight_description" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_insight_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/insight_open_area"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
+            app:layout_constraintStart_toStartOf="@id/ctl_insight_card"
+            app:layout_constraintTop_toBottomOf="@+id/ctl_insight_card" />
 
+        <View
+            android:id="@+id/view_insight_line"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/tv_insight_description"
+            app:layout_constraintStart_toStartOf="@id/tv_insight_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_insight_description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
