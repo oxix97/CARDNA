@@ -82,13 +82,13 @@ class MainActivity :
         val bottomDialogCardFragment: BottomDialogCardFragment = BottomDialogCardFragment {
             when (it) {
                 CARD_ME -> {
-                    Toast.makeText(this, "카드나 작성", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(this, "카드나 작성", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, CardCreateActivity::class.java)
                     startActivity(intent)
                 }
                 //
                 CARD_YOU -> {
-                    Toast.makeText(this, "카드너 추가", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(this, "카드너 추가", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, OtherWriteActivity::class.java)
                     startActivity(intent)
                 }

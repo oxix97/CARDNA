@@ -111,7 +111,7 @@ class DetailActivity :
             val noBtn = dialog.findViewById<Button>(R.id.tv_dialog_save)
             dialog.findViewById<Button>(R.id.tv_dialog_save).text = "신고"
             noBtn.setOnClickListener {
-                shortToast("준비중입니다.")
+                // shortToast("준비중입니다.")
             }
 
 
@@ -126,7 +126,7 @@ class DetailActivity :
                     }
                 }
                 dialog.dismiss()
-                shortToast("삭제되었습니다.")
+                // shortToast("삭제되었습니다.")
                 finish()
             }
         }

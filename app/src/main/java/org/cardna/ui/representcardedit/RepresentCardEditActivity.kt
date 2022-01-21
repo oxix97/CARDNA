@@ -39,6 +39,13 @@ class RepresentCardEditActivity :
         initCoroutine()
         setTextGradient()
         onClickResult()
+        binding.rvRepresentcardeditContainer
+            .addItemDecoration(
+                SpacesItemDecoration2(
+                    (4 * resources.displayMetrics.density).roundToInt(),
+                    (4 * resources.displayMetrics.density).roundToInt(),
+                )
+            )
     }
 
 
@@ -55,13 +62,13 @@ class RepresentCardEditActivity :
         }
 
         //representation card장식하는 거뿐임
-        binding.rvRepresentcardeditContainer
-            .addItemDecoration(
-                SpacesItemDecoration2(
-                    (4 * resources.displayMetrics.density).roundToInt(),
-                    (4 * resources.displayMetrics.density).roundToInt(),
-                )
-            )
+//        binding.rvRepresentcardeditContainer
+//            .addItemDecoration(
+//                SpacesItemDecoration2(
+//                    (4 * resources.displayMetrics.density).roundToInt(),
+//                    (4 * resources.displayMetrics.density).roundToInt(),
+//                )
+//            )
         // binding.rvRepresentcardeditContainer.addItemDecoration(SpacesItemDecoration(12))
 
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
