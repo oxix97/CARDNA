@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -132,15 +131,19 @@ class RepresentCardEditBottomDialogFragment(
 
                 return@setItemClickListener list.lastIndex
             } else {
-                Log.d("size", list.size.toString())
-                Log.d("position", position.toString())
-                list.removeAt(position)
-                cardMeAdapter.setLastRemovedIndex(position)
-                cardYouAdapter.setLastRemovedIndex(position)
-                binding.tvRepresentcardeditCardListCount.text =
-                    "${list.size}"
-                cardYouAdapter.notifyDataSetChanged()
-                cardMeAdapter.notifyDataSetChanged()
+                try {
+                    Log.d("size", list.size.toString())
+                    Log.d("position", position.toString())
+                    list.removeAt(position)
+                    cardMeAdapter.setLastRemovedIndex(position)
+                    cardYouAdapter.setLastRemovedIndex(position)
+                    binding.tvRepresentcardeditCardListCount.text =
+                        "${list.size}"
+                    cardYouAdapter.notifyDataSetChanged()
+                    cardMeAdapter.notifyDataSetChanged()
+                } catch (e: Exception) {
+                    dialog?.dismiss()
+                }
                 return@setItemClickListener -1
             }
         }
@@ -157,13 +160,18 @@ class RepresentCardEditBottomDialogFragment(
             } else {
                 Log.d("size", list.size.toString())
                 Log.d("position", position.toString())
-                list.removeAt(position)
-                cardMeAdapter.setLastRemovedIndex(position)
-                cardYouAdapter.setLastRemovedIndex(position)
-                binding.tvRepresentcardeditCardListCount.text =
-                    "${list.size}"
-                cardMeAdapter.notifyDataSetChanged()
-                cardYouAdapter.notifyDataSetChanged()
+                try {
+                    list.removeAt(position)
+                    cardMeAdapter.setLastRemovedIndex(position)
+                    cardYouAdapter.setLastRemovedIndex(position)
+                    binding.tvRepresentcardeditCardListCount.text =
+                        "${list.size}"
+                    cardMeAdapter.notifyDataSetChanged()
+                    cardYouAdapter.notifyDataSetChanged()
+                } catch (e: Exception) {
+                    dialog?.dismiss()
+                }
+
                 return@setItemClickListener -1
             }
         }
