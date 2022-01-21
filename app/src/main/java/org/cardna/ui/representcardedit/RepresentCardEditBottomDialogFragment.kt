@@ -118,19 +118,20 @@ class RepresentCardEditBottomDialogFragment(
         binding.rvRepresentcardeditCardme.adapter = cardMeAdapter
         binding.rvRepresentcardeditCardyou.adapter = cardYouAdapter
         binding.tvRepresentcardeditCardListCount.text = "0"
+        val limit = 7 - cardListSize
         binding.tvRepresentcardeditCardListCountAll.text = "${7 - cardListSize}"
-
-        if (list.size < 7) {
-            cardMeAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
-                if (isSelected) {
+        cardMeAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
+            if (isSelected) {
                     list.add(RepresentCardData)
                     cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                     cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                     binding.tvRepresentcardeditCardListCount.text =
                         "${list.size}"
-                    cardYouAdapter.notifyDataSetChanged()
-                    return@setItemClickListener list.lastIndex
-                } else {
+                cardMeAdapter.notifyDataSetChanged()
+                cardYouAdapter.notifyDataSetChanged()
+
+                return@setItemClickListener list.lastIndex
+            } else {
                     Log.d("size", list.size.toString())
                     Log.d("position", position.toString())
                     list.removeAt(position)
@@ -138,37 +139,33 @@ class RepresentCardEditBottomDialogFragment(
                     cardYouAdapter.setLastRemovedIndex(position)
                     binding.tvRepresentcardeditCardListCount.text =
                         "${list.size}"
-
-                    cardYouAdapter.notifyDataSetChanged()
-                    cardMeAdapter.notifyDataSetChanged()
-                    return@setItemClickListener -1
-                }
+                cardYouAdapter.notifyDataSetChanged()
+                cardMeAdapter.notifyDataSetChanged()
+                return@setItemClickListener -1
             }
-            cardYouAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
-                if (isSelected) {
-                    list.add(RepresentCardData)
-                    cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                    cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                    binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}"
-                    cardMeAdapter.notifyDataSetChanged()
-                    cardYouAdapter.notifyDataSetChanged()
-                    return@setItemClickListener list.lastIndex
-                } else {
-                    Log.d("size", list.size.toString())
-                    Log.d("position", position.toString())
-                    list.removeAt(position)
-                    cardMeAdapter.setLastRemovedIndex(position)
-                    cardYouAdapter.setLastRemovedIndex(position)
-                    binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}"
-                    cardMeAdapter.notifyDataSetChanged()
-                    cardYouAdapter.notifyDataSetChanged()
-                    return@setItemClickListener -1
-                }
+        }
+        cardYouAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
+            if (isSelected) {
+                list.add(RepresentCardData)
+                cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                binding.tvRepresentcardeditCardListCount.text =
+                    "${list.size}"
+                cardMeAdapter.notifyDataSetChanged()
+                cardYouAdapter.notifyDataSetChanged()
+                return@setItemClickListener list.lastIndex
+            } else {
+                Log.d("size", list.size.toString())
+                Log.d("position", position.toString())
+                list.removeAt(position)
+                cardMeAdapter.setLastRemovedIndex(position)
+                cardYouAdapter.setLastRemovedIndex(position)
+                binding.tvRepresentcardeditCardListCount.text =
+                    "${list.size}"
+                cardMeAdapter.notifyDataSetChanged()
+                cardYouAdapter.notifyDataSetChanged()
+                return@setItemClickListener -1
             }
-        } else {
-            requireActivity().shortToast("대표카드는 7개가 최대입니다.")
         }
         cardMeAdapter.cardMeList.addAll(cardMeList)
         cardYouAdapter.cardYouList.addAll(cardYouList)
@@ -178,6 +175,7 @@ class RepresentCardEditBottomDialogFragment(
 
         onResultClick()
     }
+
     private fun initTabLayout() {
         binding.tlRepresentcardedit.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
