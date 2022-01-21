@@ -117,11 +117,8 @@ class RepresentCardEditBottomDialogFragment(
 
         binding.rvRepresentcardeditCardme.adapter = cardMeAdapter
         binding.rvRepresentcardeditCardyou.adapter = cardYouAdapter
-        binding.tvRepresentcardeditCardListCount.text = "0/${7 - cardListSize}"
-
-        cardMeAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-
-        })
+        binding.tvRepresentcardeditCardListCount.text = "0"
+        binding.tvRepresentcardeditCardListCountAll.text = "${7 - cardListSize}"
 
         if (list.size < 7) {
             cardMeAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
@@ -130,17 +127,17 @@ class RepresentCardEditBottomDialogFragment(
                     cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                     cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                     binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}/${7 - cardListSize}"
+                        "${list.size}"
                     cardYouAdapter.notifyDataSetChanged()
                     return@setItemClickListener list.lastIndex
                 } else {
-                    Log.d("size",list.size.toString())
-                    Log.d("position",position.toString())
+                    Log.d("size", list.size.toString())
+                    Log.d("position", position.toString())
                     list.removeAt(position)
                     cardMeAdapter.setLastRemovedIndex(position)
                     cardYouAdapter.setLastRemovedIndex(position)
                     binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}/${7 - cardListSize}"
+                        "${list.size}"
 
                     cardYouAdapter.notifyDataSetChanged()
                     cardMeAdapter.notifyDataSetChanged()
@@ -153,18 +150,18 @@ class RepresentCardEditBottomDialogFragment(
                     cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                     cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
                     binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}/${7 - cardListSize}"
+                        "${list.size}"
                     cardMeAdapter.notifyDataSetChanged()
                     cardYouAdapter.notifyDataSetChanged()
                     return@setItemClickListener list.lastIndex
                 } else {
-                    Log.d("size",list.size.toString())
-                    Log.d("position",position.toString())
+                    Log.d("size", list.size.toString())
+                    Log.d("position", position.toString())
                     list.removeAt(position)
                     cardMeAdapter.setLastRemovedIndex(position)
                     cardYouAdapter.setLastRemovedIndex(position)
                     binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}/${7 - cardListSize}"
+                        "${list.size}"
                     cardMeAdapter.notifyDataSetChanged()
                     cardYouAdapter.notifyDataSetChanged()
                     return@setItemClickListener -1
@@ -181,10 +178,6 @@ class RepresentCardEditBottomDialogFragment(
 
         onResultClick()
     }
-
-    private fun listCounter(count: Int) {
-    }
-
     private fun initTabLayout() {
         binding.tlRepresentcardedit.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {

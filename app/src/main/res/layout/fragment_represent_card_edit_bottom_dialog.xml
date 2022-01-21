@@ -66,8 +66,29 @@
                 app:layout_constraintStart_toStartOf="@id/tl_representcardedit"
                 app:layout_constraintEnd_toEndOf="@id/tl_representcardedit"
                 app:layout_constraintTop_toBottomOf="@id/tl_representcardedit"
-                android:text="0/7"
+                android:text="0"
                 android:layout_marginTop="4dp"
+                android:textColor="@color/white_3"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_representcardedit_card_list_count_dot"
+                app:layout_constraintStart_toEndOf="@id/tv_representcardedit_card_list_count"
+                app:layout_constraintTop_toTopOf="@id/tv_representcardedit_card_list_count"
+                android:text="/"
+                android:textColor="@color/white_3"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_representcardedit_card_list_count_all"
+                app:layout_constraintStart_toEndOf="@id/tv_representcardedit_card_list_count_dot"
+                app:layout_constraintTop_toTopOf="@id/tv_representcardedit_card_list_count_dot"
+                android:text="7"
                 android:textColor="@color/white_3"
                 android:textSize="12sp" />
 
@@ -76,10 +97,11 @@
                 android:layout_height="0dp"
                 android:id="@+id/rv_representcardedit_cardme"
                 android:visibility="visible"
-                android:layout_marginStart="12dp"
                 app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_card_list_count"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="0dp"
+                app:layout_constraintVertical_bias="0.0" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
