@@ -36,6 +36,8 @@ class MainCardFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+
+        // binding.tvMaincardAll.text = mainCardAdapter.cardList.size.toString()
     }
 
     override fun initView() {
@@ -111,6 +113,9 @@ class MainCardFragment :
     }
 
     private fun setAnswerPager(pagerAdapter: MainCardAdapter) {
+        binding.tvMaincardPageCount.text = "1"
+        Log.d("--------------------------------------", mainCardAdapter.cardList.size.toString())
+        binding.tvMaincardAll.text = mainCardAdapter.cardList.size.toString()
         val compositePageTransformer = getPageTransformer()
         binding.vpMaincardList.apply {
             adapter = pagerAdapter
@@ -118,7 +123,12 @@ class MainCardFragment :
             clipChildren = false
             offscreenPageLimit = 1
             setPageTransformer(compositePageTransformer)
-            setPadding((56 * resources.displayMetrics.density).roundToInt(), 0, (56 * resources.displayMetrics.density).roundToInt(), 0)
+            setPadding(
+                (56 * resources.displayMetrics.density).roundToInt(),
+                0,
+                (56 * resources.displayMetrics.density).roundToInt(),
+                0
+            )
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
     }
@@ -144,11 +154,9 @@ class MainCardFragment :
                         binding.tvMaincardPageCount.setTextColor(requireContext().getColor(R.color.main_purple))
                         binding.viewMaincardUnderLine.setBackgroundColor(requireContext().getColor(R.color.main_purple_60))
                     }
-
-                    binding.tvMaincardPageCount.text =
-                        "${position + 1} "
-                    binding.tvMaincardAll.text =
-                        "/ ${mainCardAdapter.cardList.size}"
+                    binding.tvMaincardTitle.text = list[position].title
+                    binding.tvMaincardPageCount.text = "${position + 1}"
+                    binding.tvMaincardAll.text = list.size.toString()
                 }
             })
         }
@@ -216,16 +224,17 @@ class MainCardFragment :
             ctlMaincardFriend.setOnClickListener {
                 ctvMaincardFriend.toggle()
                 //친구 추가하는 네트워크 통신
-             //   if (ctvMaincardFriend.isChecked) {
-                    lifecycleScope.launch {
-                        try {
-                            val result=ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
-                            Log.d("성공", result.isFriend.toString())
-                        } catch (e: Exception) {
-                            Log.d("실패", e.message.toString())
-                            Log.d("실패","친구추가 실패")
-                        }
-                   // }
+                //   if (ctvMaincardFriend.isChecked) {
+                lifecycleScope.launch {
+                    try {
+                        val result =
+                            ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
+                        Log.d("성공", result.isFriend.toString())
+                    } catch (e: Exception) {
+                        Log.d("실패", e.message.toString())
+                        Log.d("실패", "친구추가 실패")
+                    }
+                    // }
                 }
             }
 
