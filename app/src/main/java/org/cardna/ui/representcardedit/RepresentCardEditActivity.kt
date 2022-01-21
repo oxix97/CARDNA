@@ -28,6 +28,7 @@ class RepresentCardEditActivity :
         initView()
     }
 
+    //대표카드가 수정된 이후 확인 activity로 돌아왔을 때 리스트 업데이트
     override fun onResume() {
         super.onResume()
         initCoroutine()
@@ -39,14 +40,20 @@ class RepresentCardEditActivity :
         onClickResult()
     }
 
+
+    //확인아이템들 리사이클러뷰에 연결결
     private fun initFragment(representList: MutableList<MainCardList>) {
         representCardAdapter = RepresentCardListAdapter()
         val gridLayoutManager = GridLayoutManager(this, 2)
         binding.rvRepresentcardeditContainer.layoutManager = gridLayoutManager
+
+        //representList에다가 cardList에서 id값 하나씩 추가
         val cardList = mutableListOf<Int>()
         representList.forEach {
-            cardList.add(it.id)
+            cardList.add(it.id)  //representList의 각 item의 id를 cardList에 하나씩 담는다 ->기존 representList의 id 값들만 저장한다
         }
+
+        //representation card장식하는 거뿐임
         binding.rvRepresentcardeditContainer
             .addItemDecoration(
                 SpacesItemDecoration2(
@@ -57,20 +64,24 @@ class RepresentCardEditActivity :
         // binding.rvRepresentcardeditContainer.addItemDecoration(SpacesItemDecoration(12))
 
         binding.rvRepresentcardeditContainer.adapter = representCardAdapter
-        representCardAdapter.cardList = representList
+        representCardAdapter.cardList = representList //대표카드 그려주는 adapter에게 representList를 넘김->id값 넘길필요 없으니까
         binding.tvRepresentcardeditCardListCount.text =
-            "${representCardAdapter.itemCount}/7"
-        activityReload()
-        onClick(cardList)
+            "${representCardAdapter.itemCount}/7"  // representlist를 그려주는 adapter에서 대표카드 size를 넘겨받아서 위에 count값 교체
+        activityReload()  //대표카드를 실시간으로 수정할수도 있으니까 실행
+        onClick(cardList)  //바컴싯이 호출되면 대표카드 id값만 담은 cardList를 보낸다
+        Log.d("대표카드들의 id: ", cardList.toString())
         representCardAdapter.notifyDataSetChanged()
     }
 
+
     private fun activityReload() {
         representCardAdapter.registerAdapterDataObserver(object :
+
+        //리사이클러뷰에 있는 data를 observe할 수 있음
             RecyclerView.AdapterDataObserver() {
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 super.onItemRangeRemoved(positionStart, itemCount)
-                binding.tvRepresentcardeditCardListCount.text =
+                binding.tvRepresentcardeditCardListCount.text =  //지우고 남아있는 아이템 개수만큼 위에 표시함
                     "${representCardAdapter.itemCount}/7"
             }
         })
@@ -81,13 +92,14 @@ class RepresentCardEditActivity :
         binding.fabRepresentcardedit.setOnClickListener {
             val bottomSheetDialog =
                 RepresentCardEditBottomDialogFragment(cardList, representCardAdapter.cardList.size)
-            cardList.forEach {
+/*            cardList.forEach {
                 println(it)
-            }
+            }*/
             bottomSheetDialog.show(supportFragmentManager, "sdsfs")
         }
     }
 
+    //텍스트 그라디언트
     private fun setTextGradient() {
         val text = binding.tvRepresentcardeditColorTitle.text.toString()
         val green = getColor(R.color.main_green)
@@ -119,12 +131,13 @@ class RepresentCardEditActivity :
         }
     }
 
+    //초기대표카드 아이템들을 가져와서 리사이클러뷰 어댑터에게 넘겨줌
     private fun initCoroutine() {
         lifecycleScope.launch {
             try {
                 val dataContainer = ApiService.cardService.getUserMainCard()
-                val list = dataContainer.data.mainCardList
-                initFragment(list)
+                val representList = dataContainer.data.mainCardList
+                initFragment(representList)
             } catch (e: Exception) {
                 Log.d("error", "error")
             }
