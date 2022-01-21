@@ -31,6 +31,7 @@ class BuildAreaFragment(private val blindArea: BlindAreaCard) :
         binding.ctlInsightCard.setOnClickListener {
             val intent = Intent(requireContext(), DetailCardMeActivity::class.java)
             intent.putExtra("id", blindArea.id)
+            intent.putExtra("isMyCard", true)
             startActivity(intent)
         }
     }

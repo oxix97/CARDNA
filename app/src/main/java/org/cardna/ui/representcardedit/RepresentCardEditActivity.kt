@@ -133,7 +133,7 @@ class RepresentCardEditActivity :
     }
 
 
-    fun initCoroutine() {
+     fun initCoroutine() {
         lifecycleScope.launch {
             try {
                 val dataContainer = ApiService.cardService.getUserMainCard()
