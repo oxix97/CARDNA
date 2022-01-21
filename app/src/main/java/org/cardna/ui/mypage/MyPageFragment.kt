@@ -44,6 +44,7 @@ class MyPageFragment :
         initScrollView()
         initClickEvent()
         initNetwork()
+        binding.rvMypage.addItemDecoration(SpacesItemDecoration((8 * resources.displayMetrics.density).roundToInt()))
         initRootClickEvent(binding.ctlMypageTop)
         initRootClickEvent(binding.ctlMypageHeader)
     }
@@ -75,7 +76,6 @@ class MyPageFragment :
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         with(binding) {
             rvMypage.layoutManager = gridLayoutManager
-            rvMypage.addItemDecoration(SpacesItemDecoration((8 * resources.displayMetrics.density).roundToInt()))
             rvMypage.adapter = myPageFriendAdapter
         }
         myPageFriendAdapter.notifyDataSetChanged()
