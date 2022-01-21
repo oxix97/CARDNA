@@ -40,11 +40,15 @@ class RepresentBottomSheetCardMeAdapter(
 
             binding.tvCardpackRecyclerview.text = data.title
             binding.tvRepresentcardCount.isVisible = data.isClicked
+
             if (lastRemovedIndex < data.index) {
                 data.index = data.index - 1
             }
 
             binding.tvRepresentcardCount.text = (data.index + 1).toString()
+
+            Log.d("index : ", "${data.index + 1}")
+            Log.d("limit : ", "$isSelectedCount")
 
             binding.clRvItem.setOnClickListener {
                 data.isClicked = !data.isClicked
