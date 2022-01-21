@@ -44,7 +44,7 @@ class MyPageFragment :
         initScrollView()
         initClickEvent()
         initNetwork()
-        binding.rvMypage.addItemDecoration(SpacesItemDecoration((8 * resources.displayMetrics.density).roundToInt()))
+        binding.rvMypage.addItemDecoration(SpacesItemDecoration((16 * resources.displayMetrics.density).roundToInt()))
         initRootClickEvent(binding.ctlMypageTop)
         initRootClickEvent(binding.ctlMypageHeader)
     }
