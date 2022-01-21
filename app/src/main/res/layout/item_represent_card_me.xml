@@ -23,6 +23,7 @@
             app:layout_constraintDimensionRatio="142:203"
             android:scaleType="fitXY"
             android:layout_marginTop="8dp"
+            android:padding="1dp"
             android:background="@drawable/background_rv_iv_border"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
