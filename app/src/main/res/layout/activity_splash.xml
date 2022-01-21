@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"
-            app:lottie_rawRes="@raw/cardna_splash" />
+            app:lottie_rawRes="@raw/splash" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
