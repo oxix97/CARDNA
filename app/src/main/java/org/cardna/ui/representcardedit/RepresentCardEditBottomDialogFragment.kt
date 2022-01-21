@@ -111,8 +111,12 @@ class RepresentCardEditBottomDialogFragment(
         binding.rvRepresentcardeditCardme.layoutManager = gridLayoutManager1
         binding.rvRepresentcardeditCardyou.layoutManager = gridLayoutManager2
 
-        binding.rvRepresentcardeditCardme.addItemDecoration(SpacesItemDecoration(12))
-        binding.rvRepresentcardeditCardyou.addItemDecoration(SpacesItemDecoration(12))
+        binding.rvRepresentcardeditCardme.addItemDecoration(
+            SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt())
+        )
+        binding.rvRepresentcardeditCardyou.addItemDecoration(
+            SpacesItemDecoration((12 * resources.displayMetrics.density).roundToInt())
+        )
 
         binding.rvRepresentcardeditCardme.adapter = cardMeAdapter
         binding.rvRepresentcardeditCardyou.adapter = cardYouAdapter
