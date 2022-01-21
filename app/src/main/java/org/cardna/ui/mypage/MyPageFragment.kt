@@ -29,8 +29,9 @@ class MyPageFragment :
     BaseViewUtil.BaseFragment<FragmentMyPageBinding>(org.cardna.R.layout.fragment_my_page) {
     private lateinit var list: MutableList<ResponseMyPageFriendData>
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+        initNetwork()
         binding.etMypageSearchBackground.setText("")
     }
 
