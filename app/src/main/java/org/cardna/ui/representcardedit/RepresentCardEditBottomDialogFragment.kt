@@ -122,23 +122,23 @@ class RepresentCardEditBottomDialogFragment(
         binding.tvRepresentcardeditCardListCountAll.text = "${7 - cardListSize}"
         cardMeAdapter.setItemClickListener { position, RepresentCardData, isSelected ->
             if (isSelected) {
-                    list.add(RepresentCardData)
-                    cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                    cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
-                    binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}"
+                list.add(RepresentCardData)
+                cardMeAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                cardYouAdapter.setLastRemovedIndex(Int.MAX_VALUE)
+                binding.tvRepresentcardeditCardListCount.text =
+                    "${list.size}"
                 cardMeAdapter.notifyDataSetChanged()
                 cardYouAdapter.notifyDataSetChanged()
 
                 return@setItemClickListener list.lastIndex
             } else {
-                    Log.d("size", list.size.toString())
-                    Log.d("position", position.toString())
-                    list.removeAt(position)
-                    cardMeAdapter.setLastRemovedIndex(position)
-                    cardYouAdapter.setLastRemovedIndex(position)
-                    binding.tvRepresentcardeditCardListCount.text =
-                        "${list.size}"
+                Log.d("size", list.size.toString())
+                Log.d("position", position.toString())
+                list.removeAt(position)
+                cardMeAdapter.setLastRemovedIndex(position)
+                cardYouAdapter.setLastRemovedIndex(position)
+                binding.tvRepresentcardeditCardListCount.text =
+                    "${list.size}"
                 cardYouAdapter.notifyDataSetChanged()
                 cardMeAdapter.notifyDataSetChanged()
                 return@setItemClickListener -1
@@ -227,6 +227,7 @@ class RepresentCardEditBottomDialogFragment(
         data.cards.forEach {
             Log.d("이미지 아이디", it.toString())
         }
+        (activity as RepresentCardEditActivity).initCoroutine()
         dialog?.dismiss()
     }
 }

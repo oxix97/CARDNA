@@ -28,10 +28,12 @@ class RepresentCardEditActivity :
         initView()
     }
 
-    override fun onResume() {
+     override fun onResume() {
         super.onResume()
         initCoroutine()
     }
+
+
 
     override fun initView() {
         initCoroutine()
@@ -119,7 +121,8 @@ class RepresentCardEditActivity :
         }
     }
 
-    private fun initCoroutine() {
+     fun initCoroutine() {
+         Log.d("init Conroutine","-------------------------------------")
         lifecycleScope.launch {
             try {
                 val dataContainer = ApiService.cardService.getUserMainCard()
