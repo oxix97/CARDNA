@@ -29,8 +29,9 @@ class OpenAreaFragment(private val openArea: OpenAreaCard) :
             .into(binding.ivOpenareaImage)
         binding.tvOpenareaUserTitle.text = openArea.title
         binding.ctlInsightCard.setOnClickListener {
-            val intent = Intent(requireContext(),DetailCardMeActivity::class.java)
-            intent.putExtra("id",openArea.id)
+            val intent = Intent(requireContext(), DetailCardMeActivity::class.java)
+            intent.putExtra("id", openArea.id)
+            intent.putExtra("isMyCard", true)
             startActivity(intent)
         }
     }
