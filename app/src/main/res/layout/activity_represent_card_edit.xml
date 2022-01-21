@@ -100,7 +100,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:background="@drawable/rectangle_black_radius_2"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:listitem="@layout/item_represent_card_me"
                     android:layout_marginTop="20dp"

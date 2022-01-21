@@ -149,15 +149,27 @@
             app:layout_constraintStart_toStartOf="@+id/vp_maincard_list" />
 
         <TextView
+            android:id="@+id/tv_maincard_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColor="@color/white_3"
+            android:textSize="12sp"
+            android:text=" / "
+            app:layout_constraintBottom_toBottomOf="@+id/tv_maincard_page_count"
+            app:layout_constraintStart_toEndOf="@+id/tv_maincard_page_count"
+            app:layout_constraintTop_toTopOf="@+id/tv_maincard_page_count" />
+
+        <TextView
             android:id="@+id/tv_maincard_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:textColor="@color/white_3"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_maincard_page_count"
-            app:layout_constraintStart_toEndOf="@+id/tv_maincard_page_count"
-            app:layout_constraintTop_toTopOf="@+id/tv_maincard_page_count" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_maincard_dot"
+            app:layout_constraintStart_toEndOf="@+id/tv_maincard_dot"
+            app:layout_constraintTop_toTopOf="@+id/tv_maincard_dot" />
 
         <ImageView
             android:id="@+id/iv_maincard_goto_cardpack_background"
