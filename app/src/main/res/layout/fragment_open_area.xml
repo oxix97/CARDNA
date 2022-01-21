@@ -73,7 +73,7 @@
                 android:layout_marginHorizontal="56dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="56dp"
-                android:background="@drawable/rectangle_maingreen_stroke_black" />
+                android:background="@drawable/rectangle_maingreen_stroke_black">
 
             <ImageView
                 android:id="@+id/iv_openarea_image"
@@ -86,9 +86,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
                 app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
                 app:layout_constraintStart_toStartOf="@+id/ctl_insight_card"
-                app:layout_constraintTop_toTopOf="@id/ctl_insight_card"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="@id/ctl_insight_card" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,6 +102,9 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
                 app:layout_constraintStart_toStartOf="@+id/iv_openarea_image"
                 app:layout_constraintTop_toBottomOf="@+id/iv_openarea_image" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:id="@+id/tv_insight_description"
