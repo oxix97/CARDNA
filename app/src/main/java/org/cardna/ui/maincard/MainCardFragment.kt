@@ -18,6 +18,7 @@ import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.data.remote.api.ApiService
 import org.cardna.data.remote.model.maincard.MainCardList
+import org.cardna.data.remote.model.mypage.RequestFriendUpdateData
 import org.cardna.databinding.FragmentMainCardBinding
 import org.cardna.ui.cardpack.CardPackFragment
 import org.cardna.ui.maincard.adapter.MainCardAdapter
@@ -215,14 +216,16 @@ class MainCardFragment :
             ctlMaincardFriend.setOnClickListener {
                 ctvMaincardFriend.toggle()
                 //친구 추가하는 네트워크 통신
-                lifecycleScope.launch {
-                    try {
-                        // val responseData =
-                        // ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
-                        //    Log.d("친구추가", ApiService.friendService.postFriend(RequestFriendUpdateData(id)).message)
-                    } catch (e: Exception) {
-                        Log.d("실패", e.message.toString())
-                    }
+             //   if (ctvMaincardFriend.isChecked) {
+                    lifecycleScope.launch {
+                        try {
+                            val result=ApiService.friendService.postFriend(RequestFriendUpdateData(id)).data
+                            Log.d("성공", result.isFriend.toString())
+                        } catch (e: Exception) {
+                            Log.d("실패", e.message.toString())
+                            Log.d("실패","친구추가 실패")
+                        }
+                   // }
                 }
             }
 
