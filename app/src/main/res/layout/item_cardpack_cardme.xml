@@ -16,14 +16,15 @@
         tools:backgroundTint="@color/main_green">
 
         <ImageView
-            android:id="@+id/iv_carpack_recyclerview"
+            android:id="@+id/iv_cardpack_recyclerview"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="142:203"
-            android:scaleType="fitXY"
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/background_rv_iv_border"
+            android:padding="1dp"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="142:203"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,8 +38,8 @@
             android:layout_marginStart="4dp"
             android:theme="@style/cardpack_recyclerview_tv"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/iv_carpack_recyclerview"
-            app:layout_constraintTop_toBottomOf="@id/iv_carpack_recyclerview"
+            app:layout_constraintStart_toStartOf="@id/iv_cardpack_recyclerview"
+            app:layout_constraintTop_toBottomOf="@id/iv_cardpack_recyclerview"
             tools:text="댕댕이 짱 좋아" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

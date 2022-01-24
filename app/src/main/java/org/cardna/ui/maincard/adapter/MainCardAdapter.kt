@@ -1,29 +1,34 @@
 package org.cardna.ui.maincard.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.cardna.R
-import org.cardna.data.remote.api.MainCardListData
+import org.cardna.data.remote.model.maincard.MainCardList
 import org.cardna.databinding.ItemMainCardViewBinding
-import org.cardna.ui.maincard.DetailCardYouActivity
 
-class MainCardAdapter : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>() {
-
-    val cardList = mutableListOf<MainCardListData>()
+class MainCardAdapter(
+    val cardList: MutableList<MainCardList>,
+    private val clickListener: (MainCardList) -> Unit
+) : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>() {
 
     inner class MainCardViewHolder(private val binding: ItemMainCardViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: MainCardListData) {
-            binding.ivMainCardImage.setImageResource(data.image)
-            binding.tvMainCardTitle.text = data.tag
+        fun onBind(data: MainCardList) {
+            //상단 이름, 타이틀, 이미지
+            Glide.with(itemView.context).load(data.cardImg).into(binding.ivMainCardImage)
+            binding.tvMainCardTitle.text = data.title
 
-            if(data.isMe)
+            //카드 너, 나에 따라 데이터 색상값 변경
+            if (data.isMe)
                 binding.clMaincardContainer.setBackgroundResource(R.drawable.rectangle_green_null_black_radius_2)
             else
                 binding.clMaincardContainer.setBackgroundResource(R.drawable.rectangle_right_null_black_radius_2)
+
+            binding.root.setOnClickListener {
+                clickListener(data)
+            }
         }
     }
 
@@ -38,11 +43,6 @@ class MainCardAdapter : RecyclerView.Adapter<MainCardAdapter.MainCardViewHolder>
     }
 
     override fun onBindViewHolder(holder: MainCardViewHolder, position: Int) {
-        holder.itemView.setOnClickListener {
-            val context: Context = holder.itemView.context
-            val intent = Intent(context, DetailCardYouActivity::class.java)
-            context.startActivity(intent)
-        }
         holder.onBind(cardList[position])
     }
 

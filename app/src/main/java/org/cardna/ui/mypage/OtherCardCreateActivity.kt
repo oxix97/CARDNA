@@ -1,19 +1,73 @@
 package org.cardna.ui.mypage
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.core.widget.addTextChangedListener
+import org.cardna.MainActivity
 import org.cardna.R
 import org.cardna.base.baseutil.BaseViewUtil
 import org.cardna.databinding.ActivityOtherCardCreateBinding
+import org.cardna.util.initRootClickEvent
 
-class OtherCardCreateActivity
-    : BaseViewUtil.BaseAppCompatActivity<ActivityOtherCardCreateBinding>(R.layout.activity_other_card_create){
+class OtherCardCreateActivity :
+    BaseViewUtil.BaseAppCompatActivity<ActivityOtherCardCreateBinding>(R.layout.activity_other_card_create) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_other_card_create)
+        initView()
     }
 
     override fun initView() {
+        checkIdAndName()
+        checkEditTextLength()
+        initRootClickEvent(binding.ctlOthercardcreateTop)
+    }
 
+    private fun checkIdAndName() {
+        // 1. 친구의 대표카드 창에서 연필모양 선택 - MainActivity의 mainCard Fragment에서 Intent로 액티비티 전환
+        // 2. 친구의 대표카드 창에서 카드팩으로 들어가서 거기서 연필 모양 - MainActivity의 cardpack Fagment에서 Intent로 액티비티 전환
+
+        //
+        val name = intent.getStringExtra("name")
+        val id = intent.getIntExtra("id", 0)
+        binding.tvOthercardcreateRelation.text = "당신은 ${name}님에게 어떤 사람인가요 ?"
+
+        binding.btnOthercardcreateNext.setOnClickListener {
+            // editText 값이 들어가있으면 버튼 클릭할 수 있도록
+
+            var intent = Intent(this, OtherCardWriteActivity::class.java)
+
+            // 이름, id, 관계 3개 OtherCardWriteActivity로 전달
+            intent.putExtra("name",  name)
+            intent.putExtra("id", id)
+            intent.putExtra("relation", binding.etOthercardcreateRelation.text.toString())
+            startActivity(intent)
+        }
+    }
+
+    // 관계 작성 시에 버튼 클릭 가능
+    private fun checkEditTextLength() {
+        // 처음에는 작성 완료 버튼 클릭 안되게
+        binding.btnOthercardcreateNext.isClickable = false;
+
+        binding.etOthercardcreateRelation.addTextChangedListener {
+            if (binding.etOthercardcreateRelation.length() > 0) {
+                with(binding) {
+                    btnOthercardcreateNext.isClickable = true
+                    btnOthercardcreateNext.isEnabled = true;
+                    btnOthercardcreateNext.setTextColor(resources.getColor(R.color.black))
+                    btnOthercardcreateNext.setBackgroundResource(R.drawable.background_btn_cardyou_abled)
+                }
+            } else {
+                with(binding) {
+                    btnOthercardcreateNext.isClickable = false;
+                    btnOthercardcreateNext.isEnabled = false;
+                    btnOthercardcreateNext.setTextColor(resources.getColor(R.color.white_2))
+                    btnOthercardcreateNext.setBackgroundResource(R.drawable.background_btn_card_disabled)
+                }
+            }
+
+            binding.tvOthercardcreateCnt.text = "${binding.etOthercardcreateRelation.length()}/10"
+        }
     }
 
     // editText 내용 있을 때, 다음 버튼 누를 수 있도록 버튼 enable

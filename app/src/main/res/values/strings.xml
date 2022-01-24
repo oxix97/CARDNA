@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CardNa</string>
+    <string name="app_name">CARDNA</string>
     <string name="title_activity_main_activityrerererer">MainActivityrerererer</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -15,4 +15,8 @@
 
     <string name="insight_open_area">나도 알고, 타인도 아는 나의 모습이에요</string>
     <string name="insight_blind_area">나는 몰랐지만, 타인이 아는 나의 모습이에요</string>
+
+    <string name="signup_warning_email_text">이메일 형식에 맞게 입력해 주세요.</string>
+    <string name="signup_warning_password_text">비밀번호는 영문+숫자 최소 8자 이상 입력해 주세요.</string>
+
 </resources>

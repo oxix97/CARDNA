@@ -7,28 +7,22 @@
 
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_rv_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/real_black">
-
-        <ImageView
-            android:id="@+id/iv_friend_background"
-            android:layout_width="156dp"
-            android:layout_height="180dp"
-            android:background="@drawable/rectangle_dark_grey_radius_10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/rectangle_dark_grey_radius_10">
 
         <ImageView
             android:id="@+id/iv_friend_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:scaleType="fitXY"
+            android:layout_marginHorizontal="48dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/img_searchemail_friend_image"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,13 +45,13 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/pretendard_light"
             android:text="딩가딩가딩"
-            android:textColor="@color/white"
+            android:textColor="@color/white_2"
             android:textSize="12sp"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tv_friend_name"
             app:layout_constraintStart_toStartOf="@id/tv_friend_name"
             app:layout_constraintTop_toBottomOf="@id/tv_friend_name" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

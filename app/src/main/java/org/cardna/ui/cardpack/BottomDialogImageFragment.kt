@@ -16,7 +16,7 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
     private var _binding: FragmentBottomDialogImageBinding? = null
     private val binding get() = _binding ?: error("Binding이 초기화되지 않았습니다")
 
-    var selectedImg = NONE;
+    var selectedImg = GALLERY;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +41,7 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
     }
 
     private fun accessGallery(){
+        // 이미지 선택하는 dialog에서 갤러리 접근 버튼 눌렀을 때, 갤러리에 접근하고 dialog는 사라짐
         binding.btnCardcreateGallery.setOnClickListener{
             (activity as CardCreateActivity).checkPermission()
             dialog?.dismiss()
@@ -59,7 +60,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_0
+                if(imgBtnCardpackSymbol0.isSelected)
+                    selectedImg = SYMBOL_0
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol1.setOnClickListener {
@@ -69,7 +73,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_1
+                if(imgBtnCardpackSymbol1.isSelected)
+                    selectedImg = SYMBOL_1
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol2.setOnClickListener {
@@ -79,7 +86,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_2
+                if(imgBtnCardpackSymbol2.isSelected)
+                    selectedImg = SYMBOL_2
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol3.setOnClickListener {
@@ -89,7 +99,10 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = !imgBtnCardpackSymbol3.isSelected
                 imgBtnCardpackSymbol4.isSelected = false
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_3
+                if(imgBtnCardpackSymbol3.isSelected)
+                    selectedImg = SYMBOL_3
+                else
+                    selectedImg = GALLERY
             }
 
             imgBtnCardpackSymbol4.setOnClickListener {
@@ -99,34 +112,18 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
                 imgBtnCardpackSymbol3.isSelected = false
                 imgBtnCardpackSymbol4.isSelected = !imgBtnCardpackSymbol4.isSelected
                 ifEnableCompleteBtn()
-                selectedImg = SYMBOL_4
+                if(imgBtnCardpackSymbol4.isSelected)
+                    selectedImg = SYMBOL_4
+                else
+                    selectedImg = GALLERY
             }
-
-
 
             // 완료 버튼 누르면 dialog 없어지고, 현재 selected되어 있는 버튼에 대한 상수 값을 itemClick으로 넘겨준다.
-
+            // 완료 버튼 안 누르고 갤러리 접근하면 itemClock 호출 안할테니
             btnCardcreateComplete.setOnClickListener{
-                itemClick(selectedImg)
+                itemClick(selectedImg) // 완료 버튼 누르려면 하나라도 선택되어있어야 하므로 selectedimg는 0,1,2,3,4중 하나로 넘어갈 것
                 dialog?.dismiss()
             }
-
-
-
-            // val imgBtnlist = listOf<ImageButton>(imgBtnCardpackSymbol0, imgBtnCardpackSymbol1, imgBtnCardpackSymbol2, imgBtnCardpackSymbol3, imgBtnCardpackSymbol4)
-
-            // 5개의 심볼, 이미지 버튼에서 하나를 선택하면 나머지 선택안되도록
-            // 선택된 이미지 버튼은 image selected 버전으로 setImageResource 바꿔주기
-            // 완료버튼 누르면 현재 5개의 버튼 중 셀렉되어있는 버튼을 찾아 그에 맞는 상수를 넘겨준다
-
-
-            // 갤러리부분
-            /*
-            clCardpackGallery.setOnClickListener {
-                itemClick(GALLERY)
-                dialog?.dismiss()
-            }
-            */
         }
     }
 
@@ -145,7 +142,6 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
     }
 
     companion object {
-        const val NONE = -1
         const val SYMBOL_0 = 0
         const val SYMBOL_1 = 1
         const val SYMBOL_2 = 2
@@ -153,5 +149,7 @@ class BottomDialogImageFragment(val itemClick: (Int) -> Unit) : BottomSheetDialo
         const val SYMBOL_4 = 4
         const val GALLERY = 5
     }
+
+
 
 }

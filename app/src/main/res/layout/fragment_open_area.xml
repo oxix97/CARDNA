@@ -8,6 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_grand_parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_insight_open_area"
@@ -21,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_openarea_title"
+                android:id="@+id/tv_blindarea_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -35,17 +36,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/iv_openarea_allow"
+                android:id="@+id/iv_blindarea_allow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
                 android:src="@drawable/ic_insight_allow_open_area"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_openarea_title" />
+                app:layout_constraintTop_toTopOf="@id/tv_blindarea_title" />
 
             <TextView
-                android:id="@+id/tv_openarea_sentence"
+                android:id="@+id/tv_blindarea_sentence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -53,80 +54,79 @@
                 android:text="내가 쓴 카드 중 가장 많은 공감을 받은 카드"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/tv_openarea_title"
-                app:layout_constraintTop_toBottomOf="@id/tv_openarea_title" />
+                app:layout_constraintStart_toStartOf="@id/tv_blindarea_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_blindarea_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/ctl_insight_card"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ctl_insight">
-
-
-            <ImageView
-                android:id="@+id/iv_insight_card"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="56dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="56dp"
-                android:src="@drawable/rectangle_maingreen_stroke_black" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="56dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/rectangle_maingreen_stroke_black"
+            app:layout_constraintTop_toBottomOf="@id/ctl_insight">
 
             <ImageView
                 android:id="@+id/iv_openarea_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="30dp"
-                android:padding="10dp"
+                android:background="@color/black"
+                android:padding="2dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/img_insight_openarea"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_insight_card"
-                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
-                app:layout_constraintStart_toStartOf="@+id/iv_insight_card"
-                app:layout_constraintTop_toTopOf="@id/iv_insight_card" />
+                app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
+                app:layout_constraintDimensionRatio="227:343"
+                app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
+                app:layout_constraintStart_toStartOf="@+id/ctl_insight_card"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_openarea_user_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/pretendard_semibold"
                 android:includeFontPadding="false"
                 android:text="배신을 잘해"
                 android:textColor="@color/real_black"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_insight_card"
+                app:layout_constraintBottom_toBottomOf="@+id/ctl_insight_card"
                 app:layout_constraintStart_toStartOf="@+id/iv_openarea_image"
-                app:layout_constraintTop_toBottomOf="@+id/iv_openarea_image" />
-
-            <TextView
-                android:id="@+id/tv_insight_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/pretendard_semibold"
-                android:text="@string/insight_open_area"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@+id/iv_insight_card"
-                app:layout_constraintStart_toStartOf="@id/iv_insight_card"
-                app:layout_constraintTop_toBottomOf="@+id/iv_insight_card" />
-
-            <View
-                android:id="@+id/view_insight_line"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="@id/tv_insight_description"
-                app:layout_constraintStart_toStartOf="@id/tv_insight_description"
-                app:layout_constraintTop_toBottomOf="@+id/tv_insight_description" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_openarea_image"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_insight_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@string/insight_open_area"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/ctl_insight_card"
+            app:layout_constraintStart_toStartOf="@id/ctl_insight_card"
+            app:layout_constraintTop_toBottomOf="@+id/ctl_insight_card" />
 
+        <View
+            android:id="@+id/view_insight_line"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@id/tv_insight_description"
+            app:layout_constraintStart_toStartOf="@id/tv_insight_description"
+            app:layout_constraintTop_toBottomOf="@+id/tv_insight_description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

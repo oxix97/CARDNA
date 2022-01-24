@@ -42,69 +42,73 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="4/7"
+            tools:text="4/7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_title" />
 
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="32dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_representcardedit_card_list_count">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_representcardedit_title_group"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_representcardedit_card_list_count">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_representcardedit_text"
-                    style="@style/represent_card_edit_title_white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="나를 가장 잘 표현하는 카드를"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/cl_representcardedit_title_group"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_representcardedit_color_title"
-                    style="@style/represent_card_edit_title_white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="대표카드"
-                    app:layout_constraintStart_toStartOf="@id/tv_representcardedit_text"
-                    app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_text" />
+                    <TextView
+                        android:id="@+id/tv_representcardedit_text"
+                        style="@style/represent_card_edit_title_white"
+                        android:layout_marginStart="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="나를 가장 잘 표현하는 카드를"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_representcardedit_text_end"
-                    style="@style/represent_card_edit_title_white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="로 지정해보세요!"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_representcardedit_color_title"
-                    app:layout_constraintStart_toEndOf="@id/tv_representcardedit_color_title"
-                    app:layout_constraintTop_toTopOf="@id/tv_representcardedit_color_title" />
+                    <TextView
+                        android:id="@+id/tv_representcardedit_color_title"
+                        style="@style/represent_card_edit_title_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="대표카드"
+                        app:layout_constraintStart_toStartOf="@id/tv_representcardedit_text"
+                        app:layout_constraintTop_toBottomOf="@id/tv_representcardedit_text" />
 
+                    <TextView
+                        android:id="@+id/tv_representcardedit_text_end"
+                        style="@style/represent_card_edit_title_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="로 지정해보세요!"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_representcardedit_color_title"
+                        app:layout_constraintStart_toEndOf="@id/tv_representcardedit_color_title"
+                        app:layout_constraintTop_toTopOf="@id/tv_representcardedit_color_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_representcardedit_container"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:listitem="@layout/item_represent_card_me"
                     android:layout_marginTop="20dp"
                     android:nestedScrollingEnabled="true"
                     android:overScrollMode="never"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_representcardedit_text_end"
+                    app:layout_constraintTop_toBottomOf="@id/cl_representcardedit_title_group"
                     tools:itemCount="4"
+                    app:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteX="16dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

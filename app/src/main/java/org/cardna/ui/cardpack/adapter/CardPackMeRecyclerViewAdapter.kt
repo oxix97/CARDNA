@@ -3,18 +3,32 @@ package org.cardna.ui.cardpack.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.cardna.R
-import org.cardna.data.remote.model.cardpack.ResponseCardPackMeData
+import com.bumptech.glide.Glide
+import org.cardna.data.remote.model.cardpack.CardMeList
+import org.cardna.data.remote.model.cardpack.CardYouList
+import org.cardna.data.remote.model.cardpack.ResponseCardAllData
 import org.cardna.databinding.ItemCardpackCardmeBinding
 
-class CardPackMeRecyclerViewAdapter : RecyclerView.Adapter<CardPackMeRecyclerViewAdapter.CardPackMeViewHolder>() {
+class CardPackMeRecyclerViewAdapter(
+// private val cardList: MutableList<CardMeList>,
+    private val cardList: MutableList<CardMeList>,
+    private val clickListener: (CardMeList) -> Unit
+) :
+    RecyclerView.Adapter<CardPackMeRecyclerViewAdapter.CardPackMeViewHolder>() {
 
-    val cardList = mutableListOf<ResponseCardPackMeData>()
+    inner class CardPackMeViewHolder(private val binding: ItemCardpackCardmeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    inner class CardPackMeViewHolder(private val binding: ItemCardpackCardmeBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ResponseCardPackMeData) {
-            binding.ivCarpackRecyclerview.setImageResource(R.drawable.dummy_img_cardpack_1)
-            binding.tvCardpackRecyclerview.text = data.title
+        fun onBind(data: CardMeList) {
+            // if (data is CardMeList) {
+            with(binding) {
+                // uri로 받은 사진 Glide로 띄우기
+                Glide.with(itemView.context).load(data.cardImg).into(binding.ivCardpackRecyclerview)
+                tvCardpackRecyclerview.text = data.title
+                root.setOnClickListener {
+                    clickListener(data)
+                }
+            }
         }
     }
 
@@ -22,7 +36,8 @@ class CardPackMeRecyclerViewAdapter : RecyclerView.Adapter<CardPackMeRecyclerVie
         parent: ViewGroup,
         viewType: Int
     ): CardPackMeViewHolder {
-        val binding = ItemCardpackCardmeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCardpackCardmeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardPackMeViewHolder(binding)
     }
 

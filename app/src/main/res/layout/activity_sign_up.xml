@@ -26,6 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/cl_edit_email"
+            android:layout_marginEnd="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_sign_up_title"
@@ -37,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_sign_up_email"
+                android:inputType="textEmailAddress"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:hint="이메일"
@@ -45,12 +47,37 @@
                 android:textColor="@color/white_1"
                 android:textColorHint="@color/white_3"
                 android:background="@null" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/ll_signup_email_layout"
+            app:layout_constraintStart_toStartOf="@id/cl_edit_email"
+            app:layout_constraintTop_toBottomOf="@id/cl_edit_email"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_signup_email_warning"
+                android:src="@drawable/ic_exclamationmark_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:id="@+id/tv_signup_warning_text_email"
+                android:textColor="@color/signup_warning_red"
+                android:text="@string/signup_warning_email_text" />
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:id="@+id/cl_edit_password"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_sign_up_password"
+                android:inputType="textPassword"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@null"
@@ -72,7 +100,43 @@
                 android:hint="비밀번호(영문+숫자 최소 8자 이상)"
                 android:textColor="@color/white_1" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_signup_password_check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/et_sign_up_password"
+                app:layout_constraintBottom_toBottomOf="@id/et_sign_up_password"
+                android:src="@drawable/ic_eye"
+                android:visibility="gone"
+                android:layout_marginEnd="28dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/ll_signup_password_layout"
+            app:layout_constraintStart_toStartOf="@id/cl_edit_password"
+            app:layout_constraintTop_toBottomOf="@id/cl_edit_password"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_signup_password_warning"
+                android:src="@drawable/ic_exclamationmark_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:id="@+id/tv_signup_warning_text_password"
+                android:textColor="@color/signup_warning_red"
+                android:text="@string/signup_warning_password_text" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,16 +157,17 @@
             app:layout_constraintStart_toStartOf="@id/tv_sign_up_about"
             app:layout_constraintTop_toBottomOf="@id/tv_sign_up_about"
             android:text="이용약관"
-            android:textColor="@color/main_green"/>
+            android:textColor="@color/main_green" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_sign_up_about_terms_space"
             android:text="과"
             app:layout_constraintStart_toEndOf="@id/tv_sign_up_about_terms"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/white_3"
-            app:layout_constraintTop_toTopOf="@id/tv_sign_up_about_terms"/>
+            app:layout_constraintTop_toTopOf="@id/tv_sign_up_about_terms" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,14 +175,14 @@
             android:id="@+id/tv_sign_up_about_policy"
             app:layout_constraintStart_toEndOf="@id/tv_sign_up_about_terms_space"
             app:layout_constraintTop_toTopOf="@id/tv_sign_up_about_terms_space"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/main_green"
-            android:text=" 개인정보 정책"
-            />
+            android:text=" 개인정보 정책" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:id="@+id/btn_sign_up_access"
             android:background="@drawable/rectangle_sign_up_gray_radius_10"
             android:layout_marginHorizontal="16dp"
